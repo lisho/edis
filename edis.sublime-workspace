@@ -488,17 +488,18 @@
 	"buffers":
 	[
 		{
+			"file": "/home/lisho/.ssh/id_rsa",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 1675,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "index.php",
+			"file": "/home/lisho/.ssh/id_rsa.pub",
 			"settings":
 			{
-				"buffer_size": 648,
+				"buffer_size": 402,
 				"line_ending": "Unix"
 			}
 		}
@@ -555,6 +556,9 @@
 	],
 	"file_history":
 	[
+		"/home/lisho/.ssh/known_hosts",
+		"/home/lisho/.ssh/id_rsa.pub",
+		"/opt/lampp/htdocs/edis/webroot/css/cake.css",
 		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/citas_slide_editar_jQuery.html",
 		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/javascript/galeria.js",
 		"/opt/lampp/htdocs/rgc_cake/sftp-config.json",
@@ -679,10 +683,7 @@
 		"/home/lisho/Descargas/curso JQuery/img/sumar.php",
 		"/home/lisho/Descargas/curso JQuery/eventos2.html",
 		"/home/lisho/Descargas/curso JQuery/ejercicio3.html",
-		"/tmp/sublime-sftp-browse-1458928720/lishowebproject/index.php",
-		"/home/lisho/Descargas/curso JQuery/efectos2.html",
-		"/home/lisho/Descargas/curso JQuery/ejercicio1.html",
-		"/home/lisho/Descargas/curso JQuery/ejercicio2.html"
+		"/tmp/sublime-sftp-browse-1458928720/lishowebproject/index.php"
 	],
 	"find":
 	{
@@ -762,40 +763,11 @@
 			[
 				{
 					"buffer": 0,
+					"file": "/home/lisho/.ssh/id_rsa",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"default_dir": "/home/lisho/Descargas/Cursos/curso HTML",
-							"incomplete_sync": null,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "index.php",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 648,
+						"buffer_size": 1675,
 						"regions":
 						{
 						},
@@ -811,7 +783,36 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/lisho/.ssh/id_rsa.pub",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 402,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								402,
+								402
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -912,7 +913,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 268.0,
+	"side_bar_width": 207.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
