@@ -1,0 +1,920 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"galeria",
+				"galeria1"
+			],
+			[
+				"str",
+				"str1"
+			],
+			[
+				"lo",
+				"localStorage"
+			],
+			[
+				"pa",
+				"parse	$.parseJSON()"
+			],
+			[
+				"num",
+				"num_candidatos"
+			],
+			[
+				"dat",
+				"datos"
+			],
+			[
+				"fun",
+				"fun	PHP: function definition"
+			],
+			[
+				"lis",
+				"listado_no_nomina"
+			],
+			[
+				"lista",
+				"listado_en_nomina"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"rbg",
+				"rgba()"
+			],
+			[
+				"borde",
+				"border"
+			],
+			[
+				"plaza",
+				"plaza3"
+			],
+			[
+				"correcto",
+				"Corrector"
+			],
+			[
+				"titu",
+				"titulares_barrenderos"
+			],
+			[
+				"key",
+				"array_keys"
+			],
+			[
+				"titulare",
+				"titulares_conserjes"
+			],
+			[
+				"as",
+				"asort"
+			],
+			[
+				"llamados",
+				"llamados_notas"
+			],
+			[
+				"titular",
+				"titulares"
+			],
+			[
+				"fo",
+				"for	for …"
+			],
+			[
+				"clasi",
+				"clasificado"
+			],
+			[
+				"ma",
+				"margin-bottom"
+			],
+			[
+				"ali",
+				"alignment"
+			],
+			[
+				"bor",
+				"border-radius"
+			],
+			[
+				"hi",
+				"height"
+			],
+			[
+				"ke",
+				"key"
+			],
+			[
+				"pre",
+				"pre_dni"
+			],
+			[
+				"col",
+				"color"
+			],
+			[
+				"nomina",
+				"nomina_dni"
+			],
+			[
+				"nombre",
+				"nombre_completo"
+			],
+			[
+				"sw",
+				"switch	switch …"
+			],
+			[
+				"dis",
+				"display"
+			],
+			[
+				"listado",
+				"listado_full"
+			],
+			[
+				"ba",
+				"background-color"
+			],
+			[
+				"mar",
+				"margin-left"
+			],
+			[
+				"php",
+				"php	<?php … ?>"
+			],
+			[
+				"arra",
+				"array_push"
+			],
+			[
+				"expediente",
+				"expediente_gerencia"
+			],
+			[
+				"ex",
+				"expediente"
+			],
+			[
+				"partici",
+				"participante_por_dni"
+			],
+			[
+				"candi",
+				"candidato"
+			],
+			[
+				"participante_por_",
+				"participante_por_rgc"
+			],
+			[
+				"exped",
+				"expediente_gerencia"
+			],
+			[
+				"par",
+				"participantes"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"is",
+				"isset"
+			],
+			[
+				"plaz",
+				"plaza2"
+			],
+			[
+				"exc",
+				"Excyl2016"
+			],
+			[
+				"conte",
+				"contenido1"
+			],
+			[
+				"array_m",
+				"array_merge"
+			],
+			[
+				"contenido",
+				"contenido1"
+			],
+			[
+				"pu",
+				"publica"
+			],
+			[
+				"unse",
+				"unset"
+			],
+			[
+				"llamado",
+				"llamado_dni"
+			],
+			[
+				"padding-ri",
+				"padding-right"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"min",
+				"min-height"
+			],
+			[
+				"if",
+				"ifelse	if … else …"
+			],
+			[
+				"ted",
+				"tedis_default"
+			],
+			[
+				"cre",
+				"crecer_cuadro1"
+			],
+			[
+				"focu",
+				"focusout	.focusout()"
+			],
+			[
+				"crecer",
+				"crecer_campo"
+			],
+			[
+				"va",
+				"var"
+			],
+			[
+				"ceas",
+				"ceas_id"
+			],
+			[
+				"scri",
+				"script	Tag"
+			],
+			[
+				"clasificado",
+				"clasificado_id"
+			],
+			[
+				"margi",
+				"margin"
+			],
+			[
+				"boto",
+				"botonera_pequeña"
+			],
+			[
+				"hei",
+				"height"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"emp",
+				"empleos"
+			],
+			[
+				"fade",
+				"fadeOut	.fadeOut()"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"DAT",
+				"datos"
+			],
+			[
+				"pri",
+				"print_r"
+			],
+			[
+				"lista_",
+				"lista_candidatos"
+			],
+			[
+				"array_p",
+				"array_push"
+			],
+			[
+				"list",
+				"lista_candidatos"
+			],
+			[
+				"th",
+				"this	PHP: $this->"
+			],
+			[
+				"dni",
+				"dni_candidatos"
+			],
+			[
+				"for",
+				"foreach	PHP: foreach {value} statement"
+			],
+			[
+				"set",
+				"setter	PHP: setter"
+			],
+			[
+				"can",
+				"candidatos"
+			],
+			[
+				"clasifica",
+				"clasificacion"
+			],
+			[
+				"clas",
+				"clasificacion"
+			],
+			[
+				"backgro",
+				"background-color"
+			],
+			[
+				"ab",
+				"absolute"
+			],
+			[
+				"s",
+				"slideDown	.slideDown()"
+			],
+			[
+				"sl",
+				"slideUp	.slideUp()"
+			],
+			[
+				"sr",
+				"script	Tag"
+			],
+			[
+				"im",
+				"img3"
+			],
+			[
+				"fa",
+				"fadeOut	.fadeOut()"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"h",
+				"hide	.hide()"
+			],
+			[
+				"f",
+				"focus	.focus()"
+			],
+			[
+				"mo",
+				"mousemove	.mousemove()"
+			],
+			[
+				"cua",
+				"cuadrado2"
+			],
+			[
+				"cs",
+				"css	.css() - single"
+			],
+			[
+				"mous",
+				"mouseover	.mouseover()"
+			],
+			[
+				"cha",
+				"change	.change()"
+			],
+			[
+				"sele",
+				"seleccion"
+			],
+			[
+				"cl",
+				"click	.click()"
+			],
+			[
+				"st",
+				"style	Tag"
+			],
+			[
+				"tex",
+				"text	.text()"
+			],
+			[
+				"texto",
+				"texto3"
+			],
+			[
+				"add",
+				"addClass	.addClass()"
+			],
+			[
+				"bac",
+				"background-color"
+			],
+			[
+				"html",
+				"html	.html()"
+			],
+			[
+				"sc",
+				"script	Tag"
+			],
+			[
+				"fi",
+				"first	.first()"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"ready",
+				"ready	$(document).ready"
+			],
+			[
+				"rea",
+				"ready	$(document).ready"
+			],
+			[
+				"scr",
+				"script	<script>"
+			],
+			[
+				"array",
+				"array"
+			],
+			[
+				"bs",
+				"bs3-table	bs3-table"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "index.php",
+			"settings":
+			{
+				"buffer_size": 648,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 372.0,
+		"last_filter": "Package Control: ",
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Local Dependency"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 476.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/opt/lampp/htdocs/edis"
+	],
+	"file_history":
+	[
+		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/citas_slide_editar_jQuery.html",
+		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/javascript/galeria.js",
+		"/opt/lampp/htdocs/rgc_cake/sftp-config.json",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/mi_js.js",
+		"/opt/lampp/htdocs/rgc_cake/webroot/css/mis_estilos.css",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/resultados_tribunales.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Layout/default.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Controller/CandidatosController.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/grafico.ctp",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/polar-area.html",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/bar-stacked.html",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/pie.html",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/dist/Chart.bundle.js",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/progressbar.ctp",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/combo-bar-line.html",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/grafico.html",
+		"/home/lisho/Descargas/curso JQuery/chart/Chart.js-master/samples/combo-bar-line.html",
+		"/opt/lampp/htdocs/rgc_cake/src/Controller/Excyl2016Controller.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Excyl2016/ennomina.ctp",
+		"/home/lisho/Descargas/curso JQuery/chart/chart1.html",
+		"/home/lisho/.config/sublime-text-3/Packages/BrowserIntegration/BrowserIntegration.sublime-settings",
+		"/home/lisho/Descargas/seleccion plan de empleo/Listado de dni nomina marzo 2016.csv",
+		"/run/media/lisho/KINGSTON/Plan de Empleo/_Cruce_bueno_abril16-2.csv",
+		"/home/lisho/Descargas/seleccion plan de empleo/Listado de dni nomina array marzo 2016.csv",
+		"/run/media/lisho/KINGSTON/nomina abril",
+		"/run/media/lisho/KINGSTON/Plan de Empleo/_Cruce_bueno_abril16-3.csv",
+		"/run/media/lisho/KINGSTON/Plan de Empleo/_Cruce_bueno.csv",
+		"/home/lisho/Descargas/seleccion plan de empleo/Listado de dni nomina marzo 2016.html",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/calificaajax.js",
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/valoraajax.js",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Pages/home.ctp",
+		"/home/lisho/.config/sublime-text-3/Packages/LiveReload/LiveReload.sublime-settings",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/lista_filtros_personal.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/lista_filtros_full.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/iconos_valoracion.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/iconos_profesion.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/valoracion2016.ctp",
+		"/usr/share/applications/firefox.desktop",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/iconos_formacion.ctp",
+		"/opt/lampp/htdocs/rgc_cake/webroot/css/base.css",
+		"/opt/lampp/htdocs/rgc_cake/config/bootstrap.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/navhead.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/valoracion.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/view_filtro.ctp",
+		"/tmp/sublime-sftp-browse-1459928858/lishowebproject/rgc_cake/src/Template/Candidatos/view_filtro.ctp",
+		"/opt/lampp/htdocs/rgc_cake/webroot/css/sftp-config.json",
+		"/tmp/sublime-sftp-browse-1459836780/lishowebproject/rgc_cake/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459836665/lishowebproject/rgc_cake/config/routes.php",
+		"/tmp/sublime-sftp-browse-1459836438/lishowebproject/rgc_cake/config/app.php",
+		"/home/lisho/Descargas/ivanvanderbyl-ui-progress-bar-aa60132/ivanvanderbyl-ui-progress-bar-aa60132/index.html",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/valoracion_update.ctp",
+		"/opt/lampp/htdocs/rgc_cake/config/routes.php",
+		"/opt/lampp/htdocs/papis/papis/app/Controller/AsistenciasController.php",
+		"/opt/lampp/htdocs/papis/papis/app/View/Asistencias/editar_asistencia_por_evento.ctp",
+		"/opt/lampp/htdocs/papis/papis/app/webroot/js/addasistencia.js",
+		"/home/lisho/Escritorio/curso JQuery/efectos.html",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/CandidatosTable.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/CandidatosTable_back.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/DiagnosticosTable.php",
+		"/opt/lampp/htdocs/rgc_cake/config/app.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/view_con_tedis.ctp",
+		"/opt/lampp/htdocs/rgc_cake/webroot/css/cake.css",
+		"/home/lisho/Descargas/curso JQuery/eventos.html",
+		"/opt/lampp/htdocs/papis/papis/app/View/Grupos/index.ctp",
+		"/opt/lampp/htdocs/papis/papis/app/View/Pages/home2.ctp",
+		"/opt/lampp/htdocs/papis/papis/app/View/Pages/home.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Pages/home_back.ctp",
+		"/opt/lampp/htdocs/rgc_cake/COMMIT_EDITMSG.COMMIT_EDITMSG",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/view_por_expediente.ctp",
+		"/usr/share/applications/sublime_text_3.desktop",
+		"/opt/lampp/htdocs/rgc_cake/src/Controller/ClasificadosController.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Clasificados/view.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/index.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/view_por_cea.ctp",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/CeasTable.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/ClasificadosTable.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/view.ctp",
+		"/opt/lampp/htdocs/papis/papis/app/Model/Incidencia.php",
+		"/opt/lampp/htdocs/papis/papis/app/Model/Tipoincidencia.php",
+		"/opt/lampp/htdocs/papis/papis/app/Model/Alumno.php",
+		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/ClasificadoTable.php",
+		"/etc/php/php.ini",
+		"/opt/lampp/etc/php.ini",
+		"/tmp/sublime-sftp-browse-1459103666/lishowebproject/rgc_cake/webroot/index.php",
+		"/tmp/sublime-sftp-browse-1459102494/lishowebproject/rgc/config/app.php",
+		"/tmp/sublime-sftp-browse-1459102934/lishowebproject/rgc_cake/config/app.php",
+		"/tmp/sublime-sftp-browse-1459099907/lishowebproject/rgc/config/bootstrap.php",
+		"/tmp/sublime-sftp-browse-1459100621/lishowebproject/rgc/config/app.php",
+		"/tmp/sublime-sftp-browse-1459099976/lishowebproject/rgc/config/routes.php",
+		"/tmp/sublime-sftp-browse-1459100252/lishowebproject/rgc/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459101095/lishowebproject/rgc/config/bootstrap_cli.php",
+		"/opt/lampp/htdocs/rgc_cake/config/bootstrap_cli.php",
+		"/opt/lampp/htdocs/rgc_cake/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459067440/lishowebproject/rgc/config/app.php",
+		"/tmp/sublime-sftp-browse-1459066876/lishowebproject/rgc/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459067028/lishowebproject/rgc/config/bootstrap.php",
+		"/tmp/sublime-sftp-browse-1459066546/lishowebproject/rgc_cake/config/bootstrap.php",
+		"/opt/lampp/htdocs/rgc/phpunit.xml.dist",
+		"/opt/lampp/htdocs/rgc/webroot/.htaccess",
+		"/tmp/sublime-sftp-browse-1459046615/lishowebproject/rgc/webroot/index.php",
+		"/tmp/sublime-sftp-browse-1459046267/lishowebproject/rgc/index.php",
+		"/opt/lampp/htdocs/rgc/index.php",
+		"/tmp/sublime-sftp-browse-1459044236/lishowebproject/rgc/index.php",
+		"/tmp/sublime-sftp-browse-1459044981/lishowebproject/rgc/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459044808/lishowebproject/rgc/config/bootstrap.php",
+		"/tmp/sublime-sftp-browse-1459044730/lishowebproject/rgc/config/routes.php",
+		"/opt/lampp/htdocs/rgc/config/routes.php",
+		"/tmp/sublime-sftp-browse-1459043725/lishowebproject/rgc/README.md",
+		"/tmp/sublime-sftp-browse-1459043150/lishowebproject/rgc/index.php",
+		"/tmp/sublime-sftp-browse-1459041891/lishowebproject/rgc/config/routes.php",
+		"/tmp/sublime-sftp-browse-1459042058/lishowebproject/rgc/config/paths.php",
+		"/tmp/sublime-sftp-browse-1459042092/lishowebproject/rgc/config/bootstrap.php",
+		"/tmp/sublime-sftp-browse-1459038040/lishowebproject/index.php",
+		"/srv/http/index.html",
+		"/opt/lampp/htdocs/rgc/config/app.php",
+		"/etc/httpd/conf/httpd.conf",
+		"/srv/http/info.php",
+		"/srv/http/index.php",
+		"/etc/hosts",
+		"/home/lisho/Descargas/curso JQuery/texto_en_div.html",
+		"/home/lisho/Descargas/curso JQuery/prueba_para_jose.html",
+		"/home/lisho/Descargas/curso JQuery/img/sumar.php",
+		"/home/lisho/Descargas/curso JQuery/eventos2.html",
+		"/home/lisho/Descargas/curso JQuery/ejercicio3.html",
+		"/tmp/sublime-sftp-browse-1458928720/lishowebproject/index.php",
+		"/home/lisho/Descargas/curso JQuery/efectos2.html",
+		"/home/lisho/Descargas/curso JQuery/ejercicio1.html",
+		"/home/lisho/Descargas/curso JQuery/ejercicio2.html"
+	],
+	"find":
+	{
+		"height": 26.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"PolarArea",
+			"endif",
+			"danger",
+			"panel-body",
+			"val3",
+			"val2",
+			"val1",
+			"10px",
+			"recursive",
+			"conserje",
+			"$candidato['habilidades']",
+			"$candidato['habitos']",
+			"$candidato['motivacion']",
+			"echo",
+			"p",
+			"10px",
+			" \n",
+			"expediente",
+			"            $",
+			"tedis",
+			"plaza",
+			"perfiles",
+			"#008CBA",
+			"#FF4C1A",
+			"label",
+			"];     ",
+			"                        ->",
+			"header",
+			"ceas",
+			"localhos",
+			"mysql",
+			"sql",
+			"driver",
+			"mysq",
+			"webroot",
+			"intl",
+			"intl		",
+			"intl",
+			"ext-intl",
+			"php5"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/home/lisho/Descargas/Cursos/curso HTML",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "index.php",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 648,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git":
+	{
+		"height": 100.0
+	},
+	"output.sftp":
+	{
+		"height": 100.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 118.0
+	},
+	"pinned_build_system": "",
+	"project": "edis.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 268.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
