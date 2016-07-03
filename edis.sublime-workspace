@@ -488,18 +488,19 @@
 	"buffers":
 	[
 		{
-			"file": "/home/lisho/.ssh/id_rsa",
+			"file": "cheatsheet/ajax_CheatSheet",
 			"settings":
 			{
-				"buffer_size": 1675,
-				"line_ending": "Unix"
+				"buffer_size": 3261,
+				"line_ending": "Unix",
+				"name": "CheatSheet"
 			}
 		},
 		{
-			"file": "/home/lisho/.ssh/id_rsa.pub",
+			"file": "APUNTES_DESARROLLO",
 			"settings":
 			{
-				"buffer_size": 402,
+				"buffer_size": 334,
 				"line_ending": "Unix"
 			}
 		}
@@ -552,12 +553,15 @@
 	},
 	"expanded_folders":
 	[
-		"/opt/lampp/htdocs/edis"
+		"/opt/lampp/htdocs/edis",
+		"/opt/lampp/htdocs/edis/cheatsheet"
 	],
 	"file_history":
 	[
-		"/home/lisho/.ssh/known_hosts",
+		"/tmp/sublime-sftp-browse-1463219238/lishowebproject/index.php",
+		"/home/lisho/.ssh/id_rsa",
 		"/home/lisho/.ssh/id_rsa.pub",
+		"/home/lisho/.ssh/known_hosts",
 		"/opt/lampp/htdocs/edis/webroot/css/cake.css",
 		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/citas_slide_editar_jQuery.html",
 		"/home/lisho/Descargas/Cursos/curso HTML/Ejercicios/MOD8/javascript/galeria.js",
@@ -681,9 +685,7 @@
 		"/home/lisho/Descargas/curso JQuery/texto_en_div.html",
 		"/home/lisho/Descargas/curso JQuery/prueba_para_jose.html",
 		"/home/lisho/Descargas/curso JQuery/img/sumar.php",
-		"/home/lisho/Descargas/curso JQuery/eventos2.html",
-		"/home/lisho/Descargas/curso JQuery/ejercicio3.html",
-		"/tmp/sublime-sftp-browse-1458928720/lishowebproject/index.php"
+		"/home/lisho/Descargas/curso JQuery/eventos2.html"
 	],
 	"find":
 	{
@@ -763,30 +765,29 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/home/lisho/.ssh/id_rsa",
+					"file": "cheatsheet/ajax_CheatSheet",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1675,
+						"buffer_size": 3261,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2697,
+								2697
 							]
 						],
 						"settings":
 						{
+							"auto_name": "CheatSheet",
 							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1513.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -794,24 +795,26 @@
 				},
 				{
 					"buffer": 1,
-					"file": "/home/lisho/.ssh/id_rsa.pub",
+					"file": "APUNTES_DESARROLLO",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 402,
+						"buffer_size": 334,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								402,
-								402
+								333,
+								333
 							]
 						],
 						"settings":
 						{
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -913,7 +916,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 207.0,
+	"side_bar_width": 187.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

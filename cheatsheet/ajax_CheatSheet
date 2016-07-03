@@ -1,0 +1,120 @@
+CheatSheet
+
+
+***************************
+***						***
+***			AJAX		***
+***						***
+***************************
+
+Para actrualizar los registros de la DB en tiempo real
+*******************************************************
+
+1. En el controlador:
+
+	$this->RequestHandler->config('inputTypeMap.json', ['json_decode', true]);
+
+	if ($this->request->isAjax()) {
+
+		// Asignamos una variable a cada valor del array data. Ejemplo:
+
+		$id=$this->request->data['id'];
+	    $motivacion=$this->request->data['motivacion'];
+	    $habitos=$this->request->data['habitos'];
+
+	    // Extraemos los datos actuales de la DB del registro que queremos modificar
+
+	    $candidato = $this->Candidatos->get($id, [
+								                    'contain' => []
+								                ]);
+
+		// Revisamos los datos y sustituimos aquellos en los que hay cambios:
+
+				if ($motivacion!=null) {
+	                
+	                $candidato
+	                    ->$motivacion = $motivacion;
+	           
+	            } elseif ($habitos!=null) {
+
+	                $candidato
+	                    ->$habitos = $habitos;
+
+	            }
+
+	     // Creamos una nujeva entidad con los datos modificados
+
+	     	 $candidato = $this->Candidatos->patchEntity($candidato, $this->request->data);
+
+		 // Guardamos la nueva entidad con los nuevos datos para el registro.
+
+		 	$this->Candidatos->save($candidato);
+
+	}
+
+2. En el archivo js:
+
+	// Cuando cargue la página, escuchamos los cambios en los campos generados y llamamos a la función que manda el archivo json.
+
+	$(document).ready(function() {
+	  
+		$('.motivacion').change(function(event) {
+		    var motivacion = $(this).val();
+
+		    motivacion_ajax($(this).attr("data-id"), motivacion);
+		  });
+
+		$('.habitos').change(function(event) {
+		    var habitos = $(this).val();
+
+		    habitos_ajax($(this).attr("data-id"), habitos);
+		  });
+	});
+
+	// Creamos las funciones que nos crean y envían los archivos json.
+
+	function motivacion_ajax (id,motivacion) {
+
+	    $.ajax({
+	      type: "POST",
+	      //url: "<?= Router::url(['controller=>Candidatos','action'=>'valoracion_update']); ?>",
+	      url: "/rgc_cake/candidatos/valoracion_update/",
+	      data:{
+	        id: id,
+	        motivacion: motivacion
+	      },
+
+	      dataType: "json",
+
+	    });
+
+	}
+
+	function habitos_ajax (id,habitos) {
+
+	    $.ajax({
+	      type: "POST",
+	      //url: "<?= Router::url(['controller=>Candidatos','action'=>'valoracion_update']); ?>",
+	      url: "/rgc_cake/candidatos/valoracion_update/",
+	      data:{
+	        id: id,
+	        habitos: habitos
+	      },
+
+	      dataType: "json",
+
+	    });
+
+	}
+
+3. En el archivo de la vista:
+
+	// IMPORTANTE: Generar el data-id personalizado para cada id y la class 
+
+	<td><?= $this->Form->select('',[$candidato ['motivacion'] => $candidato ['motivacion'],
+		                                                'Si' => 'Si',
+		                                                'No' => 'No',
+		                                                'Se desconoce' => 'Se desconoce',
+		                                                'Sin valorar' => 'Sin valorar',],
+		                                                ['data-id'=>$candidato ['id'], 
+		                                                'class' => 'motivacion']); ?></td>
