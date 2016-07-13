@@ -26,7 +26,7 @@ class EquiposTable extends Table
         parent::initialize($config);
 
         $this->table('equipos');
-        $this->displayField('id');
+        $this->displayField('nombre');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

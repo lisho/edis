@@ -43,12 +43,15 @@
             <?= $this->element('menus/menu_principal'); ?>
         <!-- /top navigation -->
 
-        <!-- page content -->
-            <?= $this->Flash->render() ?>
+        <!-- page content -->        
         
             <div class="container clearfix">
                 <div class="right_col" role="main">
-                    <?= $this->fetch('content') ?>
+
+                <?= $this->Flash->render() ?>
+                
+                <?= $this->fetch('content') ?>
+
                 </div>
             </div>
         <!-- /page content -->

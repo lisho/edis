@@ -1,12 +1,10 @@
-
+<h1>Nuevo Equipo.</h1>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <div class="title_left">
-                    <h1>Nuevo Equipo.</h1>
-                    <?= $this->Element('menus/menu_panel');?>
-                </div>
+                <h2>Crea un nuevo equipo técnico de referencia...</h2>
+                <?= $this->Element('menus/menu_panel');?>                
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">    
@@ -17,8 +15,7 @@
                 
 
                 <fieldset>
-                    <legend><small>Crea un nuevo equipo técnico de referencia...</small></legend>
-                    
+                                        
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre del Equipo <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -36,10 +33,11 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Equipo <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                         <?php
-                            echo $this->Form->select('tipo', ['EDIS', 'CEAS'], [
+                            echo $this->Form->select('tipo', ['EDIS'=>'EDIS', 'CEAS'=> 'CEAS'], [
                                         'class'=>'form-control col-md-7 col-xs-12',
                                         'required' => 'required',
-                                        'label' => ['text' => '']
+                                        'label' => ['text' => ''],
+                                        'default' => 'EDIS'
                                     ]);
                         ?> 
                         </div>
@@ -67,8 +65,6 @@
                
                 <?= $this->Form->end() ?>
                 <!-- /Formulario -->
-
-                </div>
             </div>
         </div>
     </div>

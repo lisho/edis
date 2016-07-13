@@ -33,11 +33,13 @@
                             <li><a href="#level2_2">Level Two</a>
                             </li>
                           </ul>
-                        <li><a>Level One<span class="fa fa-chevron-down"></span></a>
+                        <li><a>Users<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
-                            <li ><a href="level2.html">Level Two</a>
+                            <li >
+                              <?= $this->Html->link('Listado de Users', ['controller'=> 'Users', 'action'=>'index']) ?>
                             </li>
-                            <li><a href="#level2_1">Level Two</a>
+                            <li>
+                              <?= $this->Html->link('Nuevo User', ['controller'=> 'Users', 'action'=>'add']) ?>
                             </li>
                             <li><a href="#level2_2">Level Two</a>
                             </li>
