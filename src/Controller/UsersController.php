@@ -30,8 +30,8 @@ class UsersController extends AppController
         $this->set('_serialize', ['users']);
 
         $dir = new Folder(WWW_ROOT . 'img/user_fotos');
-        $fotos = $dir->find('.*\.jpg');
-        
+        //$fotos = $dir->find('.*\.jpg');
+        $fotos = $dir->find();
         $this->set('fotos',$fotos);     
     }
 
@@ -53,7 +53,9 @@ class UsersController extends AppController
 
         $dir = new Folder(WWW_ROOT . 'img/user_fotos');
         $f=$user['user'].'.jpg';
-        $foto = $dir->find($f);
+        $g=$user['user'].'.png';
+        //$foto = $dir->find($f);
+        $foto = $dir->find();
         
         $this->set('foto',$foto);       
         //debug($f);exit();
@@ -66,9 +68,23 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $filename='';
+        $filename = '';
+        $ext = '';
         $user = $this->Users->newEntity();
         //debug($this->request->data);exit();
+
+        switch ($this->request->data['photo']['type']) {
+            case 'image/jpeg':
+                $ext = '.jpg';
+                break;
+            case 'image/png':
+                $ext = '.png';
+                break;           
+            default:
+                # code...
+                break;
+        }
+
         if ($this->request->is('post')) {
             
             $user = $this->Users->patchEntity($user, $this->request->data);
@@ -76,7 +92,7 @@ class UsersController extends AppController
 
                     
                     $filename=$this->request->data['photo'];
-                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user']);
+                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
                     
 /*
                     if (!empty($this->request->data['photo']['tmp_name'])
@@ -93,20 +109,7 @@ class UsersController extends AppController
                 } else {
                     $this->Flash->error(__('No se ha guardado el nuevo usuario. Por favor, inténtelo le nuevo.'));
                 }
-            
-            /*
-            $filename=$this->request->data['User']['photo'];
-
-            move_uploaded_file($filenames['tmp_name'], WWW_ROOT . 'files' . DS . $filenames['name']);
-            
-                if (!empty($this->request->data['User']['foto']['tmp_name'])
-                    && is_uploaded_file($this->request->data['User']['foto']['tmp_name'])) 
-                {
-    
-                $filename=basename($this->request->data['User']['user']);
-    
-                move_uploaded_file($this->request->data['User']['foto']['tmp_name'],IMAGES.'user_fotos/'.$this->request->data['User']['user'].'.jpg');
-                } */
+                
         }
 
         $equipos = $this->Users->Equipos->find('list', ['limit' => 200, 'order' => 'Equipos.nombre ASC']);

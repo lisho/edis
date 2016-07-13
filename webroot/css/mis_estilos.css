@@ -10,3 +10,16 @@
 	width: 50%;
 }
 
+ul.messages li img.avatar, img.avatar {
+
+	height: 5em;
+	width: auto;
+	float: none;
+}
+
+ul.messages li img.avatar, img.avatar:hover {
+
+	height: 8em;
+	/*width: auto;
+	float: none;*/
+}

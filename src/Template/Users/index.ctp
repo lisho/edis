@@ -28,7 +28,7 @@
         <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    
+                    <th></th>
                     <th>DNI/NIE</th>
                     <th>Nombre </th>
                     <th>Apellidos </th>
@@ -46,6 +46,23 @@
                 <?php foreach ($users as $user): ?>
                 <tr>
                     
+                    <td>
+                        <div class="img-contenedor text-center">
+
+                            <?php if (in_array($user->user.'.jpg', $fotos) ): ?>
+                                  <?php $avatar = $user->user; ?>
+                                  <img class="img-circle avatar" src="img/user_fotos/<?= $avatar.'.jpg'; ?>" width="100%"></img>
+                            <?php elseif (in_array($user->user.'.png', $fotos) ): ?>
+                                  <?php $avatar = $user->user; ?>
+                                  <img class="img-circle avatar" src="img/user_fotos/<?= $avatar.'.png'; ?>" width="100%"></img>
+                            <?php else: ?>
+                                 <i class="fa fa-user fa-5x"></i>
+                            <?php endif; ?>
+
+                        </div>
+
+                    </td>
+
                     <td><?= $this->Html->link($user->dni, ['action' => 'view', $user->id]) ?></td>
 
                     <td><?= h($user->nombre) ?></td>
