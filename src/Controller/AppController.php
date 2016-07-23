@@ -16,6 +16,8 @@ namespace App\Controller;
 
 use Cake\Controller\Controller;
 use Cake\Event\Event;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * Application Controller
@@ -43,7 +45,7 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-/*       
+      
         $this->loadComponent('Auth', [
                 'authorize' => ['Controller'],
                 'authenticate' => [
@@ -67,8 +69,7 @@ class AppController extends Controller
                         'controller' => 'Users',
                         'action' => 'login'
                     ],
-            ]);
-       */ 
+            ]);            
     }
 
     /**
@@ -79,15 +80,51 @@ class AppController extends Controller
      */
     public function beforeRender(Event $event)
     {
+        $this->Auth->allow(['index', 'view', 'display']);
+       
+        $this->set('auth', $this->Auth->user()); //Con esta linea pasamos $auth a las vistas.
+        
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
+ 
     }
 
     public function isAuthorized($user)
     {
         return true;
     }
+
+    /*
+    public function buscar_avatar($id=null)
+    {        
+        $this->loadModel('Users');     
+
+        if ($id!=null) {
+            $foto=[];
+            $user = $this->Users->get($id);
+            
+            $dir = new Folder(WWW_ROOT . 'img/user_fotos');
+            $f=$user['user'].'.jpg';
+            $g=$user['user'].'.png';
+            //$foto = $dir->find($f);
+            if ($dir->find($f)) {
+                $foto = $dir->find($f);
+            } elseif ($dir->find($g)) {
+                $foto = $dir->find($g);
+            } 
+            
+        } else {
+            $dir = new Folder(WWW_ROOT . 'img/user_fotos');
+            //$f=$user['user'].'.jpg';
+            //$g=$user['user'].'.png';
+            //$foto = $dir->find($f);
+            $foto = $dir->find();
+        }
+        
+        //$this->set('foto',$foto);  
+        return $foto;
+    } */
 }

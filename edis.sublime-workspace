@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"eqipos",
+				"equipos_todos"
+			],
+			[
+				"pass",
+				"password"
+			],
+			[
 				"galeria",
 				"galeria1"
 			],
@@ -488,37 +496,50 @@
 	"buffers":
 	[
 		{
-			"file": "APUNTES_DESARROLLO",
+			"file": "src/Controller/UsersController.php",
 			"settings":
 			{
-				"buffer_size": 478,
+				"buffer_size": 6852,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Template/Layout/default.ctp",
+			"file": "src/Template/Users/edit.ctp",
 			"settings":
 			{
-				"buffer_size": 397,
+				"buffer_size": 8814,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "    \n    <?= $this->Html->charset() ?>\n   \n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    \n    <title>\n        \n        <?= $this->fetch('title') ?>\n    </title>\n    \n    <?= $this->Html->meta('icon') ?>\n\n    <? // = $this->Html->css('base.css') ?>\n    <? // = $this->Html->css('cake.css') ?>\n    \n    <?= $this->Html->css('cake.css') ?>\n    <?= $this->Html->css('mis_estilos.css') ?>\n   \n\n    \n    <?= $this->fetch('meta') ?>\n    <?= $this->fetch('css') ?>\n    <?= $this->fetch('script') ?>",
-			"file": "src/Template/Element/layout_elements/head.ctp",
-			"file_size": 524,
-			"file_write_time": 131121166526239803,
+			"file": "src/Template/Users/index.ctp",
 			"settings":
 			{
-				"buffer_size": 523,
+				"buffer_size": 4364,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Template/Element/layout_elements/header.ctp",
+			"file": "src/Template/Users/add.ctp",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 8629,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "webroot/css/mis_estilos.css",
+			"settings":
+			{
+				"buffer_size": 291,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Template/Element/menus/sidebar.ctp",
+			"settings":
+			{
+				"buffer_size": 7571,
 				"line_ending": "Unix"
 			}
 		},
@@ -526,7 +547,15 @@
 			"file": "src/Template/Element/menus/menu_principal.ctp",
 			"settings":
 			{
-				"buffer_size": 541,
+				"buffer_size": 4479,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n    <!-- top tiles -->\n    <div class=\"row tile_count\">\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Total Users</span>\n        <div class=\"count\">2500</div>\n        <span class=\"count_bottom\"><i class=\"green\">4% </i> From last Week</span>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-clock-o\"></i> Average Time</span>\n        <div class=\"count\">123.50</div>\n        <span class=\"count_bottom\"><i class=\"green\"><i class=\"fa fa-sort-asc\"></i>3% </i> From last Week</span>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Total Males</span>\n        <div class=\"count green\">2,500</div>\n        <span class=\"count_bottom\"><i class=\"green\"><i class=\"fa fa-sort-asc\"></i>34% </i> From last Week</span>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Total Females</span>\n        <div class=\"count\">4,567</div>\n        <span class=\"count_bottom\"><i class=\"red\"><i class=\"fa fa-sort-desc\"></i>12% </i> From last Week</span>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Total Collections</span>\n        <div class=\"count\">2,315</div>\n        <span class=\"count_bottom\"><i class=\"green\"><i class=\"fa fa-sort-asc\"></i>34% </i> From last Week</span>\n      </div>\n      <div class=\"col-md-2 col-sm-4 col-xs-6 tile_stats_count\">\n        <span class=\"count_top\"><i class=\"fa fa-user\"></i> Total Connections</span>\n        <div class=\"count\">7,325</div>\n        <span class=\"count_bottom\"><i class=\"green\"><i class=\"fa fa-sort-asc\"></i>34% </i> From last Week</span>\n      </div>\n    </div>\n    <!-- /top tiles -->\n\n    <div class=\"row\">\n      <div class=\"col-md-12 col-sm-12 col-xs-12\">\n        <div class=\"dashboard_graph\">\n\n          <div class=\"row x_title\">\n            <div class=\"col-md-6\">\n              <h3>Network Activities <small>Graph title sub-title</small></h3>\n            </div>\n            <div class=\"col-md-6\">\n              <div id=\"reportrange\" class=\"pull-right\" style=\"background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc\">\n                <i class=\"glyphicon glyphicon-calendar fa fa-calendar\"></i>\n                <span>December 30, 2014 - January 28, 2015</span> <b class=\"caret\"></b>\n              </div>\n            </div>\n          </div>\n\n          <div class=\"col-md-9 col-sm-9 col-xs-12\">\n            <div id=\"placeholder33\" style=\"height: 260px; display: none\" class=\"demo-placeholder\"></div>\n            <div style=\"width: 100%;\">\n              <div id=\"canvas_dahs\" class=\"demo-placeholder\" style=\"width: 100%; height:270px;\"></div>\n            </div>\n          </div>\n          <div class=\"col-md-3 col-sm-3 col-xs-12 bg-white\">\n            <div class=\"x_title\">\n              <h2>Top Campaign Performance</h2>\n              <div class=\"clearfix\"></div>\n            </div>\n\n            <div class=\"col-md-12 col-sm-12 col-xs-6\">\n              <div>\n                <p>Facebook Campaign</p>\n                <div class=\"\">\n                  <div class=\"progress progress_sm\" style=\"width: 76%;\">\n                    <div class=\"progress-bar bg-green\" role=\"progressbar\" data-transitiongoal=\"80\"></div>\n                  </div>\n                </div>\n              </div>\n              <div>\n                <p>Twitter Campaign</p>\n                <div class=\"\">\n                  <div class=\"progress progress_sm\" style=\"width: 76%;\">\n                    <div class=\"progress-bar bg-green\" role=\"progressbar\" data-transitiongoal=\"60\"></div>\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"col-md-12 col-sm-12 col-xs-6\">\n              <div>\n                <p>Conventional Media</p>\n                <div class=\"\">\n                  <div class=\"progress progress_sm\" style=\"width: 76%;\">\n                    <div class=\"progress-bar bg-green\" role=\"progressbar\" data-transitiongoal=\"40\"></div>\n                  </div>\n                </div>\n              </div>\n              <div>\n                <p>Bill boards</p>\n                <div class=\"\">\n                  <div class=\"progress progress_sm\" style=\"width: 76%;\">\n                    <div class=\"progress-bar bg-green\" role=\"progressbar\" data-transitiongoal=\"50\"></div>\n                  </div>\n                </div>\n              </div>\n            </div>\n\n          </div>\n\n          <div class=\"clearfix\"></div>\n        </div>\n      </div>\n\n    </div>\n    <br />\n\n    <div class=\"row\">\n\n\n      <div class=\"col-md-4 col-sm-4 col-xs-12\">\n        <div class=\"x_panel tile fixed_height_320\">\n          <div class=\"x_title\">\n            <h2>App Versions</h2>\n            <ul class=\"nav navbar-right panel_toolbox\">\n              <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n              </li>\n              <li class=\"dropdown\">\n                <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                <ul class=\"dropdown-menu\" role=\"menu\">\n                  <li><a href=\"#\">Settings 1</a>\n                  </li>\n                  <li><a href=\"#\">Settings 2</a>\n                  </li>\n                </ul>\n              </li>\n              <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n              </li>\n            </ul>\n            <div class=\"clearfix\"></div>\n          </div>\n          <div class=\"x_content\">\n            <h4>App Usage across versions</h4>\n            <div class=\"widget_summary\">\n              <div class=\"w_left w_25\">\n                <span>0.1.5.2</span>\n              </div>\n              <div class=\"w_center w_55\">\n                <div class=\"progress\">\n                  <div class=\"progress-bar bg-green\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 66%;\">\n                    <span class=\"sr-only\">60% Complete</span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"w_right w_20\">\n                <span>123k</span>\n              </div>\n              <div class=\"clearfix\"></div>\n            </div>\n\n            <div class=\"widget_summary\">\n              <div class=\"w_left w_25\">\n                <span>0.1.5.3</span>\n              </div>\n              <div class=\"w_center w_55\">\n                <div class=\"progress\">\n                  <div class=\"progress-bar bg-green\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 45%;\">\n                    <span class=\"sr-only\">60% Complete</span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"w_right w_20\">\n                <span>53k</span>\n              </div>\n              <div class=\"clearfix\"></div>\n            </div>\n            <div class=\"widget_summary\">\n              <div class=\"w_left w_25\">\n                <span>0.1.5.4</span>\n              </div>\n              <div class=\"w_center w_55\">\n                <div class=\"progress\">\n                  <div class=\"progress-bar bg-green\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 25%;\">\n                    <span class=\"sr-only\">60% Complete</span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"w_right w_20\">\n                <span>23k</span>\n              </div>\n              <div class=\"clearfix\"></div>\n            </div>\n            <div class=\"widget_summary\">\n              <div class=\"w_left w_25\">\n                <span>0.1.5.5</span>\n              </div>\n              <div class=\"w_center w_55\">\n                <div class=\"progress\">\n                  <div class=\"progress-bar bg-green\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 5%;\">\n                    <span class=\"sr-only\">60% Complete</span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"w_right w_20\">\n                <span>3k</span>\n              </div>\n              <div class=\"clearfix\"></div>\n            </div>\n            <div class=\"widget_summary\">\n              <div class=\"w_left w_25\">\n                <span>0.1.5.6</span>\n              </div>\n              <div class=\"w_center w_55\">\n                <div class=\"progress\">\n                  <div class=\"progress-bar bg-green\" role=\"progressbar\" aria-valuenow=\"60\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: 2%;\">\n                    <span class=\"sr-only\">60% Complete</span>\n                  </div>\n                </div>\n              </div>\n              <div class=\"w_right w_20\">\n                <span>1k</span>\n              </div>\n              <div class=\"clearfix\"></div>\n            </div>\n\n          </div>\n        </div>\n      </div>\n\n      <div class=\"col-md-4 col-sm-4 col-xs-12\">\n        <div class=\"x_panel tile fixed_height_320 overflow_hidden\">\n          <div class=\"x_title\">\n            <h2>Device Usage</h2>\n            <ul class=\"nav navbar-right panel_toolbox\">\n              <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n              </li>\n              <li class=\"dropdown\">\n                <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                <ul class=\"dropdown-menu\" role=\"menu\">\n                  <li><a href=\"#\">Settings 1</a>\n                  </li>\n                  <li><a href=\"#\">Settings 2</a>\n                  </li>\n                </ul>\n              </li>\n              <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n              </li>\n            </ul>\n            <div class=\"clearfix\"></div>\n          </div>\n          <div class=\"x_content\">\n            <table class=\"\" style=\"width:100%\">\n              <tr>\n                <th style=\"width:37%;\">\n                  <p>Top 5</p>\n                </th>\n                <th>\n                  <div class=\"col-lg-7 col-md-7 col-sm-7 col-xs-7\">\n                    <p class=\"\">Device</p>\n                  </div>\n                  <div class=\"col-lg-5 col-md-5 col-sm-5 col-xs-5\">\n                    <p class=\"\">Progress</p>\n                  </div>\n                </th>\n              </tr>\n              <tr>\n                <td>\n                  <canvas id=\"canvas1\" height=\"140\" width=\"140\" style=\"margin: 15px 10px 10px 0\"></canvas>\n                </td>\n                <td>\n                  <table class=\"tile_info\">\n                    <tr>\n                      <td>\n                        <p><i class=\"fa fa-square blue\"></i>IOS </p>\n                      </td>\n                      <td>30%</td>\n                    </tr>\n                    <tr>\n                      <td>\n                        <p><i class=\"fa fa-square green\"></i>Android </p>\n                      </td>\n                      <td>10%</td>\n                    </tr>\n                    <tr>\n                      <td>\n                        <p><i class=\"fa fa-square purple\"></i>Blackberry </p>\n                      </td>\n                      <td>20%</td>\n                    </tr>\n                    <tr>\n                      <td>\n                        <p><i class=\"fa fa-square aero\"></i>Symbian </p>\n                      </td>\n                      <td>15%</td>\n                    </tr>\n                    <tr>\n                      <td>\n                        <p><i class=\"fa fa-square red\"></i>Others </p>\n                      </td>\n                      <td>30%</td>\n                    </tr>\n                  </table>\n                </td>\n              </tr>\n            </table>\n          </div>\n        </div>\n      </div>\n\n\n      <div class=\"col-md-4 col-sm-4 col-xs-12\">\n        <div class=\"x_panel tile fixed_height_320\">\n          <div class=\"x_title\">\n            <h2>Quick Settings</h2>\n            <ul class=\"nav navbar-right panel_toolbox\">\n              <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n              </li>\n              <li class=\"dropdown\">\n                <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                <ul class=\"dropdown-menu\" role=\"menu\">\n                  <li><a href=\"#\">Settings 1</a>\n                  </li>\n                  <li><a href=\"#\">Settings 2</a>\n                  </li>\n                </ul>\n              </li>\n              <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n              </li>\n            </ul>\n            <div class=\"clearfix\"></div>\n          </div>\n          <div class=\"x_content\">\n            <div class=\"dashboard-widget-content\">\n              <ul class=\"quick-list\">\n                <li><i class=\"fa fa-calendar-o\"></i><a href=\"#\">Settings</a>\n                </li>\n                <li><i class=\"fa fa-bars\"></i><a href=\"#\">Subscription</a>\n                </li>\n                <li><i class=\"fa fa-bar-chart\"></i><a href=\"#\">Auto Renewal</a> </li>\n                <li><i class=\"fa fa-line-chart\"></i><a href=\"#\">Achievements</a>\n                </li>\n                <li><i class=\"fa fa-bar-chart\"></i><a href=\"#\">Auto Renewal</a> </li>\n                <li><i class=\"fa fa-line-chart\"></i><a href=\"#\">Achievements</a>\n                </li>\n                <li><i class=\"fa fa-area-chart\"></i><a href=\"#\">Logout</a>\n                </li>\n              </ul>\n\n              <div class=\"sidebar-widget\">\n                <h4>Profile Completion</h4>\n                <canvas width=\"150\" height=\"80\" id=\"foo\" class=\"\" style=\"width: 160px; height: 100px;\"></canvas>\n                <div class=\"goal-wrapper\">\n                  <span class=\"gauge-value pull-left\">$</span>\n                  <span id=\"gauge-text\" class=\"gauge-value pull-left\">3,200</span>\n                  <span id=\"goal-text\" class=\"goal-value pull-right\">$5,000</span>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n    </div>\n\n\n    <div class=\"row\">\n      <div class=\"col-md-4 col-sm-4 col-xs-12\">\n        <div class=\"x_panel\">\n          <div class=\"x_title\">\n            <h2>Recent Activities <small>Sessions</small></h2>\n            <ul class=\"nav navbar-right panel_toolbox\">\n              <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n              </li>\n              <li class=\"dropdown\">\n                <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                <ul class=\"dropdown-menu\" role=\"menu\">\n                  <li><a href=\"#\">Settings 1</a>\n                  </li>\n                  <li><a href=\"#\">Settings 2</a>\n                  </li>\n                </ul>\n              </li>\n              <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n              </li>\n            </ul>\n            <div class=\"clearfix\"></div>\n          </div>\n          <div class=\"x_content\">\n            <div class=\"dashboard-widget-content\">\n\n              <ul class=\"list-unstyled timeline widget\">\n                <li>\n                  <div class=\"block\">\n                    <div class=\"block_content\">\n                      <h2 class=\"title\">\n                                        <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>\n                                    </h2>\n                      <div class=\"byline\">\n                        <span>13 hours ago</span> by <a>Jane Smith</a>\n                      </div>\n                      <p class=\"excerpt\">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>\n                      </p>\n                    </div>\n                  </div>\n                </li>\n                <li>\n                  <div class=\"block\">\n                    <div class=\"block_content\">\n                      <h2 class=\"title\">\n                                        <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>\n                                    </h2>\n                      <div class=\"byline\">\n                        <span>13 hours ago</span> by <a>Jane Smith</a>\n                      </div>\n                      <p class=\"excerpt\">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>\n                      </p>\n                    </div>\n                  </div>\n                </li>\n                <li>\n                  <div class=\"block\">\n                    <div class=\"block_content\">\n                      <h2 class=\"title\">\n                                        <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>\n                                    </h2>\n                      <div class=\"byline\">\n                        <span>13 hours ago</span> by <a>Jane Smith</a>\n                      </div>\n                      <p class=\"excerpt\">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>\n                      </p>\n                    </div>\n                  </div>\n                </li>\n                <li>\n                  <div class=\"block\">\n                    <div class=\"block_content\">\n                      <h2 class=\"title\">\n                                        <a>Who Needs Sundance When You’ve Got&nbsp;Crowdfunding?</a>\n                                    </h2>\n                      <div class=\"byline\">\n                        <span>13 hours ago</span> by <a>Jane Smith</a>\n                      </div>\n                      <p class=\"excerpt\">Film festivals used to be do-or-die moments for movie makers. They were where you met the producers that could fund your project, and if the buyers liked your flick, they’d pay to Fast-forward and… <a>Read&nbsp;More</a>\n                      </p>\n                    </div>\n                  </div>\n                </li>\n              </ul>\n            </div>\n          </div>\n        </div>\n      </div>\n\n\n      <div class=\"col-md-8 col-sm-8 col-xs-12\">\n\n\n\n        <div class=\"row\">\n\n          <div class=\"col-md-12 col-sm-12 col-xs-12\">\n            <div class=\"x_panel\">\n              <div class=\"x_title\">\n                <h2>Visitors location <small>geo-presentation</small></h2>\n                <ul class=\"nav navbar-right panel_toolbox\">\n                  <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n                  </li>\n                  <li class=\"dropdown\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                    <ul class=\"dropdown-menu\" role=\"menu\">\n                      <li><a href=\"#\">Settings 1</a>\n                      </li>\n                      <li><a href=\"#\">Settings 2</a>\n                      </li>\n                    </ul>\n                  </li>\n                  <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n                  </li>\n                </ul>\n                <div class=\"clearfix\"></div>\n              </div>\n              <div class=\"x_content\">\n                <div class=\"dashboard-widget-content\">\n                  <div class=\"col-md-4 hidden-small\">\n                    <h2 class=\"line_30\">125.7k Views from 60 countries</h2>\n\n                    <table class=\"countries_list\">\n                      <tbody>\n                        <tr>\n                          <td>United States</td>\n                          <td class=\"fs15 fw700 text-right\">33%</td>\n                        </tr>\n                        <tr>\n                          <td>France</td>\n                          <td class=\"fs15 fw700 text-right\">27%</td>\n                        </tr>\n                        <tr>\n                          <td>Germany</td>\n                          <td class=\"fs15 fw700 text-right\">16%</td>\n                        </tr>\n                        <tr>\n                          <td>Spain</td>\n                          <td class=\"fs15 fw700 text-right\">11%</td>\n                        </tr>\n                        <tr>\n                          <td>Britain</td>\n                          <td class=\"fs15 fw700 text-right\">10%</td>\n                        </tr>\n                      </tbody>\n                    </table>\n                  </div>\n                  <div id=\"world-map-gdp\" class=\"col-md-8 col-sm-12 col-xs-12\" style=\"height:230px;\"></div>\n                </div>\n              </div>\n            </div>\n          </div>\n\n        </div>\n        <div class=\"row\">\n\n\n          <!-- Start to do list -->\n          <div class=\"col-md-6 col-sm-6 col-xs-12\">\n            <div class=\"x_panel\">\n              <div class=\"x_title\">\n                <h2>To Do List <small>Sample tasks</small></h2>\n                <ul class=\"nav navbar-right panel_toolbox\">\n                  <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n                  </li>\n                  <li class=\"dropdown\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                    <ul class=\"dropdown-menu\" role=\"menu\">\n                      <li><a href=\"#\">Settings 1</a>\n                      </li>\n                      <li><a href=\"#\">Settings 2</a>\n                      </li>\n                    </ul>\n                  </li>\n                  <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n                  </li>\n                </ul>\n                <div class=\"clearfix\"></div>\n              </div>\n              <div class=\"x_content\">\n\n                <div class=\"\">\n                  <ul class=\"to_do\">\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Schedule meeting with new client </p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Create email address for new intern</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Have IT fix the network printer</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Copy backups to offsite location</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Food truck fixie locavors mcsweeney</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Food truck fixie locavors mcsweeney</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Create email address for new intern</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Have IT fix the network printer</p>\n                    </li>\n                    <li>\n                      <p>\n                        <input type=\"checkbox\" class=\"flat\"> Copy backups to offsite location</p>\n                    </li>\n                  </ul>\n                </div>\n              </div>\n            </div>\n          </div>\n          <!-- End to do list -->\n          \n          <!-- start of weather widget -->\n          <div class=\"col-md-6 col-sm-6 col-xs-12\">\n            <div class=\"x_panel\">\n              <div class=\"x_title\">\n                <h2>Daily active users <small>Sessions</small></h2>\n                <ul class=\"nav navbar-right panel_toolbox\">\n                  <li><a class=\"collapse-link\"><i class=\"fa fa-chevron-up\"></i></a>\n                  </li>\n                  <li class=\"dropdown\">\n                    <a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\" role=\"button\" aria-expanded=\"false\"><i class=\"fa fa-wrench\"></i></a>\n                    <ul class=\"dropdown-menu\" role=\"menu\">\n                      <li><a href=\"#\">Settings 1</a>\n                      </li>\n                      <li><a href=\"#\">Settings 2</a>\n                      </li>\n                    </ul>\n                  </li>\n                  <li><a class=\"close-link\"><i class=\"fa fa-close\"></i></a>\n                  </li>\n                </ul>\n                <div class=\"clearfix\"></div>\n              </div>\n              <div class=\"x_content\">\n                <div class=\"row\">\n                  <div class=\"col-sm-12\">\n                    <div class=\"temperature\"><b>Monday</b>, 07:30 AM\n                      <span>F</span>\n                      <span><b>C</b></span>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"row\">\n                  <div class=\"col-sm-4\">\n                    <div class=\"weather-icon\">\n                      <canvas height=\"84\" width=\"84\" id=\"partly-cloudy-day\"></canvas>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-8\">\n                    <div class=\"weather-text\">\n                      <h2>Texas <br><i>Partly Cloudy Day</i></h2>\n                    </div>\n                  </div>\n                </div>\n                <div class=\"col-sm-12\">\n                  <div class=\"weather-text pull-right\">\n                    <h3 class=\"degrees\">23</h3>\n                  </div>\n                </div>\n\n                <div class=\"clearfix\"></div>\n\n                <div class=\"row weather-days\">\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Mon</h2>\n                      <h3 class=\"degrees\">25</h3>\n                      <canvas id=\"clear-day\" width=\"32\" height=\"32\"></canvas>\n                      <h5>15 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Tue</h2>\n                      <h3 class=\"degrees\">25</h3>\n                      <canvas height=\"32\" width=\"32\" id=\"rain\"></canvas>\n                      <h5>12 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Wed</h2>\n                      <h3 class=\"degrees\">27</h3>\n                      <canvas height=\"32\" width=\"32\" id=\"snow\"></canvas>\n                      <h5>14 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Thu</h2>\n                      <h3 class=\"degrees\">28</h3>\n                      <canvas height=\"32\" width=\"32\" id=\"sleet\"></canvas>\n                      <h5>15 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Fri</h2>\n                      <h3 class=\"degrees\">28</h3>\n                      <canvas height=\"32\" width=\"32\" id=\"wind\"></canvas>\n                      <h5>11 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"col-sm-2\">\n                    <div class=\"daily-weather\">\n                      <h2 class=\"day\">Sat</h2>\n                      <h3 class=\"degrees\">26</h3>\n                      <canvas height=\"32\" width=\"32\" id=\"cloudy\"></canvas>\n                      <h5>10 <i>km/h</i></h5>\n                    </div>\n                  </div>\n                  <div class=\"clearfix\"></div>\n                </div>\n              </div>\n            </div>\n\n          </div>\n          <!-- end of weather widget -->\n        </div>\n      </div>\n    </div>\n",
+			"settings":
+			{
+				"buffer_size": 28661,
 				"line_ending": "Unix"
 			}
 		}
@@ -580,28 +609,61 @@
 	"expanded_folders":
 	[
 		"/opt/lampp/htdocs/edis",
-		"/opt/lampp/htdocs/edis/plugins",
+		"/opt/lampp/htdocs/edis/config",
+		"/opt/lampp/htdocs/edis/config/Migrations",
 		"/opt/lampp/htdocs/edis/src",
+		"/opt/lampp/htdocs/edis/src/Controller",
+		"/opt/lampp/htdocs/edis/src/Model",
+		"/opt/lampp/htdocs/edis/src/Model/Entity",
 		"/opt/lampp/htdocs/edis/src/Template",
-		"/opt/lampp/htdocs/edis/src/Template/Element",
-		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements",
-		"/opt/lampp/htdocs/edis/src/Template/Element/menus",
-		"/opt/lampp/htdocs/edis/src/Template/Layout",
-		"/opt/lampp/htdocs/edis/src/Template/Pages",
+		"/opt/lampp/htdocs/edis/src/Template/Users",
 		"/opt/lampp/htdocs/edis/webroot",
 		"/opt/lampp/htdocs/edis/webroot/css",
-		"/opt/lampp/htdocs/edis/webroot/js",
-		"/opt/lampp/htdocs/edis/webroot/js/jq-te"
+		"/opt/lampp/htdocs/edis/webroot/img/user_fotos"
 	],
 	"file_history":
 	[
-		"/opt/lampp/htdocs/edis/src/Template/Pages/home.ctp",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/webroot/css/bootstrap.min.css",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/webroot/css/cake.css",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/webroot/css/base.css",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/webroot/css/mis_estilos.css",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/webroot/css/jquery-ui.css",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/config/bootstrap.php",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/config/app.php",
+		"/opt/lampp/htdocs/edis/src/Template/Users/add.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Controller/UsersController.php",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Template/Users/add.ctp",
+		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Controller/AppController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
+		"/opt/lampp/htdocs/edis/config/paths.php",
+		"/opt/lampp/htdocs/edis/src/Template/Equipos/index.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Users/index.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Equipos/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Equipos/add.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Table/EquiposTable.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/UsersTable.php",
+		"/opt/lampp/htdocs/edis/src/Template/Equipos/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
+		"/opt/lampp/htdocs/edis/config/bootstrap.php",
+		"/opt/lampp/htdocs/edis/webroot/js/datatables.net-buttons/js/dataTables.buttons.js",
+		"/opt/lampp/htdocs/edis/webroot/js/datatables.net/js/jquery.dataTables.js",
+		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/scripts.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/head.ctp",
-		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
-		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/footer.ctp",
+		"/opt/lampp/htdocs/edis/webroot/js/datatables.net-bs/js/dataTables.bootstrap.js",
+		"/opt/lampp/htdocs/edis/APUNTES_AUTENTIFICACION",
+		"/opt/lampp/htdocs/edis/src/Template/Element/menus/menu_panel.ctp",
+		"/opt/lampp/htdocs/edis/config/Migrations/20160707173133_create_users_table.php",
+		"/opt/lampp/htdocs/edis/config/Migrations/20160707161259_create_equipos_table.php",
+		"/opt/lampp/htdocs/edis/config/Migrations/20160707154045_create_users_table.php",
 		"/opt/lampp/htdocs/edis/config/app.php",
-		"/opt/lampp/htdocs/edis/cheatsheet/ajax_CheatSheet",
 		"/opt/lampp/htdocs/edis/APUNTES_DESARROLLO",
+		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/footer.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/header.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Element/menus/sidebar.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Pages/home.ctp",
+		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
+		"/opt/lampp/htdocs/edis/cheatsheet/ajax_CheatSheet",
 		"/tmp/sublime-sftp-browse-1463219238/lishowebproject/index.php",
 		"/home/lisho/.ssh/id_rsa",
 		"/home/lisho/.ssh/id_rsa.pub",
@@ -688,45 +750,11 @@
 		"/opt/lampp/htdocs/papis/papis/app/Model/Tipoincidencia.php",
 		"/opt/lampp/htdocs/papis/papis/app/Model/Alumno.php",
 		"/opt/lampp/htdocs/rgc_cake/src/Model/Table/ClasificadoTable.php",
-		"/etc/php/php.ini",
-		"/opt/lampp/etc/php.ini",
-		"/tmp/sublime-sftp-browse-1459103666/lishowebproject/rgc_cake/webroot/index.php",
-		"/tmp/sublime-sftp-browse-1459102494/lishowebproject/rgc/config/app.php",
-		"/tmp/sublime-sftp-browse-1459102934/lishowebproject/rgc_cake/config/app.php",
-		"/tmp/sublime-sftp-browse-1459099907/lishowebproject/rgc/config/bootstrap.php",
-		"/tmp/sublime-sftp-browse-1459100621/lishowebproject/rgc/config/app.php",
-		"/tmp/sublime-sftp-browse-1459099976/lishowebproject/rgc/config/routes.php",
-		"/tmp/sublime-sftp-browse-1459100252/lishowebproject/rgc/config/paths.php",
-		"/tmp/sublime-sftp-browse-1459101095/lishowebproject/rgc/config/bootstrap_cli.php",
-		"/opt/lampp/htdocs/rgc_cake/config/bootstrap_cli.php",
-		"/opt/lampp/htdocs/rgc_cake/config/paths.php",
-		"/tmp/sublime-sftp-browse-1459067440/lishowebproject/rgc/config/app.php",
-		"/tmp/sublime-sftp-browse-1459066876/lishowebproject/rgc/config/paths.php",
-		"/tmp/sublime-sftp-browse-1459067028/lishowebproject/rgc/config/bootstrap.php",
-		"/tmp/sublime-sftp-browse-1459066546/lishowebproject/rgc_cake/config/bootstrap.php",
-		"/opt/lampp/htdocs/rgc/phpunit.xml.dist",
-		"/opt/lampp/htdocs/rgc/webroot/.htaccess",
-		"/tmp/sublime-sftp-browse-1459046615/lishowebproject/rgc/webroot/index.php",
-		"/tmp/sublime-sftp-browse-1459046267/lishowebproject/rgc/index.php",
-		"/opt/lampp/htdocs/rgc/index.php",
-		"/tmp/sublime-sftp-browse-1459044236/lishowebproject/rgc/index.php",
-		"/tmp/sublime-sftp-browse-1459044981/lishowebproject/rgc/config/paths.php",
-		"/tmp/sublime-sftp-browse-1459044808/lishowebproject/rgc/config/bootstrap.php",
-		"/tmp/sublime-sftp-browse-1459044730/lishowebproject/rgc/config/routes.php",
-		"/opt/lampp/htdocs/rgc/config/routes.php",
-		"/tmp/sublime-sftp-browse-1459043725/lishowebproject/rgc/README.md",
-		"/tmp/sublime-sftp-browse-1459043150/lishowebproject/rgc/index.php",
-		"/tmp/sublime-sftp-browse-1459041891/lishowebproject/rgc/config/routes.php",
-		"/tmp/sublime-sftp-browse-1459042058/lishowebproject/rgc/config/paths.php",
-		"/tmp/sublime-sftp-browse-1459042092/lishowebproject/rgc/config/bootstrap.php",
-		"/tmp/sublime-sftp-browse-1459038040/lishowebproject/index.php",
-		"/srv/http/index.html",
-		"/opt/lampp/htdocs/rgc/config/app.php",
-		"/etc/httpd/conf/httpd.conf"
+		"/etc/php/php.ini"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 34.0
 	},
 	"find_in_files":
 	{
@@ -740,6 +768,44 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"img-circle",
+			"img",
+			"file",
+			");",
+			"file",
+			"folder",
+			"equipo",
+			"message",
+			"flash",
+			"prototype",
+			"next",
+			"entries",
+			"DataTable",
+			"_fnFeatureHtmlLength",
+			"lengthMenu",
+			"datatable_length",
+			" datatable.le",
+			" entries",
+			"div",
+			"datatable",
+			"Bfrtip",
+			"DOM",
+			"Bfrtip",
+			"datatable",
+			"datatable-buttons",
+			"extPagination",
+			"btnDisplay",
+			"fnBindAction",
+			"sPaginationType",
+			"previous",
+			"sPageButtonDisabled",
+			"oPagination",
+			"Previous",
+			"pagingType",
+			"Showing",
+			"previous",
+			"previousprevio",
+			"previous",
 			"('./",
 			"PolarArea",
 			"endif",
@@ -798,24 +864,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "APUNTES_DESARROLLO",
+					"file": "src/Controller/UsersController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 478,
+						"buffer_size": 6852,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								478,
-								478
+								895,
+								895
 							]
 						],
 						"settings":
@@ -823,72 +889,7 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "src/Template/Layout/default.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 397,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								249,
-								249
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"open_with_edit": true,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/Template/Element/layout_elements/head.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 523,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								334,
-								334
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -900,29 +901,133 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/Template/Element/layout_elements/header.ctp",
+					"buffer": 1,
+					"file": "src/Template/Users/edit.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 8814,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								8781,
+								8781
 							]
 						],
 						"settings":
 						{
 							"incomplete_sync": null,
-							"open_with_edit": true,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage"
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2573.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/Template/Users/index.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4364,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1996,
+								1996
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 486.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/Template/Users/add.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8629,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3726,
+								3726
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "webroot/css/mis_estilos.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 291,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								291,
+								291
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CSS3/CSS3.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -932,20 +1037,53 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/Template/Element/menus/menu_principal.ctp",
+					"buffer": 5,
+					"file": "src/Template/Element/menus/sidebar.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 541,
+						"buffer_size": 7571,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								401,
-								401
+								1601,
+								1601
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/Template/Element/menus/menu_principal.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4479,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								75,
+								75
 							]
 						],
 						"settings":
@@ -955,14 +1093,47 @@
 							"remote_loading": false,
 							"synced": false,
 							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
-							"tab_size": 4,
+							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28661,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								28661,
+								28661
+							]
+						],
+						"settings":
+						{
+							"default_dir": "/opt/lampp/htdocs/edis",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 925.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -985,11 +1156,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.948024991436,
 			1.0
 		],
 		"rows":
@@ -1057,7 +1235,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 487.0,
+	"side_bar_width": 279.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

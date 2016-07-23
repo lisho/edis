@@ -11,8 +11,13 @@
 
             <li class="">
               <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                <img src="images/img.jpg" alt="">John Doe
-                <span class=" fa fa-angle-down"></span>
+                
+                
+
+                <?= $this->Html->image('user_fotos/'.$auth['foto'], ['class'=> '']); ?>
+                <?= $auth['user'].' '; ?></h2><span class=" fa fa-angle-down"></span>
+
+
               </a>
               <ul class="dropdown-menu dropdown-usermenu pull-right">
                 <li><a href="javascript:;"> Profile</a></li>
@@ -23,7 +28,8 @@
                   </a>
                 </li>
                 <li><a href="javascript:;">Help</a></li>
-                <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                
+                <li><?= $this->Html->link('   Salir', ['controller'=> 'Users', 'action'=>'logout'], ['class'=>'fa fa-sign-out pull-right']) ?></li>
               </ul>
             </li>
 
@@ -35,7 +41,7 @@
               <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
                 <li>
                   <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                    <span class="image"><img src="" alt="Profile Image" /></span>
                     <span>
                       <span>John Smith</span>
                       <span class="time">3 mins ago</span>
@@ -47,7 +53,7 @@
                 </li>
                 <li>
                   <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                    <span class="image"><img src="" alt="Profile Image" /></span>
                     <span>
                       <span>John Smith</span>
                       <span class="time">3 mins ago</span>
@@ -59,7 +65,7 @@
                 </li>
                 <li>
                   <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                    <span class="image"><img src="" alt="Profile Image" /></span>
                     <span>
                       <span>John Smith</span>
                       <span class="time">3 mins ago</span>
@@ -71,7 +77,7 @@
                 </li>
                 <li>
                   <a>
-                    <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                    <span class="image"><img src="" alt="Profile Image" /></span>
                     <span>
                       <span>John Smith</span>
                       <span class="time">3 mins ago</span>

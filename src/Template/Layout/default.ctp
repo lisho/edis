@@ -9,10 +9,16 @@
 
     <div class="container body">
       <div class="main_container">
+        
+    <!-- Inicio barra lateral -->  
+    
+    <?php if (!empty($auth)): ?>
+      
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>EdisLeon</span></a>
+              
+              <a href="index.html" class="site_title"><?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo']) ?> <span>EdisLeon</span></a>
             </div>
 
             <div class="clearfix"></div>
@@ -20,11 +26,13 @@
             <!-- menu profile quick info -->
             <div class="profile">
               <div class="profile_pic">
-                <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+
+                <?= $this->Html->image('user_fotos/'.$auth['foto'], ['class'=> 'img-circle profile_img']) ?>
+                
               </div>
               <div class="profile_info">
-                <span>Welcome,</span>
-                <h2>John Doe</h2>
+                <span>Bienvenido,</span>
+                <h2><?= $auth['nombre'].' '.$auth['apellidos']; ?></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -39,12 +47,25 @@
           </div>
         </div>
 
+    <!-- Final barra lateral -->  
+
         <!-- top navigation -->
             <?= $this->element('menus/menu_principal'); ?>
         <!-- /top navigation -->
 
         <!-- page content -->        
-        
+    
+    <?php else : ?>
+
+        <div class="col-md-3 left_col">
+          <div class="text-center">           
+            <?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo-grande']) ?>
+          </div>
+
+        </div>
+          
+    <?php endif ?>
+
             <div class="container clearfix">
                 <div class="right_col" role="main">
 

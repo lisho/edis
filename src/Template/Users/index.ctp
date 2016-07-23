@@ -4,21 +4,9 @@
     <div class="x_panel">
       <div class="x_title">
         <h2>Lista completa de los Usuaruos registrados en el sistema </h2>
-        <ul class="nav navbar-right panel_toolbox">
-          <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-          </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="#">Settings 1</a>
-              </li>
-              <li><a href="#">Settings 2</a>
-              </li>
-            </ul>
-          </li>
-          <li><a class="close-link"><i class="fa fa-close"></i></a>
-          </li>
-        </ul>
+        
+        <?= $this->Element('menus/menu_panel');?>
+
         <div class="clearfix"></div>
       </div>
 
@@ -35,7 +23,8 @@
                     <th>Email</th>
                     <th>telefono</th>
                     <th>user</th>
-                    <th>password</th>
+                    <th>role</th>
+                    <th>foto</th>
                     <th>created</th>
                     <th>modified</th>
                     <th>Equipo de Referencia</th>
@@ -48,16 +37,11 @@
                     
                     <td>
                         <div class="img-contenedor text-center">
-
-                            <?php if (in_array($user->user.'.jpg', $fotos) ): ?>
-                                  <?php $avatar = $user->user; ?>
-                                  <img class="img-circle avatar" src="img/user_fotos/<?= $avatar.'.jpg'; ?>" width="100%"></img>
-                            <?php elseif (in_array($user->user.'.png', $fotos) ): ?>
-                                  <?php $avatar = $user->user; ?>
-                                  <img class="img-circle avatar" src="img/user_fotos/<?= $avatar.'.png'; ?>" width="100%"></img>
-                            <?php else: ?>
-                                 <i class="fa fa-user fa-5x"></i>
-                            <?php endif; ?>
+                          <?php if ($user['foto']!=''): ?>
+                            <img class="img-circle avatar" src="img/user_fotos/<?= $user['foto']; ?>" width="100%"></img>
+                          <?php else: ?>
+                            <i class="fa fa-user fa-5x"></i>
+                          <?php endif; ?>
 
                         </div>
 
@@ -70,9 +54,10 @@
                     <td><?= h($user->email) ?></td>
                     <td><?= h($user->telefono) ?></td>
                     <td><?= h($user->user) ?></td>
-                    <td><?= h($user->password) ?></td>
-                    <td><?= $this->Time->format($user->created, "dd/MM/yyyy HH:mm", null) ?></td>
-                    <td><?= $this->Time->format($user->modified, "dd/MM/yyyy HH:mm", null) ?></td>
+                    <td><?= h($user->role) ?></td>
+                    <td><?= h($user->foto) ?></td>
+                    <td><?= $this->Time->format($user->created, "dd/MM/yyyy", null) ?></td>
+                    <td><?= $this->Time->format($user->modified, "dd/MM/yyyy", null) ?></td>
                      <td><?= $user->has('equipo') ? $this->Html->link($user->equipo->nombre, ['controller' => 'Equipos', 'action' => 'view', $user->equipo->id]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id], ['class'=> 'btn btn-xs btn-success']) ?>

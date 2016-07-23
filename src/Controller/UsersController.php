@@ -28,12 +28,9 @@ class UsersController extends AppController
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
-
-        $dir = new Folder(WWW_ROOT . 'img/user_fotos');
-        //$fotos = $dir->find('.*\.jpg');
-        $fotos = $dir->find();
-        $this->set('fotos',$fotos);     
+         
     }
+
 
     /**
      * View method
@@ -51,14 +48,7 @@ class UsersController extends AppController
         $this->set('user', $user);
         $this->set('_serialize', ['user']);
 
-        $dir = new Folder(WWW_ROOT . 'img/user_fotos');
-        $f=$user['user'].'.jpg';
-        $g=$user['user'].'.png';
-        //$foto = $dir->find($f);
-        $foto = $dir->find();
-        
-        $this->set('foto',$foto);       
-        //debug($f);exit();
+       
     }
 
     /**
@@ -72,22 +62,27 @@ class UsersController extends AppController
         $ext = '';
         $user = $this->Users->newEntity();
         //debug($this->request->data);exit();
-
-        switch ($this->request->data['photo']['type']) {
-            case 'image/jpeg':
-                $ext = '.jpg';
-                break;
-            case 'image/png':
-                $ext = '.png';
-                break;           
-            default:
-                # code...
-                break;
-        }
-
+        
         if ($this->request->is('post')) {
             
+            switch ($this->request->data['photo']['type']) {
+                case 'image/jpeg':
+                    $ext = '.jpg';
+                    break;
+                case 'image/png':
+                    $ext = '.png';
+                    break;           
+                default:
+                    # code...
+                    break;
+            }
+
+            if ($this->request->data['photo']['tmp_name']!='') {
+                $this->request->data['foto'] = $this->request->data['user'].$ext;
+            }
+
             $user = $this->Users->patchEntity($user, $this->request->data);
+
                 if ($this->Users->save($user)) {
 
                     
@@ -127,35 +122,47 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
+
         $user = $this->Users->get($id, [
             'contain' => []
         ]);
 
-            $old_foto=$user['foto'];
-            // debug($old_foto);exit();
+        $old_foto=$user['foto'];
+        //debug($fotos);exit();
 
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            switch ($this->request->data['photo']['type']) {
+                case 'image/jpeg':
+                    $ext = '.jpg';
+                    break;
+                case 'image/png':
+                    $ext = '.png';
+                    break;           
+                default:
+                    # code...
+                    break;
+            }
+
+            $this->request->data['foto'] = $this->request->data['user'].$ext;
+
             $user = $this->Users->patchEntity($user, $this->request->data);
 
-            if (!empty($this->request->data['foto']['tmp_name'])
-                    && is_uploaded_file($this->request->data['foto']['tmp_name'])) 
+            if (!empty($this->request->data['photo']['tmp_name'])
+                    && is_uploaded_file($this->request->data['photo']['tmp_name'])) 
                 {
-
-                    $filename=basename($this->request->data['foto']['name']);
-    
-                    move_uploaded_file($this->request->data['foto']['tmp_name'],IMAGES.'user_fotos/'.$this->request->data['foto']['name']);
-                
-                    if ($old_foto!=''){
-                        
-                       $file = new File(IMAGES.'user_fotos/'.$old_foto);
-                       $file->delete();
-                       $file->close(); 
-                      
+                    if ($old_foto != []){
+                        $file = new File(IMAGES.'user_fotos/'.$old_foto);
+                        $file->delete();
+                        $file->close();
                     }
-                    
+                   
+
+                    $filename=$this->request->data['photo'];
+                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
+
                 } 
-                
-                $user['foto'] = $filename;
+
                 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -165,6 +172,7 @@ class UsersController extends AppController
             }
         }
         $equipos = $this->Users->Equipos->find('list', ['limit' => 200, 'order' => 'nombre DESC']);
+        
         $this->set(compact('user', 'equipos'));
         $this->set('_serialize', ['user']);
     }
@@ -180,11 +188,46 @@ class UsersController extends AppController
     {
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
+        
         if ($this->Users->delete($user)) {
+            
+            if ($user['fotos']!='') {
+                $file = new File(IMAGES.'user_fotos/'.$user['foto']);
+                $file->delete();
+                $file->close();
+            } 
+
             $this->Flash->success(__('The user has been deleted.'));
         } else {
             $this->Flash->error(__('The user could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function login()
+    {
+        if ($this->request->is('post')) {
+            //debug($_POST);exit();
+            $user = $this->Auth->identify();
+            
+            if ($user) {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            } else {
+                $this->Flash->error('Los datos no son correctos. Inténtalo de nuevo...', ['key'=>'auth']);
+            }
+        }
+    }
+
+    public function home()
+    {
+        $this->render();
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
+
 }

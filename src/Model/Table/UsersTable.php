@@ -35,6 +35,10 @@ class UsersTable extends Table
             'foreignKey' => 'equipo_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->hasMany('Avisos', [
+            'foreignKey' => 'user_id'
+        ]);
     }
 
     /**
@@ -48,10 +52,16 @@ class UsersTable extends Table
         $validator
             ->integer('id')
             ->allowEmpty('id', 'create');
-
+        
         $validator
-            ->requirePresence('dni', 'create')
-            ->notEmpty('dni');
+            //->requirePresence('dni', 'create')
+            //->notEmpty('dni')
+           ->add('dni', 'validFormat',[
+                            'rule'=>array('custom','/^(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))$/i'),
+                            'message' => 'La forma de introducir el DNI/NIE no es correcta'
+                            ])
+        ;
+
 
         $validator
             ->requirePresence('nombre', 'create')
@@ -63,12 +73,14 @@ class UsersTable extends Table
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
-            ->notEmpty('email');
+            //->requirePresence('email', 'create')
+            //->notEmpty('email')
+        ;
 
         $validator
-            ->requirePresence('telefono', 'create')
-            ->notEmpty('telefono');
+            //->requirePresence('telefono', 'create')
+            //->notEmpty('telefono')
+        ;
 
         $validator
             ->requirePresence('user', 'create')
@@ -95,7 +107,11 @@ class UsersTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['dni']));
+        $rules->add($rules->isUnique(['user']));
         $rules->add($rules->existsIn(['equipo_id'], 'Equipos'));
+       
         return $rules;
     }
+
 }

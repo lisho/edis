@@ -37,7 +37,7 @@
                             <?php
                                 echo $this->Form->input('nombre', [
                                         'class'=>'form-control col-md-7 col-xs-12',
-                                        'required' => 'required',
+                                        //'required' => 'required',
                                         'label' => ['text' => '']
                                     ]);
                             ?> 
@@ -76,7 +76,7 @@
                             <?php
                                 echo $this->Form->input('telefono', [
                                         'class'=>'form-control col-md-7 col-xs-12',
-                                        'required' => 'required',
+                                        //'required' => 'required',
                                         'label' => ['text' => '']
                                     ]);
                             ?> 
@@ -123,27 +123,37 @@
                         </div>
                     </div>
 
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo de Referencia <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                    <?php
-                        echo $this->Form->input('equipo_id', [
-                                        'options' => $equipos,
-                                        'class'=>'form-control col-md-7 col-xs-12',
-                                        'required' => 'required',
-                                        'label' => ['text' => '']
-                                    ]);
-                    ?>
-                    </div>
-
                     <div class="form-group">
-                         <h4 class="rojo_subrayado">Añadir foto de perfil:</h4>
-    
-                        <?= $this->Form->file('photo', [
-                                        //'type'=>'file',
-                                        'label'=>'Selecciona un archivo para añadir la foto de perfil:']); ?>  
-                    </div> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Equipo de Referencia <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('equipo_id', [
+                                            'options' => $equipos,
+                                            'class'=>'form-control col-md-7 col-xs-12',
+                                            'required' => 'required',
+                                            'label' => ['text' => '']
+                                        ]);
+                        ?>
+                        </div>
+                    </div>
+                    </fieldset>
 
-                </fieldset>
+                    <fieldset>
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Avatar<span class="required">*</span></label>
+                    
+                    <div class="form-group">
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                       
+                             <h4 class="rojo_subrayado">Añadir foto de perfil:</h4>
+        
+                            <?= $this->Form->file('photo', [
+                                            //'type'=>'file',
+                                            //'label'=>'Selecciona un archivo para añadir la foto de perfil:'
+                                            ]); ?>  
+                        </div>
+                    </div>
+                    </fieldset>
+                
 
                 <div class="ln_solid"></div>
                 <div class="form-group">

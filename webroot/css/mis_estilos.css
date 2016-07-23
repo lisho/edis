@@ -1,5 +1,4 @@
 
-
 .form-group-buscador {
 	padding: 0.5% 0;
 	width: 50%;
@@ -22,4 +21,60 @@ ul.messages li img.avatar, img.avatar:hover {
 	height: 8em;
 	/*width: auto;
 	float: none;*/
+}
+
+.sidebar-logo {
+
+	width: 2em;
+	z-index: 1000;
+	position: inherit;	
+	border: 1px solid rgba(52,73,94,0.44);
+	padding: 4px;
+}
+
+.sidebar-logo-grande {
+
+	width: 200%;
+	padding: 5%;	
+	/*
+	z-index: 1000;
+	position: inherit;
+	border: 1px solid rgba(52,73,94,0.44);
+	*/
+}
+
+.logo-login{
+	width: 30%;
+	text-shadow: 0 3px 3px rgba(255, 255, 255, 0.5);
+}
+
+.error-message{
+	color: #FF0000;
+	border-color: #FF0000;
+	
+
+}
+
+.error{
+	padding: 0;
+	margin: 0;
+	font-size: 1.3em;
+	color: #FF0000;
+	border-color: #FF0000;
+	background-color: rgba(255,0,0,.2);
+	text-align: center;
+}
+
+.success{
+	padding: 0;
+	margin: 0;
+	font-size: 1.3em;
+	color: #007806;
+	border-color: #007806;
+	background-color: rgba(0,120,0,.2);
+	text-align: center;
+}
+
+.radio {
+	margin-left: 2em;
 }
