@@ -1,21 +1,72 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Equipos'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="equipos form large-9 medium-8 columns content">
-    <?= $this->Form->create($equipo) ?>
-    <fieldset>
-        <legend><?= __('Add Equipo') ?></legend>
-        <?php
-            echo $this->Form->input('nombre');
-            echo $this->Form->input('tipo');
-            echo $this->Form->input('entidad');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+<h1>Nuevo Equipo.</h1> 
+<div class="row"> 
+    <div class="col-md-12 col-sm-12 col-xs-12"> 
+        <div class="x_panel"> 
+            <div class="x_title"> 
+                <h2>Crea un nuevo equipo técnico de referencia...</h2> 
+                <?= $this->Element('menus/menu_panel');?>                 
+                <div class="clearfix"></div> 
+            </div> 
+            <div class="x_content">     
+ 
+                <!-- Formulario --> 
+ 
+                <?= $this->Form->create($equipo,['class'=>'form-horizontal form-label-left']) ?> 
+                 
+ 
+                <fieldset> 
+                                         
+                    <div class="form-group"> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre del Equipo <span class="required">*</span></label> 
+                        <div class="col-md-6 col-sm-6 col-xs-12"> 
+                            <?php 
+                                echo $this->Form->input('nombre', [ 
+                                        'class'=>'form-control col-md-7 col-xs-12', 
+                                        'required' => 'required', 
+                                        'label' => ['text' => ''] 
+                                    ]); 
+                            ?>  
+                        </div> 
+                    </div> 
+ 
+                    <div class="form-group"> 
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Equipo <span class="required">*</span></label> 
+                        <div class="col-md-6 col-sm-6 col-xs-12"> 
+                        <?php 
+                            echo $this->Form->select('tipo', ['EDIS'=>'EDIS', 'CEAS'=> 'CEAS'], [ 
+                                        'class'=>'form-control col-md-7 col-xs-12', 
+                                        'required' => 'required', 
+                                        'label' => ['text' => ''], 
+                                        'default' => 'EDIS' 
+                                    ]); 
+                        ?>  
+                        </div> 
+                    </div> 
+ 
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Entidad de Referencia <span class="required">*</span></label> 
+                    <div class="col-md-6 col-sm-6 col-xs-12"> 
+                    <?php 
+                        echo $this->Form->input('entidad', [ 
+                                        'class'=>'form-control col-md-7 col-xs-12', 
+                                        'required' => 'required', 
+                                        'label' => ['text' => ''] 
+                                    ]); 
+                    ?> 
+                    </div> 
+                </fieldset> 
+ 
+                <div class="ln_solid"></div> 
+                <div class="form-group"> 
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3"> 
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?> 
+                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?> 
+                    </div> 
+                </div> 
+                
+                <?= $this->Form->end() ?> 
+                <!-- /Formulario --> 
+            </div> 
+        </div> 
+    </div> 
 </div>
