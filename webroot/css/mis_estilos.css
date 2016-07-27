@@ -78,3 +78,69 @@ ul.messages li img.avatar, img.avatar:hover {
 .radio {
 	margin-left: 2em;
 }
+
+.ui-ribbon.importancia-alta{
+	background-color: #FF0000;
+}
+
+.ui-ribbon.importancia-media{
+	background-color: #FFAE00;
+}
+
+.ui-ribbon.importancia-baja{
+	background-color: #119B00;	
+}
+
+.importancia-alta{
+	color: #EB4747;
+	font-size: 1.3em;
+}
+
+.importancia-media{
+	color: #F5C764;
+	font-size: 1.3em;
+}
+
+.importancia-baja{
+	color: #54BC48;	
+	font-size: 1.3em;
+}
+
+
+.foto-avisos {
+	text-align: center; 
+	max-width: 40%;
+	min-width: 30%;
+	
+}
+
+div.foto-avisos img.img-circle.profile_img {
+	margin-top: 0px;
+	margin-left: 0px;
+}
+
+.botonera-avisos {
+	margin-top: 10%;
+}
+
+td.foto-lista{
+	max-width: 80px;
+
+}
+
+td.foto-lista{
+	max-width: 40px;
+	padding: 3px;
+}
+
+.dataTables_filter{
+	float: none;
+}
+
+.datatable {
+	width: 100% !important;
+}
+
+ul.msg_list li a .time {
+	position: initial;
+}

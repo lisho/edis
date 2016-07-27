@@ -29,17 +29,21 @@
     <?= $this->Html->script('datatables.net-buttons/js/buttons.html5.min.js') ?>
     <?= $this->Html->script('parsleyjs/dist/parsley.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.print.min.js') ?>
-    
+    <?= $this->Html->script('bootstrap-datepicker.js') ?>
+    <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>
     <? // $this->Html->script('pdfmake/build/pdfmake.min.js') ?>
     <? // $this->Html->script('pdfmake/build/vfs_fonts.js') ?>
 
     <!-- Custom Theme Scripts -->
-     <?= $this->Html->script('custom.min.js') ?>
-
-
+    <?= $this->Html->script('custom.min.js') ?>
+ 
+    <?= $this->Html->script('mi_js.js') ?>
 <!-- Datatables -->
     
     <script>
+
+    
+    
     /*
       $(document).ready(function() {
         var handleDataTableButtons = function() {

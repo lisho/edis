@@ -1,30 +1,10 @@
 
-<div class="avisos form large-9 medium-8 columns content">
-    <?= $this->Form->create($aviso) ?>
-    <fieldset>
-        <legend><?= __('Add Aviso') ?></legend>
-        <?php
-            echo $this->Form->input('titulo');
-            echo $this->Form->input('description');
-            echo $this->Form->input('tipo');
-            echo $this->Form->input('importancia');
-            echo $this->Form->input('caduca');
-            echo $this->Form->input('user_id', ['options' => $users]);
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
-</div>
-
-
-
-
 <h1>Nuevo Aviso / Noticia.</h1>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
-                <h2>Crea un nuevo usuario en el sistema...</h2>
+                <h2>Crea un nuevo aviso o noticia que podrán ver todos los usuarios del sistema...</h2>
                 <?= $this->Element('menus/menu_panel');?>                
                 <div class="clearfix"></div>
             </div>
@@ -54,8 +34,8 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripción <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                                echo $this->Form->textarea('description', [
-                                        'class'=>'form-control col-md-7 col-xs-12',
+                                echo $this->Form->input('description', [
+                                        'class'=>'editor form-control col-md-7 col-xs-12',
                                         //'required' => 'required',
                                         'label' => ['text' => '']
                                     ]);
@@ -78,7 +58,7 @@
                             ?> 
                         </div>
                     </div>
-                    
+                  
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Importancia <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -107,74 +87,42 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">importancia <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Caduca <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                                $importancia = ['alta'=>'Alta', 'media'=> 'Media', 'baja'=> 'Baja'];
-                                echo $this->Form->select('importancia', $importancia, [
-                                        'class'=>'form-control col-md-7 col-xs-12',
-                                        'default' => 'media',
-                                        'required' => 'required',
-                                        'label' => ['text' => '']
+
+                                echo $this->Form->input('caduca', [
+                                        'type'=>'text',
+                                        //'dateFormat' => 'DMY',
+                                        'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                        //'required' => 'required',
+                                        'label' => ['text' => ''],
+                                        'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                        //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
                                     ]);
                             ?> 
                         </div>
                     </div>
-
+ <!--     
                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Teléfono <span class="required">*</span></label>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Caduca <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                                echo $this->Form->input('telefono', [
+
+                                echo $this->Form->input('caduca', [
+                                        'type'=>'date',
+                                        //'dateFormat' => 'DMY',
                                         'class'=>'form-control col-md-7 col-xs-12',
                                         //'required' => 'required',
-                                        'label' => ['text' => '']
+                                        'label' => ['text' => ''],
+                                        'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
                                     ]);
                             ?> 
                         </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre de Usuario <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php
-                                echo $this->Form->input('user', [
-                                        'class'=>'form-control col-md-7 col-xs-12',
-                                        'required' => 'required',
-                                        'label' => ['text' => '']
-                                    ]);
-                            ?> 
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Contraseña <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                            <?php
-                                echo $this->Form->input('password', [
-                                        'class'=>'form-control col-md-7 col-xs-12',
-                                        'required' => 'required',
-                                        'label' => ['text' => '']
-                                    ]);
-                            ?> 
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Equipo de Referencia <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?php
-                            echo $this->Form->input('equipo_id', [
-                                            'options' => $equipos,
-                                            'class'=>'form-control col-md-7 col-xs-12',
-                                            'required' => 'required',
-                                            'label' => ['text' => '']
-                                        ]);
-                        ?>
-                        </div>
-                    </div>
+ -->               
+                    <?= $this->Form->hidden('user_id', ['value' => $auth['id']] );?>    
                     </fieldset>                
 
                 <div class="ln_solid"></div>

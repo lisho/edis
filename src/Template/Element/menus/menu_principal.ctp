@@ -35,62 +35,43 @@
 
             <li role="presentation" class="dropdown">
               <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-envelope-o"></i>
-                <span class="badge bg-green">6</span>
+                <i class="fa fa-warning"></i>
+                <span class="badge bg-green">5</span>
               </a>
               <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
-                <li>
-                  <a>
-                    <span class="image"><img src="" alt="Profile Image" /></span>
-                    <span>
-                      <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                    </span>
+                  <li>
+                    <div class="text-center">
+                      <h2>Ultimos avisos publicados</h2>
+                    </div>
+                  </li>
+                
+                <?php foreach ($ultimos_avisos as $aviso): ?>
+
+                  <li>
+                    <a href="/edis/avisos/view/<?= $aviso['id']; ?>">
+
+                      <span class="image"><?= $this->Html->image('user_fotos/'.$aviso['user']['foto'], ['class'=> '']); ?></span>
+                      <span class="importancia-<?= $aviso['importancia'];?>">
+                          <span><small><?= $aviso['user']['nombre'].' '.$aviso['user']['apellidos']?></small></span><br>
+                          <span class="time"><?= $this->Time->timeAgoInWords(
+                                  $aviso->modified,
+                                  ['format' => 'MMM d, YYY', 'end' => '+1 year']
+                                ); ?></span>
+                      </span>
+                      <div class="divider"></div>
+                      <h2><?= $aviso['titulo'];?></h2>
                     <span class="message">
-                      Film festivals used to be do-or-die moments for movie makers. They were where...
+                      <?= $aviso['description'];?>
                     </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img src="" alt="Profile Image" /></span>
-                    <span>
-                      <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                    </span>
-                    <span class="message">
-                      Film festivals used to be do-or-die moments for movie makers. They were where...
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img src="" alt="Profile Image" /></span>
-                    <span>
-                      <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                    </span>
-                    <span class="message">
-                      Film festivals used to be do-or-die moments for movie makers. They were where...
-                    </span>
-                  </a>
-                </li>
-                <li>
-                  <a>
-                    <span class="image"><img src="" alt="Profile Image" /></span>
-                    <span>
-                      <span>John Smith</span>
-                      <span class="time">3 mins ago</span>
-                    </span>
-                    <span class="message">
-                      Film festivals used to be do-or-die moments for movie makers. They were where...
-                    </span>
-                  </a>
-                </li>
+                    </a>
+                  </li>
+                  
+                <?php endforeach ?>
+                
                 <li>
                   <div class="text-center">
-                    <a>
-                      <strong>See All Alerts</strong>
+                    <a href="/edis/avisos">
+                      <strong>Ver todos los avisos y noticias</strong>
                       <i class="fa fa-angle-right"></i>
                     </a>
                   </div>

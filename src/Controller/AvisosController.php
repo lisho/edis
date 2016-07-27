@@ -10,6 +10,90 @@ use App\Controller\AppController;
  */
 class AvisosController extends AppController
 {
+    
+    /**
+    *
+    * 
+    * @return Devuelveun array con los avisos urgentes
+    **/
+
+    public function avisos_urgentes()
+    {
+        $this->paginate = [
+            'contain' => ['Users'],
+            'order' => [
+                'Avisos.created' => 'desc'],
+             'conditions' => [  'Avisos.importancia' => 'alta',
+                                'Avisos.tipo' => 'aviso']
+        ];
+
+        $avisos_urgentes = $this->paginate($this->Avisos);
+
+        return $avisos_urgentes;
+    }
+
+    /**
+    *
+    * 
+    * @return Devuelve los avisos y las noticias publicadas
+    *       por el usuario logueado.
+    **/
+
+    public function mis_avisos()
+    {
+        $usuario = $this->Auth->user('id');
+        $this->paginate = [
+            'contain' => ['Users'],
+            'order' => [
+                'Avisos.created' => 'desc'],
+             'conditions' => ['Avisos.user_id' => $usuario]
+        ];
+
+        $mis_avisos = $this->paginate($this->Avisos);
+
+        return $mis_avisos;
+    }
+
+    /**
+    *
+    * 
+    * @return Devuelve los avisos publicados.
+    **/
+
+    public function solo_avisos()
+    {
+        $this->paginate = [
+            'contain' => ['Users'],
+            'order' => [
+                'Avisos.created' => 'desc'],
+             'conditions' => ['Avisos.tipo' => 'aviso']
+        ];
+
+        $solo_avisos = $this->paginate($this->Avisos);
+
+        return $solo_avisos;
+    }
+
+    /**
+    *
+    * 
+    * @return Devuelve los avisos y las noticias publicadas
+    *       por el usuario logueado.
+    **/
+
+    public function solo_noticias()
+    {
+        $this->paginate = [
+            'contain' => ['Users'],
+            'order' => [
+                'Avisos.created' => 'desc'],
+             'conditions' => ['Avisos.tipo' => 'noticia']
+        ];
+
+        $solo_noticias = $this->paginate($this->Avisos);
+
+        return $solo_noticias;
+    }
 
     /**
      * Index method
@@ -18,13 +102,20 @@ class AvisosController extends AppController
      */
     public function index()
     {
+
         $this->paginate = [
             'contain' => ['Users']
         ];
+        
         $avisos = $this->paginate($this->Avisos);
 
-        $this->set(compact('avisos'));
-        $this->set('_serialize', ['avisos']);
+        $avisos_urgentes = $this->avisos_urgentes();
+        $mis_avisos = $this->mis_avisos();
+        $solo_noticias = $this->solo_noticias();
+        $solo_avisos = $this->solo_avisos();
+
+        $this->set(compact('avisos','mis_avisos','avisos_urgentes', 'solo_noticias', 'solo_avisos'));
+        $this->set('_serialize', ['avisos','mis_avisos','avisos_urgentes', 'solo_noticias', 'solo_avisos']);
     }
 
     /**
@@ -51,8 +142,18 @@ class AvisosController extends AppController
      */
     public function add()
     {
+        //debug($this->request->data);exit();
+
         $aviso = $this->Avisos->newEntity();
         if ($this->request->is('post')) {
+            
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['caduca']);
+            $this->request->data['caduca']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            
             $aviso = $this->Avisos->patchEntity($aviso, $this->request->data);
             if ($this->Avisos->save($aviso)) {
                 $this->Flash->success(__('The aviso has been saved.'));
@@ -79,6 +180,14 @@ class AvisosController extends AppController
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['caduca']);
+            $this->request->data['caduca']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            
             $aviso = $this->Avisos->patchEntity($aviso, $this->request->data);
             if ($this->Avisos->save($aviso)) {
                 $this->Flash->success(__('The aviso has been saved.'));
@@ -87,8 +196,8 @@ class AvisosController extends AppController
                 $this->Flash->error(__('The aviso could not be saved. Please, try again.'));
             }
         }
-        $users = $this->Avisos->Users->find('list', ['limit' => 200]);
-        $this->set(compact('aviso', 'users'));
+        
+        $this->set(compact('aviso'));
         $this->set('_serialize', ['aviso']);
     }
 

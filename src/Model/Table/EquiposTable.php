@@ -10,6 +10,7 @@ use Cake\Validation\Validator;
 /**
  * Equipos Model
  *
+ * @property \Cake\ORM\Association\HasMany $Tecnicos
  * @property \Cake\ORM\Association\HasMany $Users
  */
 class EquiposTable extends Table
@@ -31,6 +32,9 @@ class EquiposTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->hasMany('Tecnicos', [
+            'foreignKey' => 'equipo_id'
+        ]);
         $this->hasMany('Users', [
             'foreignKey' => 'equipo_id'
         ]);

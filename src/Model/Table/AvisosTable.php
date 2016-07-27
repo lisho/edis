@@ -66,7 +66,7 @@ class AvisosTable extends Table
             ->notEmpty('importancia');
 
         $validator
-            ->dateTime('caduca')
+            ->date('caduca')
             ->requirePresence('caduca', 'create')
             ->notEmpty('caduca');
 
