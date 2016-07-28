@@ -19,7 +19,7 @@ class RolesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Expedientes', 'Users']
+            'contain' => ['Expedientes', 'Tecnicos']
         ];
         $roles = $this->paginate($this->Roles);
 
@@ -37,7 +37,7 @@ class RolesController extends AppController
     public function view($id = null)
     {
         $role = $this->Roles->get($id, [
-            'contain' => ['Expedientes', 'Users']
+            'contain' => ['Expedientes', 'Tecnicos']
         ]);
 
         $this->set('role', $role);
@@ -62,8 +62,8 @@ class RolesController extends AppController
             }
         }
         $expedientes = $this->Roles->Expedientes->find('list', ['limit' => 200]);
-        $users = $this->Roles->Users->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'expedientes', 'users'));
+        $tecnicos = $this->Roles->Tecnicos->find('list', ['limit' => 200]);
+        $this->set(compact('role', 'expedientes', 'tecnicos'));
         $this->set('_serialize', ['role']);
     }
 
@@ -89,8 +89,8 @@ class RolesController extends AppController
             }
         }
         $expedientes = $this->Roles->Expedientes->find('list', ['limit' => 200]);
-        $users = $this->Roles->Users->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'expedientes', 'users'));
+        $tecnicos = $this->Roles->Tecnicos->find('list', ['limit' => 200]);
+        $this->set(compact('role', 'expedientes', 'tecnicos'));
         $this->set('_serialize', ['role']);
     }
 

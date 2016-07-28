@@ -4,7 +4,7 @@
     <div class="col-md-12 col-sm-12 col-xs-12"> 
         <div class="x_panel"> 
             <div class="x_title"> 
-                <h2>Crea un nuevo equipo técnico de referencia...</h2> 
+                <h2>Modifica los datos del equipo <strong>'<?= $equipo->nombre; ?>'</strong></h2> 
                 <?= $this->Element('menus/menu_panel');?>                 
                 <div class="clearfix"></div> 
             </div> 

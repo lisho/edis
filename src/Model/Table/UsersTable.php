@@ -40,9 +40,6 @@ class UsersTable extends Table
             'foreignKey' => 'user_id'
         ]);
 
-        $this->hasMany('Roles', [
-            'foreignKey' => 'user_id'
-        ]);
     }
 
     /**

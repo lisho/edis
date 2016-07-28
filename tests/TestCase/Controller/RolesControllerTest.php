@@ -19,8 +19,9 @@ class RolesControllerTest extends IntegrationTestCase
         'app.roles',
         'app.expedientes',
         'app.participantes',
-        'app.users',
+        'app.tecnicos',
         'app.equipos',
+        'app.users',
         'app.avisos'
     ];
 

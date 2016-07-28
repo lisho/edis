@@ -143,10 +143,7 @@ class UsersController extends AppController
                     # code...
                     break;
             }
-
-            $this->request->data['foto'] = $this->request->data['user'].$ext;
-
-            $user = $this->Users->patchEntity($user, $this->request->data);
+//debug( $old_foto);exit();                      
 
             if (!empty($this->request->data['photo']['tmp_name'])
                     && is_uploaded_file($this->request->data['photo']['tmp_name'])) 
@@ -156,13 +153,14 @@ class UsersController extends AppController
                         $file->delete();
                         $file->close();
                     }
-                   
 
                     $filename=$this->request->data['photo'];
                     move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
+                    $this->request->data['foto'] = $this->request->data['user'].$ext;
+                }
 
-                } 
-
+            
+            $user = $this->Users->patchEntity($user, $this->request->data);
                 
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -191,7 +189,7 @@ class UsersController extends AppController
         
         if ($this->Users->delete($user)) {
             
-            if ($user['fotos']!='') {
+            if ($user['foto']!='') {
                 $file = new File(IMAGES.'user_fotos/'.$user['foto']);
                 $file->delete();
                 $file->close();

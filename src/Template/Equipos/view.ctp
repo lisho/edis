@@ -67,7 +67,7 @@
                         <th><?= __('Email') ?></th> 
                         <th><?= __('Telefono') ?></th> 
                         <th><?= __('User') ?></th> 
-                        <th><?= __('Password') ?></th> 
+                        <!-- <th><?= __('Password') ?></th> -->
                         <th><?= __('Role') ?></th> 
                         <th><?= __('Created') ?></th> 
                         <th><?= __('Modified') ?></th> 
@@ -83,7 +83,7 @@
                         <td><?= h($users->email) ?></td> 
                         <td><?= h($users->telefono) ?></td> 
                         <td><?= h($users->user) ?></td> 
-                        <td><?= h($users->password) ?></td> 
+                        <!-- <td><?= h($users->password) ?></td> -->
                         <td><?= h($users->role) ?></td> 
                         <td><?= h($users->created) ?></td> 
                         <td><?= h($users->modified) ?></td> 
