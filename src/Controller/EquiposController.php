@@ -105,4 +105,54 @@ class EquiposController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    public function combots()
+    {
+      /*
+        $ceas = $this->request->data;
+        
+        //debug($ceas);exit();
+
+        if ($ceas[0]=='3') {
+           $lista = ['Juan', 'Pedro', 'Sancho', 'Luis'];
+        } else {
+            $lista = ['este no es el ceas de armunia'];
+        }
+        
+
+        
+
+        //$this->set(compact(json_encode('elegido')));
+        echo json_encode($lista);
+        $this->autoRender = false;
+    */
+
+        if ($this->request->is('ajax')) { 
+          $idCeas = $this->request->data['ceas'];
+          //  debug($idCeas);exit();
+          //$tecnico = new Tecnico();
+          $tecnico='';
+          $tecnicos = $this->Equipos->Tecnicos->find('all',array(
+           'fields' => array('Tecnicos.id', 'Tecnicos.nombre', 'Tecnicos.apellidos'), 
+           'conditions'=>array('equipo_id'=>$idCeas)));
+        
+        foreach ($tecnicos as $t) {
+                $tecnico[$t['id']]=$t['nombre'].' '.$t['apellidos'];
+            }
+           //debug($tecnico);exit();
+          $this->RequestHandler->respondAs('json');
+          $this->autoRender = false;      
+          echo json_encode ($tecnico);      
+         }
+    }
+
+    public function combotedis()
+    {
+        $elegido = ['1'=>'Juan', '2'=>'Pedro', '3'=>'Sancho'];
+        //$this->set(compact(json_encode('elegido')));
+
+
+        echo json_encode($elegido);
+        $this->autoRender = false;
+    }
 }

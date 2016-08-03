@@ -48,17 +48,34 @@ class ExpedientesController extends AppController
      */
     public function add()
     {
+    
+        $listado_ceas = $this->listadoEquipo('ceas');
+        $listado_edis = $this->listadoEquipo('edis');
+
+//debug($this->request->data);exit();
+//debug($listado_edis);exit();
         $expediente = $this->Expedientes->newEntity();
+
         if ($this->request->is('post')) {
-            $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data);
-            if ($this->Expedientes->save($expediente)) {
+            $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
+                        'asociated' => [
+                                'Roles',
+                                'Roles.Tecnicos',
+                                'Roles.Tecnicos.Equipos'
+                        ]
+                    ]);
+            
+            debug($this->request->data);exit();
+
+
+            if ($this->Expedientes->save($expediente) && $this->Roles->save($rol)) {
                 $this->Flash->success(__('The expediente has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('expediente'));
+        $this->set(compact('expediente','listado_ceas','listado_edis'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -104,5 +121,23 @@ class ExpedientesController extends AppController
             $this->Flash->error(__('The expediente could not be deleted. Please, try again.'));
         }
         return $this->redirect(['action' => 'index']);
+    }
+
+    /**
+     * Listado de los Equipos segun el tipo que pasamos
+     *
+     * 
+     */
+        public function listadoEquipo($tipo=null)
+    {
+        $this->loadModel('Equipos');
+        $listado = [];
+        $listado = $this->Equipos->findByTipo($tipo);
+        foreach ($listado as $l) {
+            //debug($l);exit();
+            $listado_tipo[$l->id] = $l->nombre;
+        }
+
+        return $listado_tipo;
     }
 }

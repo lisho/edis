@@ -12,7 +12,8 @@
                   </li>
                   <li><a><i class="fa fa-folder-open"></i> Expedientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="form.html">General Form</a></li>
+                      <li><?= $this->Html->link('Crear Nuevo Expediente', ['controller'=> 'Expedientes', 'action'=>'add']) ?></li>
+                      <li><?= $this->Html->link('Listado de Expedientes', ['controller'=> 'Expedientes', 'action'=>'index']) ?></li>
                       <li><a href="form_advanced.html">Advanced Components</a></li>
                       
                     </ul>
@@ -52,7 +53,17 @@
                             </li>
                           </ul>
                         </li>
-                        <li><a href="#level1_2">Level One</a>
+                        <li><a>Técnicos<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li >
+                              <?= $this->Html->link('Listado de Técnicos', ['controller'=> 'Tecnicos', 'action'=>'index']) ?>
+                            </li>
+                            <li>
+                              <?= $this->Html->link('Nuevo Técnico', ['controller'=> 'Tecnicos', 'action'=>'add']) ?>
+                            </li>
+                            <li><a href="#level2_2">Level Two</a>
+                            </li>
+                          </ul>
                         </li>
                     </ul>
                   </li>
