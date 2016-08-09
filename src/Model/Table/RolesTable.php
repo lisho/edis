@@ -59,8 +59,9 @@ class RolesTable extends Table
             ->notEmpty('rol');
 
         $validator
-            ->requirePresence('observaciones', 'create')
-            ->notEmpty('observaciones');
+            //->requirePresence('observaciones', 'create')
+            //->notEmpty('observaciones')
+        ;
 
         return $validator;
     }

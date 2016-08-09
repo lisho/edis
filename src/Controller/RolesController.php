@@ -49,7 +49,7 @@ class RolesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($exp = null)
     {
         $role = $this->Roles->newEntity();
         if ($this->request->is('post')) {
@@ -63,7 +63,7 @@ class RolesController extends AppController
         }
         $expedientes = $this->Roles->Expedientes->find('list', ['limit' => 200]);
         $tecnicos = $this->Roles->Tecnicos->find('list', ['limit' => 200]);
-        $this->set(compact('role', 'expedientes', 'tecnicos'));
+        $this->set(compact('role', 'expedientes', 'tecnicos', 'exp'));
         $this->set('_serialize', ['role']);
     }
 

@@ -8,7 +8,7 @@
     <?= $this->Html->script('bootstrap.min.js') ?>
    
     <!-- FastClick -->
-     <?= $this->Html->script('fastclick.js') ?>
+     <? // $this->Html->script('fastclick.js') ?>
    
     <!-- JQ- TextEditor -->
     <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>
@@ -27,7 +27,8 @@
     <?= $this->Html->script('datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.flash.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.html5.min.js') ?>
-    <?= $this->Html->script('parsleyjs/dist/parsley.min.js') ?>
+    <? // $this->Html->script('parsleyjs/src/parsley.js') ?>
+    <? //$this->Html->script('parsleyjs/dist/parsley.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.print.min.js') ?>
     <?= $this->Html->script('bootstrap-datepicker.js') ?>
     <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>

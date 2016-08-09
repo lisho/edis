@@ -52,6 +52,8 @@ class TecnicosController extends AppController
     public function add()
     {
         $tecnico = $this->Tecnicos->newEntity();
+
+        //debug( $this->request->data);exit();
         if ($this->request->is('post')) {
             $tecnico = $this->Tecnicos->patchEntity($tecnico, $this->request->data);
             if ($this->Tecnicos->save($tecnico)) {

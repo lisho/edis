@@ -36,81 +36,49 @@ $(function(){
 					url: "/edis/equipos/combots",
 					data: "ceas="+elegido,
 					cache: false,
-					success: function(tecnico) {
+					success: function(tecnico_ceas) {
 		
-						$.each(tecnico,function(key, value) {   
+						$.each(tecnico_ceas,function(key, value) {   
 							//$("#tecnico_ceas").append($("<option></option>").attr("value", key).text(value));
 							$('<option>').val(key).text(value).appendTo($("#tecnico_ceas"));
 						});
-					} 				
+					} 
+
 				});	
 
-				
-/*
-				if ($.inArray(nombre_elegido, edis1)) {
-					var equipo = "EDIS1";
-				}
-
-				if ($.inArray(nombre_elegido, edis2)) {
-					var equipo = "EDIS2";	
-				}
-*/
 				$.ajax({
 					type: "POST",
 					url: "/edis/equipos/combotedis",
 					
-					data: "edis="+elegido,
+					data: "ceas="+elegido,
 					cache: false,
-					success: function(tecnico) {
+					success: function(tecnico_edis) {
 		
-						$.each(tecnico,function(key, value) {   
+						//tecnico_edis=$.parseJSON(tecnico_edis);
+						$.each(tecnico_edis,function(key, value) {   
 							//$("#tecnico_ceas").append($("<option></option>").attr("value", key).text(value));
 							$('<option>').val(key).text(value).appendTo($("#tecnico_inclusion"));
 						});
 					} 				
-				});			
+				});	
 			};
 		});
 
+// --> Fin Combo CEAS - EDIS
 
+// --> EFECTOS BOOTSTRAP
 
+	// --> mensajes con popover pasando el id
 
+ 	$('[data-toggle="popover"]').hover(function () {
+ 		id=$(this).attr("id");
+ 		
+ 		$("#" +id).popover('toggle');
+ 		})
 
+ 	$('#add_tecnico').click(function () {
+ 		$(this).modal();
+ 		})
+}); // --> Fin Función Anónima.
 
-
-
-
-/*
-
-
-
-	$('#ceas').change(function() {
-
-		$('#ceas option:selected').each(function() {
-			elegido=$(this).val();
-			ajaxupdate($(this). data);
-			$('#tecnico_ceas').html(data);
-		});
-	});
-
-
-	function ajaxupdate(elegido) {
-		$.ajax({
-			type: "POST",
-			url: "/edis/equipos/combots",
-			data:{
-				
-				elegido: elegido
-			},
-
-			dataType: "json",
-
-		});
-	}
-*/
-
-// --> Fin Combo CEAS
-
-});
-
-});
+}); // --> Fin ReadyDocument

@@ -52,28 +52,51 @@ class ExpedientesController extends AppController
         $listado_ceas = $this->listadoEquipo('ceas');
         $listado_edis = $this->listadoEquipo('edis');
 
-//debug($this->request->data);exit();
-//debug($listado_edis);exit();
         $expediente = $this->Expedientes->newEntity();
 
         if ($this->request->is('post')) {
+
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['participantes'][0]['nacimiento']);
+            $this->request->data['participantes'][0]['nacimiento']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+
+            $this->request->data['roles'][0]= array(
+                                //'expediente_id'=> $this->request->data['tecnico_ceas'],
+                                'id'=>'',
+                                'tecnico_id'=> $this->request->data['tecnico_ceas'],
+                                'rol'=> 'CC',
+                                'observaciones'=> '',
+                        );
+            $this->request->data['roles'][1]= array(
+                                //'expediente_id'=> $this->request->data['tecnico_ceas'],
+                                'id'=>'',
+                                'tecnico_id'=> $this->request->data['tecnico_inclusion'],
+                                'rol'=> 'tedis',
+                                'observaciones'=> '',
+                        );
+
+
             $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
-                        'asociated' => [
+                        'associated' => [
                                 'Roles',
-                                'Roles.Tecnicos',
-                                'Roles.Tecnicos.Equipos'
+                                //'Roles.Tecnicos',
+                                //'Roles.Tecnicos.Equipos',
+                                'Participantes'
                         ]
                     ]);
-            
-            debug($this->request->data);exit();
 
 
-            if ($this->Expedientes->save($expediente) && $this->Roles->save($rol)) {
+            if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('The expediente has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view',$expediente['id']]);
             } else {
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
             }
+
+
         }
         $this->set(compact('expediente','listado_ceas','listado_edis'));
         $this->set('_serialize', ['expediente']);
@@ -88,11 +111,28 @@ class ExpedientesController extends AppController
      */
     public function edit($id = null)
     {
+        $listado_ceas = $this->listadoEquipo('ceas');
+        $listado_edis = $this->listadoEquipo('edis');
+
         $expediente = $this->Expedientes->get($id, [
-            'contain' => []
+            'contain' => [
+                                'Roles',
+                                'Roles.Tecnicos',
+                                'Roles.Tecnicos.Equipos',
+                                'Participantes'
+                        ]
+            
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data);
+            $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
+                        'associated' => [
+                                'Roles',
+                                //'Roles.Tecnicos',
+                                //'Roles.Tecnicos.Equipos',
+                                'Participantes'
+                        ]
+                    ]);
+
             if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('The expediente has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -100,7 +140,7 @@ class ExpedientesController extends AppController
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('expediente'));
+        $this->set(compact('expediente','listado_ceas','listado_edis'));
         $this->set('_serialize', ['expediente']);
     }
 

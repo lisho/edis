@@ -123,7 +123,7 @@
                     </div>
  -->               
                     <?= $this->Form->hidden('user_id', ['value' => $auth['id']] );?>    
-                    </fieldset>                
+                </fieldset>                
 
                 <div class="ln_solid"></div>
                 <div class="form-group">

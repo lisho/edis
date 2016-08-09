@@ -33,10 +33,14 @@ class ExpedientesTable extends Table
         $this->addBehavior('Timestamp');
 
         $this->hasMany('Participantes', [
-            'foreignKey' => 'expediente_id'
+            'foreignKey' => 'expediente_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
         $this->hasMany('Roles', [
-            'foreignKey' => 'expediente_id'
+            'foreignKey' => 'expediente_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
     }
 
