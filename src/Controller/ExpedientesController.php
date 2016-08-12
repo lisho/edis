@@ -19,8 +19,9 @@ class ExpedientesController extends AppController
     public function index()
     {
         $expedientes = $this->paginate($this->Expedientes);
+        $listado_ceas = $this->listadoEquipo('ceas');
 
-        $this->set(compact('expedientes'));
+        $this->set(compact('expedientes', 'listado_ceas'));
         $this->set('_serialize', ['expedientes']);
     }
 
@@ -113,34 +114,54 @@ class ExpedientesController extends AppController
     {
         $listado_ceas = $this->listadoEquipo('ceas');
         $listado_edis = $this->listadoEquipo('edis');
-
+        $listado_tecnicos = $this->listadoTecnicos();
+        $opciones_rol = ['CC'=>'Coordinador de Caso', 'tedis'=>'Técnico de Inclusión'];
         $expediente = $this->Expedientes->get($id, [
             'contain' => [
                                 'Roles',
                                 'Roles.Tecnicos',
                                 'Roles.Tecnicos.Equipos',
-                                'Participantes'
+                                'Participantes',
+                                'Participantes.Relations'
                         ]
             
         ]);
+//debug($this->request->data);exit();
+        if (isset($this->request->data['roles'][0]['rol'])) {
+            if (!isset($this->request->data['roles'][0]['id'])) {
+                $this->request->data['roles'][0]['id']='';
+            }
+
+            $this->request->data['roles'][0]['expediente_id']=$id;
+        }
+        
+                            
         if ($this->request->is(['patch', 'post', 'put'])) {
+            
             $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
                         'associated' => [
                                 'Roles',
-                                //'Roles.Tecnicos',
+                                'Roles.Tecnicos',
                                 //'Roles.Tecnicos.Equipos',
                                 'Participantes'
                         ]
                     ]);
 
+
             if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('The expediente has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                if (isset($this->request->data['roles']) || isset($this->request->data['volver'])) {
+                    return $this->redirect($this->referer());
+                } else {
+                    return $this->redirect(['action' => 'index']);
+                }
+                
+                
             } else {
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
             }
         }
-        $this->set(compact('expediente','listado_ceas','listado_edis'));
+        $this->set(compact('expediente', 'listado_ceas','listado_edis','listado_tecnicos', 'opciones_rol'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -179,5 +200,23 @@ class ExpedientesController extends AppController
         }
 
         return $listado_tipo;
+    }
+
+    /**
+     * Listado de todos los tecnicos
+     *
+     * 
+     */
+        public function listadoTecnicos()
+    {
+        $this->loadModel('Tecnicos');
+        $listado = [];
+        $listado = $this->Tecnicos->find('all');
+        foreach ($listado as $l) {
+            //debug($l);exit();
+            $listado_tecnicos[$l->id] = $l->nombre.' '. $l->apellidos;
+        }
+
+        return $listado_tecnicos;
     }
 }

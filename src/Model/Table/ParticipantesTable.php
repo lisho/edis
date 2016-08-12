@@ -35,6 +35,11 @@ class ParticipantesTable extends Table
             'foreignKey' => 'expediente_id',
             'joinType' => 'INNER'
         ]);
+
+        $this->belongsTo('Relations', [
+            'foreignKey' => 'relation_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
@@ -91,6 +96,7 @@ class ParticipantesTable extends Table
     {
         $rules->add($rules->isUnique(['email']));
         $rules->add($rules->existsIn(['expediente_id'], 'Expedientes'));
+        $rules->add($rules->existsIn(['relation_id'], 'Relations'));
         return $rules;
     }
 }

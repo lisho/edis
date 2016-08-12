@@ -62,7 +62,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente RGC <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <?php
-                    echo $this->Form->input('numrgc', [
+                    echo $this->Form->input('numhs', [
                             'class'=>'form-control col-md-7 col-xs-12',
                             'required' =>'required',
                             'label' => ['text' => '']
@@ -153,7 +153,7 @@
     	<!-- 
     	********************** Formulario Nuevo Usuario *************************** -->
 		<br><br>
-    	<h4>Para completar la creación de un nuevo expediente necesitamos crear también, al menos, la ficha de un <strong>usuario adscrito al expediente</strong>: </h4> <hr>
+    	<h4>Para completar la creación de un nuevo expediente necesitamos crear también, al menos, la ficha de un <strong>usuario adscrito al expediente</strong>, que quedará registrado como titular de este expediente: </h4> <hr>
 
     	<?php
             echo $this->Form->input('participantes.0.id', [
@@ -286,34 +286,9 @@
             </div>
         </div>
 
-
+        <?= $this->Form->input('participantes.0.relation_id', ['type'=>'hidden', 'value'=>'1']);?>
         
-        <?php
-            /*
-            echo $this->Form->input('ceas', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'options' => $listado_ceas,
-                                                ]);
-            
-            echo $this->Form->input('role.0.tecnico.id', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'multiple' => true,
-                                                    //'options' => $tecnicoList,
-                                                ]);
-
-            //echo $this->Form->input('Roles.tecnico_id', ['type'=>'select', ]);
-            echo $this->Form->input('Roles.rol');
-            echo $this->Form->input('Roles.observaciones');
-            */
-        ?>
+        
     </fieldset>
 
     <div class="ln_solid"></div>

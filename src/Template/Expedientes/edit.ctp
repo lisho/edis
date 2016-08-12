@@ -10,6 +10,19 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">    
+
+                <div class="botonera pull-right">
+                    
+                    <br>
+                        <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-md modal-btn btn-info fa fa-info',
+                                    'id'=>'ver_info',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"left",
+                                    'data-content'=>"Despliega más información sobre este espediente."]) ?>
+
+                </div>
         
 
                 <!-- Formulario -->
@@ -17,9 +30,6 @@
                 <?= $this->Form->create($expediente,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
 
     <fieldset>
-
-        <br>
-        <h4>Si no has obtenido ningún resultado en el buscador anterior, puedes iniciar la <strong>creación de un nuevo expediente</strong>: </h4> <hr>
         
         <div class="form-group has-feedback">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente EDIS <span class="required">*</span></label>
@@ -35,10 +45,10 @@
         </div>
 
         <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente RGC <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Historia Social (SAUSS) <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
                 <?php
-                    echo $this->Form->input('numrgc', [
+                    echo $this->Form->input('numhs', [
                             'class'=>'form-control col-md-7 col-xs-12',
                             'required' =>'required',
                             'label' => ['text' => '']
@@ -61,9 +71,19 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Ceas de referencia: <span class="required">*</span></label>
+            <label class="control-label col-md-3 col-sm-3 col-xs-12"><p>Ceas de referencia:</p>
+                <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn btn-info fa fa-edit',
+                                    'id'=>'edita_ceas',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"right",
+                                    'data-content'=>"Cambiar el CEAS de referencia para este expediente"]) ?>
+                
+            </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <h4><?= $listado_ceas[$expediente['ceas']]; ?></h4>
+                <h4>
+                    <?= $listado_ceas[$expediente['ceas']]; ?></h4>
             </div>
         </div>
 
@@ -71,13 +91,13 @@
 
             <label class="control-label col-md-3 col-sm-3 col-xs-12"><p>Tecnicos de Referencia:</p>
             
-            <?= $this->Html->link('', ['controller'=>'roles', 'action' => 'add', $expediente->id], [     
-                                    'class'=> 'btn btn-xs btn-success fa fa-plus',
-                                    'id'=>'add_tecnico',
+            <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn btn-success fa fa-plus',
+                                    'id'=>'add_rol',
                                     'data-container'=>"body",
-                                    'data-toggle'=>"modal",
-                                    'data-target'=>"#myModal",
-                                    'data-placement'=>"left",
+                                    'data-toggle'=>"popover",
+                                    //'data-target'=>"#myModal",
+                                    'data-placement'=>"right",
                                     'data-content'=>"Añadir un nuevo técnico a este expediente."]) ?>
 
             </label>
@@ -96,9 +116,6 @@
                     <tbody>
                         <?php foreach ($expediente->roles as $rol): ?>
                         <tr>
-                        <!--
-                            <td class="foto-lista"><?= $this->Html->image('user_fotos/'.$aviso['user']['foto'], ['class'=> 'img-circle profile_img']) ?>  </td>
-                        -->
 
                             <?php 
 
@@ -129,87 +146,126 @@
                                                     'data-placement'=>"left",
                                                     'data-content'=>"Ver la ficha de este técnico."]) ?>
                      
-                                <?= $this->Html->link('', ['controller'=>'roles', 'action' => 'edit', $rol->id], [
-                                                    'class'=> 'btn btn-xs btn-info fa fa-edit',
-                                                    'id'=>'editar'.$rol->tecnico->id,
+                                <?= $this->Html->link('', '#', [
+                                                    'class'=> 'btn btn-xs btn-info modal-btn fa fa-edit',
+                                                    'id'=>'editar'.$rol->id,
                                                     'data-container'=>"body",
                                                     'data-toggle'=>"popover",
                                                     'data-placement'=>"top",
                                                     'data-content'=>"Editar este rol para este expediente."
                                                     ]) ?>
                                 
-                                <?= $this->Form->postLink('', ['action' => 'delete', $rol->id], [
+                                <?= $this->Form->postLink('', ['controller'=>'roles', 'action' => 'delete', $rol->id], [
                                             'class'=> 'btn btn-xs btn-danger fa fa-trash', 
                                             'id'=>'borrar'.$rol->tecnico->id,
                                             'data-container'=>"body",
                                             'data-toggle'=>"popover",
-                                            'data-placement'=>"right",
+                                            'data-placement'=>"top",
                                             'data-content'=>"Eliminar rol para este expediente.",
                                             'confirm' => __('¿Realmente quieres borrar de este expediente a {0}?', $rol->tecnico->nombre.' '.$rol->tecnico->apellidos.' como '. $r )]) ?>
                                 
                             </td>
 
                         </tr>
+
+        <!-- Modal para editar un rol en un expediente  -->
+
+                                <div id="modal_<?= 'editar'.$rol->id?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                  <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">Editar el Rol del expediente <strong><?= $expediente['numedis']?></strong></h4>
+                                      </div>
+                                      <div class="modal-body">
+                                        
+                                        <?= $this->Form->create($rol,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+
+                                                <?= $this->Form->input('roles.0.id', ['value'=>$rol->id, 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cambiar el Técnico<span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <?php
+                                                            echo $this->Form->input('roles.0.tecnico_id', [
+                                                                                            'type' => 'select',
+                                                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                                                            'default' => '',
+                                                                                            'id'=> 'tecnico_id',
+                                                                                            'required' => 'required',
+                                                                                            'label' => ['text' => ''],
+                                                                                            'options' => $listado_tecnicos,
+                                                                                            'default' => $rol->tecnico_id
+                                                                                            //'empty'   => $rol->tecnico->nombre
+                                                                                        ]);
+                                                        ?> 
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Cambiar el Rol <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <?php
+                                                            echo $this->Form->input('roles.0.rol', [
+                                                                                            'type' => 'select',
+                                                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                                                            'id' => 'rol',
+                                                                                            'default' => '',
+                                                                                            'required' => 'required',
+                                                                                            'label' => ['text' => ''],
+                                                                                            'options' => $opciones_rol,
+                                                                                            'default' => $rol->rol
+                                                                                        ]);
+                                                        ?> 
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este Rol <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <?php
+                                                            echo $this->Form->input('roles.0.observaciones', [
+                                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                                    //'required' => 'required',
+                                                                    'label' => ['text' => ''],
+                                                                    'default' => $rol->observaciones
+                                                                ]);
+                                                        ?> 
+                                                    </div>
+                                                </div>
+
+                                                <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+
+
+                                                <div class="modal-footer">
+                                                    <?= $this->Form->button('Guardar cambios en el rol ->', ['class' => 'btn btn-success']) ?>
+                                                    <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+                                                
+                                                </div>
+                                            
+                                        <?= $this->Form->end() ?>
+                                        
+                                    </div>
+                                  </div>
+                                </div> <!--// FIN Modal para editar un rol en un expediente  -->
+
+
+
+
+
+
+
+
+
+
+
+
                         <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>
         </div>
-<!--
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">CEAS de Referencia <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('ceas', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'default' => '',
-                                                    'id'=> 'ceas',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'options' => $listado_ceas,
-                                                    'empty'   => 'Elije un Ceas'
-                                                ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Coordinador de Caso (CC) <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('tecnico_ceas', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'id' => 'tecnico_ceas',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    //'options' => $tecnicoList,
-                                                    'empty'   => 'Elije un Coordinador de Caso'
-                                                ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Técnico de Inclusión (TEDIS) <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('tecnico_inclusion', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'id' => 'tecnico_inclusion',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'empty'   => 'Elije un Técnico de Inclusión',
-                                                    'selected' => '',
-                                                ]);
-                ?> 
-            </div>
-        </div>
--->   
+  
         <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este EXPEDIENTE <span class="required">*</span></label>
             <div class="col-md-6 col-sm-6 col-xs-12">
@@ -236,21 +292,173 @@
     <?= $this->Form->end() ?>
 
 
+    <!-- 
+    ****************************
+    ***** M O D A L E S ********
+    ****************************
+    -->
+
+ <!-- Modal para formulario de nuevo rol en un expediente  -->
 
 
-    <div id="myModal" class="modal fade bs-example-modal-lg">
+<div id="modal_add_rol" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Añadir un Nuevo Rol al Expediente <strong><?= $expediente['numedis']?></strong></h4>
+      </div>
+      <div class="modal-body">
         
         <?= $this->Form->create($expediente,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
 
-        <div class="ln_solid"></div>
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <?= $this->Form->button('Guardar cambios en el expediente ->', ['class' => 'btn btn-success']) ?>
-                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
-                    </div>
-                </div>
+            <div class="form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nuevo Técnico <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                    echo $this->Form->input('roles.0.tecnico_id', [
+                                                    'type' => 'select',
+                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                    'id' => 'tecnico_ceas',
+                                                    'default' => '',
+                                                    'required' => 'required',
+                                                    'label' => ['text' => ''],
+                                                    'options' => $listado_tecnicos,
+                                                    'empty'   => 'Elije el técnico al que desea asignar un rol'
+                                                ]);
+                ?> 
+            </div>
+        </div>
+
+        <div class="form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nuevo Rol <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                   
+                    echo $this->Form->input('roles.0.rol', [
+                                                    'type' => 'select',
+                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                    'id' => 'tecnico_inclusion',
+                                                    'default' => '',
+                                                    'required' => 'required',
+                                                    'options' => $opciones_rol,
+                                                    'label' => ['text' => ''],
+                                                    'empty'   => 'Elije un Rol para el técnico'
+                                                ]);
+                ?> 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este Rol <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                    echo $this->Form->input('roles.0.observaciones', [
+                            'class'=>'form-control col-md-7 col-xs-12',
+                            //'required' => 'required',
+                            'label' => ['text' => '']
+                        ]);
+                ?> 
+            </div>
+        </div>
+
+            <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+
+      </div>
+      <div class="modal-footer">
+        <?= $this->Form->button('Añadir el nuevo Rol al expediente ->', ['class' => 'btn btn-success']) ?>
+        <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+        
+      </div>
 
         <?= $this->Form->end() ?>
+        
     </div>
+  </div>
+</div>
 
+
+<!-- Modal para formulario de información adicional sobre un expediente  -->
+
+<div id="modal_ver_info" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">información adicional sobre el Expediente: <strong><?= $expediente['numedis']?></strong></h4>
+      </div>
+      <div class="modal-body">
+        
+        <h4>Parrilla familiar</h4><hr>
+
+            <table  class="table table-bordered">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Relacion con titular</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody>
+                    <?php foreach ($expediente->participantes as $participante): ?>
+                    <td><?= $participante->nombre.' '. $participante->apellidos?></td>
+                    <td><?= $participante->relation->nombre?></td>
+                    <td></td>
+                    <?php endforeach ?>
+                </tbody>               
+            </table>
+        
+      </div>
+      <div class="modal-footer">
+       
+        <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+ <!-- Modal para editar el CEAS de referencia para el expediente  -->
+
+
+<div id="modal_edita_ceas" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Cambia el CEAS de referencia para este Expediente <strong><?= $expediente['numedis']?></strong></h4>
+      </div>
+      <div class="modal-body">
+        
+        <?= $this->Form->create($expediente,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+
+            <div class="form-group has-feedback">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nuevo CEAS de Referencia <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                    echo $this->Form->input('ceas', [
+                                                    'type' => 'select',
+                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                    'id' => 'tecnico_ceas',
+                                                    'default' => $expediente->ceas,
+                                                    'required' => 'required',
+                                                    'label' => ['text' => ''],
+                                                    'options' => $listado_ceas
+                                                ]);
+                ?> 
+            </div>
+        </div>
+
+            <?= $this->Form->input('volver', ['value'=>'volver', 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+
+      </div>
+      <div class="modal-footer">
+        <?= $this->Form->button('Guardar cambios en el CEAS ->', ['class' => 'btn btn-success']) ?>
+        <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+        
+      </div>
+
+        <?= $this->Form->end() ?>
+        
+    </div>
+  </div>
 </div>

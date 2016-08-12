@@ -3,7 +3,7 @@ jQuery(document).ready(function($) {
 
 $(function(){
 
-	$("textarea").jqte(); 
+	$(".editor").jqte(); 
 	$("#datatable").DataTable();
 	$(".datatable").DataTable();
 	$('.datepicker').datepicker({
@@ -69,16 +69,33 @@ $(function(){
 // --> EFECTOS BOOTSTRAP
 
 	// --> mensajes con popover pasando el id
-
+	
  	$('[data-toggle="popover"]').hover(function () {
  		id=$(this).attr("id");
- 		
- 		$("#" +id).popover('toggle');
- 		})
 
- 	$('#add_tecnico').click(function () {
- 		$(this).modal();
- 		})
+ 		$("#" +id).hover('handlerIn', function (e) {
+		  	$("#" +id).popover('hide');
+		})
+ 		$("#" +id).popover('toggle');
+ 	})
+	
+ 	// ******************************************** 
+ 	// --> Desplegue de modales		
+ 	// *** necesaria clase en el botón: .modal-btn
+ 	// *** necesario id en el boton
+ 	// *** id del modal = #modal_ + id_del_boton
+ 	// ******************************************** 
+
+	$('.modal-btn').click(function () {
+		
+		id=$(this).attr("id");
+	 	$('#modal_'+id).modal();
+
+	 });
+
+
+
+ 	
 }); // --> Fin Función Anónima.
 
 }); // --> Fin ReadyDocument

@@ -16,9 +16,10 @@
             echo $this->Form->input('apellidos');
             echo $this->Form->input('nacimiento', ['empty' => true]);
             echo $this->Form->input('sexo');
+            echo $this->Form->input('relation', ['options' => $relaciones]);
             echo $this->Form->input('telefono');
             echo $this->Form->input('email');
-            echo $this->Form->input('expediente_id', ['options' => $expedientes]);
+            echo $this->Form->input('expediente_id');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

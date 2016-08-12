@@ -19,8 +19,8 @@
             <td><?= h($expediente->numedis) ?></td>
         </tr>
         <tr>
-            <th><?= __('Numrgc') ?></th>
-            <td><?= h($expediente->numrgc) ?></td>
+            <th><?= __('numhs') ?></th>
+            <td><?= h($expediente->numhs) ?></td>
         </tr>
         <tr>
             <th><?= __('Domicilio') ?></th>

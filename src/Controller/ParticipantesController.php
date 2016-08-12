@@ -51,9 +51,14 @@ class ParticipantesController extends AppController
      */
     public function add()
     {
+        
         $participante = $this->Participantes->newEntity();
         if ($this->request->is('post')) {
-            $participante = $this->Participantes->patchEntity($participante, $this->request->data);
+            $participante = $this->Participantes->patchEntity($participante, $this->request->data, [
+                        'associated' => [
+                                'Relations'
+                        ]
+                        ]);
             if ($this->Participantes->save($participante)) {
                 $this->Flash->success(__('The participante has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -61,8 +66,9 @@ class ParticipantesController extends AppController
                 $this->Flash->error(__('The participante could not be saved. Please, try again.'));
             }
         }
-        $expedientes = $this->Participantes->Expedientes->find('list', ['limit' => 200]);
-        $this->set(compact('participante', 'expedientes'));
+        
+        $relaciones = $this->Participantes->Relations->find('list', ['limit' => 20]);
+        $this->set(compact('participante','relaciones'));
         $this->set('_serialize', ['participante']);
     }
 
