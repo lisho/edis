@@ -34,11 +34,13 @@ class ExpedientesController extends AppController
      */
     public function view($id = null)
     {
+        $listado_ceas = $this->listadoEquipo('ceas');
+        $listado_tecnicos = $this->listadoTecnicos($id);
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles']
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos']
         ]);
 
-        $this->set('expediente', $expediente);
+        $this->set(compact('expediente', 'listado_ceas'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -127,6 +129,9 @@ class ExpedientesController extends AppController
             
         ]);
 //debug($this->request->data);exit();
+
+        /* Ajustes para los cambios de roles*/
+
         if (isset($this->request->data['roles'][0]['rol'])) {
             if (!isset($this->request->data['roles'][0]['id'])) {
                 $this->request->data['roles'][0]['id']='';
@@ -150,10 +155,14 @@ class ExpedientesController extends AppController
 
             if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('The expediente has been saved.'));
+                
+                return $this->redirect(['action' => 'view',$id]);
+                
                 if (isset($this->request->data['roles']) || isset($this->request->data['volver'])) {
-                    return $this->redirect($this->referer());
+                    /*return $this->redirect($this->referer());*/
+                    
                 } else {
-                    return $this->redirect(['action' => 'index']);
+                    return $this->redirect(['action' => 'view',$id]);
                 }
                 
                 
@@ -207,15 +216,16 @@ class ExpedientesController extends AppController
      *
      * 
      */
-        public function listadoTecnicos()
+        public function listadoTecnicos($expediente_id=null)
     {
         $this->loadModel('Tecnicos');
         $listado = [];
-        $listado = $this->Tecnicos->find('all');
-        foreach ($listado as $l) {
-            //debug($l);exit();
-            $listado_tecnicos[$l->id] = $l->nombre.' '. $l->apellidos;
-        }
+    
+            $listado = $this->Tecnicos->find('all');
+            foreach ($listado as $l) {
+                //debug($l);exit();
+                $listado_tecnicos[$l->id] = $l->nombre.' '. $l->apellidos;
+                }
 
         return $listado_tecnicos;
     }

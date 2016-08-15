@@ -153,3 +153,17 @@ ul.msg_list li a .time {
 	padding: 3em;
 	border-radius: 5px;
 }
+
+table.vertical-table>tbody>tr>th {
+	padding-right: 2em;
+}
+
+.icono-fa{
+	font-size: 1.5em;
+	padding-right: 1em;
+}
+
+.icono-titulo-fa{
+	font-size: 3em;
+	padding-right: 1em;
+}
