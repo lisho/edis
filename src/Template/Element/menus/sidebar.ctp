@@ -14,7 +14,7 @@
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Crear Nuevo Expediente', ['controller'=> 'Expedientes', 'action'=>'add']) ?></li>
                       <li><?= $this->Html->link('Listado de Expedientes', ['controller'=> 'Expedientes', 'action'=>'index']) ?></li>
-                      <li><a href="form_advanced.html">Advanced Components</a></li>
+                      <li><?= $this->Html->link('Mis Expedientes', ['controller'=> 'Roles', 'action'=>'mis_roles']) ?></li>
                       
                     </ul>
                   </li>
@@ -26,6 +26,15 @@
                       <li></li>
                       <li></li>
                       <li></li>
+                    </ul>
+                  </li>
+                  <li><a><i class="fa fa-fire"></i> Reflexiones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link('Crear Nueva Reflexión', ['controller'=> '', 'action'=>'add']) ?></li>
+                      <li><?= $this->Html->link('Panel de Reflexiones', ['controller'=> '', 'action'=>'index']) ?></li>
+                      <li><?= $this->Html->link('Mis Reflexiones', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
+                      <li><?= $this->Html->link('Nuevo tema de reflexión', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
+                      
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i> Administración <span class="fa fa-chevron-down"></span></a>

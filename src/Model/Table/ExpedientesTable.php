@@ -61,13 +61,29 @@ class ExpedientesTable extends Table
             ->notEmpty('numedis');
 
         $validator
-            ->requirePresence('numrgc', 'create')
-            ->notEmpty('numrgc');
+            ->requirePresence('numhs', 'create')
+            ->notEmpty('numhs');
 
         $validator
             ->requirePresence('domicilio', 'create')
             ->notEmpty('domicilio');
 
         return $validator;
+    }
+
+        /**
+     * Returns a rules checker object that will be used for validating
+     * application integrity.
+     *
+     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+     * @return \Cake\ORM\RulesChecker
+     */
+    public function buildRules(RulesChecker $rules)
+    {
+        $rules->add($rules->isUnique(['numedis']));
+        $rules->add($rules->isUnique(['numhs']));
+        //$rules->add($rules->existsIn(['expediente_id'], 'Expedientes'));
+        //$rules->add($rules->existsIn(['relation_id'], 'Relations'));
+        return $rules;
     }
 }

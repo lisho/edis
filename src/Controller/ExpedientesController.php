@@ -25,6 +25,7 @@ class ExpedientesController extends AppController
         $this->set('_serialize', ['expedientes']);
     }
 
+    
     /**
      * View method
      *
@@ -60,11 +61,17 @@ class ExpedientesController extends AppController
         if ($this->request->is('post')) {
 
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['participantes'][0]['nacimiento']);
-            $this->request->data['participantes'][0]['nacimiento']=array(
+            $this->request->data['participantes'][0]['foto']='';
+            
+            $this->request->data['participantes'][0]['nacimiento']=null;
+            if ( $this->request->data['participantes'][0]['nacimiento']) {
+                 $this->request->data['participantes'][0]['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
                                 'day' =>$cachos_fecha[0] 
                         );
+            }
+           
 
             $this->request->data['roles'][0]= array(
                                 //'expediente_id'=> $this->request->data['tecnico_ceas'],
@@ -85,15 +92,16 @@ class ExpedientesController extends AppController
             $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
                         'associated' => [
                                 'Roles',
-                                //'Roles.Tecnicos',
+                                'Roles.Tecnicos',
                                 //'Roles.Tecnicos.Equipos',
                                 'Participantes'
                         ]
                     ]);
 
+//debug($expediente);exit();
 
             if ($this->Expedientes->save($expediente)) {
-                $this->Flash->success(__('The expediente has been saved.'));
+                $this->Flash->success(__('El expediente '.$expediente['numedis'].' ha sido creado correctamente.'));
                 return $this->redirect(['action' => 'view',$expediente['id']]);
             } else {
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
@@ -193,40 +201,5 @@ class ExpedientesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    /**
-     * Listado de los Equipos segun el tipo que pasamos
-     *
-     * 
-     */
-        public function listadoEquipo($tipo=null)
-    {
-        $this->loadModel('Equipos');
-        $listado = [];
-        $listado = $this->Equipos->findByTipo($tipo);
-        foreach ($listado as $l) {
-            //debug($l);exit();
-            $listado_tipo[$l->id] = $l->nombre;
-        }
-
-        return $listado_tipo;
-    }
-
-    /**
-     * Listado de todos los tecnicos
-     *
-     * 
-     */
-        public function listadoTecnicos($expediente_id=null)
-    {
-        $this->loadModel('Tecnicos');
-        $listado = [];
     
-            $listado = $this->Tecnicos->find('all');
-            foreach ($listado as $l) {
-                //debug($l);exit();
-                $listado_tecnicos[$l->id] = $l->nombre.' '. $l->apellidos;
-                }
-
-        return $listado_tecnicos;
-    }
 }

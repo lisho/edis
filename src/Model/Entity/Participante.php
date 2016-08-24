@@ -35,4 +35,15 @@ class Participante extends Entity
         '*' => true,
         'id' => false,
     ];
+
+    //protected $_virtual = ['datos_basicos'];
+/*
+    protected function _getDatosBasicos()
+    {
+        return $this->_properties['dni'] . '  ' .
+            $this->_properties['nombre'] . '  ' .
+            $this->_properties['apellidos'];
+    }
+*/
 }
+

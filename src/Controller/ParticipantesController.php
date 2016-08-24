@@ -116,4 +116,32 @@ class ParticipantesController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+
+    /*
+    * BUSCADOR DE ALUMNOS;
+    *
+    * 
+    */  
+
+    public function searchjson()
+    {
+        $term=null;
+        if (!empty($this->request->query['term'])) {
+            $term=$this->request->query['term'];
+            $terms=explode(' ', trim($term));
+            $terms=array_diff($terms, array(''));
+
+
+            $participantes = $this->Participantes->find('all')
+                        -> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
+                        -> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
+                        ;
+                        
+            //debug($conditions);exit();
+        }
+        echo json_encode($participantes);
+        $this->autoRender = false;
+    }
+
 }

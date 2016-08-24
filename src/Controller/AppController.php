@@ -121,5 +121,42 @@ class AppController extends Controller
         //return $this->ultimosAvisos($num);
     }
 
+    /**
+     * Listado de los Equipos segun el tipo que pasamos
+     *
+     * 
+     */
+        public function listadoEquipo($tipo=null)
+    {
+        $this->loadModel('Equipos');
+        $listado = [];
+        $listado = $this->Equipos->findByTipo($tipo);
+        foreach ($listado as $l) {
+            //debug($l);exit();
+            $listado_tipo[$l->id] = $l->nombre;
+        }
+
+        return $listado_tipo;
+    }
+
+    /**
+     * Listado de todos los tecnicos
+     *
+     * 
+     */
+        public function listadoTecnicos($expediente_id=null)
+    {
+        $this->loadModel('Tecnicos');
+        $listado = [];
+    
+            $listado = $this->Tecnicos->find('all');
+            foreach ($listado as $l) {
+                //debug($l);exit();
+                $listado_tecnicos[$l->id] = $l->nombre.' '. $l->apellidos;
+                }
+
+        return $listado_tecnicos;
+    }
+
     
 }

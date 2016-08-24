@@ -113,4 +113,32 @@ class RolesController extends AppController
         $this->redirect($this->referer());
         //return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * Mis Expedientes method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function misRoles()
+    {
+        $auth=$this->Auth->user(); // lo pasamos a minúsculas
+        $nombre_user = strtolower($auth['nombre']);
+        $apellidos_user = strtolower($auth['apellidos']);
+        
+        $expedientes = $this->Roles->find('all')
+            -> where(['Tecnicos.nombre'=>ucwords($nombre_user),'Tecnicos.apellidos'=>ucwords($apellidos_user)])
+            -> contain ([
+                                            'Expedientes',
+                                            'Tecnicos',
+                                            'Tecnicos.Equipos',
+                                            'Expedientes.Participantes',
+                                            //'Participantes.Relations'
+                                    ])
+            ;
+
+        $listado_ceas = $this->listadoEquipo('ceas');
+
+        $this->set(compact('expedientes','listado_ceas'));
+        $this->set('_serialize', ['expedientes']);
+    }
 }

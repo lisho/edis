@@ -26,7 +26,7 @@
                     <div class="x_panel ui-ribbon-container fixed_height_390">
                         <div class="ui-ribbon-wrapper">
                             <div class="ui-ribbon importancia-<?= $aviso['importancia'];?>">
-                              <?= $aviso['tipo'];?>
+                              <?= strtoupper($aviso['tipo']);?>
                             </div>
                         </div>
                         <div class="x_title">

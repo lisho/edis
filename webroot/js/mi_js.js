@@ -98,4 +98,42 @@ $(function(){
  	
 }); // --> Fin Función Anónima.
 
+
+	// --> ************** BUSCADOR DEL MENU *************************************************************************
+
+	$('#s').autocomplete ({
+		minLength: 2,
+		select:function(event, ui){
+			$('#s').val(ui.item.label);
+		},
+
+		source:function(request, response){
+			$.ajax({
+				url:"/edis/participantes/searchjson",
+				data:{
+					term:request.term
+				},
+				dataType: "json",
+				success: function(data){
+					response($.map(data,function(el,index){
+						return{
+							value:el.nombre,
+							nombre:el.nombre,
+							apellidos:el.apellidos,
+							dni: el.dni,
+							id: el.id
+						};
+					}));
+				}
+			});
+		}
+
+	}).data("ui-autocomplete")._renderItem = function(ul, item){
+		return $("<li></li>")
+		.addClass('fa fa-arrow-circle-right')
+		.data("item.autocomplete", item)
+		.append("<a href='/edis/participantes/view/"+item.id+"'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
+		.appendTo(ul)
+	}; // --> Fin Buscador
+
 }); // --> Fin ReadyDocument

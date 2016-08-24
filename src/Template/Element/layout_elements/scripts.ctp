@@ -3,7 +3,10 @@
 
     <!-- jQuery -->
     <?= $this->Html->script('jquery.min.js') ?>
-   
+    
+    <!-- jQuery IU-->
+    <?= $this->Html->script('jquery-ui.min.js') ?>
+
     <!-- Bootstrap -->
     <?= $this->Html->script('bootstrap.min.js') ?>
    

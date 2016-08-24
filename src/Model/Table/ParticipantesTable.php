@@ -74,12 +74,12 @@ class ParticipantesTable extends Table
             ->notEmpty('sexo');
 
         $validator
-            ->requirePresence('telefono', 'create')
+            //->requirePresence('telefono', 'create')
             ->notEmpty('telefono');
 
         $validator
             ->email('email')
-            ->requirePresence('email', 'create')
+            //->requirePresence('email', 'create')
             ->notEmpty('email');
 
         return $validator;
@@ -94,7 +94,7 @@ class ParticipantesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['dni']));
         $rules->add($rules->existsIn(['expediente_id'], 'Expedientes'));
         $rules->add($rules->existsIn(['relation_id'], 'Relations'));
         return $rules;
