@@ -15,12 +15,12 @@
                     
                     <br>
                         <?= $this->Html->link('', '#', [     
-                                    'class'=> 'btn btn-md modal-btn btn-info fa fa-info',
+                                    'class'=> 'btn btn-md modal-btn btn-info fa fa-group',
                                     'id'=>'ver_info',
                                     'data-container'=>"body",
                                     'data-toggle'=>"popover",
                                     'data-placement'=>"left",
-                                    'data-content'=>"Despliega más información sobre este espediente."]) ?>
+                                    'data-content'=>"Despliega más información sobre la parrilla familiar de este espediente."]) ?>
 
                 </div>
         
@@ -249,17 +249,6 @@
                                   </div>
                                 </div> <!--// FIN Modal para editar un rol en un expediente  -->
 
-
-
-
-
-
-
-
-
-
-
-
                         <?php endforeach; ?>
                     </tbody>
                 </table>
@@ -285,7 +274,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <?= $this->Form->button('Guardar cambios en el expediente ->', ['class' => 'btn btn-success']) ?>
-                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action'=>'view',$expediente->id],['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
                
@@ -392,16 +381,20 @@
         <h4>Parrilla familiar</h4><hr>
 
             <table  class="table table-bordered">
-                <thead>
+                <thead>  
+                    <th>DNI</th>                   
                     <th>Nombre</th>
-                    <th>Relacion con titular</th>
-                    <th>Acciones</th>
+                    <th>Relacion con titular</th> 
+                    <th>Observaciones</th>                                     
                 </thead>
                 <tbody>
                     <?php foreach ($expediente->participantes as $participante): ?>
-                    <td><?= $participante->nombre.' '. $participante->apellidos?></td>
-                    <td><?= $participante->relation->nombre?></td>
-                    <td></td>
+                    <tr> 
+                        <td><?= $participante->dni?></td>   
+                        <td><?= $participante->nombre.' '. $participante->apellidos?></td>
+                        <td><?= $participante->relation->nombre?></td>
+                        <th><?= $participante->observaciones?></th>
+                    </tr>
                     <?php endforeach ?>
                 </tbody>               
             </table>

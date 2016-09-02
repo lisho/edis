@@ -63,7 +63,7 @@ class ParticipantesController extends AppController
                 $this->Flash->success(__('The participante has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
-                $this->Flash->error(__('The participante could not be saved. Please, try again.'));
+                $this->Flash->error('No ha sido posible guardar el nuevo participante. Por favor revisa los datos.');
             }
         }
         
@@ -114,7 +114,7 @@ class ParticipantesController extends AppController
         } else {
             $this->Flash->error(__('The participante could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['controller' => 'Expedientes','action' => 'view', $participante['expediente_id']]);
     }
 
 
@@ -134,13 +134,55 @@ class ParticipantesController extends AppController
 
 
             $participantes = $this->Participantes->find('all')
+                        ->contain(['Expedientes'])
                         -> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
                         -> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
                         ;
                         
             //debug($conditions);exit();
         }
+        //debug($participantes);exit();
         echo json_encode($participantes);
+        $this->autoRender = false;
+    }
+
+    /**
+     * Edit method
+     *
+     * @param string|null $id Participante id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function editNacimiento($id = null)
+    {
+        
+        //debug($this->request->data);exit();
+        $nacimiento = $this->request->data['nacimiento'];
+        $cachos_fecha = preg_split("/[\/]+/", $nacimiento);
+
+            if ( $nacimiento!='') {
+                 $nacimiento=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            }
+        $this->request->data['nacimiento']= $nacimiento;
+        $participante = $this->Participantes->get($id, [
+            'contain' => []
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $participante = $this->Participantes->patchEntity($participante, $this->request->data);
+            
+            if ($this->Participantes->save($participante)) {
+                $this->Flash->success(__('Se ha guardado correctamente la edad de '.$participante->nombre.' '.$participante->apellidos));
+                
+                return $this->redirect($this->referer());
+            } else {
+                $this->Flash->error(__('La edad del participante nop se ha guardado correctamente. Porf favor, inténtelo de nuevo.'));
+            }
+        }
         $this->autoRender = false;
     }
 

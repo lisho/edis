@@ -1,6 +1,4 @@
 
-
-
 <div class="col-md-4 col-sm-12 col-xs-12"> 
     <div class="x_panel"> <!-- Panel de datos de expediente-->
         <div class="x_title"> 
@@ -24,12 +22,13 @@
         </div> 
  
         <div class="x_content">         
- 
+            <h3>Datos del expediente:</h3>
             <table class="vertical-table"> 
                  
                <tr>
                     <th><?= 'Número de Expediente EDIS' ?></th>
                     <td><?= h($expediente->numedis) ?></td>
+
                 </tr>
                 <tr>
                     <th><?= 'Numero de Historia Social (SAUSS)' ?></th>
@@ -39,31 +38,41 @@
                     <th><?= 'Domicilio' ?></th>
                     <td><?= h($expediente->domicilio) ?></td>
                 </tr>
+                
                 <tr>
-                    <th><?= __('Id') ?></th>
-                    <td><?= $this->Number->format($expediente->id) ?></td>
+                    <th><?= 'Fecha de creación del expediente:' ?></th>
+                    <td><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null); ?></td>
                 </tr>
                 <tr>
-                    <th><?= __('Created  ') ?></th>
-                    <td><?= h($expediente->created) ?></td>
+                    <th><?= 'Última modificación en el expediente:' ?></th>
+                    <td><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null); ?></td>
                 </tr>
-                <tr>
-                    <th><?= __('Modified  ') ?></th>
-                    <td><?= h($expediente->modified) ?></td>
-                </tr>
+                
             </table> 
+                    <br>
+                    <p><b><?= 'CEAS de Referencia:' ?></b></p>
+                    <p><?= $listado_ceas[$expediente->ceas]; ?></p>
+                    
+                    <p><b><?= 'Observaciones sobre el expediente:' ?></b></p>
+                    <?php if ($expediente->observaciones!=null): ?>
+                         <?= $expediente->observaciones; ?>
+                    <?php else: ?>
+                        <p>No se han generado observaciones para este expediente</p>
+                    <?php endif ?>
+                   
+
                  
-                <br> 
-                <?= $this->Html->link(__('Volver'), ['action' => 'index'], ['class'=> 'btn btn-xs btn-primary']) ?> 
-                <?= $this->Html->link(__('Edit'), ['action' => 'edit', $expediente->id], ['class'=> 'btn btn-xs btn-info']) ?> 
-                <?= $this->Form->postLink(__('delete'), ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis)]) ?> 
+                <br> <hr>
+                <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa']) ?> 
+                <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa']) ?> 
+                <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis)]) ?> 
 
         </div> <!--// Fin Panel de datos de expediente-->
     </div>
 
     <div class="x_panel"> <!--/ Panel de Tecnicos-->
         <div class="x_title"> 
-            <big><i class="icono-fa fa fa-list-ul"></i><?= '    Técnicos con roles asociados a este expediente:' ?> </big>
+            <big><i class="icono-fa fa fa-list-ul"></i><?= '    Técnicos asociados a este expediente:' ?> </big>
             <ul class="nav navbar-right panel_toolbox"> 
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
               </li> 
@@ -88,7 +97,7 @@
             <div class="related"> 
                 
                 <?php if (!empty($expediente->roles)): ?> 
-                <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
+                <table id="" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
 
                     <tr> 
                         
@@ -124,9 +133,9 @@
                         <td><?= h($roles->observaciones) ?></td>
                         <?php if ($auth['role'] === 'admin'): ?>
                              <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $roles->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $roles->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                                <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'view', $roles->id], ['class'=> 'fa fa-eye text-primary icono-tabla-fa']) ?>
+                                <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'edit', $roles->id], ['class'=> 'fa fa-edit text-info icono-tabla-fa']) ?>
+                                <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
                             </td>      
                         <?php endif; ?>
                         
@@ -143,16 +152,21 @@
 
 
 
-
-
 </div><!--// FIN DIV col-md-4 col-sm-12 col-xs-12-->
 
-<!--Participantes-->
+<!--Participantes: PARRILLA FAMILIAR-->
 
 <div class="col-md-8 col-sm-12 col-xs-12"> 
     <div class="x_panel"> 
         <div class="x_title"> 
             <big><i class="icono-fa fa fa-group"></i><?= '  Parrilla Familiar de este expediente:' ?></big> 
+             <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus',
+                                    'id'=>'add_participante',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"right",
+                                    'data-content'=>"Añade un nuevo miembro a esta parrilla..."]) ?>
             <ul class="nav navbar-right panel_toolbox"> 
               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
               </li> 
@@ -176,36 +190,136 @@
             <div class="related"> 
                 
                 <?php if (!empty($expediente->participantes)): ?> 
-                <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
+
+                <table id="" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
                     <tr> 
-                        
+                        <th></th>
                         <th><?= __('Dni') ?></th>
                         <th><?= __('Nombre') ?></th>
                         <th><?= __('Apellidos') ?></th>
-                        <th><?= __('Nacimiento') ?></th>
-                        <th><?= __('Sexo') ?></th>
+                        <th><?= __('Relación') ?></th>      
+                        <th><?= __('Edad') ?></th>           
                         <th><?= __('Telefono') ?></th>
                         <th><?= __('Email') ?></th>
                         
                         <th class="actions"><?= __('Actions') ?></th>
-                    </tr> 
+                    </tr>
+
+                    <?php $p=0; ?>  
                     <?php foreach ($expediente->participantes as $participantes): ?> 
-                    <tr> 
                         
+                        <!-- Iconos de la Parrilla segun edad y sexo -->
+                        <?php 
+                        
+                            switch ($participantes['sexo']) {
+                                case 'M':
+                                    if ($participantes['edad']===null) {
+                                        $sexo = $this->Html->image('parrilla/male-desconocido.svg', ['class' =>'icono-parrilla-adulto', 
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Hombre de edad desconocida"
+                                            ]);
+                                    }elseif ($participantes['edad']<3) {
+                                        $sexo = $this->Html->image('parrilla/bebe-b.svg', ['class' =>'icono-parrilla-niño',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Niño menor de 3 años."
+                                            ]);
+                                    }elseif ($participantes['edad']<16) {
+                                        $sexo = $this->Html->image('parrilla/boy.svg', ['class' =>'icono-parrilla-niño',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Niño menor de 16 años."
+                                            ]);
+                                    }elseif ($participantes['edad']>65) {
+                                        $sexo = $this->Html->image('parrilla/grandmale.svg', ['class' =>'icono-parrilla-adulto',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Hombre mayor de 65 años."
+                                            ]);
+                                    }else {
+                                        $sexo = $this->Html->image('parrilla/male.svg', ['class' =>'icono-parrilla-adulto',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Hombre mayor de 16 años."]);
+                                    } 
+                                    break;
+
+                                case 'F':
+                                    if ($participantes['edad']===null) {
+                                        $sexo = $this->Html->image('parrilla/female-desconocida.svg', ['class' =>'icono-parrilla-adulto',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Mujer de edad desconocida"
+                                            ]);
+                                    }elseif ($participantes['edad']<3) {
+                                        $sexo = $this->Html->image('parrilla/bebe-g.svg', ['class' =>'icono-parrilla-niño',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Niña menor de 3 años."
+                                            ]);
+                                    }elseif ($participantes['edad']<16) {
+                                        $sexo = $this->Html->image('parrilla/girl.svg', ['class' =>'icono-parrilla-niño',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Niña menor de 16 años."
+                                            ]);
+                                    }elseif ($participantes['edad']>65) {
+                                        $sexo = $this->Html->image('parrilla/grandfemale.svg', ['class' =>'icono-parrilla-adulto',
+                                            'id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Mujer mayor de 65 años."
+                                            ]);
+                                    }else {
+                                        $sexo = $this->Html->image('parrilla/female.svg', ['class' =>'icono-parrilla-adulto','id'=>$participantes['id'],
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Mujer mayor de 16 años."]);
+                                    } 
+                                    break;                            
+                            }
+                         ?>
+
+                    <tr> 
+                        <td><?= $sexo;?></td>
                         <td><?= h($participantes->dni) ?></td>
                         <td><?= h($participantes->nombre) ?></td>
                         <td><?= h($participantes->apellidos) ?></td>
-                        <td><?= $this->Time->format($participantes->nacimiento, "dd/MM/yyyy", null) ?></td>
-                        <td><?= h($participantes->sexo) ?></td>
+                        <td><?= h($participantes->relation->nombre) ?></td>
+                        <td>
+                            <?php if ($participantes->nacimiento): ?>
+                                 <?= '<b>'.$participantes->edad .' años </b> ('.$this->Time->format($participantes->nacimiento, "dd/MM/yyyy", null).')';?> 
+                            <?php else: ?>
+                                    <?= $this->Html->link(' Fecha Nacimiento', '#', [     
+                                        'class'=> 'btn btn-xs modal-btn btn-warning fa fa-plus',
+                                        'id'=>'add_fecha_nacimiento_'.$participantes->id,
+                                        'data-container'=>"body",
+                                        //'data-toggle'=>"popover",
+                                        //'data-placement'=>"right",
+                                        //'data-content'=>"Añade un nuevo miembro a esta parrilla..."
+                                        ]); ?>
+
+                            <?php endif ?>
+                        </td>
                         <td><?= h($participantes->telefono) ?></td>
                         <td><?= h($participantes->email) ?></td>
                         
                         <td class="actions">
-                            <?= $this->Html->link(__('View'), ['controller' => 'Participantes', 'action' => 'view', $participantes->id]) ?>
-                            <?= $this->Html->link(__('Edit'), ['controller' => 'Participantes', 'action' => 'edit', $participantes->id]) ?>
-                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'Participantes', 'action' => 'delete', $participantes->id], ['confirm' => __('Are you sure you want to delete # {0}?', $participantes->id)]) ?>
+                            <?= $this->Html->link('', ['controller' => 'Participantes', 'action' => 'view', $participantes->id],['class'=> 'fa fa-eye text-info icono-tabla-fa']) ?>
+                            <?= $this->Html->link('', ['controller' => 'Participantes', 'action' => 'edit', $participantes->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']) ?>
+                            <?= $this->Form->postLink('', ['controller' => 'Participantes', 'action' => 'delete', $participantes->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('Estás seguro de que quieres borrar a # {0}?', $participantes->nombre.' '.$participantes->apellidos)]) ?>
                         </td>
                     </tr> 
+                    <?php $p++; ?>
                     <?php endforeach; ?> 
                 </table> 
  
@@ -219,97 +333,221 @@
 
 
 
-
-
-
 <!--*****************************************************************************************************************-->
 
 
-<!--Roles--> 
+<!--Modal ADD PARTICIPANTE--> 
 
-<!--
+<div id="modal_add_participante" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Añade un nuevo miembro a la parrilla del expediente <strong><?= $expediente['numedis']?></strong></h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create($participante,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
 
-<div class="col-md-4 col-sm-12 col-xs-12"> 
-    <div class="x_panel"> 
-        <div class="x_title"> 
-            <i class="icono-titulo-fa fa fa-folder-open"></i>Expediente: <big><?= h($expediente->numedis) ?> </big>
-            <ul class="nav navbar-right panel_toolbox"> 
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
-              </li> 
-              <li class="dropdown"> 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
-                <ul class="dropdown-menu" role="menu"> 
-                  <li><a href="#">Settings 1</a> 
-                  </li> 
-                  <li><a href="#">Settings 2</a> 
-                  </li> 
-                </ul> 
-              </li> 
-              <li><a class="close-link"><i class="fa fa-close"></i></a> 
-              </li> 
-            </ul> 
-            <div class="clearfix"></div> 
-        </div> 
- 
-        <div class="x_content">         
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">DNI/NIE <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.dni', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
 
-            <div class="clearfix"></div> 
-            <div class="related"> 
-                <h4><i class="icono-fa fa fa-list-ul"></i><?= '    Técnicos con roles asociados a este expediente:' ?></h4> 
-                <?php if (!empty($expediente->roles)): ?> 
-                <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.nombre', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
 
-                    <tr> 
-                        
-                        <th><?= __('Tecnico Id') ?></th>
-                        <th><?= __('Rol') ?></th>
-                        <th><?= __('Observaciones') ?></th>
-                        
-                        <?php if ($auth['role'] === 'admin'): ?>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        <?php endif; ?>
-                    </tr> 
-                    <?php foreach ($expediente->roles as $roles): ?> 
-                    <tr> 
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Apellidos <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.apellidos', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
 
-                    <?php 
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Sexo <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php 
 
-                        switch ($roles['rol']) {
-                            case 'CC':
-                                $r = 'Coordinador de Caso';
-                                break;
-                            case 'tedis':
-                                $r = 'Técnico de Inclusión';
-                                break; 
-                            default:
-                                $r = 'Otro rol por definir';
-                                break;                          
-                        }
-                    ?>
+                             echo $this->Form->imput(
+                                        'participantes.sexo',
+                                        [
+                                            'type' => 'radio',
+                                            'options'=>[
+                                                ['value' => 'M', 'text' => 'Hombre', 'style' => 'color:red;',
+                                                ],
+                                                ['value' => 'F', 'text' => 'Mujer', 'style' => 'color:yellow;',
+                                                ],   
+                                            ],
+                                            'templates' => [
+                                                'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
+                                            ], 
+                                            'label' => ["class" => "radio"]
 
-                       
-                        <td><?= $roles->tecnico->nombre.' '.$roles->tecnico->apellidos ?></td>
-                        <td><?= h($r) ?></td>
-                        <td><?= h($roles->observaciones) ?></td>
-                        <?php if ($auth['role'] === 'admin'): ?>
-                             <td class="actions">
-                                <?= $this->Html->link(__('View'), ['controller' => 'Roles', 'action' => 'view', $roles->id]) ?>
-                                <?= $this->Html->link(__('Edit'), ['controller' => 'Roles', 'action' => 'edit', $roles->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
-                            </td>      
-                        <?php endif; ?>
-                        
-                    </tr> 
-                    <?php endforeach; ?> 
-                </table> 
- 
-                <?php endif; ?> 
- 
-            </div> --> <!--/ FIN Roles-->
-<!--
+                                        ]
 
-        </div> 
+                                    );
+                        ?>
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Relación con el Titular de la HS <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.relation_id', [
+                                                            'type' => 'select',
+                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                            'default' => '',
+                                                            'required' => 'required',
+                                                            'label' => ['text' => ''],
+                                                            'options' => $listado_relaciones,
+                                                            'empty'   => 'Selecciona una relación con el titular...'
+                                                        ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+
+                            echo $this->Form->input('participantes.nacimiento', [
+                                    'type'=>'text',
+                                    //'dateFormat' => 'DMY',
+                                    'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => ''],
+                                    'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                    //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo Electrónico </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.email', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.telefono', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este USUARIO </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+                            echo $this->Form->input('participantes.observaciones', [
+                                    'class'=>'editor form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <?= $this->Form->button('Añadir el Nuevo Usuario ->', ['class' => 'btn btn-success']) ?>
+                <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+                
+            </div>
+               
+                <?= $this->Form->end() ?>
+        </div>
     </div>
-</div>-->
+</div>
 
 
+<!--Modal ADD FECHA DE NACIMIENTO--> 
+
+<?php foreach ($expediente->participantes as $participantes): ?> 
+
+    <div id="modal_add_fecha_nacimiento_<?= $participantes->id;?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Añade la fecha de nacimiento de <strong><?= $participantes['nombre'].' '.$participantes['apellidos']?></strong></h4>
+            </div>
+            <div class="modal-body">
+                
+                <?= $this->Form->create($participante,[
+                                            'url' => ['controller' => 'Participantes', 'action' => 'edit_nacimiento', $participantes['id']], 
+                                            'class'=>'form-horizontal form-label-left data-parsley-validate=""'
+                                            ]); ?>
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento <span class="required">*</span></label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <?php
+
+                            echo $this->Form->input('nacimiento', [
+                                    'type'=>'text',
+                                    //'dateFormat' => 'DMY',
+                                    'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => ''],
+                                    'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                    //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+ 
+            </div>
+            <div class="modal-footer">
+                <?= $this->Form->button('Guardar cambios ->', ['class' => 'btn btn-success']) ?>
+                <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+                
+            </div>
+               
+                <?= $this->Form->end() ?>
+        </div>
+    </div>
+</div>
+
+<?php endforeach ?>

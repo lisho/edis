@@ -55,8 +55,11 @@ class ParticipantesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('dni', 'create')
-            ->notEmpty('dni');
+            ->allowEmpty('dni')
+            ->add('dni', 'validFormat',[
+                            'rule'=>array('custom','/^(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))$/i'),
+                            'message' => 'La forma de introducir el DNI/NIE no es correcta'
+                            ]);
 
         $validator
             ->requirePresence('nombre', 'create')
@@ -71,16 +74,16 @@ class ParticipantesTable extends Table
 
         $validator
             ->requirePresence('sexo', 'create')
-            ->notEmpty('sexo');
+            ->notEmpty('sexo','¡No puede ser tan dificil saber si es chico o chica!');
 
         $validator
             //->requirePresence('telefono', 'create')
-            ->notEmpty('telefono');
+            ->allowEmpty('telefono');
 
         $validator
             ->email('email')
             //->requirePresence('email', 'create')
-            ->notEmpty('email');
+            ->allowEmpty('email');
 
         return $validator;
     }

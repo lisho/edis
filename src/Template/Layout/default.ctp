@@ -70,8 +70,9 @@
                 <div class="right_col" role="main">
 
                 <?= $this->Flash->render() ?>
+               
+                <div class="row"><?= $this->fetch('content') ?></div>
                 
-                <?= $this->fetch('content') ?>
 
                 </div>
             </div>

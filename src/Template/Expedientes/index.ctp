@@ -7,7 +7,7 @@
         <h2>Lista completa de los Expedientes registrados en el sistema </h2>
         
         <?= $this->Element('menus/menu_panel');?>
-
+        
         <div class="clearfix"></div>
       </div>
 
@@ -19,6 +19,7 @@
                     
                     <th>Expediente EDIS</th>
                     <th>Historia Social </th>
+                    <th>Titular</th>
                     <th>CEAS </th>
                     <th>Domicilio</th>
                     <th>Creado</th>
@@ -33,6 +34,11 @@
                     <td><?= $this->Html->link($expediente->numedis, ['action' => 'view', $expediente->id]) ?></td>
 
                     <td><?= h($expediente->numhs) ?></td>
+                    <td><?= $this->Html->link($expediente['participantes'][0]['nombre'].' '.$expediente['participantes'][0]['apellidos'], [     'controller'=>'Participantes', 
+                                            'action' => 'view', 
+                                            $expediente['participantes'][0]['id']
+                                            ]) ?></td>
+
                     <td><?= h($listado_ceas[$expediente->ceas]) ?></td>
                     <td><?= h($expediente->domicilio) ?></td>
                     <td><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null) ?></td>

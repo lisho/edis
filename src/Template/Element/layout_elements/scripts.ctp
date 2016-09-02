@@ -11,7 +11,7 @@
     <?= $this->Html->script('bootstrap.min.js') ?>
    
     <!-- FastClick -->
-     <? // $this->Html->script('fastclick.js') ?>
+     <?= $this->Html->script('fastclick.js') ?>
    
     <!-- JQ- TextEditor -->
     <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>
@@ -30,19 +30,20 @@
     <?= $this->Html->script('datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.flash.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.html5.min.js') ?>
-    <? // $this->Html->script('parsleyjs/src/parsley.js') ?>
-    <? //$this->Html->script('parsleyjs/dist/parsley.min.js') ?>
+    <?// $this->Html->script('parsleyjs/src/parsley.js') ?>
+    <?// $this->Html->script('parsleyjs/dist/parsley.min.js') ?>
+    <?= $this->Html->script('jquery.smartWizard.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.print.min.js') ?>
     <?= $this->Html->script('bootstrap-datepicker.js') ?>
     <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>
     <? // $this->Html->script('pdfmake/build/pdfmake.min.js') ?>
     <? // $this->Html->script('pdfmake/build/vfs_fonts.js') ?>
-
+    
     <!-- Custom Theme Scripts -->
     <?= $this->Html->script('custom.min.js') ?>
  
     <?= $this->Html->script('mi_js.js') ?>
-<!-- Datatables -->
+
     
     <script>
 
@@ -114,6 +115,22 @@
     */
     </script>
     <!-- /Datatables -->
+
+    <!-- jQuery Smart Wizard -->
+    <script>
+      $(document).ready(function() {
+        $('#wizard').smartWizard();
+
+        $('#wizard_verticle').smartWizard({
+          transitionEffect: 'slide'
+        });
+
+        $('.buttonNext').addClass('btn btn-success');
+        $('.buttonPrevious').addClass('btn btn-primary');
+        $('.buttonFinish').addClass('btn btn-default');
+      });
+    </script>
+    <!-- /jQuery Smart Wizard -->
 
 
     <?= $this->fetch('script') ?>

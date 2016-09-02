@@ -18,6 +18,13 @@ class ExpedientesController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'contain' => ['Participantes'=>[
+                                'conditions' => ['Participantes.relation_id'=>'1']
+                ]
+            ],
+            //'conditions' => ['participantes.relation_id'=>'1']
+        ];
         $expedientes = $this->paginate($this->Expedientes);
         $listado_ceas = $this->listadoEquipo('ceas');
 
@@ -35,13 +42,33 @@ class ExpedientesController extends AppController
      */
     public function view($id = null)
     {
-        $listado_ceas = $this->listadoEquipo('ceas');
-        $listado_tecnicos = $this->listadoTecnicos($id);
+        $this->loadModel('Participantes');
+        $participante = $this->Participantes->newEntity();
+
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos']
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations']
         ]);
 
-        $this->set(compact('expediente', 'listado_ceas'));
+        //Añadimos la edad al array de datos del expediente
+            foreach ($expediente->participantes as $p) {
+                $edad = $this->calcularEdad($p['nacimiento']);
+                $p['edad'] = $edad;
+            }
+
+       
+            //Si creamos un nuevo usuario en el expediente...
+            if ($this->request->is('post')) {
+        
+                $data = $this->request->data['participantes'];
+                $this->addParticipante($data,$expediente,$participante);
+                
+            } // FIN creación de nuevo usuario/participante.
+
+        $listado_ceas = $this->listadoEquipo('ceas');        
+        $listado_relaciones = $this->listadoRelaciones();
+       unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.       
+
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -52,15 +79,15 @@ class ExpedientesController extends AppController
      */
     public function add()
     {
-    
+        
         $listado_ceas = $this->listadoEquipo('ceas');
         $listado_edis = $this->listadoEquipo('edis');
 
         $expediente = $this->Expedientes->newEntity();
 
         if ($this->request->is('post')) {
-
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['participantes'][0]['nacimiento']);
+
             $this->request->data['participantes'][0]['foto']='';
             
             $this->request->data['participantes'][0]['nacimiento']=null;
@@ -104,7 +131,7 @@ class ExpedientesController extends AppController
                 $this->Flash->success(__('El expediente '.$expediente['numedis'].' ha sido creado correctamente.'));
                 return $this->redirect(['action' => 'view',$expediente['id']]);
             } else {
-                $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
+                $this->Flash->error(__('No se ha podiodo crear el expediente correctamente. Por favor revisa los datos.'));
             }
 
 
@@ -201,5 +228,44 @@ class ExpedientesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+
+    /**
+     * AddParticipante method
+     *
+     * Crea un n uevo partricipante en la parrilla familia.
+     *
+     * Necesitamos pasarle:
+     *  1. Array con los datos del expediente, al menos id y numedis
+     *  2. Array con el request->data del formulario.
+     *   Redirecciona a la vista del expediente.
+     */
+    public function addParticipante($data,$expediente,$participante)
+    {
+        
+        $cachos_fecha = preg_split("/[\/]+/", $data['nacimiento']);
+        $data['id']='';
+        $data['foto']='';
+        $data['expediente_id']=$expediente['id'];
+        //$data['nacimiento']=null;
+            if ( $data['nacimiento']!='') {
+                 $data['nacimiento']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            }
+       
+        $participante = $this->Participantes->patchEntity($participante, $data);    
+        //debug($data);exit();
+        if ($this->Participantes->save($participante)) {
+            $this->Flash->success('Se ha añadido correctamente un nuevo miembro a la parrilla familiar del expediente'.$expediente['numedis']);
+            
+            return $this->redirect(['action' => 'view',$expediente['id']]);
+            
+        } else {
+            $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
+        }
+
+    }
     
 }

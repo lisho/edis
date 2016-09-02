@@ -56,19 +56,20 @@ class AppController extends Controller
                             ]
                         ]
                     ],
-                    'loginAction' => [
-                        'controller' => 'Users',
-                        'action' => 'login'
+                'loginAction' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
                     ],
-                    'autrhError' => 'Debe introducir datos correctos...',
-                    'loginRedirect' => [
-                        'controller' => 'Users',
-                        'action' => 'home'
+                'autrhError' => 'Debe introducir datos correctos...',
+                'loginRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'home'
                     ],
-                    'logoutRedirect' => [
-                        'controller' => 'Users',
-                        'action' => 'login'
+                'logoutRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
                     ],
+                'authError' => '¿Crees que puedes entrar sin loguearte?',
             ]);
 
     }
@@ -158,5 +159,41 @@ class AppController extends Controller
         return $listado_tecnicos;
     }
 
+    /**
+     * Listado de las posibles relaciones entre los participantes
+     *
+     * 
+     */
+        public function listadoRelaciones($expediente_id=null)
+    {
+        $this->loadModel('Relations');
+        $listado = [];
     
+            $listado = $this->Relations->find('all');
+            foreach ($listado as $l) {
+                //debug($l);exit();
+                $listado_relaciones[$l->id] = $l->nombre;
+                }
+
+        return $listado_relaciones;
+    }
+
+    /**
+     * Calcular la EDAD
+     *
+     * Necesitamos pasar la fecha de nacimiento y nos devuelve un integral.
+     */
+        public function calcularEdad($nacimiento=null)
+    {
+        if ($nacimiento!=null) {
+            $nac_format = $nacimiento->i18nFormat('yyyy-MM-dd');
+            $fecha = time() - strtotime($nac_format);
+            $edad = floor($fecha / 31556926);
+
+            /*$dias = explode("/", $nacimiento, 3);
+            $dias = mktime(0,0,0,$dias[1],$dias[0],$dias[2]);
+            $edad = (int)((date('now')-$dias)/31556926 );*/
+            return $edad;
+        }        
+    }   
 }

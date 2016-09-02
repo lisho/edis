@@ -58,11 +58,16 @@ class ExpedientesTable extends Table
 
         $validator
             ->requirePresence('numedis', 'create')
-            ->notEmpty('numedis');
+            //->isUnique('numedis', 'Este Número de expediente ya está creado en la aplicación')
+            ->notEmpty('numedis','Debes añadir un número de Expediente de EDIS');
+            //->add('numedis')
+            
 
         $validator
             ->requirePresence('numhs', 'create')
+            //->isUnique('numhs', 'Este Número de historia ya existe en la aplicación')
             ->notEmpty('numhs');
+
 
         $validator
             ->requirePresence('domicilio', 'create')
@@ -80,8 +85,12 @@ class ExpedientesTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['numedis']));
-        $rules->add($rules->isUnique(['numhs']));
+        $rules->add($rules->isUnique(['numedis'], 'Este Número de expediente ya está creado en la aplicación'));
+       // $rules->add([$this,'numedis']));
+        
+
+      
+        $rules->add($rules->isUnique(['numhs'], 'Este Número de historia ya existe en la aplicación'));
         //$rules->add($rules->existsIn(['expediente_id'], 'Expedientes'));
         //$rules->add($rules->existsIn(['relation_id'], 'Relations'));
         return $rules;

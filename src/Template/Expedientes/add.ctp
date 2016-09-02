@@ -1,293 +1,382 @@
 
 
 <h1><i class="fa fa-folder-open"></i>  Nuevo Expediente.</h1>
+
+
 <div class="row">
+
     <div class="col-md-12 col-sm-12 col-xs-12">
-        <div class="x_panel">
-			
-			<div class="x_title">
-                <h2>Crea un nuevo expediente en el sistema...</h2>
-                <?= $this->Element('menus/menu_panel');?>                
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">    
-				
-		<fieldset class="buscador">
-
-				<h3>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro: </h3>
-
-                <div class="form-group input-group form-group-buscador form-horizontal center-block">
-                	
-                    <input type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default " type="button"><i class="fa fa-search"></i></button>
-                    </span>
+            <div class="x_panel">
+                <div class="x_title">
+                    
+                    <h2>Debes completar los cuatro pasos propuestos para crear correctamente un nuevo expediente en el sistema.</h2>
+                    <?= $this->Element('menus/menu_panel');?>                
+                    <div class="clearfix"></div>
                 </div>
 
-     	</fieldset>
+            <div class="x_content">
+                
+                <div id="wizard" class="form_wizard wizard_horizontal"> <!-- Smart Wizard -->
+            
+                    <ul class="wizard_steps"> <!-- Menú de Pasos - Smart Wizard -->
+                        <li>
+                          <a href="#step-1">
+                            <span class="step_no">1</span>
+                            <span class="step_descr">
+                                              Paso 1<br />
+                                              <small>Comprueba el sistema</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-2">
+                            <span class="step_no">2</span>
+                            <span class="step_descr">
+                                              Paso 2<br />
+                                              <small>Crea el expediente</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-3">
+                            <span class="step_no">3</span>
+                            <span class="step_descr">
+                                              Paso 3<br />
+                                              <small>Crea el Titular</small>
+                                          </span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#step-4">
+                            <span class="step_no">4</span>
+                            <span class="step_descr">
+                                              Paso 4<br />
+                                              <small>Comprueba los datos</small>
+                                          </span>
+                          </a>
+                        </li>
+                      </ul>
 
-                <!-- Formulario -->
+        <!-- // FIN Menu de pasos-->   
+                        <?= $this->Flash->render() ?>
+                      <hr>
 
-                <?= $this->Form->create($expediente,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+        <!-- PRIMER PASO-->                
+                    <div id="step-1">
+                        <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro: </h2>
 
-    <fieldset>
+                        <fieldset class="bloque-formulario">
+                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos...</h4>
+                            <div class="form-group input-group form-group-buscador form-horizontal center-block">
+                                
+                                <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
+                                <span class="input-group-btn">
+                                  <button class="btn btn-default " type="button"><i class="fa fa-search"></i></button>
+                                </span>
+                            </div>
 
-    	<br>
-    	<h4>Si no has obtenido ningún resultado en el buscador anterior, puedes iniciar la <strong>creación de un nuevo expediente</strong>: </h4> <hr>
-        
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente EDIS <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('numedis', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' =>'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
+                        </fieldset>
 
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Historia Social (SAUSS) <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('numhs', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' =>'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Domicilio <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('domicilio', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' =>'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">CEAS de Referencia <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('ceas', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'default' => '',
-                                                    'id'=> 'ceas',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'options' => $listado_ceas,
-                                                    'empty'   => 'Elije un Ceas'
-                                                ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Coordinador de Caso (CC) <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('tecnico_ceas', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'id' => 'tecnico_ceas',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    //'options' => $tecnicoList,
-                                                    'empty'   => 'Elije un Coordinador de Caso'
-                                                ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Técnico de Inclusión (TEDIS) <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('tecnico_inclusion', [
-                                                    'type' => 'select',
-                                                    'class'=>'form-control col-md-7 col-xs-12',
-                                                    'id' => 'tecnico_inclusion',
-                                                    'default' => '',
-                                                    'required' => 'required',
-                                                    'label' => ['text' => ''],
-                                                    'empty'   => 'Elije un Técnico de Inclusión'
-                                                ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este EXPEDIENTE <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('observaciones', [
-                            'class'=>'editor form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-    	<!-- 
-    	********************** Formulario Nuevo Usuario *************************** -->
-		<br><br>
-    	<h4>Para completar la creación de un nuevo expediente necesitamos crear también, al menos, la ficha de un <strong>usuario adscrito al expediente</strong>, que quedará registrado como titular de este expediente: </h4> <hr>
-
-    	<?php
-            echo $this->Form->input('participantes.0.id', [
-                    'class'=>'',
-                    'required' => 'required',
-                    'label' => ['text' => ''],
-                ]);
-        ?> 
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">DNI/NIE <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.dni', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.nombre', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Apellidos <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.apellidos', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Sexo <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php 
-
-                     echo $this->Form->imput(
-                                'participantes.0.sexo',
-                                [
-                                    'type' => 'radio',
-                                    'options'=>[
-                                        ['value' => 'M', 'text' => 'Hombre', 'style' => 'color:red;',
-                                        ],
-                                        ['value' => 'F', 'text' => 'Mujer', 'style' => 'color:yellow;',
-                                        ],   
-                                    ],
-                                    'templates' => [
-                                        'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
-                                    ], 
-                                    'label' => ["class" => "radio"]
-
-                                ]
-
-                            );
-                ?>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-
-                    echo $this->Form->input('participantes.0.nacimiento', [
-                            'type'=>'text',
-                            //'dateFormat' => 'DMY',
-                            'class'=>'datepicker form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => ''],
-                            'placeholder' => '_ _ / _ _ / _ _ _ _'
-                            //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo Electrónico <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.email', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group has-feedback">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.telefono', [
-                            'class'=>'form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este USUARIO <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('participantes.0.observaciones', [
-                            'class'=>'editor form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
-            </div>
-        </div>
-
-        <?= $this->Form->input('participantes.0.relation_id', ['type'=>'hidden', 'value'=>'1']);?>
-        
-        
-    </fieldset>
-
-    <div class="ln_solid"></div>
-                <div class="form-group">
-                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                <?= $this->Form->button('Crear el expediente y añadir usuarios ->', ['class' => 'btn btn-success']) ?>
-                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
                     </div>
-                </div>
-               
-    <?= $this->Form->end() ?>
-</div>
+
+                        <?= $this->Form->create($expediente,[
+                                            'class'=>'form-horizontal form-label-left',
+                                            'role'=>'form', 'id'=>'nuevo_expediente', 
+                                            'data-toggle'=>'validator', 
+                                            'novalidate'
+                                            ]) ?>
+        
+        <!-- SEGUNDO PASO--> 
+
+                    <div id="step-2">
+
+                        <h2 class="StepTitle"><big><b>Segundo Paso: </b></big> Si ninguna de las personas mayores de 16 años del expediente están en el sistema podemos comenzar a <u>crear el nuevo expediente:</u></h2>
+
+                        <div class="bloque-formulario">
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente EDIS <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('numedis', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'id' => 'numedis',
+                                                'required' =>'',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                                <div id="resultados"></div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Historia Social (SAUSS) <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('numhs', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'required' =>'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Domicilio <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('domicilio', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'required' =>'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">CEAS de Referencia <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('ceas', [
+                                                                        'type' => 'select',
+                                                                        'class'=>'form-control col-md-7 col-xs-12',
+                                                                        'default' => '',
+                                                                        'id'=> 'ceas',
+                                                                        'required' => 'required',
+                                                                        'label' => ['text' => ''],
+                                                                        'options' => $listado_ceas,
+                                                                        'empty'   => 'Elije un Ceas'
+                                                                    ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Coordinador de Caso (CC) <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('tecnico_ceas', [
+                                                                        'type' => 'select',
+                                                                        'class'=>'form-control col-md-7 col-xs-12',
+                                                                        'id' => 'tecnico_ceas',
+                                                                        'default' => '',
+                                                                        'required' => 'required',
+                                                                        'label' => ['text' => ''],
+                                                                        //'options' => $tecnicoList,
+                                                                        'empty'   => 'Elije un Coordinador de Caso'
+                                                                    ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Técnico de Inclusión (TEDIS) <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('tecnico_inclusion', [
+                                                                        'type' => 'select',
+                                                                        'class'=>'form-control col-md-7 col-xs-12',
+                                                                        'id' => 'tecnico_inclusion',
+                                                                        'default' => '',
+                                                                        'required' => 'required',
+                                                                        'label' => ['text' => ''],
+                                                                        'empty'   => 'Elije un Técnico de Inclusión'
+                                                                    ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este EXPEDIENTE <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('observaciones', [
+                                                'class'=>'editor form-control col-md-7 col-xs-12',
+                                                //'required' => 'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+                        </div> <!-- // FIN bloque-formulario-->
+                    </div>
+
+        <!-- TERCER PASO-->
+
+                    <div id="step-3">
+                        <h2 class="StepTitle"><big><b>Tercer Paso: </b></big>Para finalizar la creación del nuevo expediente es imprescindible introducir, al menos, los <u>datos del titular</u> del expediente...</h2>
+                        
+                        <div class="bloque-formulario">
+
+ 
+                            <?php
+                                echo $this->Form->input('participantes.0.id', [
+                                        'class'=>'',
+                                        'required' => 'required',
+                                        'label' => ['text' => ''],
+                                    ]);
+                            ?> 
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">DNI/NIE <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.dni', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'required' => 'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Nombre <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.nombre', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'required' => 'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Apellidos <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.apellidos', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                'required' => 'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Sexo <span class="required">*</span></label>
+                                <div id="sexo" class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php 
+
+                                         echo $this->Form->imput(
+                                                    'participantes.0.sexo',
+                                                    [
+                                                        'type' => 'radio',
+                                                        'options'=>[
+                                                            ['value' => 'M', 'text' => 'Hombre',
+                                                            ],
+                                                            ['value' => 'F', 'text' => 'Mujer', 
+                                                            ],   
+                                                        ],
+                                                        'templates' => [
+                                                            'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
+                                                        ], 
+                                                        'label' => ["class" => "radio"]
+
+                                                    ]
+
+                                                );
+                                    ?>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+
+                                        echo $this->Form->input('participantes.0.nacimiento', [
+                                                'type'=>'text',
+                                                //'dateFormat' => 'DMY',
+                                                'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                                //'required' => '',
+                                                'label' => ['text' => ''],
+                                                'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                                //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Correo Electrónico <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.email', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                //'required' => '',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Teléfono <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.telefono', [
+                                                'class'=>'form-control col-md-7 col-xs-12',
+                                                //'required' => '',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este USUARIO <span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?php
+                                        echo $this->Form->input('participantes.0.observaciones', [
+                                                'class'=>'editor form-control col-md-7 col-xs-12',
+                                                //'required' => 'required',
+                                                'label' => ['text' => '']
+                                            ]);
+                                    ?> 
+                                </div>
+                            </div>
+
+                            <?= $this->Form->input('participantes.0.relation_id', ['type'=>'hidden', 'value'=>'1']);?>
+                        
+                        </div> <!-- // FIN bloque-formulario-->    
+                            
+                    </div>
+
+        <!-- CUARTO PASO-->
+
+                        <div id="step-4">
+                            <h2 class="StepTitle"><big><b>Cuarto Paso: </b></big>Comprueba que los datos introducidos son correctos y completa la creación del expediente</h2>
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <div id="datos">
+                                        <div id="datos_expediente">
+                                            <h2>Datos del Expediente:</h2>
+                                        
+                                                <div id="div-numedis"><li class="fa fa-arrow-circle-right"></li> Número de Expediente: <span id="li-numedis">Sin datos.</span></div>
+                                                <div id="div-numhs"><li class="fa fa-arrow-circle-right"></li> Número de Historia Social: <span id="li-numhs">Sin datos.</span></div>
+                                                
+                                            <h2>Datos del Titular:</h2>
+
+                                                <div id="div-sexo"><li class="fa fa-arrow-circle-right"></li> Sexo: <span id="li-sexo">Sin datos.</span></div>
+
+                                        </div>                                       
+                                    </div>
+                                    <?= $this->Form->button('CREA UN NUEVO EXPEDIENTE', ['class' => 'btn btn-success btn-lg', 'id'=>'crea_expediente' ]) ?>
+                                    <? // $this->Html->link(__('Cancela'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                                </div>
+                            </div>                
+                        </div>
+
+                        <?= $this->Form->end() ?>    
+
+                    </div> <!-- End SmartWizard Content -->                    
+                </div> <!-- End x-content --> 
+            </div> <!-- End x-panel --> 
+        </div> <!-- End col -->
+    </div> <!-- End row -->
+
