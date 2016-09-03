@@ -66,7 +66,7 @@
                         <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro: </h2>
 
                         <fieldset class="bloque-formulario">
-                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos...</h4>
+                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"sigiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>
                             <div class="form-group input-group form-group-buscador form-horizontal center-block">
                                 
                                 <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
@@ -128,6 +128,7 @@
                                         echo $this->Form->input('domicilio', [
                                                 'class'=>'form-control col-md-7 col-xs-12',
                                                 'required' =>'required',
+                                                'id' => 'domicilio',
                                                 'label' => ['text' => '']
                                             ]);
                                     ?> 
@@ -355,14 +356,18 @@
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                                     <div id="datos">
                                         <div id="datos_expediente">
-                                            <h2>Datos del Expediente:</h2>
+                                            <h2><u>Datos del Expediente:</u></h2>
                                         
                                                 <div id="div-numedis"><li class="fa fa-arrow-circle-right"></li> Número de Expediente: <span id="li-numedis">Sin datos.</span></div>
                                                 <div id="div-numhs"><li class="fa fa-arrow-circle-right"></li> Número de Historia Social: <span id="li-numhs">Sin datos.</span></div>
-                                                
-                                            <h2>Datos del Titular:</h2>
+                                                <div id="div-domicilio"><li class="fa fa-arrow-circle-right"></li> Domicilio de la unidad familiar: <span id="li-domicilio">Sin datos.</span></div>
+                                                <div id="div-ceas"><li class="fa fa-arrow-circle-right"></li> CEAS de referencia: <span id="li-ceas">Sin datos.</span></div>
+                                                <div id="div-tecnico_ceas"><li class="fa fa-arrow-circle-right"></li> Rol de Coordinador de Caso (CC): <span id="li-tecnico_ceas">Sin datos.</span></div>
+                                                <div id="div-tecnico_inclusion"><li class="fa fa-arrow-circle-right"></li> Rol de Técnico de Inclusión (TEDIS): <span id="li-tecnico_inclusion">Sin datos.</span></div>
 
-                                                <div id="div-sexo"><li class="fa fa-arrow-circle-right"></li> Sexo: <span id="li-sexo">Sin datos.</span></div>
+                                            <h2><u>Datos del Titular:</u></h2>
+
+                                                <div id="div-sexo"><li class="fa fa-arrow-circle-right"></li> Sexo: <span id="li-sexo" class="">Sin datos.</span></div>
 
                                         </div>                                       
                                     </div>

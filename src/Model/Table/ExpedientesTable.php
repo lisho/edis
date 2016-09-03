@@ -59,19 +59,19 @@ class ExpedientesTable extends Table
         $validator
             ->requirePresence('numedis', 'create')
             //->isUnique('numedis', 'Este Número de expediente ya está creado en la aplicación')
-            ->notEmpty('numedis','Debes añadir un número de Expediente de EDIS');
+            ->notEmpty('numedis','Debes añadir un número de Expediente de EDIS.');
             //->add('numedis')
             
 
         $validator
             ->requirePresence('numhs', 'create')
             //->isUnique('numhs', 'Este Número de historia ya existe en la aplicación')
-            ->notEmpty('numhs');
+            ->notEmpty('numhs','Debes introducir el número de Historia Social de SAUSS para crear correctamente el expediente.');
 
 
         $validator
             ->requirePresence('domicilio', 'create')
-            ->notEmpty('domicilio');
+            ->notEmpty('domicilio', 'Debes añadir un domicilio de referencia para crear el expediente.');
 
         return $validator;
     }

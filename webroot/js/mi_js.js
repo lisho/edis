@@ -60,8 +60,8 @@ $(function(){
 						'CEAS MARIANO ANDRES (Ventas Este)'];
 */
 
-			$("#tecnico_ceas").find('option').remove();
-			$("#tecnico_inclusion").find('option').remove();
+			//$("#tecnico_ceas").find('option').remove();
+			//$("#tecnico_inclusion").find('option').remove();
 			if (elegido) {
 				$.ajax({
 					type: "POST",
@@ -213,19 +213,116 @@ $(function(){
 // --> *********** VALIDACIONES PARA NUEVO EXPEDIENTE ***************//
 
 
+	var numedis = $('#numedis').val();
+	var id = 'numedis';
+	actualizar_datos(numedis,id); 
+
+	var numhs = $('#numhs').val();
+	var id = 'numhs';
+	actualizar_datos(numhs,id); 
+
+	var domicilio = $('#domicilio').val();
+	var id = 'domicilio';
+	actualizar_datos(domicilio,id); 
+
+	var ceas = $('#ceas option:selected').text();
+	var id = 'ceas';
+	actualizar_datos(ceas,id); 
+	//$("#li-ceas").html(ceas).addClass('');
+
+	var tecnico_ceas = $('#tecnico_ceas option:selected').text();
+	var id = 'tecnico_ceas';
+	actualizar_datos(tecnico_ceas,id); 
+
+	var tecnico_inclusion = $('#tecnico_inclusion option:selected').text();
+	var id = 'tecnico_inclusion';
+	actualizar_datos(tecnico_inclusion,id); 
+
+	var sexo = $('form input:radio:checked').val();
+	var id = 'sexo';
+	if (sexo==='F') {var sexo='Mujer';}
+	if (sexo==='M') {var sexo='Hombre';}
+	actualizar_datos(sexo,id); 
+
+
 	$("#numedis").change(function() {
-			var numedis = $(this).val(); 
-			$("#li-numedis").html(numedis).addClass('');
+			var numedis = $(this).val();
+			var id = 'numedis'; 
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(numedis,id);  
+			//$("#li-numedis").html(numedis).addClass('');
 		});
 
 	$("#numhs").change(function() {
 			var numhs = $(this).val(); 
-			$("#li-numhs").html(numhs).addClass('');
+			var id = 'numhs';
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(numhs,id);  
+			//$("#li-numhs").html(numhs).addClass('');
 		});
 
-	var sexo = $('form input:radio').val(); 
+	$("#domicilio").change(function() {
+			var domicilio = $(this).val(); 
+			var id = 'domicilio';
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(domicilio,id);  
+			//$("#li-numhs").html(numhs).addClass('');
+		});
+
+	$("#ceas").change(function() {
+			var ceas = $('#ceas option:selected').text(); 
+			if (ceas==='Elije un Ceas') {var ceas = '';}
+			var id = 'ceas';
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(ceas,id);  
+			//$("#li-numhs").html(numhs).addClass('');
+		});
+
+	$("#tecnico_ceas").change(function() {
+			var tecnico_ceas = $('#tecnico_ceas option:selected').text(); 
+			if (tecnico_ceas==='Elije un Coordinador de Caso') {var tecnico_ceas = '';}
+			var id = 'tecnico_ceas';
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(tecnico_ceas,id);  
+			//$("#li-numhs").html(numhs).addClass('');
+		});
+
+	$("#tecnico_inclusion").change(function() {
+			var tecnico_inclusion = $('#tecnico_inclusion option:selected').text(); 
+			if (tecnico_inclusion==='Elije un Técnico de Inclusión') {var tecnico_inclusion = '';}
+			var id = 'tecnico_inclusion';
+			$("#li-"+id).removeClass('error');
+			actualizar_datos(tecnico_inclusion,id);  
+			//$("#li-numhs").html(numhs).addClass('');
+		});
+
+	$( "form input:radio" ).click(function() {
+		var sexo = $(this).val(); 
+		if (sexo==='F') {var sexo='Mujer';}
+		if (sexo==='M') {var sexo='Hombre';}
+		var id = 'sexo';
+		$("#li-"+id).removeClass('error');
+		actualizar_datos(sexo,id);  
+		});
+	
+
+
+
+
+
+
+
+
+	function actualizar_datos(dato,id) {
+		//var atencion = '';
+
+		if (dato==='') { 
+				var dato = 'No has introducido información';
+				$("#li-"+id).html(dato).addClass('error');
+			}else{$("#li-"+id).html(dato);}
+	}
 			//$("#li-sexo").addClass('error');
-			$("#li-sexo").val(sexo).addClass('');
+			
 
 /*
 	$("#sexo").change(function() {
