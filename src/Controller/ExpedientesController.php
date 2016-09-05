@@ -263,7 +263,7 @@ class ExpedientesController extends AppController
             return $this->redirect(['action' => 'view',$expediente['id']]);
             
         } else {
-            $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
+            $this->Flash->error(__('Lo siento. No ha sido posible incluir a esa persona en el sistema. Por favor revisa los datos.'));
         }
 
     }

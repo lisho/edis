@@ -1,8 +1,8 @@
 jQuery(document).ready(function($) {
-
 	
 	$(".editor").jqte(); 
 
+	$.fn.dataTable.moment( 'DD/MM/YYYY' );
 	$("#datatable").DataTable({
 			dom: 'Blfrtip',
 		    buttons: [ 'copy', 
@@ -24,8 +24,9 @@ jQuery(document).ready(function($) {
 	// --> EFECTOS BOOTSTRAP
 	
 	$('.datepicker').datepicker({
-      format:'dd/mm/yyyy'
-    });
+	        format:'dd/mm/yyyy',
+	        
+    })
 
 	// --> mensajes con popover pasando el id
 	
@@ -37,6 +38,7 @@ jQuery(document).ready(function($) {
 		})
  		$("#" +id).popover('toggle');
  	});
+
 
 $(function(){
 
@@ -60,8 +62,8 @@ $(function(){
 						'CEAS MARIANO ANDRES (Ventas Este)'];
 */
 
-			//$("#tecnico_ceas").find('option').remove();
-			//$("#tecnico_inclusion").find('option').remove();
+			$("#tecnico_ceas").find('option').remove();
+			$("#tecnico_inclusion").find('option').remove();
 			if (elegido) {
 				$.ajax({
 					type: "POST",
@@ -69,11 +71,14 @@ $(function(){
 					data: "ceas="+elegido,
 					cache: false,
 					success: function(tecnico_ceas) {
-		
+						
+						$('<option>').text('Selecciona un Coordinador de Caso').appendTo($("#tecnico_ceas"));
 						$.each(tecnico_ceas,function(key, value) {   
 							//$("#tecnico_ceas").append($("<option></option>").attr("value", key).text(value));
 							$('<option>').val(key).text(value).appendTo($("#tecnico_ceas"));
 						});
+
+						//$("#tecnico_ceas > option:nth-child(1)").attr('selected', 'selected');
 					} 
 
 				});	
@@ -86,7 +91,7 @@ $(function(){
 					cache: false,
 					success: function(tecnico_edis) {
 		
-						//tecnico_edis=$.parseJSON(tecnico_edis);
+						$('<option>').text('Selecciona un Técnico de Inclusión').css('color', 'red').appendTo($("#tecnico_inclusion"));
 						$.each(tecnico_edis,function(key, value) {   
 							//$("#tecnico_ceas").append($("<option></option>").attr("value", key).text(value));
 							$('<option>').val(key).text(value).appendTo($("#tecnico_inclusion"));
@@ -107,7 +112,7 @@ $(function(){
 
 	
  	// ******************************************** 
- 	// --> Desplegue de modales		
+ 	// --> Despliegue de modales		
  	// *** necesaria clase en el botón: .modal-btn
  	// *** necesario id en el boton
  	// *** id del modal = #modal_ + id_del_boton
@@ -196,7 +201,7 @@ $(function(){
 		}
 
 	}).data("ui-autocomplete")._renderItem = function(ul, item){
-		return $("<li></li>")
+		return $("<li style='display:block'></li>")
 		.addClass('fa fa-arrow-circle-right')
 		.data("item.autocomplete", item)
 		.append("<a href='/edis/participantes/view/"+item.id+"'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
@@ -212,115 +217,178 @@ $(function(){
 
 // --> *********** VALIDACIONES PARA NUEVO EXPEDIENTE ***************//
 
-
+	// numedis
 	var numedis = $('#numedis').val();
 	var id = 'numedis';
 	actualizar_datos(numedis,id); 
-
-	var numhs = $('#numhs').val();
-	var id = 'numhs';
-	actualizar_datos(numhs,id); 
-
-	var domicilio = $('#domicilio').val();
-	var id = 'domicilio';
-	actualizar_datos(domicilio,id); 
-
-	var ceas = $('#ceas option:selected').text();
-	var id = 'ceas';
-	actualizar_datos(ceas,id); 
-	//$("#li-ceas").html(ceas).addClass('');
-
-	var tecnico_ceas = $('#tecnico_ceas option:selected').text();
-	var id = 'tecnico_ceas';
-	actualizar_datos(tecnico_ceas,id); 
-
-	var tecnico_inclusion = $('#tecnico_inclusion option:selected').text();
-	var id = 'tecnico_inclusion';
-	actualizar_datos(tecnico_inclusion,id); 
-
-	var sexo = $('form input:radio:checked').val();
-	var id = 'sexo';
-	if (sexo==='F') {var sexo='Mujer';}
-	if (sexo==='M') {var sexo='Hombre';}
-	actualizar_datos(sexo,id); 
-
-
 	$("#numedis").change(function() {
 			var numedis = $(this).val();
 			var id = 'numedis'; 
-			$("#li-"+id).removeClass('error');
 			actualizar_datos(numedis,id);  
-			//$("#li-numedis").html(numedis).addClass('');
 		});
 
+	// numhs
+	var numhs = $('#numhs').val();
+	var id = 'numhs';
+	actualizar_datos(numhs,id); 
 	$("#numhs").change(function() {
 			var numhs = $(this).val(); 
 			var id = 'numhs';
-			$("#li-"+id).removeClass('error');
 			actualizar_datos(numhs,id);  
-			//$("#li-numhs").html(numhs).addClass('');
 		});
 
+	//domicilio
+	var domicilio = $('#domicilio').val();
+	var id = 'domicilio';
+	actualizar_datos(domicilio,id); 
 	$("#domicilio").change(function() {
 			var domicilio = $(this).val(); 
 			var id = 'domicilio';
-			$("#li-"+id).removeClass('error');
 			actualizar_datos(domicilio,id);  
-			//$("#li-numhs").html(numhs).addClass('');
 		});
 
+	// ceas
+	var ceas = $('#ceas option:selected').text();
+	var id = 'ceas';
+	actualizar_datos(ceas,id); 
 	$("#ceas").change(function() {
-			var ceas = $('#ceas option:selected').text(); 
+			var ceas = $('#ceas option:selected').text(); 			
 			if (ceas==='Elije un Ceas') {var ceas = '';}
 			var id = 'ceas';
-			$("#li-"+id).removeClass('error');
-			actualizar_datos(ceas,id);  
-			//$("#li-numhs").html(numhs).addClass('');
+			actualizar_datos(ceas,id);
+
 		});
 
+	// cc
+	var tecnico_ceas = $('#tecnico_ceas option:selected').text();
+	var id = 'tecnico_ceas';
+	actualizar_datos(tecnico_ceas,id); 
 	$("#tecnico_ceas").change(function() {
 			var tecnico_ceas = $('#tecnico_ceas option:selected').text(); 
 			if (tecnico_ceas==='Elije un Coordinador de Caso') {var tecnico_ceas = '';}
 			var id = 'tecnico_ceas';
-			$("#li-"+id).removeClass('error');
 			actualizar_datos(tecnico_ceas,id);  
-			//$("#li-numhs").html(numhs).addClass('');
 		});
 
+	// tedis
+	var tecnico_inclusion = $('#tecnico_inclusion option:selected').text();
+	var id = 'tecnico_inclusion';
+	actualizar_datos(tecnico_inclusion,id); 
 	$("#tecnico_inclusion").change(function() {
-			var tecnico_inclusion = $('#tecnico_inclusion option:selected').text(); 
-			if (tecnico_inclusion==='Elije un Técnico de Inclusión') {var tecnico_inclusion = '';}
-			var id = 'tecnico_inclusion';
-			$("#li-"+id).removeClass('error');
-			actualizar_datos(tecnico_inclusion,id);  
-			//$("#li-numhs").html(numhs).addClass('');
+		var tecnico_inclusion = $('#tecnico_inclusion option:selected').text(); 
+		if (tecnico_inclusion==='Elije un Técnico de Inclusión') {var tecnico_inclusion = '';}
+		var id = 'tecnico_inclusion';
+		actualizar_datos(tecnico_inclusion,id);  
+	});
+
+	// dni
+	var dni = $('#participantes-0-dni').val();
+	var id = 'participantes-0-dni';
+	actualizar_datos(dni,id); 
+	$("#participantes-0-dni").change(function() {
+			var dni = $(this).val(); 
+			var id = 'participantes-0-dni';
+			actualizar_datos(dni,id);  
 		});
 
-	$( "form input:radio" ).click(function() {
+	//nombre
+	var nombre = $('#participantes-0-nombre').val();
+	var id = 'participantes-0-nombre';
+	actualizar_datos(nombre,id); 
+	$("#participantes-0-nombre").change(function() {
+			var nombre = $(this).val(); 
+			var id = 'participantes-0-nombre';
+			actualizar_datos(nombre,id);  
+		});
+
+	// apellidos
+	var apellidos = $('#participantes-0-apellidos').val();
+	var id = 'participantes-0-apellidos';
+	actualizar_datos(apellidos,id); 
+	$("#participantes-0-apellidos").change(function() {
+			var apellidos = $(this).val(); 
+			var id = 'participantes-0-apellidos';
+			actualizar_datos(apellidos,id);  
+		});
+
+
+	// sexo
+	var sexo = $('#nuevo_expediente input:radio:checked').val();
+	var id = 'sexo';
+	if (sexo==='F') {var sexo='Mujer';}
+	else if (sexo==='M') {var sexo='Hombre';}
+	else {var sexo='';}
+	actualizar_datos(sexo,id); 
+	$( "#nuevo_expediente input:radio" ).click(function() {
 		var sexo = $(this).val(); 
 		if (sexo==='F') {var sexo='Mujer';}
-		if (sexo==='M') {var sexo='Hombre';}
+		else if (sexo==='M') {var sexo='Hombre';}
+		else {var sexo='';}
 		var id = 'sexo';
-		$("#li-"+id).removeClass('error');
 		actualizar_datos(sexo,id);  
 		});
-	
 
+	// nacimiento
 
+	var nacimiento = $('#participantes-0-nacimiento').text();
+	var id = 'participantes-0-nacimiento';
+	actualizar_opcional(nacimiento,id); 
+	$("#participantes-0-nacimiento").change(function() {
+			var nacimiento = $(this).text(); 
+			var id = 'participantes-0-nacimiento';
+			actualizar_opcional(nacimiento,id);  
+		});
 
+	// email
+	var email = $('#participantes-0-email').val();
+	var id = 'participantes-0-email';
+	actualizar_opcional(email,id); 
+	$("#eparticipantes-0-mail").change(function() {
+			var email = $(this).val(); 
+			var id = 'participantes-0-email';
+			actualizar_datos(email,id);  
+		});
 
+	//telefono
+	var telefono = $('#participantes-0-telefono').val();
+	var id = 'participantes-0-telefono';
+	actualizar_opcional(telefono,id); 
+	$("#participantes-0-telefono").change(function() {
+			var telefono = $(this).val(); 
+			var id = 'participantes-0-telefono';
+			actualizar_datos(telefono,id);  
+		});
 
+	// Observaciones del Titular
+	var observaciones_titular = $('#participantes-0-observaciones').text();
+	var id = 'participantes-0-observaciones';
+	actualizar_opcional(observaciones_titular,id); 
+	$("#participantes-0-observaciones").change(function() {
+			var observaciones_titular = $(this).val(); 
+			var id = 'participantes-0-observaciones';
+			actualizar_datos(observaciones_titular,id);  
+		});
 
 
 
 	function actualizar_datos(dato,id) {
-		//var atencion = '';
 
 		if (dato==='') { 
 				var dato = 'No has introducido información';
-				$("#li-"+id).html(dato).addClass('error');
-			}else{$("#li-"+id).html(dato);}
+				$("#li-"+id).html("<b>"+dato+"</b>").addClass('error');
+			}else{$("#li-"+id).html("<b>"+dato+"</b>").removeClass('error');}
 	}
+
+	function actualizar_opcional(dato,id) {
+
+		if (dato==='') { 
+				var dato = 'No has introducido información';
+				$("#li-"+id).html("<b>"+dato+"</b>").addClass('alert-warning');
+			}else{$("#li-"+id).html("<b>"+dato+"</b>");}
+	}
+
+	
+	
 			//$("#li-sexo").addClass('error');
 			
 
@@ -372,7 +440,6 @@ $(function(){
 
 
 }); // --> Fin ReadyDocument
-
 
 
 

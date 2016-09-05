@@ -180,7 +180,8 @@ class ParticipantesController extends AppController
                 
                 return $this->redirect($this->referer());
             } else {
-                $this->Flash->error(__('La edad del participante nop se ha guardado correctamente. Porf favor, inténtelo de nuevo.'));
+                $this->Flash->error(__('La edad del participante no se ha guardado correctamente. Por favor, revisa el formato e inténtalo de nuevo.'));
+                return $this->redirect($this->referer());
             }
         }
         $this->autoRender = false;

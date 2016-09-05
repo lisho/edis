@@ -32,7 +32,7 @@
                 <?php foreach ($expedientes as $expediente): ?>
                 <tr>
 
-                    <td><?= $this->Html->link($expediente->expediente->numedis, ['action' => 'view', $expediente->expediente->id]) ?></td>
+                    <td><?= $this->Html->link($expediente->expediente->numedis, ['controller'=>'expedientes', 'action' => 'view', $expediente->expediente->id]) ?></td>
 
                     <td><?= h($expediente->expediente->numhs) ?></td>
                     <td>

@@ -68,10 +68,9 @@ class ExpedientesTable extends Table
             //->isUnique('numhs', 'Este Número de historia ya existe en la aplicación')
             ->notEmpty('numhs','Debes introducir el número de Historia Social de SAUSS para crear correctamente el expediente.');
 
-
         $validator
             ->requirePresence('domicilio', 'create')
-            ->notEmpty('domicilio', 'Debes añadir un domicilio de referencia para crear el expediente.');
+            ->notEmpty('domicilio', 'Debes añadir un domicilio de referencia para crear el expediente.');    
 
         return $validator;
     }

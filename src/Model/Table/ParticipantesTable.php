@@ -55,15 +55,16 @@ class ParticipantesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('dni')
+            ->notEmpty('dni')
             ->add('dni', 'validFormat',[
-                            'rule'=>array('custom','/^(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))$/i'),
+                            'rule'=>array('custom','/^(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))$/i'),
+                            //'rule'=>array('custom','/^(\d{4})-(\d{1})$/i'),
                             'message' => 'La forma de introducir el DNI/NIE no es correcta'
                             ]);
 
         $validator
             ->requirePresence('nombre', 'create')
-            ->notEmpty('nombre');
+            ->notEmpty('nombre', 'Este campo no puede quedar vacío.');
 
         $validator
             ->allowEmpty('apellidos');

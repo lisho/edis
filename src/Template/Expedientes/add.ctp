@@ -165,7 +165,7 @@
                                                                         'required' => 'required',
                                                                         'label' => ['text' => ''],
                                                                         //'options' => $tecnicoList,
-                                                                        'empty'   => 'Elije un Coordinador de Caso'
+                                                                        //'empty'   => 'Elije un Coordinador de Caso'
                                                                     ]);
                                     ?> 
                                 </div>
@@ -182,7 +182,7 @@
                                                                         'default' => '',
                                                                         'required' => 'required',
                                                                         'label' => ['text' => ''],
-                                                                        'empty'   => 'Elije un Técnico de Inclusión'
+                                                                        //'empty'   => 'Elije un Técnico de Inclusión'
                                                                     ]);
                                     ?> 
                                 </div>
@@ -367,10 +367,18 @@
 
                                             <h2><u>Datos del Titular:</u></h2>
 
+                                                <div id="div-participantes-0-dni"><li class="fa fa-arrow-circle-right"></li> DNI/NIE: <span id="li-participantes-0-dni" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-nombre"><li class="fa fa-arrow-circle-right"></li> Nombre: <span id="li-participantes-0-nombre" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-apellidos"><li class="fa fa-arrow-circle-right"></li> Apellidos: <span id="li-participantes-0-apellidos" class="">Sin datos.</span></div>
                                                 <div id="div-sexo"><li class="fa fa-arrow-circle-right"></li> Sexo: <span id="li-sexo" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-nacimiento"><li class="fa fa-arrow-circle-right"></li> Fecha de Nacimiento: <span id="li-participantes-0-nacimiento" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-email"><li class="fa fa-arrow-circle-right"></li> Correo electrónico: <span id="li-participantes-0-email" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-telefono"><li class="fa fa-arrow-circle-right"></li> Teléfono de contacto: <span id="li-participantes-0-telefono" class="">Sin datos.</span></div>
+                                                <div id="div-participantes-0-observaciones"><li class="fa fa-arrow-circle-right"></li> Observaciones sobre el Titular: <span id="li-participantes-0-observaciones" class="">Sin datos.</span></div>
 
                                         </div>                                       
                                     </div>
+                                    <br><br>
                                     <?= $this->Form->button('CREA UN NUEVO EXPEDIENTE', ['class' => 'btn btn-success btn-lg', 'id'=>'crea_expediente' ]) ?>
                                     <? // $this->Html->link(__('Cancela'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
                                 </div>

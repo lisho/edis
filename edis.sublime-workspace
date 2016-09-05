@@ -4,6 +4,50 @@
 		"selected_items":
 		[
 			[
+				"read",
+				"ready	$(document).ready"
+			],
+			[
+				"remove",
+				"removeClass	.removeClass()"
+			],
+			[
+				"nuevo",
+				"nuevo_expediente"
+			],
+			[
+				"append",
+				"appendTo	.appendTo()"
+			],
+			[
+				"ri",
+				"rig	right"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"eXPEDIENTE",
+				"Expedientes"
+			],
+			[
+				"nue",
+				"nuevos_datos"
+			],
+			[
+				"app",
+				"append	.append()"
+			],
+			[
+				"apend",
+				"appendTo"
+			],
+			[
 				"maxhe",
 				"max-height"
 			],
@@ -26,14 +70,6 @@
 			[
 				"strt",
 				"strtoupper"
-			],
-			[
-				"margin",
-				"margin-bottom"
-			],
-			[
-				"mar",
-				"margin-left"
 			],
 			[
 				"add",
@@ -478,76 +514,32 @@
 			[
 				"backgro",
 				"background-color"
-			],
-			[
-				"ab",
-				"absolute"
-			],
-			[
-				"s",
-				"slideDown	.slideDown()"
-			],
-			[
-				"sl",
-				"slideUp	.slideUp()"
-			],
-			[
-				"sr",
-				"script	Tag"
-			],
-			[
-				"im",
-				"img3"
-			],
-			[
-				"fa",
-				"fadeOut	.fadeOut()"
-			],
-			[
-				"text",
-				"text-align"
-			],
-			[
-				"h",
-				"hide	.hide()"
-			],
-			[
-				"mo",
-				"mousemove	.mousemove()"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/Controller/AppController.php",
-			"settings":
-			{
-				"buffer_size": 5610,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "src/Controller/ParticipantesController.php",
 			"settings":
 			{
-				"buffer_size": 6499,
+				"buffer_size": 6666,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Model/Table/ParticipantesTable.php",
+			"file": "src/Template/Expedientes/add.ctp",
 			"settings":
 			{
-				"buffer_size": 2717,
+				"buffer_size": 24578,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Template/Expedientes/view.ctp",
+			"file": "src/Template/Expedientes/index.ctp",
 			"settings":
 			{
-				"buffer_size": 28474,
+				"buffer_size": 2969,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +547,31 @@
 			"file": "src/Controller/ExpedientesController.php",
 			"settings":
 			{
-				"buffer_size": 9694,
+				"buffer_size": 10025,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Model/Table/ExpedientesTable.php",
+			"settings":
+			{
+				"buffer_size": 2936,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Model/Table/ParticipantesTable.php",
+			"settings":
+			{
+				"buffer_size": 2971,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "webroot/js/datatables.net/js/jquery.dataTables.js",
+			"settings":
+			{
+				"buffer_size": 447006,
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +579,7 @@
 			"file": "webroot/css/mis_estilos.css",
 			"settings":
 			{
-				"buffer_size": 3236,
+				"buffer_size": 3714,
 				"line_ending": "Unix"
 			}
 		},
@@ -595,7 +611,7 @@
 			"file": "webroot/js/mi_js.js",
 			"settings":
 			{
-				"buffer_size": 3231,
+				"buffer_size": 9796,
 				"line_ending": "Unix"
 			}
 		},
@@ -603,8 +619,16 @@
 			"file": "src/Template/Element/layout_elements/scripts.ctp",
 			"settings":
 			{
-				"buffer_size": 3446,
+				"buffer_size": 4140,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "webroot/js/jquery.smartWizard.js",
+			"settings":
+			{
+				"buffer_size": 16662,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -658,14 +682,30 @@
 	[
 		"/opt/lampp/htdocs/edis",
 		"/opt/lampp/htdocs/edis/src",
-		"/opt/lampp/htdocs/edis/src/Model",
-		"/opt/lampp/htdocs/edis/src/Model/Table",
+		"/opt/lampp/htdocs/edis/src/Controller",
 		"/opt/lampp/htdocs/edis/src/Template",
-		"/opt/lampp/htdocs/edis/src/Template/Participantes",
-		"/opt/lampp/htdocs/edis/webroot/img/parrilla"
+		"/opt/lampp/htdocs/edis/webroot",
+		"/opt/lampp/htdocs/edis/webroot/js",
+		"/opt/lampp/htdocs/edis/webroot/js/datatables.net",
+		"/opt/lampp/htdocs/edis/webroot/js/datatables.net/js"
 	],
 	"file_history":
 	[
+		"/opt/lampp/htdocs/edis/src/Template/Roles/mis_roles.ctp",
+		"/etc/modprobe.d/ath9k.conf",
+		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
+		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Entity/Expediente.php",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/index.ctp",
+		"/usr/share/applications/firefox.desktop",
+		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/vendors/datatables.net-buttons/js/buttons.print.js",
+		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/tables_dynamic.html",
+		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js",
+		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/form_wizards.html",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
 		"/opt/lampp/htdocs/edis/webroot/img/parrilla/male-desconocido.svg",
 		"/opt/lampp/htdocs/edis/webroot/img/parrilla/female-desconocida.svg",
 		"/home/lisho/Imágenes/family-icons/svg/female-desconocida.svg",
@@ -681,17 +721,11 @@
 		"/opt/lampp/htdocs/edis/webroot/img/parrilla/male.svg",
 		"/opt/lampp/htdocs/edis/webroot/img/familiy-svg/male.svg",
 		"/home/lisho/Imágenes/family-icons/svg/male.svg",
-		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
 		"/opt/lampp/htdocs/edis/src/Controller/RolesController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Entity/Participante.php",
-		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
-		"/opt/lampp/htdocs/edis/src/Template/Roles/mis_roles.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
-		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
 		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/dist/parsley.js",
 		"/opt/lampp/htdocs/edis/webroot/js/datatables.net/js/jquery.dataTables.js",
 		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/src/parsley.css",
@@ -702,12 +736,10 @@
 		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/src/i18n/en.js",
 		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/dist/i18n/en.js",
 		"/opt/lampp/htdocs/edis/webroot/js/iCheck/icheck.min.js",
-		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/RelationsController.php",
 		"/opt/lampp/htdocs/excyl2016/src/Controller/DiagnosticosController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/RelationsTable.php",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Relations/add.ctp",
@@ -786,14 +818,7 @@
 		"/opt/lampp/htdocs/rgc_cake/src/Template/Layout/default.ctp",
 		"/opt/lampp/htdocs/rgc_cake/src/Controller/CandidatosController.php",
 		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/grafico.ctp",
-		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/polar-area.html",
-		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/bar-stacked.html",
-		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/pie.html",
-		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/dist/Chart.bundle.js",
-		"/opt/lampp/htdocs/rgc_cake/src/Template/Element/progressbar.ctp",
-		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/combo-bar-line.html",
-		"/opt/lampp/htdocs/rgc_cake/src/Template/Candidatos/grafico.html",
-		"/home/lisho/Descargas/curso JQuery/chart/Chart.js-master/samples/combo-bar-line.html"
+		"/opt/lampp/htdocs/rgc_cake/webroot/js/chart/samples/polar-area.html"
 	],
 	"find":
 	{
@@ -811,6 +836,26 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"dd",
+			"date",
+			"sorting_asc",
+			"var dni = $('#dni option:selected').text();\n	var id = 'dni';\n	actualizar_datos(dni,id); ",
+			"sexo",
+			"Finish",
+			"title",
+			"print",
+			"numhs",
+			"div-numhs",
+			"demo",
+			"has-feedback",
+			"buscador",
+			"autocomplete",
+			"busca",
+			");",
+			"elmStepContainer",
+			"fieldset",
+			"      \n",
+			">\n",
 			";\n",
 			"icono-fa",
 			"redi",
@@ -918,10 +963,7 @@
 			"mysq",
 			"webroot",
 			"intl",
-			"intl		",
-			"intl",
-			"ext-intl",
-			"php5"
+			"intl		"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -939,57 +981,24 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/Controller/AppController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 5610,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4926,
-								4926
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2529.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "src/Controller/ParticipantesController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6499,
+						"buffer_size": 6666,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6499,
-								6499
+								6523,
+								6523
 							]
 						],
 						"settings":
@@ -1002,27 +1011,60 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2358.0,
+						"translation.y": 2547.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 12,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Template/Expedientes/add.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 24578,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								21705,
+								21705
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 7056.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "src/Model/Table/ParticipantesTable.php",
+					"file": "src/Template/Expedientes/index.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2717,
+						"buffer_size": 2969,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2153,
-								2153
+								266,
+								266
 							]
 						],
 						"settings":
@@ -1030,32 +1072,32 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 972.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "src/Template/Expedientes/view.ctp",
+					"file": "src/Controller/ExpedientesController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28474,
+						"buffer_size": 10025,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22354,
-								22354
+								3605,
+								3605
 							]
 						],
 						"settings":
@@ -1068,66 +1110,131 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7201.0,
+						"translation.y": 251.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/Model/Table/ExpedientesTable.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1962,
+								1962
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 792.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "src/Model/Table/ParticipantesTable.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2971,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1562,
+								1562
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1170.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 5,
+			"sheets":
+			[
+				{
+					"buffer": 6,
+					"file": "webroot/js/datatables.net/js/jquery.dataTables.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 447006,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								447006,
+								447006
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 274374.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "src/Controller/ExpedientesController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9694,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1830,
-								1830
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 432.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 4,
-			"sheets":
-			[
-				{
-					"buffer": 5,
+					"buffer": 7,
 					"file": "webroot/css/mis_estilos.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3236,
+						"buffer_size": 3714,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								695,
-								695
+								888,
+								888
 							]
 						],
 						"settings":
@@ -1139,14 +1246,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 548.0,
+						"translation.y": 188.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 8,
 					"file": "src/Template/Element/menus/sidebar.ctp",
 					"semi_transient": false,
 					"settings":
@@ -1175,11 +1282,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 13,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "src/Template/Element/menus/menu_principal.ctp",
 					"semi_transient": false,
 					"settings":
@@ -1191,8 +1298,8 @@
 						"selection":
 						[
 							[
-								535,
-								535
+								3525,
+								3525
 							]
 						],
 						"settings":
@@ -1206,14 +1313,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 648.0,
+						"translation.y": 216.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 11,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1242,24 +1349,28 @@
 						"translation.y": 198.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 11,
 					"file": "webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3231,
+						"buffer_size": 9796,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1634,
-								1634
+								90,
+								90
+							],
+							[
+								478,
+								478
 							]
 						],
 						"settings":
@@ -1271,27 +1382,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1026.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 12,
 					"file": "src/Template/Element/layout_elements/scripts.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3446,
+						"buffer_size": 4140,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3371,
-								3371
+								1839,
+								1839
 							]
 						],
 						"settings":
@@ -1304,10 +1415,43 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 270.0,
+						"translation.y": 162.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 13,
+					"file": "webroot/js/jquery.smartWizard.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 16662,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2021,
+								2021
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3726.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
 					"type": "text"
 				}
 			]
@@ -1341,7 +1485,7 @@
 		"cols":
 		[
 			0.0,
-			0.924602871147,
+			0.233475636208,
 			1.0
 		],
 		"rows":
@@ -1401,7 +1545,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1409,7 +1553,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 268.0,
+	"side_bar_width": 282.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

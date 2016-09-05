@@ -24,6 +24,7 @@
  
     <!-- Datatables -->
 
+
     <?= $this->Html->script('datatables.net/js/jquery.dataTables.js') ?>
     <?= $this->Html->script('datatables.net-bs/js/dataTables.bootstrap.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/dataTables.buttons.min.js') ?>
@@ -39,6 +40,8 @@
     <? // $this->Html->script('pdfmake/build/pdfmake.min.js') ?>
     <? // $this->Html->script('pdfmake/build/vfs_fonts.js') ?>
     
+    <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js') ?>
+    <?= $this->Html->script('//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js') ?>
     <!-- Custom Theme Scripts -->
     <?= $this->Html->script('custom.min.js') ?>
  
