@@ -66,7 +66,7 @@
                         <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro: </h2>
 
                         <fieldset class="bloque-formulario">
-                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"sigiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>
+                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe, pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"sigiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>
                             <div class="form-group input-group form-group-buscador form-horizontal center-block">
                                 
                                 <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
@@ -165,7 +165,7 @@
                                                                         'required' => 'required',
                                                                         'label' => ['text' => ''],
                                                                         //'options' => $tecnicoList,
-                                                                        //'empty'   => 'Elije un Coordinador de Caso'
+                                                                        'empty'   => '-----'
                                                                     ]);
                                     ?> 
                                 </div>
@@ -182,7 +182,7 @@
                                                                         'default' => '',
                                                                         'required' => 'required',
                                                                         'label' => ['text' => ''],
-                                                                        //'empty'   => 'Elije un Técnico de Inclusión'
+                                                                        'empty'   => '-----'
                                                                     ]);
                                     ?> 
                                 </div>

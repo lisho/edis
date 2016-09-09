@@ -58,34 +58,40 @@ class UsersController extends AppController
      */
     public function add()
     {
-        $filename = '';
-        $ext = '';
-        $user = $this->Users->newEntity();
-        //debug($this->request->data);exit();
         
-        if ($this->request->is('post')) {
-            
-            switch ($this->request->data['photo']['type']) {
-                case 'image/jpeg':
-                    $ext = '.jpg';
-                    break;
-                case 'image/png':
-                    $ext = '.png';
-                    break;           
-                default:
-                    # code...
-                    break;
-            }
+        $user = $this->Users->newEntity();
+        
+        // ****  Inicio Preparacion de foto **** //
+        
+            $filename = '';
+            $ext = '';
+                   
+            if ($this->request->is('post')) {
+                
+                switch ($this->request->data['photo']['type']) {
+                    case 'image/jpeg':
+                        $ext = '.jpg';
+                        break;
+                    case 'image/png':
+                        $ext = '.png';
+                        break;           
+                    default:
+                        # code...
+                        break;
+                }
+        // ****  FIN preparacion de FOTO *******//
+
 
             if ($this->request->data['photo']['tmp_name']!='') {
                 $this->request->data['foto'] = $this->request->data['user'].$ext;
             }
 
+
             $user = $this->Users->patchEntity($user, $this->request->data);
 
                 if ($this->Users->save($user)) {
 
-                    
+                // ****  Añadimos el archivo a la carpeta *******//    
                     $filename=$this->request->data['photo'];
                     move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
                     

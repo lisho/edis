@@ -1,30 +1,104 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $tecnico->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $tecnico->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Tecnicos'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Equipos'), ['controller' => 'Equipos', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Equipo'), ['controller' => 'Equipos', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Roles'), ['controller' => 'Roles', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Role'), ['controller' => 'Roles', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="tecnicos form large-9 medium-8 columns content">
-    <?= $this->Form->create($tecnico) ?>
-    <fieldset>
-        <legend><?= __('Edit Tecnico') ?></legend>
-        <?php
-            echo $this->Form->input('nombre');
-            echo $this->Form->input('apellidos');
-            echo $this->Form->input('equipo_id', ['options' => $equipos]);
-            echo $this->Form->input('puesto');
-        ?>
-    </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
-    <?= $this->Form->end() ?>
+
+<h1>Editar Técnico.</h1>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Modifica los datos de uno de los técnicos que intervienen en los casos.</h2>
+                <?= $this->Element('menus/menu_panel');?>                
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">    
+
+                 <!-- Formulario -->
+
+                <?= $this->Form->create($tecnico,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+                
+
+                <fieldset>
+                                        
+                    <div class="form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Nombre <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php
+                                echo $this->Form->input('nombre', [
+                                        'class'=>'form-control col-md-7 col-xs-12',
+                                        'required' =>'required',
+                                        'label' => ['text' => '']
+                                    ]);
+                            ?> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Apellidos <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php
+                                echo $this->Form->input('apellidos', [
+                                        'class'=>'form-control col-md-7 col-xs-12',
+                                        //'required' => 'required',
+                                        'label' => ['text' => '']
+                                    ]);
+                            ?> 
+                        </div>
+                    </div>
+
+                    <div class="form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Equipo <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php
+                            
+                                echo $this->Form->select('equipo_id', $equipos, [
+                                        'class'=>'form-control col-md-7 col-xs-12',
+                                        'empty' => 'Selecciona un equipo',
+                                        'required' => 'required',
+                                        'label' => ['text' => '']
+                                    ]);
+
+                            ?> 
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Puestos <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php
+
+
+                                $puestos = [    'Trabajador/a Social' => 'Trabajador/a Social',
+                                                'Psicólogo/a' => 'Psicólogo/a',
+                                                'Asesora Juridica' => 'Asesora Juridica',
+                                                'Tecnico/a Inmigración' => 'Tecnico/a Inmigración' ]; // Cambiar tambien en add
+
+                                echo $this->Form->input('puesto', [
+                                                                    'type' => 'select',
+                                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                                    'id' => 'puesto',
+                                                                    'required' => 'required',
+                                                                    'label' => ['text' => ''],
+                                                                    'options' => $puestos,
+                                                                    'default' => $tecnico->puesto
+                                                                ]);
+
+
+                            ?> 
+                        </div>
+                    </div>
+
+                    <?= $this->Form->hidden('user_id', ['value' => $auth['id']] );?>    
+                </fieldset>                
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                    </div>
+                </div>
+               
+                <?= $this->Form->end() ?>
+                <!-- /Formulario -->
+            </div>
+        </div>
+    </div>
 </div>

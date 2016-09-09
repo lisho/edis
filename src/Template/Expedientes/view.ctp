@@ -1,4 +1,4 @@
-
+<?= $this->assign('title', $expediente->numedis);?>
 <div class="col-md-4 col-sm-12 col-xs-12"> 
     <div class="x_panel"> <!-- Panel de datos de expediente-->
         <div class="x_title"> 

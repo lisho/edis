@@ -36,7 +36,7 @@
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
                                 echo $this->Form->input('apellidos', [
-                                        'class'=>'editor form-control col-md-7 col-xs-12',
+                                        'class'=>'form-control col-md-7 col-xs-12',
                                         //'required' => 'required',
                                         'label' => ['text' => '']
                                     ]);
@@ -69,11 +69,11 @@
                                 $puestos = [    'Trabajador/a Social' => 'Trabajador/a Social',
                                                 'Psicólogo/a' => 'Psicólogo/a',
                                                 'Asesora Juridica' => 'Asesora Juridica',
-                                                'Tecnico/a Inmigración' => 'Tecnico/a Inmigración' ];
+                                                'Tecnico/a Inmigración' => 'Tecnico/a Inmigración' ]; // Cambiar tambien en edit
 
                                 echo $this->Form->select('puesto', $puestos, [
                                         'empty' => 'Selecciona el puesto que ocupa',
-                                        'class'=>'editor form-control col-md-7 col-xs-12',
+                                        'class'=>'form-control col-md-7 col-xs-12',
                                         //'required' => 'required',
                                         'label' => ['text' => '']
                                     ]);

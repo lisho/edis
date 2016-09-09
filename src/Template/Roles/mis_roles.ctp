@@ -50,9 +50,12 @@
                     <td><?= $this->Time->format($expediente->expediente->modified, "dd/MM/yyyy", null) ?></td>
                     
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $expediente->expediente->id], ['class'=> 'btn btn-xs btn-success']) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $expediente->expediente->id], ['class'=> 'btn btn-xs btn-info']) ?>
-                        <?= $this->Form->postLink(__('delete'), ['action' => 'delete', $expediente->expediente->id], ['class'=> 'btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->expediente->nombre)]) ?>
+                        <?= $this->Html->link('', ['controller'=>'expedientes', 'action' => 'view', $expediente->expediente->id], ['class'=> 'fa fa-folder-open btn btn-xs btn-success']) ?>
+                        <?= $this->Html->link('', ['controller'=>'expedientes', 'action' => 'edit', $expediente->expediente->id], ['class'=> 'fa fa-edit btn btn-xs btn-info']) ?>
+                        
+                        <?php if ($auth['role'] === 'admin'): ?>    
+                            <?= $this->Form->postLink('', ['controller'=>'expedientes', 'action' => 'delete', $expediente->expediente->id], ['class'=> 'fa fa-trash btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->expediente->nombre)]) ?>
+                        <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

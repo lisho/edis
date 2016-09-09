@@ -23,6 +23,9 @@ ul.messages li img.avatar, img.avatar:hover {
 	float: none;*/
 }
 
+blockquote.small {
+	font-size: 1em;
+}
 .sidebar-logo {
 
 	width: 2em;
@@ -174,7 +177,9 @@ ul.msg_list li a .time {
 
 .ui-autocomplete li.ui-menu-item a {
 	color: #E7E7E7;
-	margin-bottom: 1.2em;
+	/*margin-bottom: 1.2em;*/
+	margin-top: 0.8em;
+	margin-bottom: 0.8em;
 	/*font-size: 1.2em;*/
 
 }
@@ -182,22 +187,29 @@ ul.msg_list li a .time {
 .ui-autocomplete li.ui-menu-item a:hover {
 	color: #fff;
 	font-size: 1.1em;
-	background-color: rgba(252,252,252,.3);
-	padding-left: 1em;
-	padding-right: 1em;
-	padding-top: 0.4em;
-	padding-bottom: 0.4em;
-	margin-left: 1em;
-	border-radius: 10px;
-	-webkit-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
-	-moz-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
-	box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
+	
+
+}
+
+.ui-autocomplete li.ui-menu-item {
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
 
 }
 
 .ui-autocomplete li.ui-menu-item:hover {
 	margin-top: 0.8em;
 	margin-bottom: 0.8em;
+	background-color: rgba(252,252,252,.3);
+	/*padding-left: 1em;*/
+	padding-right: 1em;
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
+	/*margin-left: 1em;*/
+	border-radius: 10px;
+	-webkit-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
+	-moz-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
+	box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
 
 }
 
@@ -255,4 +267,15 @@ table.vertical-table>tbody>tr>th {
 }
 
 /********************************************/
+
+.datos-profile>i.user-profile-icon  {
+	color: #26B99A;
+	-webkit-text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+	-moz-text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+	text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+}
+
+.datos-profile:hover {
+	font-size: 1.8em;		
+}
 

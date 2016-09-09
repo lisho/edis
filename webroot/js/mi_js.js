@@ -333,11 +333,17 @@ $(function(){
 	var nacimiento = $('#participantes-0-nacimiento').text();
 	var id = 'participantes-0-nacimiento';
 	actualizar_opcional(nacimiento,id); 
-	$("#participantes-0-nacimiento").change(function() {
-			var nacimiento = $(this).text(); 
-			var id = 'participantes-0-nacimiento';
-			actualizar_opcional(nacimiento,id);  
-		});
+	$("#participantes-0-nacimiento").datepicker()
+  	.on('changeDate', function(ev){
+	    var nacimiento = $("#participantes-0-nacimiento").val(); 
+	    var id = 'participantes-0-nacimiento';
+		actualizar_opcional(nacimiento,id);  
+    });
+    $("#participantes-0-nacimiento").change(function() {
+	    var nacimiento = $("#participantes-0-nacimiento").val(); 
+	    var id = 'participantes-0-nacimiento';
+		actualizar_opcional(nacimiento,id);  
+    });
 
 	// email
 	var email = $('#participantes-0-email').val();
@@ -384,7 +390,7 @@ $(function(){
 		if (dato==='') { 
 				var dato = 'No has introducido información';
 				$("#li-"+id).html("<b>"+dato+"</b>").addClass('alert-warning');
-			}else{$("#li-"+id).html("<b>"+dato+"</b>");}
+			}else{$("#li-"+id).html("<b>"+dato+"</b>").removeClass('alert-warning');}
 	}
 
 	

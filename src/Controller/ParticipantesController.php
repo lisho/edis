@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * Participantes Controller
@@ -19,8 +22,9 @@ class ParticipantesController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Expedientes']
+            'contain' => [  'Expedientes']
         ];
+
         $participantes = $this->paginate($this->Participantes);
 
         $this->set(compact('participantes'));
@@ -37,9 +41,22 @@ class ParticipantesController extends AppController
     public function view($id = null)
     {
         $participante = $this->Participantes->get($id, [
-            'contain' => ['Expedientes']
+            'contain' => [  'Expedientes',
+                            'Expedientes.Participantes',
+                            'Expedientes.Participantes.Relations']
         ]);
 
+        //Añadimos la edad al array de datos del expediente
+        
+        $edad = $this->calcularEdad($participante['nacimiento']);
+        $participante['edad'] = $edad;
+
+         //Añadimos la edad al array de datos de los miembros de la parrilla
+        foreach ($participante['expediente']['participantes'] as $p) {
+            $edad = $this->calcularEdad($p['nacimiento']);
+            $p['edad'] = $edad;
+        }
+            
         $this->set('participante', $participante);
         $this->set('_serialize', ['participante']);
     }
@@ -53,13 +70,16 @@ class ParticipantesController extends AppController
     {
         
         $participante = $this->Participantes->newEntity();
+
         if ($this->request->is('post')) {
+            
             $participante = $this->Participantes->patchEntity($participante, $this->request->data, [
                         'associated' => [
                                 'Relations'
                         ]
                         ]);
             if ($this->Participantes->save($participante)) {
+
                 $this->Flash->success(__('The participante has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -82,19 +102,72 @@ class ParticipantesController extends AppController
     public function edit($id = null)
     {
         $participante = $this->Participantes->get($id, [
-            'contain' => []
+            'contain' => ['Relations']
         ]);
+        
+        $old_foto=$participante['foto'];
+                   
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $participante = $this->Participantes->patchEntity($participante, $this->request->data);
+
+//debug( $this->request->data);exit();                      
+
+            switch ($this->request->data['photo']['type']) {
+                case 'image/jpeg':
+                    $ext = '.jpg';
+                    break;
+                case 'image/png':
+                    $ext = '.png';
+                    break;           
+                default:
+                    # code...
+                    break;
+            }
+//debug( $old_foto);exit();                      
+
+            if (!empty($this->request->data['photo']['tmp_name'])
+                    && is_uploaded_file($this->request->data['photo']['tmp_name'])) 
+                {
+                    if ($old_foto != []){
+                        $file = new File(IMAGES.'participantes_fotos/'.$old_foto);
+                        $file->delete();
+                        $file->close();
+                    }
+
+                    $filename=$this->request->data['photo'];
+                    move_uploaded_file($filename['tmp_name'], IMAGES.'participantes_fotos'. DS . $participante['dni'].$ext);
+                    $this->request->data['foto'] = $this->request->data['dni'].$ext;
+                }
+
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['nacimiento']);
+            $this->request->data['nacimiento']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+//debug($this->request->data);exit();
+            $participante = $this->Participantes->patchEntity($participante, $this->request->data, [
+                    'associated' => [
+                                'Relations'
+                        ]
+                ]);
             if ($this->Participantes->save($participante)) {
-                $this->Flash->success(__('The participante has been saved.'));
-                return $this->redirect(['action' => 'index']);
+
+                // ****  Añadimos el archivo FOTO a la carpeta *******//    
+                if ($this->request->data['photo']['name']!='') {
+                        $filename=$this->request->data['photo'];
+                        move_uploaded_file($filename['tmp_name'], IMAGES.'participante_fotos/'. DS . $participante['dni'].$ext);
+                    }    
+                   
+
+                $this->Flash->success(__('Se han editado correctamente los datos de  '.$participante['nombre'].' '.$participante['apellidos'].'.'));
+                return $this->redirect(['action' => 'view',$participante->id]);
             } else {
-                $this->Flash->error(__('The participante could not be saved. Please, try again.'));
+                $this->Flash->error(__('No hga sido posible guardar los cambios. Por favor inténtalo de nuevo.'));
             }
         }
         $expedientes = $this->Participantes->Expedientes->find('list', ['limit' => 200]);
-        $this->set(compact('participante', 'expedientes'));
+        $relaciones = $this->Participantes->Relations->find('list', ['limit' => 20]);
+        $this->set(compact('participante', 'expedientes', 'relaciones'));
         $this->set('_serialize', ['participante']);
     }
 

@@ -17,7 +17,7 @@
             <thead>
                 <tr>
                     
-                    <th>Expediente EDIS</th>
+                    <th>Exp. EDIS</th>
                     <th>Historia Social </th>
                     <th>Titular</th>
                     <th>CEAS </th>
@@ -31,10 +31,11 @@
                 <?php foreach ($expedientes as $expediente): ?>
                 <tr>
 
-                    <td><?= $this->Html->link($expediente->numedis, ['action' => 'view', $expediente->id]) ?></td>
+                    <td class="text-center"><?= $this->Html->link('  '.$expediente->numedis, ['action' => 'view', $expediente->id], ['class' => 'btn btn-sm btn-success fa fa-folder-open', 'target' => '_blank']) ?></td>
 
                     <td><?= h($expediente->numhs) ?></td>
-                    <td><?= $this->Html->link($expediente['participantes'][0]['nombre'].' '.$expediente['participantes'][0]['apellidos'], [     'controller'=>'Participantes', 
+                    <td><?= $this->Html->link($expediente['participantes'][0]['nombre'].' '.$expediente['participantes'][0]['apellidos'], [
+                                            'controller'=>'Participantes', 
                                             'action' => 'view', 
                                             $expediente['participantes'][0]['id']
                                             ]) ?></td>
@@ -45,9 +46,11 @@
                     <td><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null) ?></td>
                     
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $expediente->id], ['class'=> 'btn btn-xs btn-success']) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $expediente->id], ['class'=> 'btn btn-xs btn-info']) ?>
-                        <?= $this->Form->postLink(__('delete'), ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->nombre)]) ?>
+                        <?= $this->Html->link('', ['action' => 'view', $expediente->id], ['class'=> 'btn btn-xs btn-success fa fa-folder-open']) ?>
+                        <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit btn btn-xs btn-info']) ?>
+                     <?php if ($auth['role'] === 'admin'): ?>    
+                        <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger fa fa-trash', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->nombre)]) ?>
+                    <?php endif; ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
