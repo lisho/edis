@@ -66,6 +66,7 @@
                 <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa']) ?> 
                 <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa']) ?> 
                 <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis)]) ?> 
+                
 
         </div> <!--// Fin Panel de datos de expediente-->
     </div>
@@ -157,6 +158,15 @@
 <!--Participantes: PARRILLA FAMILIAR-->
 
 <div class="col-md-8 col-sm-12 col-xs-12"> 
+    <div class="fijo">
+        <?= $this->Html->link('',[],['class'=>'default fa fa-close fijo-boton', 'id'=>'cerrar_ventana', 'data-expediente'=>$expediente->numedis,'data-container'=>"body",
+                'data-toggle'=>"popover",
+                'data-placement'=>"left",
+                'data-content'=>"Cerrar este expediente"
+            ]); ?> 
+
+    </div>
+
     <div class="x_panel"> 
         <div class="x_title"> 
             <big><i class="icono-fa fa fa-group"></i><?= '  Parrilla Familiar de este expediente:' ?></big> 
@@ -330,6 +340,138 @@
     </div>
 </div>
 
+<div class="col-md-8 col-sm-12 col-xs-12"> 
+    <div class="x_panel"> 
+        <div class="x_title"> 
+             <big><i class="icono-fa fa fa-list"></i><?= '  Actuaciones:' ?></big> 
+             <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus',
+                                    'id'=>'add_incidencia',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"right",
+                                    'data-content'=>"Crea una nueva incidencia para este expediente..."]) ?>
+            <ul class="nav navbar-right panel_toolbox"> 
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
+              </li> 
+              <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
+                <ul class="dropdown-menu" role="menu"> 
+                  <li><a href="#">Settings 1</a> 
+                  </li> 
+                  <li><a href="#">Settings 2</a> 
+                  </li> 
+                </ul> 
+              </li> 
+              <li><a class="close-link"><i class="fa fa-close"></i></a> 
+              </li> 
+            </ul> 
+            <div class="clearfix"></div> 
+        </div>
+        <div class="x_content">
+            <ul class="list-unstyled timeline">                
+                
+                <?php
+                    // Ordenamos el array por la fecha de la incidencia
+                    $incidencias = $expediente->incidencias;
+                    uasort($incidencias, 'ordename');
+                    function ordename ($a, $b) {
+                        return $a['fecha'] < $b['fecha'];
+                    }
+
+                ?>
+                <?php foreach ($incidencias as $incidencia): ?>
+                   <!--
+                   <li>
+                        <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
+
+                        <div class="message_date">
+                          <h4 class="date text-info"><?= '<small>'.$this->Time->format($incidencia->fecha, "dd/MM/yyyy", null).'</small>'?> </h4>
+                            
+                            <?= $this->Html->link('', '#',['id'=>'ver_incidencia_'.$incidencia->id,'class'=> 'modal-btn fa fa-eye text-info icono-tabla-fa']); ?>
+                            <?= $this->Html->link('', ['controller' => 'Incidencias', 'action' => 'edit', $incidencia->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']); ?>
+                            <?= $this->Form->postLink('', ['controller' => 'Incidencias', 'action' => 'delete', $incidencia->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('Estás seguro de que quieres borrar a # {0}?', $participantes->nombre.' '.$participantes->apellidos)]); ?>
+                          
+                        </div>
+                        <div class="message_wrapper">
+                          <h4 class="heading"><?= $incidencia->incidenciatipo->tipo;?></h4>
+                          <blockquote class="message"><?= $incidencia->descripcion;?></blockquote>
+                          <br>
+
+                        </div>
+                    </li> 
+                    -->
+
+                    <li>
+                         
+                      <div class="block">
+
+                        <div class="tags">
+                          <a  class= "tag">
+                            <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></strong></span>
+                          </a>
+                          <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
+                        </div>
+                        <div class="block_content">
+                            
+                          <h2 class="title">
+                                          <a><?= $incidencia->incidenciatipo->tipo;?></a>
+                                      </h2>
+                          <div class="byline">
+                             Creado por <a><?= $incidencia->user->nombre.' '.$incidencia->user->apellidos;?></a>
+                          </div>
+                          <p class="excerpt">
+                                <?= substr($incidencia->descripcion,0,200);?>
+                          <a href="#" id = "ver_incidencia_<?=$incidencia->id; ?>" class= "modal-btn"><strong>... Leer&nbsp;más</strong></a>
+                          </p>
+                        </div>
+                      </div>
+                    </li>
+
+                    <!-- Modal -->
+
+                    <div id="modal_ver_incidencia_<?= $incidencia->id;?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel"><strong>Expediente: <?= $expediente['numedis']?></strong>.</h4>
+                                     
+                                     <h4 class="modal-title label label-warning"><strong ><?= $incidencia->incidenciatipo->tipo; ?></strong>.</h4>
+                                    <span class="label label-success pull-right"><big><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></big></span>
+                                    <p></p>
+                                    <p>Incidencia registrada por: <?= $incidencia->user->nombre.' '.$incidencia->user->apellidos; ?></p>
+                                </div>
+                                <div class="modal-body">
+                                     
+                                    
+                                    <blockquote><?= $incidencia->descripcion; ?></blockquote>
+
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <?php if ($incidencia->user->id === $auth['id']): ?>
+                                         <?= $this->Html->link('', ['controller' => 'Incidencias', 'action' => 'edit', $incidencia->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']); ?>
+                                        
+                                        <?= $this->Form->postLink('', ['controller' => 'Incidencias', 'action' => 'delete', $incidencia->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('¿Estás seguro de que quieres borrar esta incidencia?')]); ?>
+                                    <?php endif ?>
+
+                                       
+
+                                </div>   
+
+                            </div>
+                        </div>
+                    </div>
+
+                <?php endforeach ?>
+
+            </ul>
+
+        </div>
+    </div>
+</div>
 
 
 
@@ -551,3 +693,82 @@
 </div>
 
 <?php endforeach ?>
+
+<!--Modal ADD INCIDENCIA--> 
+
+    <div id="modal_add_incidencia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Añade una nueva incidencia para el expediente <strong><?= $expediente['numedis']?></strong></h4>
+            </div>
+            <div class="modal-body">
+                
+                <?= $this->Form->create($nueva_incidencia,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+     
+                         <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php
+
+                                    echo $this->Form->input('incidencias.fecha', [
+                                            'type'=>'text',
+                                            'default' => date('d/m/Y'),
+                                            'dateFormat' => 'DMY',
+                                            'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                            //'required' => 'required',
+                                            'label' => ['text' => ''],
+                                            'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                            //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
+                                        ]);
+                                ?> 
+                            </div>
+                        </div>                   
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php
+                                    echo $this->Form->input('incidencias.incidenciatipo_id', [
+                                            'type' => 'select',
+                                            'class'=>'form-control col-md-7 col-xs-12',
+                                            'default' => '',
+                                            'required' => 'required',
+                                            'label' => ['text' => ''],
+                                            'options' => $incidenciatipos,
+                                            'empty'   => 'Selecciona un tipo de incidencia...'
+                                        ]);
+                                ?> 
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripción <span class="required">*</span></label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <?php
+                                    echo $this->Form->input('incidencias.descripcion', [
+                                        'class'=>'editor form-control col-md-7 col-xs-12',
+                                        //'required' => 'required',
+                                        'label' => ['text' => '']
+                                    ]);
+                                ?> 
+                            </div>
+                        </div>
+
+                        <?= $this->Form->input('incidencias.expediente_id', ['type'=>'hidden', 'value'=>$expediente['id']]);?>
+                        <?= $this->Form->input('incidencias.user_id', ['type'=>'hidden', 'value'=>$auth['id']]);?>
+
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
+                    <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                        </div>
+                    </div>
+                   
+                <?= $this->Form->end() ?>
+                <!-- /END Formulario -->
+            </div>
+        </div>
+    </div>
+</div>

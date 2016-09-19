@@ -42,6 +42,11 @@ class ExpedientesTable extends Table
             'dependent' => true,
             'cascadeCallbacks' => true,
         ]);
+        $this->hasMany('Incidencias', [
+            'foreignKey' => 'expediente_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**

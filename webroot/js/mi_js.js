@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 	
 	$(".editor").jqte(); 
-
+	
 	$.fn.dataTable.moment( 'DD/MM/YYYY' );
 	$("#datatable").DataTable({
 			dom: 'Blfrtip',
@@ -38,6 +38,11 @@ jQuery(document).ready(function($) {
 		})
  		$("#" +id).popover('toggle');
  	});
+
+ 	$('#cerrar_ventana').click(function() {
+		var expediente = $(this).data("expediente");
+		cerrar_ventana(expediente);
+	});
 
 
 $(function(){
@@ -162,9 +167,9 @@ $(function(){
 	        
 	    return $("<li></li>")
 	        
-	        .addClass('fa fa-arrow-circle-right')
+	        //.addClass('fa fa-arrow-circle-right')
 	        .data("item.autocomplete", item)
-	        .append("<a href='/edis/expedientes/view/"+item.exp_id+"'><b> Exp: "+" "+item.exp +" </b>-- "+ item.nombre +" "+ item.apellidos + " (" + item.dni + ")</a>")
+	        .append("<i class='fa fa-arrow-circle-right'><a href='/edis/expedientes/view/"+item.exp_id+"'><b> Exp: "+" "+item.exp +" </b>-- "+ item.nombre +" "+ item.apellidos + " (" + item.dni + ")</a></i>")
 	        .appendTo(ul)
 	    }; // --> Fin Buscador
 	} // END if
@@ -439,7 +444,12 @@ $(function(){
 	}) /* FIN función anónima.*/
 
 
-
+	function cerrar_ventana(expediente){
+		
+		if(confirm('¿Seguro que deseas cerrar el expediente '+expediente+'?')){
+		close();
+		}
+	}
 			
 
 

@@ -523,31 +523,15 @@
 			"file": "src/Controller/ParticipantesController.php",
 			"settings":
 			{
-				"buffer_size": 9544,
+				"buffer_size": 9663,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Template/Participantes/view.ctp",
+			"file": "src/Template/Expedientes/view.ctp",
 			"settings":
 			{
-				"buffer_size": 16294,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Participantes/edit.ctp",
-			"settings":
-			{
-				"buffer_size": 13717,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Users/edit.ctp",
-			"settings":
-			{
-				"buffer_size": 9027,
+				"buffer_size": 29400,
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +539,7 @@
 			"file": "webroot/js/mi_js.js",
 			"settings":
 			{
-				"buffer_size": 11787,
+				"buffer_size": 12083,
 				"line_ending": "Unix"
 			}
 		},
@@ -679,7 +663,6 @@
 		"/opt/lampp/htdocs/edis/src/Model/Table",
 		"/opt/lampp/htdocs/edis/src/Template",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos",
-		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes",
 		"/opt/lampp/htdocs/edis/src/Template/Layout",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes",
@@ -690,10 +673,12 @@
 	],
 	"file_history":
 	[
-		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Participantes/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Users/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Participantes/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/AvisosController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
@@ -707,7 +692,6 @@
 		"/opt/lampp/htdocs/edis/src/Template/Roles/mis_roles.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
 		"/etc/modprobe.d/ath9k.conf",
 		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
@@ -776,7 +760,6 @@
 		"/opt/lampp/htdocs/edis/src/Model/Table/AvisosTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Users/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/view.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Users/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/login.ctp",
 		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
 		"/opt/lampp/htdocs/edis/src/Template/Pages/home.ctp",
@@ -989,15 +972,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 9544,
+						"buffer_size": 9663,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4407,
-								4407
+								4892,
+								4892
 							]
 						],
 						"settings":
@@ -1010,7 +993,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1425.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1018,52 +1001,19 @@
 				},
 				{
 					"buffer": 1,
-					"file": "src/Template/Participantes/view.ctp",
+					"file": "src/Template/Expedientes/view.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 16294,
+						"buffer_size": 29400,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6777,
-								6777
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1967.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/Template/Participantes/edit.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 13717,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11276,
-								11276
+								7277,
+								7277
 							]
 						],
 						"settings":
@@ -1076,43 +1026,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2505.0,
+						"translation.y": 2742.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/Template/Users/edit.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 9027,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								498,
-								498
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1122,20 +1039,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 2,
 					"file": "webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11787,
+						"buffer_size": 12083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10186,
-								10186
+								12005,
+								12005
 							]
 						],
 						"settings":
@@ -1147,14 +1064,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5167.0,
+						"translation.y": 6090.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 3,
 					"file": "webroot/js/datatables.net/js/jquery.dataTables.js",
 					"semi_transient": false,
 					"settings":
@@ -1182,11 +1099,11 @@
 						"translation.y": 1455.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 4,
 					"file": "webroot/css/mis_estilos.css",
 					"semi_transient": false,
 					"settings":
@@ -1211,14 +1128,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2505.0,
+						"translation.y": 3330.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 5,
 					"file": "src/Template/Element/menus/sidebar.ctp",
 					"semi_transient": false,
 					"settings":
@@ -1247,11 +1164,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 12,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 6,
 					"file": "src/Template/Element/menus/menu_principal.ctp",
 					"semi_transient": false,
 					"settings":
@@ -1278,14 +1195,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 180.0,
+						"translation.y": 3615.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 7,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1311,14 +1228,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 195.0,
+						"translation.y": 6630.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
+					"buffer": 8,
 					"file": "src/Template/Element/layout_elements/scripts.ctp",
 					"semi_transient": false,
 					"settings":
@@ -1351,11 +1268,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 11,
+					"buffer": 9,
 					"file": "webroot/js/bootstrap-datepicker.js",
 					"semi_transient": false,
 					"settings":
@@ -1383,11 +1300,11 @@
 						"translation.y": 4935.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 12,
+					"buffer": 10,
 					"file": "webroot/js/jquery.smartWizard.js",
 					"semi_transient": false,
 					"settings":
@@ -1416,7 +1333,7 @@
 						"translation.y": 1627.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 9,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1450,7 +1367,7 @@
 		"cols":
 		[
 			0.0,
-			0.587849864703,
+			0.402157374095,
 			1.0
 		],
 		"rows":
@@ -1510,7 +1427,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1518,7 +1435,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 351.0,
+	"side_bar_width": 187.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

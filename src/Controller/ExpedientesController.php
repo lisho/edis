@@ -45,8 +45,16 @@ class ExpedientesController extends AppController
         $this->loadModel('Participantes');
         $participante = $this->Participantes->newEntity();
 
+        $this->loadModel('Incidencias');
+        $nueva_incidencia = $this->Incidencias->newEntity();
+
+        $incidenciatipos = $this->Incidencias->Incidenciatipos->find('list', [  'keyField' => 'id',
+                                                                                'valueField' => 'tipo'
+                                                                                ]);
+
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations']
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos'],
+
         ]);
 
         //Añadimos la edad al array de datos del expediente
@@ -55,12 +63,19 @@ class ExpedientesController extends AppController
                 $p['edad'] = $edad;
             }
 
-       
+      
             //Si creamos un nuevo usuario en el expediente...
             if ($this->request->is('post')) {
-        
-                $data = $this->request->data['participantes'];
-                $this->addParticipante($data,$expediente,$participante);
+         //debug($this->request->data);exit();
+                
+                if (isset($this->request->data['participantes'])) {
+                    $data = $this->request->data['participantes'];
+                    $this->addParticipante($data,$expediente,$participante);
+                } elseif (isset($this->request->data['incidencias'])) {
+                    $data = $this->request->data['incidencias'];
+                    $this->addIncidencia($data,$expediente,$nueva_incidencia);
+                }
+                    
                 
             } // FIN creación de nuevo usuario/participante.
 
@@ -68,7 +83,7 @@ class ExpedientesController extends AppController
         $listado_relaciones = $this->listadoRelaciones();
        unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.       
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones'));
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -268,4 +283,40 @@ class ExpedientesController extends AppController
 
     }
     
+    /**
+     * AddIncidencia method
+     *
+     * Crea una nueva incidencia asociada a este expediente.
+     *
+     * Necesitamos pasarle:
+     *  1. Array con los datos del expediente, al menos id y numedis
+     *  2. Array con el request->data del formulario.
+     *   Redirecciona a la vista del expediente.
+     */
+    public function addIncidencia($data,$expediente,$nueva_incidencia)
+    {
+        
+        $cachos_fecha = preg_split("/[\/]+/", $data['fecha']);
+        $data['id']='';
+
+            if ( $data['fecha']!='') {
+                 $data['fecha']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            }
+       
+        $nueva_incidencia = $this->Incidencias->patchEntity($nueva_incidencia, $data);    
+        //debug($nueva_incidencia);exit();
+        if ($this->Incidencias->save($nueva_incidencia)) {
+            $this->Flash->success('Se ha añadido correctamente un nuevo miembro a la parrilla familiar del expediente');
+            
+            return $this->redirect(['action' => 'view',$expediente['id']]);
+            
+        } else {
+            $this->Flash->error(__('Lo siento. No ha sido posible incluir a esa persona en el sistema. Por favor revisa los datos.'));
+        }
+
+    }
 }

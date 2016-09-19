@@ -1,4 +1,8 @@
 
+h1 {
+	margin-left: 10px;
+	text-shadow: 2px 2px 2px rgba(0, 0, 0, 1);
+}
 .form-group-buscador {
 	padding: 0.5% 0;
 	width: 50%;
@@ -279,3 +283,43 @@ table.vertical-table>tbody>tr>th {
 	font-size: 1.8em;		
 }
 
+.fijo {
+	position:fixed !important; 
+	right: -35px; 
+	top:150px; 
+	z-index:1000 !important;
+	padding-right: 30px;
+	
+} 
+
+.fijo-boton {
+	font-size: 3em;
+	background-color: rgba(42,63,84,.3);
+	border-radius: 10px;
+	padding-right: 10px;
+}
+
+.fijo-boton:hover{
+	background-color: rgba(42,63,84,.7);
+	padding-right: 15px;
+	padding-left: 5px;
+	border-radius: 10px;
+	color: #fff;
+
+}
+
+ul.messages li img.avatar, img.avatar {
+    height: 32px;
+    /*width: 32px;*/
+    float: left;
+    display: inline-block;
+    border-radius: 2px;
+    padding: 2px;
+    background: #f7f7f7;
+    border: 1px solid #e6e6e6;
+}
+
+ul.messages li img.avatar, img.avatar:hover {
+    height: 60px;
+    
+}

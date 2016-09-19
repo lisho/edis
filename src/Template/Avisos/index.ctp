@@ -1,7 +1,7 @@
 
 <div class="row">
 
-<h1>Avisos y Noticias</h1>
+<h1><i class="fa fa-newspaper-o"></i>  Avisos y Noticias</h1>
     
 <!-- Panel de fichas-->
 <div class="col-md-12 col-sm-12 col-xs-12">

@@ -1,5 +1,5 @@
 
-<h1>Nuevo Aviso / Noticia.</h1>
+<h1><i class="fa fa-newspaper-o"></i>  Nuevo Aviso / Noticia.</h1>
 <div class="row">
     <div class="col-md-12 col-sm-12 col-xs-12">
         <div class="x_panel">
@@ -98,10 +98,12 @@
                                         'class'=>'datepicker form-control col-md-7 col-xs-12',
                                         //'required' => 'required',
                                         'label' => ['text' => ''],
+                                        'default' => date('d/m/Y', strtotime('+1 month')),
                                         'placeholder' => '_ _ / _ _ / _ _ _ _'
                                         //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
                                     ]);
                             ?> 
+                            <p>Por defecto, los avisos y noticias caducarán un mes después de ser creados...</p>
                         </div>
                     </div>
  <!--     

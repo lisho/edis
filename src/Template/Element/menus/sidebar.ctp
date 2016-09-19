@@ -37,6 +37,7 @@
                       
                     </ul>
                   </li>
+<!-- ADMINISTRACION -->                  
                   <li><a><i class="fa fa-desktop"></i> Administración <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a>Equipos<span class="fa fa-chevron-down"></span></a>
@@ -71,6 +72,16 @@
                               <?= $this->Html->link('Nuevo Técnico', ['controller'=> 'Tecnicos', 'action'=>'add']) ?>
                             </li>
                             <li><a href="#level2_2">Level Two</a>
+                            </li>
+                          </ul>
+                        </li>
+                        <li><a>Incidencias<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li>
+                              <?= $this->Html->link('Gestión Tipos de Incidencia', ['controller'=> 'Incidenciatipos', 'action'=>'add']) ?>
+                            </li>
+                            <li>
+                              <?= $this->Html->link('Listado de Incidencias', ['controller'=> 'Incidencias', 'action'=>'index']) ?>
                             </li>
                           </ul>
                         </li>
