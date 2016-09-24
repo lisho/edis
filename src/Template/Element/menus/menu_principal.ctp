@@ -20,7 +20,10 @@
 
               </a>
               <ul class="dropdown-menu dropdown-usermenu pull-right">
-                <li><a href="javascript:;"> Profile</a></li>
+
+                <li>
+                <?= $this->Html->link('    Mi Perfil',['controller'=>'Users','action' => 'view', $auth['id']], ['class'=>'fa fa-user pull-right'])?>
+                <a href="javascript:;"> Profile</a></li>
                 <li>
                   <a href="javascript:;">
                     <span class="badge bg-red pull-right">50%</span>

@@ -168,7 +168,7 @@
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
-                <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                <?= $this->Html->link(__('Cancel'), ['action'=>'view', $user->id],['class' => 'btn btn-primary']) ?>
                     </div>
                 </div>
                

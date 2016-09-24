@@ -129,14 +129,18 @@
              <div class="clearfix"></div>
            <hr>
             <!-- Botonera profile -->
-            <?= $this->Html->link(' Editar Datos de Usuario', ['action' => 'edit', $participante->id], ['class'=> 'btn btn-success fa fa-edit m-right-xs']) ?>
-            <?= $this->Html->link(' '.$participante->expediente->numedis, ['controller'=>'expedientes', 'action' => 'view', $participante->expediente->id], ['class'=> 'btn btn-success fa fa-folder-open']) ?>
-
+            <?= $this->Html->link(' Editar Datos de Usuario', ['action' => 'edit', $participante->id], ['class'=> 'pull-right btn btn-success fa fa-edit m-right-xs']) ?>
+            <?= $this->Form->postLink(' Eliminar usuario', ['controller' => 'Participantes', 'action' => 'delete', $participante->id], ['class'=> 'pull-right btn btn-danger fa fa-trash','confirm' => __('Estás seguro de que quieres borrar a # {0}?', $participante->nombre.' '.$participante->apellidos),
+                        'id' => 'borra_participante',
+                        'data-toggle'=>"popover",
+                        'data-placement'=>"top",
+                        'data-content'=>"¡ATENCIÓN! Si eliminas este usuario eliminarás todos los datos y plantillas asociadas a él (currículum, valoraciones, caracterizaciones...)."]) ?>
           <br />
 
         </div>
 
-<!--// end Columna derecha -->   
+<!--// end Columna IZQUIERDA -->   
+
      <big><?= $this->Html->link(' '.$participante->expediente->numedis, ['controller'=>'expedientes', 'action' => 'view', $participante->expediente->id], ['class'=> 'btn btn-success btn-lg fa fa-folder-open pull-right']) ?></big>
         <div class="col-lg-10 col-md-9 col-sm-9 col-xs-12">
 

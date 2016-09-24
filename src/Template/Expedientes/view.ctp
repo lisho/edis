@@ -65,7 +65,10 @@
                 <br> <hr>
                 <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa']) ?> 
                 <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa']) ?> 
-                <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis)]) ?> 
+                <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis), 'id' => 'borra_expediente',
+                                        'data-toggle'=>"popover",
+                                        'data-placement'=>"top",
+                                        'data-content'=>"¡ATENCIÓN! Si eliminas este expediente eliminarás todos los datos y usuarios asociados a él  ¡PIÉNSALO DE NUEVO!."]) ?> 
                 
 
         </div> <!--// Fin Panel de datos de expediente-->
@@ -205,14 +208,12 @@
                     <tr> 
                         <th></th>
                         <th><?= __('Dni') ?></th>
-                        <th><?= __('Nombre') ?></th>
-                        <th><?= __('Apellidos') ?></th>
+                        <th><?= __('Nombre y apellidos') ?></th>
                         <th><?= __('Relación') ?></th>      
                         <th><?= __('Edad') ?></th>           
                         <th><?= __('Telefono') ?></th>
                         <th><?= __('Email') ?></th>
                         
-                        <th class="actions"><?= __('Actions') ?></th>
                     </tr>
 
                     <?php $p=0; ?>  
@@ -302,8 +303,11 @@
                     <tr> 
                         <td><?= $sexo;?></td>
                         <td><?= h($participantes->dni) ?></td>
-                        <td><?= h($participantes->nombre) ?></td>
-                        <td><?= h($participantes->apellidos) ?></td>
+                        <td>
+                            <?= $this->Html->link($participantes->nombre.' '.$participantes->apellidos,['controller'=>'Participantes','action'=>'view',$participantes->id]); ?>
+                            
+
+                        </td>
                         <td><?= h($participantes->relation->nombre) ?></td>
                         <td>
                             <?php if ($participantes->nacimiento): ?>
@@ -323,11 +327,6 @@
                         <td><?= h($participantes->telefono) ?></td>
                         <td><?= h($participantes->email) ?></td>
                         
-                        <td class="actions">
-                            <?= $this->Html->link('', ['controller' => 'Participantes', 'action' => 'view', $participantes->id],['class'=> 'fa fa-eye text-info icono-tabla-fa']) ?>
-                            <?= $this->Html->link('', ['controller' => 'Participantes', 'action' => 'edit', $participantes->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']) ?>
-                            <?= $this->Form->postLink('', ['controller' => 'Participantes', 'action' => 'delete', $participantes->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('Estás seguro de que quieres borrar a # {0}?', $participantes->nombre.' '.$participantes->apellidos)]) ?>
-                        </td>
                     </tr> 
                     <?php $p++; ?>
                     <?php endforeach; ?> 
@@ -339,6 +338,8 @@
         </div> 
     </div>
 </div>
+
+<!-- ACTUACIONES -->
 
 <div class="col-md-8 col-sm-12 col-xs-12"> 
     <div class="x_panel"> 
@@ -379,28 +380,10 @@
                         return $a['fecha'] < $b['fecha'];
                     }
 
+                    $i=0; //inicio de contador de incidencias de este espediente.
+
                 ?>
                 <?php foreach ($incidencias as $incidencia): ?>
-                   <!--
-                   <li>
-                        <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
-
-                        <div class="message_date">
-                          <h4 class="date text-info"><?= '<small>'.$this->Time->format($incidencia->fecha, "dd/MM/yyyy", null).'</small>'?> </h4>
-                            
-                            <?= $this->Html->link('', '#',['id'=>'ver_incidencia_'.$incidencia->id,'class'=> 'modal-btn fa fa-eye text-info icono-tabla-fa']); ?>
-                            <?= $this->Html->link('', ['controller' => 'Incidencias', 'action' => 'edit', $incidencia->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']); ?>
-                            <?= $this->Form->postLink('', ['controller' => 'Incidencias', 'action' => 'delete', $incidencia->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('Estás seguro de que quieres borrar a # {0}?', $participantes->nombre.' '.$participantes->apellidos)]); ?>
-                          
-                        </div>
-                        <div class="message_wrapper">
-                          <h4 class="heading"><?= $incidencia->incidenciatipo->tipo;?></h4>
-                          <blockquote class="message"><?= $incidencia->descripcion;?></blockquote>
-                          <br>
-
-                        </div>
-                    </li> 
-                    -->
 
                     <li>
                          
@@ -762,7 +745,7 @@
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                     <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
-                    <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
+                    <?= $this->Html->link(__('Cancel'), ['action'=>'view',$expediente->id],['class' => 'btn btn-primary']) ?>
                         </div>
                     </div>
                    

@@ -1,19 +1,19 @@
 <?php
 namespace App\Model\Table;
 
-use App\Model\Entity\Tecnico;
+use App\Model\Entity\Asistentecomision;
 use Cake\ORM\Query;
 use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
 /**
- * Tecnicos Model
+ * Asistentecomisions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Equipos
- * @property \Cake\ORM\Association\HasMany $Roles
+ * @property \Cake\ORM\Association\BelongsTo $Comisions
+ * @property \Cake\ORM\Association\BelongsTo $Tecnicos
  */
-class TecnicosTable extends Table
+class AsistentecomisionsTable extends Table
 {
 
     /**
@@ -26,19 +26,19 @@ class TecnicosTable extends Table
     {
         parent::initialize($config);
 
-        $this->table('tecnicos');
+        $this->table('asistentecomisions');
         $this->displayField('id');
         $this->primaryKey('id');
 
-        $this->belongsTo('Equipos', [
-            'foreignKey' => 'equipo_id',
+        $this->addBehavior('Timestamp');
+
+        $this->belongsTo('Comisions', [
+            'foreignKey' => 'comision_id',
             'joinType' => 'INNER'
         ]);
-        $this->hasMany('Roles', [
-            'foreignKey' => 'tecnico_id'
-        ]);
-        $this->hasMany('Asistentecomisions', [
-            'foreignKey' => 'tecnico_id'
+        $this->belongsTo('Tecnicos', [
+            'foreignKey' => 'tecnico_id',
+            'joinType' => 'INNER'
         ]);
     }
 
@@ -55,16 +55,8 @@ class TecnicosTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->requirePresence('nombre', 'create')
-            ->notEmpty('nombre');
-
-        $validator
-            ->requirePresence('apellidos', 'create')
-            ->notEmpty('apellidos');
-
-        $validator
-            ->requirePresence('puesto', 'create')
-            ->notEmpty('puesto');
+            ->requirePresence('rol', 'create')
+            ->notEmpty('rol');
 
         return $validator;
     }
@@ -78,7 +70,8 @@ class TecnicosTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['equipo_id'], 'Equipos'));
+        $rules->add($rules->existsIn(['comision_id'], 'Comisions'));
+        $rules->add($rules->existsIn(['tecnico_id'], 'Tecnicos'));
         return $rules;
     }
 }

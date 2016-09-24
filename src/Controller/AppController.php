@@ -69,7 +69,7 @@ class AppController extends Controller
                     'controller' => 'Users',
                     'action' => 'login'
                     ],
-                'authError' => '¿Crees que puedes entrar sin loguearte?',
+                'authError' => '¿Crees que puedes entrar sin loguearte?... Pues NO!',
             ]);
 
     }
@@ -139,7 +139,7 @@ class AppController extends Controller
 
         return $listado_tipo;
     }
-
+    
     /**
      * Listado de todos los tecnicos
      *
@@ -195,5 +195,57 @@ class AppController extends Controller
             $edad = (int)((date('now')-$dias)/31556926 );*/
             return $edad;
         }        
-    }   
+    } 
+
+    /**
+     * Redimensionar foto proporcionalmente
+     *
+     * Necesitamos pasar la foto y nos devuelve la foto redimensionada.
+     */
+        public function redimensionar($file=null)
+    {
+          
+        $nueva_anchura = 220; // Definimos el tamaño a 100 px 
+
+          //Separamos las extenciones de archivos para definir el tipo de ext. 
+        $extension = explode(".",$file); 
+        $ext = count($extension)-1; 
+        //Determinamos las extenciones permitidas. 
+        if($extension[$ext] == "jpg" || $extension[$ext] == "jpeg") 
+        { 
+            $image = ImageCreateFromJPEG($file); 
+        } 
+        else if($extension[$ext] == "gif"){ 
+            $image = ImageCreateFromGIF($file); 
+        } 
+        else if($extension[$ext] == "png"){ 
+            $image = ImageCreateFromPNG($file); 
+        } 
+        else 
+        { 
+            echo "Error, extension no permitida"; 
+        die(); 
+        } 
+
+        $thumb_name = substr($file,0,-4);//nombre del thumbnail 
+        $width = imagesx($image);//ancho 
+        $height = imagesy($image);//alto 
+
+        
+        $nueva_altura = ($nueva_anchura * $height) / $width ; // tamaño proporcional 
+
+        if (function_exists("imagecreatetruecolor")) 
+        { 
+            $thumb = ImageCreateTrueColor($nueva_anchura, $nueva_altura);//Color Real 
+        } 
+        //En caso de no encontrar la funcion, la saca en calidad media 
+        if (!$thumb) $thumb = ImageCreate($nueva_anchura, $nueva_altura); 
+
+        ImageCopyResized($thumb, $image, 0, 0, 0, 0, $nueva_anchura, $nueva_altura, $width, $height); 
+        //header("Content-type: image/jpeg"); 
+        ImageJPEG($thumb, "".$thumb_name.".jpg", 99); 
+        imagedestroy($image); 
+
+        return $image; 
+    }  
 }

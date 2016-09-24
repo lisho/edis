@@ -108,13 +108,8 @@ $(function(){
 
 // --> Fin Combo CEAS - EDIS
 
-
-
  	
 }); // --> Fin Función Anónima.
-
-
-
 	
  	// ******************************************** 
  	// --> Despliegue de modales		
@@ -124,6 +119,8 @@ $(function(){
  	// ******************************************** 
 
 	$('.modal-btn').click(function () {
+
+		if ($('add_pasacomision')) {}
 		
 		id=$(this).attr("id");
 	 	$('#modal_'+id).modal();
@@ -175,6 +172,56 @@ $(function(){
 	} // END if
 
 
+	// --> ************** BUSCADOR DE EXPEDIENTES PARA COMISION **************************
+
+	 
+	$('#busca_para_comision').autocomplete ({
+		minLength: 2,
+		select:function(event, ui){
+			$('#busca_para_comision').val(ui.item.label);
+		},
+
+		source:function(request, response){
+			$.ajax({
+				url:"/edis/participantes/searchjson",
+				data:{
+					term:request.term
+				},
+				dataType: "json",
+				success: function(data){
+					response($.map(data,function(el,index){
+						return{
+							value:el.expediente.numedis,
+							pasadato:el.expediente.id,
+                            nombre:el.nombre,
+                            apellidos:el.apellidos,
+                            dni: el.dni,
+                            id: el.id,
+                            exp: el.expediente.numedis,
+                            exp_id: el.expediente.id
+						};
+					}));
+				}
+			});
+
+		}
+
+	}).data("ui-autocomplete")._renderItem = function(ul, item){
+		return $("<li></li>")
+		.addClass('fa fa-plus')
+		.data("item.autocomplete", item)
+		.append("<a href='#' class='modal-btn' id='add_pasacomisión_"+item.exp_id+"'>"+"<b>("+item.exp+") "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
+		.appendTo(ul);
+	}; 
+
+	
+	$('add_pasacomision').click(function () {
+		var expediente = $('#busca_para_comision').val();
+		//alert(expediente);
+		$('#datos_expedeiente').html(expediente);
+	});
+
+
 
 	// --> ************** BUSCADOR DEL MENU *************************************************************************
 
@@ -212,10 +259,6 @@ $(function(){
 		.append("<a href='/edis/participantes/view/"+item.id+"'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
 		.appendTo(ul)
 	}; // --> Fin Buscador
-
-
-
-
 
 
 
@@ -451,6 +494,29 @@ $(function(){
 		}
 	}
 			
+
+// --> *********** CHECKBOX ASISTENTES A COMISION ***************//
+
+	$('input.tecnico_check').change(function(){ 
+		var tecnico_id = $(this).val();
+		//var comision_id = <?php echo $comision['id'] ?>;
+		var datos = {"tecnico_id":tecnico_id, "comision_id":comision_id};
+		if (tecnico_id) {
+				$.ajax({
+					type: "POST",
+					url: "/edis/asistentecomisions/add",
+					//data: {tecnico_id:tecnico_id,},
+					data: datos,
+					//dataType: "json",
+					cache: false,
+					});
+				};			
+	});
+
+	$('#recargar_pagina').click(function() {
+		location.reload();
+	});
+
 
 
 

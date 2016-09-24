@@ -134,7 +134,11 @@ class ParticipantesController extends AppController
                     }
 
                     $filename=$this->request->data['photo'];
+//debug($filename);exit();
+                   
                     move_uploaded_file($filename['tmp_name'], IMAGES.'participantes_fotos'. DS . $participante['dni'].$ext);
+                     //redimensionamos la foto antes de guardarla.
+                    $filename=$this->redimensionar(IMAGES.'participantes_fotos'. DS . $participante['dni'].$ext);
                     $this->request->data['foto'] = $this->request->data['dni'].$ext;
                 }
 
