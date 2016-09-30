@@ -66,6 +66,9 @@ class TecnicosTable extends Table
             ->requirePresence('puesto', 'create')
             ->notEmpty('puesto');
 
+        //$validator
+            //->email('email');
+
         return $validator;
     }
 

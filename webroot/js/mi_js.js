@@ -120,8 +120,6 @@ $(function(){
 
 	$('.modal-btn').click(function () {
 
-		if ($('add_pasacomision')) {}
-		
 		id=$(this).attr("id");
 	 	$('#modal_'+id).modal();
 
@@ -174,54 +172,69 @@ $(function(){
 
 	// --> ************** BUSCADOR DE EXPEDIENTES PARA COMISION **************************
 
-	 
-	$('#busca_para_comision').autocomplete ({
-		minLength: 2,
-		select:function(event, ui){
-			$('#busca_para_comision').val(ui.item.label);
-		},
+	if ($('#busca_para_comision').length > 0 ) {
+		$('#busca_para_comision').autocomplete ({
+			minLength: 2,
+			select:function(event, ui){
+				expediente_id = ui.item.exp_id;
+				//console.log(ui.item);
+				numedis = ui.item.exp;
+				numhs = ui.item.hs;
+				nombre_completo = ui.item.nombre+' '+ui.item.apellidos;
+				//$('#datos_expediente').html(ui.item);
+				$('#busca_para_comision').val(ui.item.label).attr('data', expediente_id);
+				$('#campo_expediente').val(expediente_id);
+				$('#modal_add_pasacomision').modal();
+		 		$('#datos_expediente').html('<p>Has buscado a : <b>'+nombre_completo+' ('+ui.item.dni+')</b></p>'+
+		 									'<p>Expediente EDIS: <b>'+numedis+'</b></p>'+
+		 									'<p>Historia Social: <b>'+numhs+'</b></p>'
+		 					);
+			},
 
-		source:function(request, response){
-			$.ajax({
-				url:"/edis/participantes/searchjson",
-				data:{
-					term:request.term
-				},
-				dataType: "json",
-				success: function(data){
-					response($.map(data,function(el,index){
-						return{
-							value:el.expediente.numedis,
-							pasadato:el.expediente.id,
-                            nombre:el.nombre,
-                            apellidos:el.apellidos,
-                            dni: el.dni,
-                            id: el.id,
-                            exp: el.expediente.numedis,
-                            exp_id: el.expediente.id
-						};
-					}));
-				}
-			});
+			source:function(request, response){
+				$.ajax({
+					url:"/edis/participantes/searchjson",
+					data:{
+						term:request.term
+					},
+					dataType: "json",
+					success: function(data){
+						response($.map(data,function(el,index){
+							return{
+								value:el.expediente.numedis,
+								//pasadato:el.expediente.id,
+	                            nombre:el.nombre,
+	                            apellidos:el.apellidos,
+	                            dni: el.dni,
+	                            id: el.id,
+	                            exp: el.expediente.numedis,
+	                            hs: el.expediente.numhs,
+	                            exp_id: el.expediente.id
+							};						
+						}));
+					}
+				});
+			}
 
-		}
+		}).data("ui-autocomplete")._renderItem = function(ul, item){
+			return $("<li style='display:block'></li>")
+			.addClass('fa fa-plus')
+			.data("item.autocomplete", item)
+			.append("<a href='#' class='caza_expediente' id='"+item.exp_id+"'>"+"<b>("+item.exp+") "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
+			.appendTo(ul);
 
-	}).data("ui-autocomplete")._renderItem = function(ul, item){
-		return $("<li></li>")
-		.addClass('fa fa-plus')
-		.data("item.autocomplete", item)
-		.append("<a href='#' class='modal-btn' id='add_pasacomisión_"+item.exp_id+"'>"+"<b>("+item.exp+") "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
-		.appendTo(ul);
-	}; 
+		}; 
+	} 
+	/*
+	$('#add_pasacomision').click(function () {
 
-	
-	$('add_pasacomision').click(function () {
 		var expediente = $('#busca_para_comision').val();
-		//alert(expediente);
-		$('#datos_expedeiente').html(expediente);
+		$('#campo_expediente').val(expediente);
+	 	$('#modal_add_pasacomision').modal();
+	 	$('#datos_expediente').html('Expediente EDIS:'+expediente);
+
 	});
-
-
+	*/
 
 	// --> ************** BUSCADOR DEL MENU *************************************************************************
 
@@ -505,7 +518,6 @@ $(function(){
 				$.ajax({
 					type: "POST",
 					url: "/edis/asistentecomisions/add",
-					//data: {tecnico_id:tecnico_id,},
 					data: datos,
 					//dataType: "json",
 					cache: false,
@@ -517,6 +529,41 @@ $(function(){
 		location.reload();
 	});
 
+//--> Cambio de Secretario de comision
+
+	$('#secretaria').change(function() {
+
+		var secretario=$(this).val();
+		var datos_nuevo_secretario = {"id":secretario, "comision_id":comision_id, "rol":"secretario"};
+
+		
+
+		if (secretario) {
+
+			if (typeof antiguo_secretario != 'undefined') {
+			var datos_viejo_secretario = {"id":antiguo_secretario, "comision_id":comision_id, "rol":"asistente"};
+
+				$.ajax({
+					type: "POST",
+					url: "/edis/asistentecomisions/edit/"+antiguo_secretario,
+					data: datos_viejo_secretario,
+					cache: false,
+				});	
+			}
+
+				$.ajax({
+					type: "POST",
+					url: "/edis/asistentecomisions/edit/"+secretario,
+					data: datos_nuevo_secretario,
+					cache: false,
+					success: function() {
+						location.reload();
+					}
+				});	
+			}
+	});
+
+//--> FIN Cambio de Secretario de comision
 
 
 

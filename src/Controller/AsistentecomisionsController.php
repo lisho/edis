@@ -75,36 +75,9 @@ class AsistentecomisionsController extends AppController
 
             //debug($existe_asistente->toArray());exit();
 
-           /* 
-            if ($this->Asistentecomisions->save($asistentecomision)) {
-                $this->Flash->success(__('The asistentecomision has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The asistentecomision could not be saved. Please, try again.'));
-            }
-*/
-            //echo json_encode(compact('datos'));
             $this->autoRender=false;
         }
 
-
-/*
-
-        $asistentecomision = $this->Asistentecomisions->newEntity();
-        if ($this->request->is('post')) {
-            $asistentecomision = $this->Asistentecomisions->patchEntity($asistentecomision, $this->request->data);
-            if ($this->Asistentecomisions->save($asistentecomision)) {
-                $this->Flash->success(__('The asistentecomision has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The asistentecomision could not be saved. Please, try again.'));
-            }
-        }
-        $comisions = $this->Asistentecomisions->Comisions->find('list', ['limit' => 200]);
-        $tecnicos = $this->Asistentecomisions->Tecnicos->find('list', ['limit' => 200]);
-        $this->set(compact('asistentecomision', 'comisions', 'tecnicos'));
-        $this->set('_serialize', ['asistentecomision']);
-*/
     }
 
     /**
@@ -116,13 +89,14 @@ class AsistentecomisionsController extends AppController
      */
     public function edit($id = null)
     {
+        
         $asistentecomision = $this->Asistentecomisions->get($id, [
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $asistentecomision = $this->Asistentecomisions->patchEntity($asistentecomision, $this->request->data);
             if ($this->Asistentecomisions->save($asistentecomision)) {
-                $this->Flash->success(__('The asistentecomision has been saved.'));
+                //$this->Flash->success(__('The asistentecomision has been saved.'));
                 return $this->redirect(['action' => 'index']);
             } else {
                 $this->Flash->error(__('The asistentecomision could not be saved. Please, try again.'));
@@ -152,4 +126,5 @@ class AsistentecomisionsController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
 }

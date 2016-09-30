@@ -71,6 +71,19 @@
         </div>
 
         <div class="form-group">
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este EXPEDIENTE <span class="required">*</span></label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <?php
+                    echo $this->Form->input('observaciones', [
+                            'class'=>'editor form-control col-md-7 col-xs-12',
+                            //'required' => 'required',
+                            'label' => ['text' => '']
+                        ]);
+                ?> 
+            </div>
+        </div>
+
+        <div class="form-group">
             <label class="control-label col-md-3 col-sm-3 col-xs-12"><p>Ceas de referencia:</p>
                 <?= $this->Html->link('', '#', [     
                                     'class'=> 'btn btn-xs modal-btn btn-info fa fa-edit',
@@ -252,19 +265,6 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-            </div>
-        </div>
-  
-        <div class="form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este EXPEDIENTE <span class="required">*</span></label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <?php
-                    echo $this->Form->input('observaciones', [
-                            'class'=>'editor form-control col-md-7 col-xs-12',
-                            //'required' => 'required',
-                            'label' => ['text' => '']
-                        ]);
-                ?> 
             </div>
         </div>
         

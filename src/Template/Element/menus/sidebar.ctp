@@ -89,7 +89,7 @@
                   </li>
                   <li><a><i class="fa fa-table"></i> Comisiones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><?= $this->Html->link('Vengo de comisión', ['controller'=> 'Comisions', 'action'=>'index']) ?></li>
+                      <li><?= $this->Html->link('Tengo que ir a una comisión ', ['controller'=> 'Comisions', 'action'=>'index']) ?></li>
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
                     </ul>
                   </li>

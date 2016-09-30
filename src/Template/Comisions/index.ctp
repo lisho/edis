@@ -1,4 +1,4 @@
-<h1><i class="fa fa-suitcase">   Vengo de comisión...</i>
+<h1><i class="fa fa-suitcase">   Panel de Gestión de Comisiones...</i>
 <?= $this->Html->link('', '#', [     
                                     'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus pull-right',
                                     'id'=>'add_comision',
@@ -27,8 +27,11 @@
                                 </div>
                            
                             <div class="count"><?= $this->Time->format($comision->fecha, "dd/MM/yyyy", null) ?></div>
-                            <h3><?= h($comision->tipo) ?></h3>
-                              
+                                <h3><?= h($comision->tipo) ?>
+                                <button class="btn btn-primary" type="button">
+                                  <span class="badge"> <?= count($comision->pasacomisions);?> </span>
+                                </button>
+                                </h3>
                             </div>
                           </div>
                         </a>

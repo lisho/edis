@@ -72,8 +72,9 @@ class PasacomisionsTable extends Table
             ->notEmpty('informeedis');
 
         $validator
-            ->requirePresence('observaciones', 'create')
-            ->notEmpty('observaciones');
+            //->requirePresence('observaciones', 'create')
+            //->notEmpty('observaciones')
+        ;
 
         return $validator;
     }

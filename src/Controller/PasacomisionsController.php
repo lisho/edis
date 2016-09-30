@@ -77,20 +77,23 @@ class PasacomisionsController extends AppController
     public function edit($id = null)
     {
         $pasacomision = $this->Pasacomisions->get($id, [
-            'contain' => []
+            'contain' => ['Expedientes', 'Comisions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pasacomision = $this->Pasacomisions->patchEntity($pasacomision, $this->request->data);
             if ($this->Pasacomisions->save($pasacomision)) {
                 $this->Flash->success(__('The pasacomision has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'comisions', 'action' => 'view', $pasacomision->comision->id]);
             } else {
                 $this->Flash->error(__('The pasacomision could not be saved. Please, try again.'));
             }
         }
-        $expedientes = $this->Pasacomisions->Expedientes->find('list', ['limit' => 200]);
-        $comisions = $this->Pasacomisions->Comisions->find('list', ['limit' => 200]);
-        $this->set(compact('pasacomision', 'expedientes', 'comisions'));
+        //$expedientes = $this->Pasacomisions->Expedientes->find('list', ['limit' => 200]);
+        //$comisions = $this->Pasacomisions->Comisions->find('list', ['limit' => 200]);
+        $this->set(compact('pasacomision'
+                            //, 'expedientes', 
+                            //'comisions'
+                        ));
         $this->set('_serialize', ['pasacomision']);
     }
 
@@ -106,10 +109,11 @@ class PasacomisionsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $pasacomision = $this->Pasacomisions->get($id);
         if ($this->Pasacomisions->delete($pasacomision)) {
-            $this->Flash->success(__('The pasacomision has been deleted.'));
+            $this->Flash->success(__('Se ha eliminado correctamente el expediente de esta comisión.'));
         } else {
-            $this->Flash->error(__('The pasacomision could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No se ha podido eliminar el expediente de esta comisión.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
     }
+    
 }

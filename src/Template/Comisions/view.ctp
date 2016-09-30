@@ -1,15 +1,44 @@
+
 <h1><i class="fa fa-folder-open"></i>  Comisión <?= $comision->tipo; ?><small><?= ' '.$this->Time->format($comision->fecha, "dd/MM/yyyy", null); ?></small></h1>
 
 <!-- Columna Izquierda -->   
 <div class="col-md-3 col-sm-4 col-xs-12">
- 
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2><?= __('Buscador...') ?></h2>
+             <?= $this->Element('menus/menu_panel');?>
+             <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="form-group">
+                <p>Busca el expediente que quieres añadir a la comisión. Puedes usar el niombre, los apellidos o el DNI/NIE de cualquier persona asociada al expediente que deseas añadir.</p>
+                        <input id="busca_para_comision" type="text" class="form-control" placeholder="Buscar a..." autocomplete="off">
+                </div>
+      
+        
+                <p><u>Si no existe ningún usario del expediente en la aplicación, debes <b>crear un nuevo expediente</b></u> para añadirlos antes de incluirlos en una comisión. Puedes hacerlo desde 
+                <?= $this->Html->link('', ['controller'=> 'Expedientes', 'action'=>'add'],
+                                            ['class'=>'btn btn-xs modal-btn btn-info fa fa-plus', 'target' => '_blank',
+                                              'data-container'=>"body",
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Accede directamente a añadir un nuevo Expediente a la aplicación." 
+                                            ]); ?>    
+                </p>
+        </div>    
+    </div>
+
  <!-- Panel de Observaciones -->   
     <div class="x_panel">
           <div class="x_title">
             <h2><?= __('Observaciones') ?></h2>
-            
+             <?= $this->Element('menus/menu_panel');?>
             <div class="clearfix"></div>
           </div>
+                
+    
+          <div class="x_content">
                 <div class="content">
 
                     <?php if ($comision->observaciones===''): ?>
@@ -19,9 +48,6 @@
                     <?php endif ?>
 
                 </div>
-    
-          <div class="x_content">
-
         </div>
     </div>
 
@@ -39,7 +65,13 @@
           <div class="x_content">
             <?php foreach ($comision->asistentecomisions as $asistente): ?>
                 <div>
-                    <p><i class="glyphicon glyphicon-check"></i> <?= $asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos.' ('.$asistente->tecnico->equipo->nombre.')'; ?></p>
+                    <?php if ($asistente->rol==='secretario'): ?>
+                        <p><strong><i class="glyphicon glyphicon-star"></i> <?= $asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos.' ('.$asistente->tecnico->equipo->nombre.') - Secr.'; ?></strong></p>
+                     <?php else: ?>
+                        <p><i class="glyphicon glyphicon-check"></i> <?= $asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos.' ('.$asistente->tecnico->equipo->nombre.')'; ?></p>               
+                    <?php endif; ?>
+
+                    
                 </div>
 
             <?php endforeach ?>
@@ -52,6 +84,27 @@
                                     'data-placement'=>"right",
                                     'data-content'=>"Añade y elimina asistentes a esta comisión."]); ?>
 
+
+
+
+
+
+            <p>Selecciona al Secretario de la comisión...</p>
+            <?php if($secretario===''){$secretario='Selecciona un TEDIS...';} ?>
+            <?= $this->Form->input('secretaria',[   'id'=>'secretaria', 
+                                                    'class'=>'form-control col-md-7 col-xs-12',
+                                                    'type'=>'select', 
+                                                    'options' => $posibles_secretarios,
+                                                    'empty' => $secretario,
+                                                    'label' => ''
+                                                    ]); ?>
+
+
+
+
+
+
+<!-- INICIO MODAL Añadir asistentes a la comision-->
                 <div id="modal_add_asistentes" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -62,10 +115,13 @@
                             <div class="modal-body">
                                 
                                  <?php foreach ($tecnicos as $tecnico): ?>
-                                    <?php $checked=''; ?>
+                                    <?php $checked=''; $secretario_check='';?>
                                     <?php if (isset($asistentes) && in_array($tecnico->id, $asistentes)): ?>
                                         <?php $checked='checked'; ?>
                                     <?php endif ?>
+                                    <?php //if ($tecnico->rol === 'secretario' && in_array($tecnico->id, $asistentes)): ?>
+                                        <?php //$secretario_check='secretario'; ?>
+                                    <?php //endif ?>
                                     <div class="checkbox">
                                         <label>
                                             <input class="tecnico_check" <?= $checked;?> 
@@ -75,9 +131,10 @@
                                                     placeholder=""
                                                     data-comision = "<?= $comision->id; ?>">
                                         <?= $tecnico->nombre.' '.$tecnico->apellidos.' ('.$tecnico->equipo->nombre.').'; ?>
+
                                         </label>
-                                    </div>
-                      
+                                   </div>     
+                                     
                                 <?php endforeach ?>
                  
                             </div>
@@ -90,27 +147,20 @@
                     </div>
                 </div>         
 
-        </div>
+        </div> <!-- Fin Panel Asistentes a comisión-->
+
+
     </div>
 
-     <fieldset class="">
-        <div class="input-group">
-            <input id="busca_para_comision" type="text" class="form-control" placeholder="Buscar a..." autocomplete="off">
-            <span class="input-group-btn">
-              <button class="btn btn-default modal-btn" id="add_pasacomision" type="button"><i class="fa fa-plus"></i></button>
-            </span>
-        </div>
-
-        <p>Busca el expediente que quieres añadir a la comisión. Puedes usar el niombre, los apellidos o el DNI/NIE de cualquier persona asociada al expediente que deseas añadir.</p>
-        
-       
-    </fieldset>
+           
 
 </div>  <!-- // FIN columna izquierda -->   
 
 <!-- // PANEL DERECHO - Expedientes por CEAS --> 
 
 <div class="col-md-9 col-sm-8 col-xs-12">
+
+    
 
     <div class="x_panel">
         <div class="x_title">
@@ -139,17 +189,18 @@
                     <div class="tab-pane" id="<?= $key; ?>-r">
                      
                         <?php if (!empty($comision->pasacomisions)): ?>
-
-                             <table>
+                            <h3><?= $ceas; ?></h3>
+                             <table class="table">
                                     <thead>
                                         <tr>
                                             <th>Motivo</th>
                                             <th>Clasif.</th>
                                             <th>Numedis</th>
-                                            <th>Numhas</th>
+                                            <th>NumHS</th>
                                             <th>Titular</th>
                                             <th>Observ.</th>
-                                            <th>>Docum.</th>
+                                            <th>Docum.</th>
+                                            <th></th>
                                             
                                         </tr>
                                     </thead>
@@ -157,15 +208,32 @@
                                         
                                         <?php foreach ($comision->pasacomisions as $pasacomision): ?>
                                
-                                            <?php if ($pasacomision->expediente->ceas===$key): ?>
+                                            <?php if ($pasacomision->expediente->ceas==$key): ?>
                                                 <tr>
-                                                    <td>data</td>
-                                                    <td></td>   
-                                                    <td></td>   
-                                                    <td></td>   
-                                                    <td></td>   
-                                                    <td></td>   
-                                                    <td></td>   
+                                                    <td><?= $pasacomision->motivo; ?></td>
+                                                    <td><?= $pasacomision->clasificacion; ?></td>   
+                                                    <td><?= $pasacomision->expediente->numedis; ?></td>   
+                                                    <td><?= $pasacomision->expediente->numhs; ?></td>   
+                                                    <td>
+                                                        <?php foreach ($pasacomision->expediente->participantes as $participante): ?>
+                                                            <?php if($participante->relation_id=='1'){ echo $participante->nombre.' '.$participante->apellidos; }?>
+                                                        <?php endforeach ?>
+
+                                                    </td>   
+                                                    <td><?= $pasacomision->observaciones; ?></td>   
+                                                    <td>
+                                                        <?php if ($pasacomision->informeedis==1){echo '<span class="label label-warning">IE</span>';}
+                                                                else{echo '<span class="label label-default">IE</span>';} ?>
+                                                                   
+                                                        <?php if ($pasacomision->diligencia==1){echo '<span class="label label-warning">D</span>';}
+                                                                else{echo '<span class="label label-default">D</span>';} ?>
+
+                                                    </td>  
+                                                    <td>
+                                                        <?= $this->Html->link('', ['controller' =>'Pasacomisions','action' => 'edit', $pasacomision->id], ['class'=> 'fa fa-edit']) ?> 
+                                                        <?= $this->Form->postLink('', ['controller' =>'Pasacomisions', 'action' => 'delete', $pasacomision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar este expediente de esta comisión?']); ?> 
+
+                                                    </td> 
                                                 </tr>
                                             <?php endif ?>
                                         <?php endforeach ?>
@@ -211,32 +279,39 @@
             </div>
             <div class="modal-body">
 
-                <?= $this->Form->create($pasacomision,[
-                                            'url' => ['controller' => 'Pasacomisions', 'action' => 'add'], 
-                                            'class'=>'form-horizontal form-label-left data-parsley-validate=""'
-                                            ]); ?>
+                    <?= $this->Form->create($nuevo_pasacomision,[
+                                                    'class'=>'form-horizontal form-label-left data-parsley-validate=""'
+                                                    ]); ?>
 
+                <div class="row">
 
-                <?= $this->Form->input('comision_id', [
-                                    'type'=>'hidden',
-                                    'value' => $comision->id
-                                ]);
-                        ?> 
-
-                <?= $this->Form->input('expediente_id', [
-                                    'type'=>'text',
-                                    'id' => 'campo_expediente'
-                                ]);
-                        ?> 
-
-                <div id='datos_expediente'>
-                    
+                    <div class="form-group has-feedback">
+              
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Datos del expediente: <span class="required">*</span></label>
+                        
+                        <div id="datos_expediente" class="col-md-9 col-sm-9 col-xs-12"></div>
+                    </div>
                 </div>
+
+                <div class="row">
                     <div class="form-group has-feedback">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Motivo del paso por comisión: <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
+
+                            <?= $this->Form->input('pasacomision.comision_id', [
+                                                'type'=>'hidden',
+                                                'value' => $comision->id
+                                            ]);
+                                    ?> 
+
+                            <?= $this->Form->input('pasacomision.expediente_id', [
+                                                'type'=>'hidden',
+                                                'id' => 'campo_expediente'
+                                            ]);
+                                    ?> 
+
                             <?= $this->Form->imput(
-                                        'motivo',
+                                        'pasacomision.motivo',
                                         [
                                             'type' => 'radio',
                                             'options'=>[
@@ -255,42 +330,116 @@
                                         ]
 
                                     );
+                                ?> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Clasificación: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                        
+                        <?= $this->Form->imput(
+                                        'pasacomision.clasificacion',
+                                        [
+                                            'type' => 'radio',
+                                            'options'=>[
+                                                ['value' => 'E', 'text' => 'Estructural',
+                                                ],
+                                                ['value' => 'C', 'text' => 'Coyuntural', 
+                                                ],
+                                            ],
+                                            'templates' => [
+                                                'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
+                                            ], 
+                                            'label' => ["class" => "radio"]
+
+                                        ]
+
+                                    );
                             ?> 
                         </div>
                     </div>
+                </div>
 
-                 <?= $this->Form->input('diligencia', [
-                                    'type'=>'check-box',
-                                    //'options' => ['INI', 'RIP', 'ROF'],
-                                ]);
-                        ?> 
+                <div class="row">
+                    <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Documentación que se adjunta: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <?= $this->Form->input('pasacomision.diligencia', [
+                                            'type'=>'checkbox',
+                                        ]);
+                                ?> 
 
-                <?= $this->Form->input('informeedis', [
-                                    'type'=>'check-box',
-                                    'class' => '',
-                                    //'options' => ['INI', 'RIP', 'ROF'],
-                                ]);
-                        ?> 
-
-
-                <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha de Nacimiento <span class="required">*</span></label>
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <?php
-
-                            echo $this->Form->input('nacimiento', [
-                                    'type'=>'text',
-                                    //'dateFormat' => 'DMY',
-                                    'class'=>'datepicker form-control col-md-7 col-xs-12',
-                                    //'required' => 'required',
-                                    'label' => ['text' => ''],
-                                    'placeholder' => '_ _ / _ _ / _ _ _ _'
-                                    //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
-                                ]);
-                        ?> 
+                        <?= $this->Form->input('pasacomision.informeedis', [
+                                            'type'=>'checkbox',
+                                            'class' => '',
+                                        ]);
+                                ?> 
+                        </div>
                     </div>
                 </div>
- 
+<!-- BORRADOR -->
+
+<!--
+
+                <div class="row">
+                    <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Numero de RGC: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <?= $this->Form->input('pasacomision.diligencia', [
+                                            'type'=>'text',
+                                            'label'=>""
+                                        ]);
+                                ?> 
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Titular de RGC: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         
+                        <?= $this->Form->input('pasacomision.informeedis', [
+                                            'type'=>'text',
+                                            'class' => '',
+                                            'label'=>""
+                                        ]);
+                                ?> 
+                        </div>
+                    </div>
+                </div>
+
+
+-->
+<!-- FIN BORRADOR -->
+
+
+
+
+
+
+
+                <div class="row">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este Expediente: </label>
+                        <div class="col-md-9 col-sm-9 col-xs-12">
+                            <?php
+                                echo $this->Form->input('pasacomision.observaciones', [
+                                        'class'=>'editor form-control col-md-7 col-xs-12',
+                                        //'required' => 'required',
+                                        'label' => ['text' => '']
+                                    ]);
+                            ?> 
+                        </div>
+                    </div>
+                </div>
+               
             </div>
             <div class="modal-footer">
                 <?= $this->Form->button('Guardar cambios ->', ['class' => 'btn btn-success']) ?>
@@ -307,5 +456,12 @@
 
 <!-- Pasamos el valor de la variable comision id para el ajax-->
 <script type="text/javascript">
-var comision_id = '<?php echo $comision['id'] ?>';
+var comision_id = '<?php echo $comision['id']; ?>';
 </script>
+
+<!-- Pasamos el valor de la variable antiguo_secretario para el ajax-->
+<?php if (!empty($secretario)): ?>
+    <script>
+        var antiguo_secretario = '<?php echo key($secretario); ?>';
+    </script>       
+<?php endif; ?>

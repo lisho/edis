@@ -112,4 +112,29 @@ class TecnicosController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+    /**
+     * PASAMOS A PRIMERA EN MAYUSCULA LOS CAMPOS DE LA FUNCION
+     */
+    public function mayuscula()
+    {
+        $tecnicos = $this->Tecnicos->find('all');
+
+        foreach ($tecnicos as $t) {
+            $tecnico = $t->toArray();
+            $mayusculas = ["Á", "É", "Í", "Ó", "Ú"];
+            $minusculas = ["á", "é", "í", "ó", "ú"];
+
+            $tecnico['nombre']=ucwords(strtolower($tecnico['nombre']));
+            $tecnico['nombre']=str_replace($mayusculas,$minusculas,$tecnico['nombre']);
+            $tecnico['apellidos']=ucwords(strtolower($tecnico['apellidos']));
+            $tecnico['apellidos']=str_replace($mayusculas,$minusculas,$tecnico['apellidos']);
+            $t= $this->Tecnicos->patchEntity($t, $tecnico);
+
+            $this->Tecnicos->save($t);
+        }
+        debug($t);
+        exit();
+        
+    }
 }
