@@ -166,14 +166,6 @@
         <div class="x_title">
             <big>Expedientes que han pasado por esta comisión </big>
 
-        <!--     <?= $this->Html->link('', '#', [     
-                                    'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus',
-                                    'id'=>'add_pasacomisión',
-                                    'data-container'=>"body",
-                                    'data-toggle'=>"popover",
-                                    'data-placement'=>"right",
-                                    'data-content'=>"Añade un nuevo expediente a esta comisión..."]) ?> -->
-
             <?= $this->Element('menus/menu_panel');?>
            
             <div class="clearfix"></div>
@@ -185,6 +177,62 @@
               <!-- Tab panes -->
               <div class="tab-content">
                 
+                <div class="tab-pane active" id="todos-r"> 
+                    <?php foreach ($expedientes_ordenados as $key => $ceas): ?>
+
+                        <h3><?= $listado_ceas[$key]; ?></h3>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Motivo</th>
+                                        <th>Clasif.</th>
+                                        <th>Numedis</th>
+                                        <th>NumHS</th>
+                                        <th>Titular</th>
+                                        <th>Observ.</th>
+                                        <th>Docum.</th>
+                                        <th></th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($ceas as $pasacomision): ?>
+
+                                        <tr>
+                                            <td><?= $pasacomision->motivo; ?></td>
+                                            <td><?= $pasacomision->clasificacion; ?></td>   
+                                            <td><?= $pasacomision->expediente->numedis; ?></td>   
+                                            <td><?= $pasacomision->expediente->numhs; ?></td>   
+                                            <td>
+                                                <?php foreach ($pasacomision->expediente->participantes as $participante): ?>
+                                                    <?php if($participante->relation_id=='1'){ echo $participante->nombre.' '.$participante->apellidos; }?>
+                                                <?php endforeach ?>
+
+                                            </td>   
+                                            <td><?= $pasacomision->observaciones; ?></td>   
+                                            <td>
+                                                <?php if ($pasacomision->informeedis==1){echo '<span class="label label-warning">IE</span>';}
+                                                        else{echo '<span class="label label-default">IE</span>';} ?>
+                                                           
+                                                <?php if ($pasacomision->diligencia==1){echo '<span class="label label-warning">D</span>';}
+                                                        else{echo '<span class="label label-default">D</span>';} ?>
+
+                                            </td>  
+                                            <td>
+                                                <?= $this->Html->link('', ['controller' =>'Pasacomisions','action' => 'edit', $pasacomision->id], ['class'=> 'fa fa-edit']) ?> 
+                                                <?= $this->Form->postLink('', ['controller' =>'Pasacomisions', 'action' => 'delete', $pasacomision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar este expediente de esta comisión?']); ?> 
+
+                                            </td> 
+                                        </tr>
+
+
+                                    <?php endforeach ?>
+
+                                </tbody>
+                            </table>
+                    <?php endforeach ?>
+                </div>
+
                 <?php foreach ($listado_ceas as $key => $ceas): ?>
                     <div class="tab-pane" id="<?= $key; ?>-r">
                      
@@ -256,7 +304,7 @@
               <!-- required for floating -->
               <!-- Nav tabs -->
               <ul class="nav nav-tabs tabs-right">
-                
+                    <li><a href="#todos-r" data-toggle="tab" aria-expanded="true">Visión Global</a>
                 <?php foreach ($listado_ceas as $key => $ceas): ?>
                     <li><a href="#<?= $key; ?>-r" data-toggle="tab"><?= $ceas; ?></a>
                 <?php endforeach ?>    
@@ -382,48 +430,6 @@
                         </div>
                     </div>
                 </div>
-<!-- BORRADOR -->
-
-<!--
-
-                <div class="row">
-                    <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Numero de RGC: <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         <?= $this->Form->input('pasacomision.diligencia', [
-                                            'type'=>'text',
-                                            'label'=>""
-                                        ]);
-                                ?> 
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="form-group">
-                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Titular de RGC: <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                         
-                        <?= $this->Form->input('pasacomision.informeedis', [
-                                            'type'=>'text',
-                                            'class' => '',
-                                            'label'=>""
-                                        ]);
-                                ?> 
-                        </div>
-                    </div>
-                </div>
-
-
--->
-<!-- FIN BORRADOR -->
-
-
-
-
-
-
 
                 <div class="row">
                     <div class="form-group">

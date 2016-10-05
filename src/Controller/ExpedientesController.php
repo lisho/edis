@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * Expedientes Controller
@@ -18,14 +20,23 @@ class ExpedientesController extends AppController
      */
     public function index()
     {
+        
+        $expedientes = $this->Expedientes->find('all', [
+            'contain' => ['Participantes'=>[
+                                'conditions' => ['Participantes.relation_id'=>'1']
+                ]
+            ],
+        ]);
+
+/*
         $this->paginate = [
             'contain' => ['Participantes'=>[
                                 'conditions' => ['Participantes.relation_id'=>'1']
                 ]
             ],
-            //'conditions' => ['participantes.relation_id'=>'1']
         ];
         $expedientes = $this->paginate($this->Expedientes);
+*/
         $listado_ceas = $this->listadoEquipo('ceas');
 
         $this->set(compact('expedientes', 'listado_ceas'));
@@ -42,6 +53,7 @@ class ExpedientesController extends AppController
      */
     public function view($id = null)
     {
+        $archivos_tree=[];
         $this->loadModel('Participantes');
         $participante = $this->Participantes->newEntity();
 
@@ -53,7 +65,7 @@ class ExpedientesController extends AppController
                                                                                 ]);
 
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos'],
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos','Pasacomisions.Comisions'],
 
         ]);
 
@@ -81,9 +93,14 @@ class ExpedientesController extends AppController
 
         $listado_ceas = $this->listadoEquipo('ceas');        
         $listado_relaciones = $this->listadoRelaciones();
-       unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.       
+        unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.       
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos'));
+        //*************************************************//
+        // Ceeamos el arbol de Archivos de este expediente //
+        //*************************************************//
+        $archivos=$this->archivosTree($expediente->numedis, $expediente->id);
+
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -105,7 +122,6 @@ class ExpedientesController extends AppController
 
             $this->request->data['participantes'][0]['foto']='';
             
-            $this->request->data['participantes'][0]['nacimiento']=null;
             if ( $this->request->data['participantes'][0]['nacimiento']) {
                  $this->request->data['participantes'][0]['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
@@ -114,7 +130,6 @@ class ExpedientesController extends AppController
                         );
             }
            
-
             $this->request->data['roles'][0]= array(
                                 //'expediente_id'=> $this->request->data['tecnico_ceas'],
                                 'id'=>'',
@@ -143,6 +158,19 @@ class ExpedientesController extends AppController
 //debug($expediente);exit();
 
             if ($this->Expedientes->save($expediente)) {
+
+                // Carpetas del expediente ...
+                if (!file_exists(WWW_ROOT . 'docs/'.$expediente->numedis)) {
+                    $dir = new Folder(WWW_ROOT . 'docs/'.$expediente->numedis, true, 0755);
+                    $this->Flash->success(__('Se ha creado correctamente la carpeta de documentos de este expediente.'));
+                } else {
+                    $this->Flash->error(__('La carpeta del expediente no se ha creado porque ya exite. Comprueba que es la correcta.'));
+                }     
+                
+
+//debug($dir);exit();
+
+
                 $this->Flash->success(__('El expediente '.$expediente['numedis'].' ha sido creado correctamente.'));
                 return $this->redirect(['action' => 'view',$expediente['id']]);
             } else {
@@ -243,6 +271,32 @@ class ExpedientesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
+    /**
+     * Delete method
+     *
+     * @param string|null $expediente $archivo $directorio
+     * @return \Cake\Network\Response|null Redirects to index.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function deleteArchivo($expediente=null, $archivo=null, $directorio='')
+    {
+       
+        if ($directorio==='') {
+            $file = WWW_ROOT . 'docs/'.$expediente.'/'.$archivo;
+        } else {
+            $file = WWW_ROOT . 'docs/'.$expediente.'/'.$directorio.'/'.$archivo;
+        }
+
+        $archivo = new File($file);
+       
+        if ($archivo->delete()) {
+            $this->Flash->success(__('El archivo se ha borrado correctamente.'));
+        } else {
+            $this->Flash->error(__('No se ha podido eliminar el archivo. Inténtalo de nuevo.'));
+        }
+        return $this->redirect($this->referer());
+    }
+
 
     /**
      * AddParticipante method
@@ -310,13 +364,91 @@ class ExpedientesController extends AppController
         $nueva_incidencia = $this->Incidencias->patchEntity($nueva_incidencia, $data);    
         //debug($nueva_incidencia);exit();
         if ($this->Incidencias->save($nueva_incidencia)) {
-            $this->Flash->success('Se ha añadido correctamente un nuevo miembro a la parrilla familiar del expediente');
+            $this->Flash->success('Se ha añadido correctamente una actuación a este expediente');
             
             return $this->redirect(['action' => 'view',$expediente['id']]);
             
         } else {
-            $this->Flash->error(__('Lo siento. No ha sido posible incluir a esa persona en el sistema. Por favor revisa los datos.'));
+            $this->Flash->error(__('Lo siento. No ha sido posible registrar la actuación en el sistema. Por favor revisa los datos.'));
         }
 
     }
+
+    public function addArchivos($expediente=null, $directorio='')
+    {
+        if ($directorio!='') {$directorio='/'.$directorio;}
+        
+        $archivos=$this->request->data;
+
+        if (!file_exists(WWW_ROOT . 'docs/'.$expediente.$directorio)) {
+                    $dir = new Folder(WWW_ROOT . 'docs/'.$expediente.$directorio, true, 0755);
+                    $this->Flash->success(__('La carpeta de documentos de este expediente no existía y se ha creado correctamente.'));
+                }
+
+        foreach ($archivos['add_files'] as $file) {
+                    
+                if (file_exists(WWW_ROOT . 'docs/'.$expediente.$directorio.'/'.$file['name'])) {
+                   
+                    $this->Flash->error(__('No es posible guardar el archivo'.$file['name'].' porque ya existe en este expediente. Cambia el nombre o borra el archivo existente antes de subir el nuevo.'));
+                   
+
+                } else {
+                    
+                    move_uploaded_file($file['tmp_name'], WWW_ROOT . 'docs/'.$expediente.$directorio. DS . $file['name']);
+                    $this->Flash->success(__('Se ha guardado correctamente el archivo '.$file['name']));
+                   
+                    //debug($file).exit();   
+                }           
+        }
+        return $this->redirect($this->referer());
+        $this->autoRender = false;
+
+    }
+
+     /**
+     * archivosTree method
+     *
+     * Crea un array con los directorios y archivos que contiene la carpetacon el
+     * número de expediente edis.
+     *
+     * Necesitamos pasarle:
+     *      - Número de expediente edis.
+     *   Redirecciona a la vista del expediente.
+     */
+
+    public function archivosTree($expediente=null,$expediente_id=null)
+    {
+
+        $root = WWW_ROOT . 'docs/'.$expediente.'/';
+        $longitud_nombre_carpeta = strlen($root);
+        $archivos_tree['/'] = [];
+        $dir = new Folder($root);
+        //$archivos = $dir->findRecursive();
+
+        $archivos = Folder::tree($root);
+        
+        foreach ($archivos[0] as $directorio) {
+            $directorio = substr($directorio,$longitud_nombre_carpeta);
+            if($directorio===false){$directorio='/';};
+            $archivos_tree[$directorio] = [];
+        }
+
+        foreach ($archivos[1] as $archivo) {
+            $file = new File($archivo);
+            $file_info = $file->info();
+            $change = $file->lastChange();
+            $change = date('d/m/Y H:m', $change);
+            $file_info['change'] = $change;
+            
+            $folder = substr($file_info['dirname'],$longitud_nombre_carpeta);
+            if ($folder === false) {$folder = '/';}
+            
+            $archivos_tree[$folder][] = $file_info;
+
+        }
+
+        return $archivos_tree;
+        $this->autoRender = false;
+    }
+
 }

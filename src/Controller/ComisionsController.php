@@ -77,19 +77,11 @@ class ComisionsController extends AppController
                 }                           
         }
 
-// BORRADOR      
+        // Ordenamos los Pasos por comisión por CEAS
 
-        foreach ($comision->pasacomisions as $expediente) {
-            $parrillas[]=$expediente->expediente->id;  
-        /*    
-            foreach ($expediente->expediente->participantes as $participante) {
-                          $parrillas[$expediente->expediente->id][]=$participante->nombre.' '. $participante->apellidos; 
-                      }    */    
+        foreach ($comision->pasacomisions as $exp) {
+            $expedientes_ordenados[$exp->expediente->ceas][]=$exp;  
         }
-
-//debug($parrillas);exit();
-
-// fin BORRADOR
 
         $this->loadModel('Tecnicos');
         $tecnicos = $this->Tecnicos->find('all', ['contain' => ['Asistentecomisions', 'Equipos'],
@@ -100,7 +92,7 @@ class ComisionsController extends AppController
                     $this->addPasacomision($data, $id, $nuevo_pasacomision);
                 }
 
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario'));
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados'));
         $this->set('_serialize', ['comision']);
     }
 

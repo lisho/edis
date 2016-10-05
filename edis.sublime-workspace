@@ -4,12 +4,76 @@
 		"selected_items":
 		[
 			[
+				"expediente",
+				"expediente"
+			],
+			[
+				"dir",
+				"directorio"
+			],
+			[
+				"r",
+				"rgba()"
+			],
+			[
+				"margin",
+				"margin"
+			],
+			[
+				"FILE",
+				"file"
+			],
+			[
+				"FOLDER",
+				"folder"
+			],
+			[
+				"direc",
+				"directorio_min"
+			],
+			[
+				"For",
+				"foreach"
+			],
+			[
+				"a",
+				"a\t<a>"
+			],
+			[
+				"script",
+				"script\t<script>"
+			],
+			[
+				"da",
+				"datos_expediente"
+			],
+			[
+				"div",
+				"div\t<div>"
+			],
+			[
+				"comisi",
+				"comision"
+			],
+			[
+				"for",
+				"foreach\tforeach …"
+			],
+			[
+				"comision",
+				"comision_id"
+			],
+			[
+				"clas",
+				"class\tclass …"
+			],
+			[
 				"nueva",
 				"nueva_incidencia"
 			],
 			[
 				"if",
-				"ifelse	if … else …"
+				"ifelse\tif … else …"
 			],
 			[
 				"ma",
@@ -20,20 +84,12 @@
 				"posible"
 			],
 			[
-				"for",
-				"foreach	PHP: foreach {value} statement"
-			],
-			[
-				"margin",
-				"margin-bottom"
-			],
-			[
 				"read",
-				"ready	$(document).ready"
+				"ready\t$(document).ready"
 			],
 			[
 				"remove",
-				"removeClass	.removeClass()"
+				"removeClass\t.removeClass()"
 			],
 			[
 				"nuevo",
@@ -41,11 +97,11 @@
 			],
 			[
 				"append",
-				"appendTo	.appendTo()"
+				"appendTo\t.appendTo()"
 			],
 			[
 				"ri",
-				"rig	right"
+				"rig\tright"
 			],
 			[
 				"mar",
@@ -61,7 +117,7 @@
 			],
 			[
 				"app",
-				"append	.append()"
+				"append\t.append()"
 			],
 			[
 				"apend",
@@ -77,7 +133,7 @@
 			],
 			[
 				"fun",
-				"fun	function …"
+				"fun\tfunction …"
 			],
 			[
 				"icono",
@@ -93,7 +149,7 @@
 			],
 			[
 				"add",
-				"addClass	.addClass()"
+				"addClass\t.addClass()"
 			],
 			[
 				"marg",
@@ -121,10 +177,6 @@
 			],
 			[
 				"ex",
-				"expediente_id"
-			],
-			[
-				"expediente",
 				"expediente_id"
 			],
 			[
@@ -157,7 +209,7 @@
 			],
 			[
 				"i",
-				"inarray	$.inArray()"
+				"inarray\t$.inArray()"
 			],
 			[
 				"E",
@@ -165,7 +217,7 @@
 			],
 			[
 				"eac",
-				"each	.each()"
+				"each\t.each()"
 			],
 			[
 				"solo",
@@ -213,7 +265,7 @@
 			],
 			[
 				"f",
-				"fun	function …"
+				"fun\tfunction …"
 			],
 			[
 				"TH",
@@ -241,7 +293,7 @@
 			],
 			[
 				"pa",
-				"parse	$.parseJSON()"
+				"parse\t$.parseJSON()"
 			],
 			[
 				"num",
@@ -305,7 +357,7 @@
 			],
 			[
 				"fo",
-				"for	for …"
+				"for\tfor …"
 			],
 			[
 				"clasi",
@@ -337,7 +389,7 @@
 			],
 			[
 				"sw",
-				"switch	switch …"
+				"switch\tswitch …"
 			],
 			[
 				"dis",
@@ -349,7 +401,7 @@
 			],
 			[
 				"php",
-				"php	<?php … ?>"
+				"php\t<?php … ?>"
 			],
 			[
 				"arra",
@@ -433,7 +485,7 @@
 			],
 			[
 				"focu",
-				"focusout	.focusout()"
+				"focusout\t.focusout()"
 			],
 			[
 				"crecer",
@@ -449,7 +501,7 @@
 			],
 			[
 				"scri",
-				"script	Tag"
+				"script\tTag"
 			],
 			[
 				"clasificado",
@@ -462,84 +514,44 @@
 			[
 				"hei",
 				"height"
-			],
-			[
-				"print",
-				"print_r"
-			],
-			[
-				"emp",
-				"empleos"
-			],
-			[
-				"fade",
-				"fadeOut	.fadeOut()"
-			],
-			[
-				"DAT",
-				"datos"
-			],
-			[
-				"pri",
-				"print_r"
-			],
-			[
-				"lista_",
-				"lista_candidatos"
-			],
-			[
-				"array_p",
-				"array_push"
-			],
-			[
-				"list",
-				"lista_candidatos"
-			],
-			[
-				"th",
-				"this	PHP: $this->"
-			],
-			[
-				"dni",
-				"dni_candidatos"
-			],
-			[
-				"set",
-				"setter	PHP: setter"
-			],
-			[
-				"can",
-				"candidatos"
-			],
-			[
-				"clasifica",
-				"clasificacion"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"file": "src/Controller/ExpedientesController.php",
+			"settings":
+			{
+				"buffer_size": 17040,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Template/Comisions/view.ctp",
+			"settings":
+			{
+				"buffer_size": 23795,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "src/Controller/ComisionsController.php",
 			"settings":
 			{
-				"buffer_size": 4650,
+				"buffer_size": 7500,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Template/Comisions/index.ctp",
+			"file": "src/Template/Expedientes/view.ctp",
 			"settings":
 			{
-				"buffer_size": 7297,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Expedientes/index.ctp",
-			"settings":
-			{
-				"buffer_size": 3259,
+				"buffer_size": 57598,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -547,7 +559,8 @@
 			"file": "webroot/js/mi_js.js",
 			"settings":
 			{
-				"buffer_size": 12087,
+				"buffer_size": 15652,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -555,7 +568,8 @@
 			"file": "webroot/css/mis_estilos.css",
 			"settings":
 			{
-				"buffer_size": 5124,
+				"buffer_size": 5229,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -563,7 +577,17 @@
 			"file": "src/Template/Element/layout_elements/scripts.ctp",
 			"settings":
 			{
-				"buffer_size": 4140,
+				"buffer_size": 4254,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "src/Template/Element/layout_elements/head.ctp",
+			"settings":
+			{
+				"buffer_size": 1349,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -579,7 +603,8 @@
 			"file": "src/Template/Element/menus/sidebar.ctp",
 			"settings":
 			{
-				"buffer_size": 10312,
+				"buffer_size": 10323,
+				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
@@ -642,32 +667,55 @@
 	"expanded_folders":
 	[
 		"/opt/lampp/htdocs/edis",
+		"/opt/lampp/htdocs/edis/config",
 		"/opt/lampp/htdocs/edis/src",
+		"/opt/lampp/htdocs/edis/src/Controller",
 		"/opt/lampp/htdocs/edis/src/Model",
 		"/opt/lampp/htdocs/edis/src/Model/Table",
 		"/opt/lampp/htdocs/edis/src/Template",
-		"/opt/lampp/htdocs/edis/src/Template/Equipos",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes",
-		"/opt/lampp/htdocs/edis/src/Template/Users"
+		"/opt/lampp/htdocs/edis/src/Template/Comisions",
+		"/opt/lampp/htdocs/edis/webroot",
+		"/opt/lampp/htdocs/edis/webroot/js"
 	],
 	"file_history":
 	[
-		"/opt/lampp/htdocs/edis/src/Model/Table/ComisionsTable.php",
+		"/opt/lampp/htdocs/edis/webroot/js/mi_jstree.js",
+		"/opt/lampp/htdocs/edis/config/paths.php",
+		"/opt/lampp/htdocs/edis/config/routes.php",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Roles/mis_roles.ctp",
+		"/opt/lampp/htdocs/excyl2016/src/Template/Excyl2016/ennomina.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
+		"/opt/lampp/htdocs/edis/src/Template/Participantes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/PasacomisionsController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/ComisionsController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Comisions/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/AsistentecomisionsController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Comisions/index.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Pasacomisions/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Table/PasacomisionsTable.php",
+		"/opt/lampp/htdocs/edis/src/Controller/TecnicosController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
+		"/opt/lampp/htdocs/edis/src/Model/Table/TecnicosTable.php",
+		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/add.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
+		"/opt/lampp/htdocs/papis/papis/app/Controller/NotasController.php",
+		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
+		"/opt/lampp/htdocs/edis/src/Model/Table/ComisionsTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/menus/menu_principal.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Participantes/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Incidencias/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/IncidenciasController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Incidencias/gestion.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Incidencias/add.ctp",
-		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/IncidenciasTable.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/UsersTable.php",
@@ -678,18 +726,12 @@
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Roles/mis_roles.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
 		"/opt/lampp/htdocs/edis/webroot/js/bootstrap-datepicker.js",
 		"/opt/lampp/htdocs/edis/webroot/js/datatables.net/js/jquery.dataTables.js",
 		"/opt/lampp/htdocs/edis/src/Controller/AvisosController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/profile.html",
 		"/opt/lampp/htdocs/edis/webroot/img/avatar/avatar-M.svg",
-		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/add.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/edit.ctp",
 		"/etc/modprobe.d/ath9k.conf",
-		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Entity/Expediente.php",
 		"/usr/share/applications/firefox.desktop",
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/vendors/datatables.net-buttons/js/buttons.print.js",
@@ -741,10 +783,8 @@
 		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/head.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/scripts.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/EquiposController.php",
-		"/opt/lampp/htdocs/edis/src/Controller/TecnicosController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/menus/menu_panel.ctp",
-		"/opt/lampp/htdocs/edis/src/Model/Table/TecnicosTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Equipos/index.ctp",
 		"/opt/lampp/htdocs/edis/webroot/js/mi_js.js",
 		"/opt/lampp/htdocs/edis/webroot/css/datepicker.css",
@@ -752,7 +792,6 @@
 		"/opt/lampp/htdocs/edis/src/Template/Users/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/login.ctp",
-		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
 		"/opt/lampp/htdocs/edis/src/Template/Pages/home.ctp",
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/glyphicons.html",
 		"/home/lisho/Imágenes/escudo.svg",
@@ -767,19 +806,7 @@
 		"/home/lisho/Descargas/archivos de escuela juan soñador/config/app.php",
 		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Controller/UsersController.php",
 		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Template/Users/add.ctp",
-		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Controller/AppController.php",
-		"/opt/lampp/htdocs/edis/config/paths.php",
-		"/opt/lampp/htdocs/edis/src/Model/Table/EquiposTable.php",
-		"/opt/lampp/htdocs/edis/config/bootstrap.php",
-		"/opt/lampp/htdocs/edis/webroot/js/datatables.net-buttons/js/dataTables.buttons.js",
-		"/opt/lampp/htdocs/edis/webroot/js/datatables.net-bs/js/dataTables.bootstrap.js",
-		"/opt/lampp/htdocs/edis/APUNTES_AUTENTIFICACION",
-		"/opt/lampp/htdocs/edis/config/Migrations/20160707173133_create_users_table.php",
-		"/opt/lampp/htdocs/edis/config/Migrations/20160707161259_create_equipos_table.php",
-		"/opt/lampp/htdocs/edis/config/Migrations/20160707154045_create_users_table.php",
-		"/opt/lampp/htdocs/edis/config/app.php",
-		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/footer.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Element/layout_elements/header.ctp"
+		"/home/lisho/Descargas/archivos de escuela juan soñador/src/Controller/AppController.php"
 	],
 	"find":
 	{
@@ -797,6 +824,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"hr",
+			"datos_expediente",
+			"datod_expediente",
+			"BORRADOR",
+			"numhs",
+			"nombre:el.nombre,\n                            apellidos:el.apellidos,\n                            dni: el.dni,\n                            id: el.id,\n                            exp: el.expediente.numedis,\n                            exp_id: el.expediente.id",
 			"redimensionar",
 			"avatar",
 			"participantes",
@@ -811,7 +844,7 @@
 			"dd",
 			"date",
 			"sorting_asc",
-			"var dni = $('#dni option:selected').text();\n	var id = 'dni';\n	actualizar_datos(dni,id); ",
+			"var dni = $('#dni option:selected').text();\n\tvar id = 'dni';\n\tactualizar_datos(dni,id); ",
 			"sexo",
 			"Finish",
 			"title",
@@ -850,7 +883,7 @@
 			"fill\n",
 			"out\n",
 			"fill\n",
-			"please	\n",
+			"please\t\n",
 			"...',\n",
 			"usuario_id",
 			"css",
@@ -918,13 +951,7 @@
 			" \n",
 			"expediente",
 			"            $",
-			"tedis",
-			"plaza",
-			"perfiles",
-			"#008CBA",
-			"#FF4C1A",
-			"label",
-			"];     "
+			"tedis"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -942,24 +969,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/Controller/ComisionsController.php",
+					"file": "src/Controller/ExpedientesController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4650,
+						"buffer_size": 17040,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								479,
-								479
+								11044,
+								11044
 							]
 						],
 						"settings":
@@ -972,27 +999,60 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 90.0,
+						"translation.y": 4091.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/Template/Comisions/view.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 23795,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8294,
+								8294
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 5892.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "src/Template/Comisions/index.ctp",
+					"buffer": 2,
+					"file": "src/Controller/ComisionsController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7297,
+						"buffer_size": 7500,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2764,
-								2764
+								3145,
+								3145
 							]
 						],
 						"settings":
@@ -1000,32 +1060,32 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 765.0,
+						"translation.y": 840.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "src/Template/Expedientes/index.ctp",
-					"semi_transient": true,
+					"buffer": 3,
+					"file": "src/Template/Expedientes/view.ctp",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3259,
+						"buffer_size": 57598,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2285,
-								2285
+								37712,
+								37712
 							]
 						],
 						"settings":
@@ -1038,7 +1098,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 405.0,
+						"translation.y": 9617.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1047,24 +1107,24 @@
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12087,
+						"buffer_size": 15652,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								573,
-								573
+								15648,
+								15648
 							]
 						],
 						"settings":
@@ -1076,31 +1136,32 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 7691.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"file": "webroot/css/mis_estilos.css",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5124,
+						"buffer_size": 5229,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5119,
-								5119
+								5229,
+								5229
 							]
 						],
 						"settings":
 						{
+							"history_list_is_closing": true,
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
@@ -1108,31 +1169,27 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4671.0,
+						"translation.y": 4535.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 6,
 					"file": "src/Template/Element/layout_elements/scripts.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4140,
+						"buffer_size": 4254,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1651,
-								1651
-							],
-							[
-								1748,
-								1748
+								2081,
+								2081
 							]
 						],
 						"settings":
@@ -1148,11 +1205,44 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
+					"buffer": 7,
+					"file": "src/Template/Element/layout_elements/head.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								374,
+								374
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
 					"file": "webroot/js/jquery.smartWizard.js",
 					"semi_transient": false,
 					"settings":
@@ -1181,24 +1271,24 @@
 						"translation.y": 1627.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 10,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 9,
 					"file": "src/Template/Element/menus/sidebar.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10312,
+						"buffer_size": 10323,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5825,
-								5825
+								5781,
+								5781
 							]
 						],
 						"settings":
@@ -1211,14 +1301,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 750.0,
+						"translation.y": 150.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 9,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 10,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1229,8 +1319,8 @@
 						"selection":
 						[
 							[
-								1342,
-								1342
+								896,
+								896
 							]
 						],
 						"settings":
@@ -1238,13 +1328,15 @@
 							"auto_name": "Lorem ipsum dolor sit amet, consectetur adipisicin",
 							"default_dir": "/opt/lampp/htdocs/edis",
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
@@ -1278,7 +1370,7 @@
 		"cols":
 		[
 			0.0,
-			0.532598077879,
+			0.628794747878,
 			1.0
 		],
 		"rows":
@@ -1346,7 +1438,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 267.0,
+	"side_bar_width": 255.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

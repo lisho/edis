@@ -147,7 +147,8 @@
                                                                         'required' => 'required',
                                                                         'label' => ['text' => ''],
                                                                         'options' => $listado_ceas,
-                                                                        'empty'   => 'Elije un Ceas'
+                                                                        'empty'   => 'Elije un CEAS',
+                                                                        'value' => 'elige un CEAS...'
                                                                     ]);
                                     ?> 
                                 </div>
@@ -296,7 +297,8 @@
                                                 'class'=>'datepicker form-control col-md-7 col-xs-12',
                                                 //'required' => '',
                                                 'label' => ['text' => ''],
-                                                'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                                'placeholder' => '_ _ / _ _ / _ _ _ _',
+                                                'value'=> '',
                                                 //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
                                             ]);
                                     ?> 

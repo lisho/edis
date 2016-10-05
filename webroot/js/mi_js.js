@@ -50,8 +50,7 @@ $(function(){
 	
 
 // --> Inicio Combo CEAS
-
-
+	
 	$('#ceas').change(function() {
 		
 			elegido=$(this).val();
@@ -565,8 +564,9 @@ $(function(){
 
 //--> FIN Cambio de Secretario de comision
 
-
-
+	function confirmar(texto) {
+		return confirm (texto);
+	}
 
 }); // --> Fin ReadyDocument
 

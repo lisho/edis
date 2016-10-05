@@ -46,7 +46,6 @@
     <?= $this->Html->script('custom.min.js') ?>
  
     <?= $this->Html->script('mi_js.js') ?>
-
     
     <script>
 

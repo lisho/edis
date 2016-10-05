@@ -47,6 +47,11 @@ class ExpedientesTable extends Table
             'dependent' => true,
             'cascadeCallbacks' => true,
         ]);
+        $this->hasMany('Pasacomisions', [
+            'foreignKey' => 'expediente_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**

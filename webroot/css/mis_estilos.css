@@ -330,3 +330,12 @@ ul.messages li img.avatar, img.avatar:hover {
 .titulo-tarjeta .count{
 	font-size: 25px;
 }
+
+hr.reset {
+	margin: 0px;
+	padding: 0px;
+}
+
+.row_archivo:hover {
+	background-color: rgba(0, 0, 0, 1.0)
+}

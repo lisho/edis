@@ -304,7 +304,7 @@
                         <td><?= $sexo;?></td>
                         <td><?= h($participantes->dni) ?></td>
                         <td>
-                            <?= $this->Html->link($participantes->nombre.' '.$participantes->apellidos,['controller'=>'Participantes','action'=>'view',$participantes->id]); ?>
+                            <strong><?= $this->Html->link($participantes->nombre.' '.$participantes->apellidos,['controller'=>'Participantes','action'=>'view',$participantes->id]); ?></strong>
                             
 
                         </td>
@@ -339,122 +339,406 @@
     </div>
 </div>
 
-<!-- ACTUACIONES -->
 
-<div class="col-md-8 col-sm-12 col-xs-12"> 
-    <div class="x_panel"> 
-        <div class="x_title"> 
-             <big><i class="icono-fa fa fa-list"></i><?= '  Actuaciones:' ?></big> 
-             <?= $this->Html->link('', '#', [     
+<!-- INICIO BLOQUE DE PESTAÑAS -->   
+
+    <div class="col-md-8 col-sm-12 col-xs-12"> 
+        <div class="x_panel">    
+          <div class="" role="tabpanel" data-example-id="togglable-tabs">
+            <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true" > <i class="fa fa-cubes">  Actuaciones</i></a>
+              </li>
+              <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-folder-open user-profile-icon"></i> Documentos </a>
+              </li>
+              
+              <li role="presentation" class=""><a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false"><i class="fa fa-suitcase user-profile-icon"></i> Comisiones</a>
+              </li>
+              <li role="presentation" class=""><a href="#tab_content4" role="tab" id="profile-tab3" data-toggle="tab" aria-expanded="false"><i class="fa fa-file-text user-profile-icon"></i> Prestaciones</a>
+              </li>
+              
+            </ul>
+            <div id="myTabContent" class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                <!-- start primera pestaña ACTUACIONES -->
+
+                <?= $this->Html->link('', '#', [     
                                     'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus',
                                     'id'=>'add_incidencia',
                                     'data-container'=>"body",
                                     'data-toggle'=>"popover",
                                     'data-placement'=>"right",
-                                    'data-content'=>"Crea una nueva incidencia para este expediente..."]) ?>
-            <ul class="nav navbar-right panel_toolbox"> 
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
-              </li> 
-              <li class="dropdown"> 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
-                <ul class="dropdown-menu" role="menu"> 
-                  <li><a href="#">Settings 1</a> 
-                  </li> 
-                  <li><a href="#">Settings 2</a> 
-                  </li> 
-                </ul> 
-              </li> 
-              <li><a class="close-link"><i class="fa fa-close"></i></a> 
-              </li> 
-            </ul> 
-            <div class="clearfix"></div> 
-        </div>
-        <div class="x_content">
-            <ul class="list-unstyled timeline">                
-                
-                <?php
-                    // Ordenamos el array por la fecha de la incidencia
-                    $incidencias = $expediente->incidencias;
-                    uasort($incidencias, 'ordename');
-                    function ordename ($a, $b) {
-                        return $a['fecha'] < $b['fecha'];
-                    }
+                                    'data-content'=>"Añade una nueva actuación para este expediente..."]) ?>
 
-                    $i=0; //inicio de contador de incidencias de este espediente.
+                <ul class="list-unstyled timeline">                
+                    
+                    <?php
+                        // Ordenamos el array por la fecha de la incidencia
+                        $incidencias = $expediente->incidencias;
+                        uasort($incidencias, 'ordename');
+                        function ordename ($a, $b) {
+                            return $a['fecha'] < $b['fecha'];
+                        }
 
-                ?>
-                <?php foreach ($incidencias as $incidencia): ?>
+                        $i=0; //inicio de contador de incidencias de este espediente.
 
-                    <li>
-                         
-                      <div class="block">
+                    ?>
+                    <?php foreach ($incidencias as $incidencia): ?>
 
-                        <div class="tags">
-                          <a  class= "tag">
-                            <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></strong></span>
-                          </a>
-                          <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
-                        </div>
-                        <div class="block_content">
-                            
-                          <h2 class="title">
-                                          <a><?= $incidencia->incidenciatipo->tipo;?></a>
-                                      </h2>
-                          <div class="byline">
-                             Creado por <a><?= $incidencia->user->nombre.' '.$incidencia->user->apellidos;?></a>
+                        <li>
+                             
+                          <div class="block">
+
+                            <div class="tags">
+                              <a  class= "tag">
+                                <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></strong></span>
+                              </a>
+                              <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
+                            </div>
+                            <div class="block_content">
+                                
+                              <h2 class="title">
+                                              <a><?= $incidencia->incidenciatipo->tipo;?></a>
+                                          </h2>
+                              <div class="byline">
+                                 Creado por <a><?= $incidencia->user->nombre.' '.$incidencia->user->apellidos;?></a>
+                              </div>
+                              <p class="excerpt">
+                                    <?= substr($incidencia->descripcion,0,200);?>
+                              <a href="#" id = "ver_incidencia_<?=$incidencia->id; ?>" class= "modal-btn"><strong>... Leer&nbsp;más</strong></a>
+                              </p>
+                            </div>
                           </div>
-                          <p class="excerpt">
-                                <?= substr($incidencia->descripcion,0,200);?>
-                          <a href="#" id = "ver_incidencia_<?=$incidencia->id; ?>" class= "modal-btn"><strong>... Leer&nbsp;más</strong></a>
-                          </p>
+                        </li>
+
+                        <!-- Modal -->
+
+                        <div id="modal_ver_incidencia_<?= $incidencia->id;?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><strong>Expediente: <?= $expediente['numedis']?></strong>.</h4>
+                                         
+                                         <h4 class="modal-title label label-warning"><strong ><?= $incidencia->incidenciatipo->tipo; ?></strong>.</h4>
+                                        <span class="label label-success pull-right"><big><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></big></span>
+                                        <p></p>
+                                        <p>Incidencia registrada por: <?= $incidencia->user->nombre.' '.$incidencia->user->apellidos; ?></p>
+                                    </div>
+                                    <div class="modal-body">
+                                         
+                                        
+                                        <blockquote><?= $incidencia->descripcion; ?></blockquote>
+
+                                    </div>
+
+                                    <div class="modal-footer">
+
+                                        <?php if ($incidencia->user->id === $auth['id']): ?>
+                                             <?= $this->Html->link('', ['controller' => 'Incidencias', 'action' => 'edit', $incidencia->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']); ?>
+                                            
+                                            <?= $this->Form->postLink('', ['controller' => 'Incidencias', 'action' => 'delete', $incidencia->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('¿Estás seguro de que quieres borrar esta incidencia?')]); ?>
+                                        <?php endif ?>
+
+                                           
+
+                                    </div>   
+
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                    </li>
+
+                    <?php endforeach ?>
+
+                </ul>
+                <!-- end primera pestaña -->
+
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+
+                <!-- start segunda pestaña -->
+
+                    <?= $this->Html->link('', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn fa fa-plus',
+                                    'id'=>'add_archivos',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"right",
+                                    'data-content'=>"Añade archivos a este expediente..."]) ?>
 
                     <!-- Modal -->
 
-                    <div id="modal_ver_incidencia_<?= $incidencia->id;?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel"><strong>Expediente: <?= $expediente['numedis']?></strong>.</h4>
-                                     
-                                     <h4 class="modal-title label label-warning"><strong ><?= $incidencia->incidenciatipo->tipo; ?></strong>.</h4>
-                                    <span class="label label-success pull-right"><big><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></big></span>
-                                    <p></p>
-                                    <p>Incidencia registrada por: <?= $incidencia->user->nombre.' '.$incidencia->user->apellidos; ?></p>
-                                </div>
-                                <div class="modal-body">
-                                     
-                                    
-                                    <blockquote><?= $incidencia->descripcion; ?></blockquote>
-
-                                </div>
-
-                                <div class="modal-footer">
-
-                                    <?php if ($incidencia->user->id === $auth['id']): ?>
-                                         <?= $this->Html->link('', ['controller' => 'Incidencias', 'action' => 'edit', $incidencia->id],['class'=> 'fa fa-edit text-primary icono-tabla-fa']); ?>
+                        <div id="modal_add_archivos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><strong> Añade nuevos archivos a este expediente </strong>.</h4>
+  
+                                    </div>
+                                    <div class="modal-body">
                                         
-                                        <?= $this->Form->postLink('', ['controller' => 'Incidencias', 'action' => 'delete', $incidencia->id], ['class'=> 'fa fa-trash text-danger icono-fa','confirm' => __('¿Estás seguro de que quieres borrar esta incidencia?')]); ?>
-                                    <?php endif ?>
+                                          <?= $this->Form->create('',['type' => 'file', 'class'=>'form-horizontal form-label-left', 'url' => ['controller' => 'Expedientes', 'action' => 'add_archivos', $expediente->numedis]]) ?>
 
-                                       
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <?= $this->Form->input('add_files[]', ['id'=>'add_files', 'type' => 'file', 'multiple' => 'true', 'label' => 'Añade archivos a este expediente']);?>
+                                                    </div>
+                                                </div>  
+                                    </div>
 
-                                </div>   
+                                    <div class="modal-footer">
+                                                <?= $this->Form->button('Enviar archivos ->', ['class' => 'btn btn-success']) ?>
 
+                                            <?= $this->Form->end() ?>
+                                    </div>   
+
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                <?php endforeach ?>
 
-            </ul>
+<!-- Listado de ARCHIVOS -->
 
+                <li class="fa fa-folder-open">../ <?= $expediente->numedis; ?> </li>
+                <ul> 
+                
+                 <?php foreach ($archivos as $key => $directorio): ?> 
+
+                        <?php if ($key ==='/'): ?>
+                            <?php foreach ($directorio as $a): ?> 
+
+                                <?php 
+                                    switch ($a['extension']) {
+                                        case 'pdf':
+                                            $ext_ico = 'fa fa-file-pdf-o text-danger';
+                                            break;
+                                        case ('xlsx'):
+                                        case('csv'):
+                                            $ext_ico = 'fa fa-file-excel-o text-success';
+                                            break;
+                                        case ('doc'):
+                                            $ext_ico = 'fa fa-file-word-o text-primary';
+                                            break;
+                                        default:
+                                            $ext_ico = 'fa fa-file-o';
+                                            break;
+                                    }
+                                ?>
+
+                                <div class="row row_archivo">
+                                    <div class="col-xs-6">
+                                        <li class="<?= $ext_ico; ?>"></li> 
+                                        
+                                        <?= $this->Html->link($a['basename'], '/webroot/docs/'.$expediente->numedis.'/'.$a['basename']); ?><!-- Archivo en Subdirectorio -->
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <?php $size = $a['filesize']/1000;?>
+                                        <?= $size.' Kb'; ?> <!-- Tamaño de Archivo en Subdirectorio -->
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <?= $a['change']; ?> <!-- Fecha de Archivo en Subdirectorio -->
+                                    </div>
+                                    <div class="col-xs-2 text-right">
+                                        <?= $this->Html->link('', [ 'controller' => 'Expedientes', 
+                                                                    'action' => 'delete_archivo', 
+                                                                    $expediente['numedis'], 
+                                                                    //$a['dirname'], 
+                                                                    $a['basename']
+                                                                    ], 
+                                                                ['class'=> 'fa fa-trash text-danger',
+                                                                    'confirm' => __('¿Estás seguro de que quieres borrar este archivo?')
+                                                                    ]); ?>
+                                    </div>
+                                </div>
+                                <hr class="reset">
+
+                              <!-- Archivo en Subdirectorio -->
+                            <?php endforeach; ?>    
+                        
+                         <?php else: ?>
+                                <br>
+                                <?php if (!strpos($key, '/')): ?>
+                                        <?php $key_replace = $key; ?>  
+                                    <?php if (strpos($key, ' ')): ?>
+                                          <?php $key_replace = str_replace(' ', '_', $key); ?>     
+                                    <?php endif; ?>
+
+                                    <?= $this->Html->link('', '#', [     
+                                            'class'=> 'btn btn-xs modal-btn fa fa-plus',
+                                            'id'=>'add_archivos_'.$key_replace,
+                                            'data-container'=>"body",
+                                            'data-toggle'=>"popover",
+                                            'data-placement'=>"right",
+                                            'data-content'=>"Añade archivos en esta carpeta..."]) ?>
+
+                                <!-- Modal -->
+
+                                    <div id="modal_add_archivos_<?= $key_replace; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                                    <h4 class="modal-title" id="myModalLabel"> Añade nuevos archivos en la carpeta <strong><?= $key; ?></strong> del expediente <?= $expediente->numedis; ?>.</h4>
+              
+                                                </div>
+                                                <div class="modal-body">
+                                                    
+                                                      <?= $this->Form->create('',['type' => 'file', 'class'=>'form-horizontal form-label-left', 'url' => ['controller' => 'Expedientes', 'action' => 'add_archivos', $expediente->numedis, $key]]) ?>
+
+                                                            <div class="form-group has-feedback">
+                                                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span></label>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <?= $this->Form->input('add_files[]', ['id'=>'add_files', 'type' => 'file', 'multiple' => 'true', 'label' => 'Añade archivos a este expediente']);?>
+                                                                </div>
+                                                            </div>  
+                                                </div>
+
+                                                <div class="modal-footer">
+                                                            <?= $this->Form->button('Enviar archivos ->', ['class' => 'btn btn-success']) ?>
+
+                                                        <?= $this->Form->end() ?>
+                                                </div>   
+
+                                            </div>
+                                        </div>
+                                    </div> 
+
+                                <?php endif; ?>
+
+                                    <li class="fa fa-folder">  <?= $key; ?></li> <!-- Subdirectorio -->
+                            <ul>
+                                <?php foreach ($directorio as $a): ?> 
+                                       <?php //debug($a['extension']);exit(); ?>
+                                       <?php if (empty($a['extension'])){$a['extension']='';} ?>
+                                            <?php 
+                                                switch ($a['extension']) {
+                                                    case 'pdf':
+                                                        $ext_ico = 'fa fa-file-pdf-o text-danger';
+                                                        break;
+                                                    case ('xlsx'):
+                                                    case('csv'):
+                                                        $ext_ico = 'fa fa-file-excel-o text-success';
+                                                        break;
+                                                    case ('doc'):
+                                                    case ('docx'):
+                                                        $ext_ico = 'fa fa-file-word-o text-primary';
+                                                        break;
+                                                    default:
+                                                        $ext_ico = 'fa fa-file-o';
+                                                        break;
+                                                }
+                                            ?>       
+                                        
+                                        
+                                        
+                                    <div class="row row_archivo">
+                                        <div class="col-xs-6">
+                                            <li class="<?= $ext_ico; ?>"></li> 
+                                            <?php $options=['target' => '_blank'];?>
+                                           <?= $this->Html->link($a['basename'], '/webroot/docs/'.$expediente->numedis.'/'.$key.'/'.$a['basename'], $options); ?><!-- Archivo en Subdirectorio -->
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <?php $size = $a['filesize']/1000;?>
+                                            <?= $size.' Kb'; ?> <!-- Tamaño de Archivo en Subdirectorio -->
+                                        </div>
+                                        <div class="col-xs-2">
+                                            <?= $a['change']; ?> <!-- Fecha de Archivo en Subdirectorio -->
+                                        </div>
+                                        <div class="col-xs-2 text-right">
+                                            <?= $this->Html->link('', [ 'controller' => 'Expedientes', 
+                                                                    'action' => 'delete_archivo', 
+                                                                    $expediente['numedis'], 
+                                                                    $a['basename'],
+                                                                    $key, 
+                                                                    ], 
+                                                                ['class'=> 'fa fa-trash text-danger',
+                                                                    'confirm' => __('¿Estás seguro de que quieres borrar este archivo?')
+                                                                    ]); ?>
+                                        </div>
+                                    </div>
+                                    <hr class="reset">
+
+                                <?php endforeach; ?>      
+                            </ul>
+
+                    <?php endif; ?>
+                    
+                <?php endforeach; ?>    
+                </ul>
+
+<!-- // END Listado de ARCHIVOS -->
+
+
+                
+                <div id="jstree_div"></div>          
+
+                <!-- end segunda pestaña -->
+
+              </div>
+
+                <!-- start tercera pestaña -->
+
+              <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th>Fecha</th>
+                                <th>Tipo</th>
+                                <th>Motivo</th>
+                                <th>Clasif.</th>
+                                <th>Observ.</th>
+                                <th>Docum.</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                                        
+                    <?php foreach ($expediente->pasacomisions as $pasacomision): ?> 
+                             <tr>
+                                <td>
+                                    <?php $fecha = $this->Time->format($pasacomision->comision->fecha, "dd/MM/yyyy", null); ?>
+                                    <strong><?= $this->Html->link($fecha, ['controller' =>'Comisions','action' => 'view', $pasacomision->comision->id]) ?> </strong>
+                                </td>
+                                <td><?= $pasacomision->comision->tipo; ?></td>
+                                <td><?= $pasacomision->motivo; ?></td>
+                                <td><?= $pasacomision->clasificacion; ?></td>   
+                                <td><?= $pasacomision->observaciones; ?></td>   
+                                <td>
+                                    <?php if ($pasacomision->informeedis==1){echo '<span class="label label-warning">IE</span>';}
+                                            else{echo '<span class="label label-default">IE</span>';} ?>
+                                               
+                                    <?php if ($pasacomision->diligencia==1){echo '<span class="label label-warning">D</span>';}
+                                            else{echo '<span class="label label-default">D</span>';} ?>
+
+                                </td>  
+                               
+                            </tr>
+
+                    <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+
+              </div>   <!-- end tercera pestaña -->
+
+                <!-- start cuarta pestaña -->
+
+              <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
+                <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
+                  photo booth letterpress, commodo enim craft beer mlkshk </p>
+              </div>
+
+                <!-- end cuarta pestaña -->
+            </div>
+          </div>
         </div>
     </div>
-</div>
 
 
 
