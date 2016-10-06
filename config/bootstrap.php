@@ -190,6 +190,20 @@ Request::addDetector('tablet', function ($request) {
  *
  */
 
+Plugin::load('CakePdf', ['bootstrap' => true]);
+Configure::write('CakePdf', array(
+    'engine' => 'CakePdf.DomPdf',
+    'pageSize' => 'A4',
+    'orientation' => 'portrait'
+));
+
+//DomPDF settings
+define('DOMPDF_ENABLE_AUTOLOAD', false);
+define('DOMPDF_ENABLE_HTML5PARSER', true);
+define('DOMPDF_ENABLE_REMOTE', true);
+
+//require ROOT . DS . 'vendor' . DS . 'dompdf' . DS . 'dompdf' . DS . 'dompdf_config.inc.php';
+
 Plugin::load('Migrations');
 
 // Only try to load DebugKit in development mode

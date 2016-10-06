@@ -1,0 +1,81 @@
+
+html {
+  margin: 0;
+}
+body {
+  /*font-family: "Times New Roman", serif;*/
+  font-family: "Helvetica Neue", Roboto, Arial, "Droid Sans", sans-serif;
+  font-size: 11px;
+  margin: 45mm 8mm 2mm 8mm;
+}
+h1, h2, h3, h4 {
+    font-weight: normal;
+    margin-bottom:0.5em;
+}
+h2 {
+    background: #fff;
+    color: #15848F;
+    font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
+    font-size: 190%;
+}
+/** Scaffold View **/
+dl {
+    line-height: 2em;
+    margin: 0em 0em;
+    width: 100%;
+    background: #f4f4f4;
+}
+
+dt {
+	color: #15848F;
+    font-weight: bold;
+    padding-left: 4px;
+    vertical-align: top;
+    width: 10em;
+}
+dd {
+    margin-left: 10em;
+    margin-top: -2em;
+    vertical-align: top;
+    display: inline-block;
+}
+hr.salto {
+  page-break-after: always;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+#content{
+    background: #fff;
+    clear: both;
+    color: #333;
+    padding: 10px 60px 40px 60px;
+    overflow: auto;
+}
+
+table.table {
+    width: 100%;
+}
+
+th {
+    font-weight: bold;   
+    text-align: center;    
+}
+
+td {
+    border-bottom: 1px solid;
+    text-align: center;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 4px;
+    line-height: 1.42857143;
+    border-bottom: 1px solid #ddd;
+}
+.table>thead>tr>th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #ddd;
+}
+.label-default {
+    display: none;
+}

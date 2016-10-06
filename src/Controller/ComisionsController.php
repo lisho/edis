@@ -192,4 +192,59 @@ class ComisionsController extends AppController
         
     }
 
+    public function acta($id=null)
+    {
+
+        $listado_ceas = $this->listadoEquipo('CEAS');
+        $secretario='';
+        $posibles_secretarios=[];
+        $this->loadModel('Pasacomisions');      
+        $nuevo_pasacomision = $this->Pasacomisions->newEntity();
+        
+        $comision = $this->Comisions->get($id, [
+            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes']
+        ]);
+
+        foreach ($comision->asistentecomisions as $asistente) {
+            $asistentes[]=$asistente->tecnico_id; 
+            if ($asistente->tecnico->equipo->tipo === "EDIS" && $asistente->rol ==="asistente") {
+                $posibles_secretarios[$asistente->id]=$asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos;
+            }
+            if ($asistente->rol ==="secretario") {
+                    $secretario[$asistente->id]=$asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos;
+                }                           
+        }
+
+        // Ordenamos los Pasos por comisión por CEAS
+
+        foreach ($comision->pasacomisions as $exp) {
+            $expedientes_ordenados[$exp->expediente->ceas][]=$exp;  
+        }
+
+        $this->loadModel('Tecnicos');
+        $tecnicos = $this->Tecnicos->find('all', ['contain' => ['Asistentecomisions', 'Equipos'],
+                                                    ]);
+
+        if ($this->request->is('post')) {
+                    $data = $this->request->data['pasacomision'];
+                    $this->addPasacomision($data, $id, $nuevo_pasacomision);
+                }
+        /**
+         * Creamos el PDF
+         */
+
+        $this->viewBuilder()->options([
+                'pdfConfig' => [
+                    'orientation' => 'portrait',
+                    'filename' => 'acta_'.$id.'pdf'
+                ]
+            ]);
+
+        //$acta_completa = $file = new File(APP_DIR.'/Template/Comisions/pdf/acta.ctp');
+        //file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
+
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados'));
+        $this->set('_serialize', ['comision']);
+    }
+
 }

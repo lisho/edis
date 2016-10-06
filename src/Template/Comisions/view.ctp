@@ -151,7 +151,7 @@
 
 
     </div>
-
+<?= $this->Html->link(__('  Crear el acta'), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'btn btn-default fa fa-file-pdf-o']); ?>
            
 
 </div>  <!-- // FIN columna izquierda -->   
@@ -165,7 +165,7 @@
     <div class="x_panel">
         <div class="x_title">
             <big>Expedientes que han pasado por esta comisión </big>
-
+            
             <?= $this->Element('menus/menu_panel');?>
            
             <div class="clearfix"></div>

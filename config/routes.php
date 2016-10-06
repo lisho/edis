@@ -72,6 +72,15 @@ Router::scope('/', function (RouteBuilder $routes) {
      * routes you want in your application.
      */
     $routes->fallbacks('DashedRoute');
+    $routes->addExtensions(['pdf']);
+});
+
+Router::scope('/comisions', function ($routes) {
+    $routes->extensions('pdf');
+    $routes->connect('/acta/*', ['controller' => 'Comisions', 'action' => 'acta']);
+    $routes->connect('/view/*', ['controller' => 'Comisions', 'action' => 'view']);
+    $routes->connect('/edit/*', ['controller' => 'Comisions', 'action' => 'edit']);
+    $routes->fallbacks('InflectedRoute');
 });
 
 /**
