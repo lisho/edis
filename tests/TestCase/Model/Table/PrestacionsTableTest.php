@@ -25,7 +25,7 @@ class PrestacionsTableTest extends TestCase
      */
     public $fixtures = [
         'app.prestacions',
-        'app.tipoprestacions',
+        'app.prestaciontipos',
         'app.expedientes',
         'app.participantes',
         'app.relations',
@@ -39,7 +39,7 @@ class PrestacionsTableTest extends TestCase
         'app.asistentecomisions',
         'app.comisions',
         'app.pasacomisions',
-        'app.estadoprestacions'
+        'app.prestacionestados'
     ];
 
     /**

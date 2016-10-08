@@ -9,10 +9,10 @@ use Cake\Validation\Validator;
 /**
  * Prestacions Model
  *
- * @property \Cake\ORM\Association\BelongsTo $Tipoprestacions
+ * @property \Cake\ORM\Association\BelongsTo $Prestaciontipos
  * @property \Cake\ORM\Association\BelongsTo $Expedientes
  * @property \Cake\ORM\Association\BelongsTo $Participantes
- * @property \Cake\ORM\Association\BelongsTo $Estadoprestacions
+ * @property \Cake\ORM\Association\BelongsTo $Prestacionestados
  *
  * @method \App\Model\Entity\Prestacion get($primaryKey, $options = [])
  * @method \App\Model\Entity\Prestacion newEntity($data = null, array $options = [])
@@ -43,8 +43,8 @@ class PrestacionsTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        $this->belongsTo('Tipoprestacions', [
-            'foreignKey' => 'tipoprestacion_id',
+        $this->belongsTo('Prestaciontipos', [
+            'foreignKey' => 'prestaciontipo_id',
             'joinType' => 'INNER'
         ]);
         $this->belongsTo('Expedientes', [
@@ -55,8 +55,8 @@ class PrestacionsTable extends Table
             'foreignKey' => 'participante_id',
             'joinType' => 'INNER'
         ]);
-        $this->belongsTo('Estadoprestacions', [
-            'foreignKey' => 'estadoprestacion_id',
+        $this->belongsTo('Prestacionestados', [
+            'foreignKey' => 'prestacionestado_id',
             'joinType' => 'INNER'
         ]);
     }
@@ -100,10 +100,10 @@ class PrestacionsTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->existsIn(['tipoprestacion_id'], 'Tipoprestacions'));
+        $rules->add($rules->existsIn(['prestaciontipo_id'], 'Prestaciontipos'));
         $rules->add($rules->existsIn(['expediente_id'], 'Expedientes'));
         $rules->add($rules->existsIn(['participante_id'], 'Participantes'));
-        $rules->add($rules->existsIn(['estadoprestacion_id'], 'Estadoprestacions'));
+        $rules->add($rules->existsIn(['prestacionestado_id'], 'Prestacionestados'));
 
         return $rules;
     }

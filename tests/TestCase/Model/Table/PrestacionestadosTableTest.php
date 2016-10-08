@@ -24,7 +24,22 @@ class PrestacionestadosTableTest extends TestCase
      * @var array
      */
     public $fixtures = [
-        'app.prestacionestados'
+        'app.prestacionestados',
+        'app.prestacions',
+        'app.prestaciontipos',
+        'app.expedientes',
+        'app.participantes',
+        'app.relations',
+        'app.roles',
+        'app.tecnicos',
+        'app.equipos',
+        'app.users',
+        'app.avisos',
+        'app.incidencias',
+        'app.incidenciatipos',
+        'app.asistentecomisions',
+        'app.comisions',
+        'app.pasacomisions'
     ];
 
     /**

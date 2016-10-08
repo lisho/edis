@@ -9,6 +9,8 @@ use Cake\ORM\Entity;
  * @property int $id
  * @property string $estado
  * @property string $observaciones
+ *
+ * @property \App\Model\Entity\Prestacion[] $prestacions
  */
 class Prestacionestado extends Entity
 {

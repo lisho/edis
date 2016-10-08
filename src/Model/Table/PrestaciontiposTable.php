@@ -33,6 +33,12 @@ class PrestaciontiposTable extends Table
         $this->table('prestaciontipos');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->hasMany('Prestacions', [
+            'foreignKey' => 'prestaciontipo_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**

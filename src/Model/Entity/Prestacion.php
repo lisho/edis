@@ -8,20 +8,20 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property string $numprestacion
- * @property int $tipoprestacion_id
+ * @property int $prestaciontipo_id
  * @property \Cake\I18n\Time $apertura
  * @property \Cake\I18n\Time $cierre
  * @property int $expediente_id
  * @property int $participante_id
- * @property int $estadoprestacion_id
+ * @property int $prestacionestado_id
  * @property string $observaciones
  * @property int $created
  * @property int $modified
  *
- * @property \App\Model\Entity\Tipoprestacion $tipoprestacion
+ * @property \App\Model\Entity\Prestaciontipo $prestaciontipo
  * @property \App\Model\Entity\Expediente $expediente
  * @property \App\Model\Entity\Participante $participante
- * @property \App\Model\Entity\Estadoprestacion $estadoprestacion
+ * @property \App\Model\Entity\Prestacionestado $prestacionestado
  */
 class Prestacion extends Entity
 {

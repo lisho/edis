@@ -9,6 +9,8 @@ use Cake\Validation\Validator;
 /**
  * Prestacionestados Model
  *
+ * @property \Cake\ORM\Association\HasMany $Prestacions
+ *
  * @method \App\Model\Entity\Prestacionestado get($primaryKey, $options = [])
  * @method \App\Model\Entity\Prestacionestado newEntity($data = null, array $options = [])
  * @method \App\Model\Entity\Prestacionestado[] newEntities(array $data, array $options = [])
@@ -33,6 +35,10 @@ class PrestacionestadosTable extends Table
         $this->table('prestacionestados');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->hasMany('Prestacions', [
+            'foreignKey' => 'prestacionestado_id'
+        ]);
     }
 
     /**

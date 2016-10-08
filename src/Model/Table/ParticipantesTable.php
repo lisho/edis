@@ -40,6 +40,11 @@ class ParticipantesTable extends Table
             'foreignKey' => 'relation_id',
             'joinType' => 'INNER'
         ]);
+        $this->hasMany('Prestacions', [
+            'foreignKey' => 'participante_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**
