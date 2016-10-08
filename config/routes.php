@@ -80,6 +80,7 @@ Router::scope('/comisions', function ($routes) {
     $routes->connect('/acta/*', ['controller' => 'Comisions', 'action' => 'acta']);
     $routes->connect('/view/*', ['controller' => 'Comisions', 'action' => 'view']);
     $routes->connect('/edit/*', ['controller' => 'Comisions', 'action' => 'edit']);
+    $routes->connect('/delete/*', ['controller' => 'Comisions', 'action' => 'delete']);
     $routes->fallbacks('InflectedRoute');
 });
 

@@ -92,7 +92,7 @@ class ComisionsController extends AppController
                     $this->addPasacomision($data, $id, $nuevo_pasacomision);
                 }
 
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados'));
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'el_asistente'));
         $this->set('_serialize', ['comision']);
     }
 
@@ -154,9 +154,9 @@ class ComisionsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $comision = $this->Comisions->get($id);
         if ($this->Comisions->delete($comision)) {
-            $this->Flash->success(__('The comision has been deleted.'));
+            $this->Flash->success(__('La comisión ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The comision could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No se ha podido eliminar la comisión. Por favor inténtalo de nuevo.'));
         }
         return $this->redirect(['action' => 'index']);
     }
@@ -188,13 +188,12 @@ class ComisionsController extends AppController
         } else {
            $this->Flash->error(__('Lo siento. No ha sido posible añadir este expediente porque ya existe en esta Comisión.'));
         }
-            
-        
+                    
     }
 
     public function acta($id=null)
     {
-
+        
         $listado_ceas = $this->listadoEquipo('CEAS');
         $secretario='';
         $posibles_secretarios=[];
@@ -212,6 +211,7 @@ class ComisionsController extends AppController
             }
             if ($asistente->rol ==="secretario") {
                     $secretario[$asistente->id]=$asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos;
+                    $el_secretario= $asistente->tecnico;
                 }                           
         }
 
@@ -239,11 +239,11 @@ class ComisionsController extends AppController
                     'filename' => 'acta_'.$id.'pdf'
                 ]
             ]);
-
+        $logo= IMAGES."logo_concejalia.png";
         //$acta_completa = $file = new File(APP_DIR.'/Template/Comisions/pdf/acta.ctp');
         //file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
 
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados'));
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'logo', 'el_secretario'));
         $this->set('_serialize', ['comision']);
     }
 

@@ -85,10 +85,6 @@
                                     'data-content'=>"Añade y elimina asistentes a esta comisión."]); ?>
 
 
-
-
-
-
             <p>Selecciona al Secretario de la comisión...</p>
             <?php if($secretario===''){$secretario='Selecciona un TEDIS...';} ?>
             <?= $this->Form->input('secretaria',[   'id'=>'secretaria', 

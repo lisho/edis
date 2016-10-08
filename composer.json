@@ -11,7 +11,8 @@
         "cakephp/migrations": "~1.0",
         "cakephp/plugin-installer": "*",
         "friendsofcake/CakePdf": "^3.2",
-        "dompdf/dompdf": "^0.7.0"
+        "dompdf/dompdf": "^0.7.0",
+        "cakephp/localized": "^3.0"
     },
     "require-dev": {
         "psy/psysh": "@stable",

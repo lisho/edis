@@ -19,6 +19,10 @@ use Cake\Event\Event;
 use Cake\Filesystem\Folder;
 use Cake\Filesystem\File;
 
+use Cake\I18n\I18n;
+
+I18n::locale('es_ES');
+
 /**
  * Application Controller
  *

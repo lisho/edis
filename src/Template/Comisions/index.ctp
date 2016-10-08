@@ -61,6 +61,7 @@
                     <th>Fecha</th>
                     <th>Comisión de...</th>
                     <th>Observaciones </th>
+                    <th></th>
                     
                 </tr>
             </thead>
@@ -75,6 +76,10 @@
                     </td>
                     <td><?= h($comision->tipo) ?></td>
                     <td><?= h($comision->observaciones) ?></td>
+                    <td>
+                        <?= $this->Html->link('', ['action' => 'edit', $comision->id], ['class'=> 'fa fa-edit']); ?> 
+                        <?= $this->Form->postLink('', ['controller' => 'Comisions', 'action' => 'delete', $comision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar esta comisión?. Si lo haces eliminarás todos los datos asociados a la misma... ¡Para siempre!']); ?> 
+                    </td>
                     
                 </tr>
                 <?php endforeach; ?>

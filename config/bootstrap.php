@@ -197,6 +197,7 @@ Configure::write('CakePdf', array(
     'orientation' => 'portrait'
 ));
 
+
 //DomPDF settings
 define('DOMPDF_ENABLE_AUTOLOAD', false);
 define('DOMPDF_ENABLE_HTML5PARSER', true);
@@ -233,3 +234,5 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
+
+Plugin::load('Cake/Localized');
