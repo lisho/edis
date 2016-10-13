@@ -1,4 +1,4 @@
-
+<?php $modificador =''; ?>
 <h1><i class="fa fa-folder-open"></i>  Comisión <?= $comision->tipo; ?><small><?= ' '.$this->Time->format($comision->fecha, "dd/MM/yyyy", null); ?></small></h1>
 
 <!-- Columna Izquierda -->   
@@ -200,7 +200,8 @@
 
                                         <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                                         'pasacomision' => $pasacomision,
-                                                                                                        'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion
+                                                                                                        'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                                        'modificador' => 'todos_'
                                                                                                     ])?>
 
                                     <?php endforeach ?>
@@ -239,7 +240,8 @@
 
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                                                 'pasacomision' => $pasacomision,
-                                                                                                                'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion
+                                                                                                                'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                                                'modificador' => 'ceas_'
                                                                                                             ])?>
 
                                             <?php endif ?>

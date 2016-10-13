@@ -8,13 +8,14 @@
             
             <?php $p = 'no'; ?> <!-- Partimos de que no existe prestación abierta de RGC -->
             <?php $atfis = 'no'; ?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
+            <?php $atfis_num = 0; ?>
             <?php $titular = ''; ?> 
             
             <?php foreach ($pasacomision->expediente->prestacions as $prestacion): ?>
 
                     <?php if ($prestacion->prestaciontipo->tipo === 'ATFIS' && $prestacion->cierre === null): ?>
 
-                        <?php $atfis = 'si'; ?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
+                        <?php $atfis = 'si'; $atfis_num++?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
 
                     <?php endif; ?>
 
@@ -31,7 +32,7 @@
                             <p>
                                 <?= $this->Html->link(' '.$prestacion->numprestacion, '#', [     
                                         'class'=> 'btn btn-xs modal-btn'.$btn.'fa blond sombra',
-                                        'id'=>'ver_info_prestacion'. $pasacomision->id,
+                                        'id'=>$modificador.'ver_info_prestacion'. $pasacomision->id,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
                                         'data-placement'=>"top",
@@ -40,7 +41,7 @@
 
    <!-- MODAL Datos de la Prestación  -->  
 
-                                    <div id="modal_ver_info_prestacion<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div id="modal_<?= $modificador; ?>ver_info_prestacion<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
 
                                                 <div class="modal-content">
@@ -117,7 +118,7 @@
            
                     <?= $this->Html->link('+ RGC', '#', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
-                                        'id'=>'crear_prestacion_rgc'.$pasacomision->id,
+                                        'id'=>$modificador.'crear_prestacion_rgc'.$pasacomision->id,
                                         //'data-expediente' => $pasacomision->expediente->id,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
@@ -126,7 +127,7 @@
                 
 
     <!-- MODAL Crear prestación -->
-                <div id="modal_crear_prestacion_rgc<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div id="modal_<?= $modificador; ?>crear_prestacion_rgc<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
 
                             <div class="modal-content">
@@ -249,15 +250,22 @@
    
                 <?php if ($atfis === 'no'): ?>
 
-                     <?= $this->Html->link('No Derivado', '#', [     
+                     <?= $this->Html->link('ND', '#', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_atfis',
-                                        'id'=>'crear_prestacion_atfis'.$pasacomision->id,
+                                        'id'=>$modificador.'crear_prestacion_atfis'.$pasacomision->id,
                                         //'data-expediente' => $pasacomision->expediente->id,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
                                         'data-placement'=>"top",
                                         'data-content'=>"Si este expediente está DERIVADO a EDIS deberíamos tener una prestación de Apoyo Técnico y Familiar para la Inclusión Social (ATFIS). Si n o es así deberíamos crearla."]); ?>  
+                
+                <?php elseif ($atfis === 'si'): ?>
+                        <button class="btn btn-xs btn-success" type="button">
+                          <span class="badge"><?= $atfis_num; ?></span>
+                        </button>      
                 <?php endif; ?>
+
+
         </td>
         <td class="text-uppercase"><?= $titular; ?></td>  
         <td><?= $pasacomision->observaciones; ?></td>   
