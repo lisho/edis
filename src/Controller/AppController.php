@@ -164,6 +164,31 @@ class AppController extends Controller
     }
 
     /**
+     * Listado de Posibles titulares de Prestacion
+     *
+     * Miembros de la unidad familiar mayores de 16 años
+     */
+        public function listadoMiembrosParrilla($expediente_id=null)
+    {
+        $this->loadModel('Participantes');
+        $listado_parrilla = [];
+    
+            $listado = $this->Participantes->find('all',[
+                                    'conditions' => ['expediente_id'=>$expediente_id],
+                                    'order' => 'relation_id',
+                                ]);
+
+            foreach ($listado as $l) {
+
+                if ($this->calcularEdad($l->nacimiento)>15 || $this->calcularEdad($l->nacimiento)===null) {
+                    $listado_parrilla[$l->id] = $l->nombre.' '. $l->apellidos;
+                }
+            }
+
+        return $listado_parrilla;
+    }
+
+    /**
      * Listado de las posibles relaciones entre los participantes
      *
      * 
@@ -252,4 +277,21 @@ class AppController extends Controller
 
         return $image; 
     }  
+
+    /**
+     * Ajustar una fecha para formatearla para Guardarla en la BD
+     *
+     * @return Fecha formateada en un array.
+     */
+
+    public function ajustarFecha($fecha=null)
+    {
+        $cachos_fecha_apertura = preg_split("/[\/]+/", $fecha);
+         $fecha_ajustada=array(
+                        'year'=>$cachos_fecha_apertura[2],
+                        'month'=>$cachos_fecha_apertura[1],
+                        'day' =>$cachos_fecha_apertura[0] 
+                );
+        return $fecha_ajustada;
+    }
 }

@@ -60,12 +60,21 @@ class ExpedientesController extends AppController
         $this->loadModel('Incidencias');
         $nueva_incidencia = $this->Incidencias->newEntity();
 
+        $this->loadModel('Prestacions');
+        $nueva_prestacion = $this->Prestacions->newEntity();
+
         $incidenciatipos = $this->Incidencias->Incidenciatipos->find('list', [  'keyField' => 'id',
                                                                                 'valueField' => 'tipo'
                                                                                 ]);
+        $prestaciontipos = $this->Prestacions->Prestaciontipos->find('list', [  'keyField' => 'id',
+                                                                                'valueField' => 'tipo'
+                                                                                ]);
+        $prestacionestados = $this->Prestacions->Prestacionestados->find('list', [  'keyField' => 'id',
+                                                                                'valueField' => 'estado'
+                                                                                ]);
 
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos','Pasacomisions.Comisions'],
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos','Pasacomisions.Comisions', 'Prestacions', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes'],
 
         ]);
 
@@ -75,7 +84,6 @@ class ExpedientesController extends AppController
                 $p['edad'] = $edad;
             }
 
-      
             //Si creamos un nuevo usuario en el expediente...
             if ($this->request->is('post')) {
          //debug($this->request->data);exit();
@@ -86,6 +94,9 @@ class ExpedientesController extends AppController
                 } elseif (isset($this->request->data['incidencias'])) {
                     $data = $this->request->data['incidencias'];
                     $this->addIncidencia($data,$expediente,$nueva_incidencia);
+                }   elseif (isset($this->request->data['prestacions'])) {
+                    $data = $this->request->data['prestacions'];
+                    $this->addPrestacion($data,$expediente,$nueva_prestacion);
                 }
                     
                 
@@ -93,14 +104,16 @@ class ExpedientesController extends AppController
 
         $listado_ceas = $this->listadoEquipo('ceas');        
         $listado_relaciones = $this->listadoRelaciones();
-        unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.       
+        unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.
+        $listado_posibles_titulares_prestacion = $this->listadoMiembrosParrilla($id);
+        //$listado_prestaciones = $this->listadoTiposPrestacion();       
 
         //*************************************************//
         // Ceeamos el arbol de Archivos de este expediente //
         //*************************************************//
         $archivos=$this->archivosTree($expediente->numedis, $expediente->id);
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos'));
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -278,9 +291,9 @@ class ExpedientesController extends AppController
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function deleteArchivo($expediente=null, $archivo=null, $directorio='')
+    public function deleteArchivo($archivo=null, $expediente=null, $expediente_id= null, $directorio='')
     {
-       
+       //debug($_POST);exit();
         if ($directorio==='') {
             $file = WWW_ROOT . 'docs/'.$expediente.'/'.$archivo;
         } else {
@@ -294,7 +307,8 @@ class ExpedientesController extends AppController
         } else {
             $this->Flash->error(__('No se ha podido eliminar el archivo. Inténtalo de nuevo.'));
         }
-        return $this->redirect($this->referer());
+        //return $this->redirect($this->referer());
+        return $this->redirect(['action' => 'view', $expediente_id]);
     }
 
 
@@ -374,6 +388,55 @@ class ExpedientesController extends AppController
 
     }
 
+    /**
+     * AddIncidencia method
+     *
+     * Crea una nueva incidencia asociada a este expediente.
+     *
+     * Necesitamos pasarle:
+     *  1. Array con los datos del expediente, al menos id y numedis
+     *  2. Array con el request->data del formulario.
+     *   Redirecciona a la vista del expediente.
+     */
+    public function addPrestacion($data,$expediente,$nueva_prestacion)
+    {
+        
+        $cachos_fecha = preg_split("/[\/]+/", $data['apertura']);
+        $data['id']='';
+        
+        if (!isset($data['expediente_id'])) {
+            $data['expediente_id']=$expediente->id;
+        } 
+        
+            if ( $data['apertura']!='') {
+                 $data['apertura']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            }
+       
+        $nueva_prestacion = $this->Prestacions->patchEntity($nueva_prestacion, $data);    
+        //debug($nueva_prestacion);exit();
+
+        if ($this->Prestacions->save($nueva_prestacion)) {
+            $this->Flash->success('Se ha añadido correctamente una nueva prestación a este expediente');
+            
+            //return $this->redirect(['action' => 'view',$expediente['id']]);
+            return $this->redirect($this->referer());
+            
+        } else {
+            $this->Flash->error(__('Lo siento. No ha sido posible crear una nueva prestación asociada a este expediente. Por favor revisa los datos.'));
+        }
+
+    }
+
+    /**
+     * AddArchivos method
+     *
+     * Subir un nuevo archivo asociado a este expediente.
+     *
+     */
     public function addArchivos($expediente=null, $directorio='')
     {
         if ($directorio!='') {$directorio='/'.$directorio;}

@@ -48,18 +48,19 @@ class PrestaciontiposController extends AppController
      */
     public function add()
     {
+        $tipos_de_prestacion = $this->paginate($this->Prestaciontipos);
         $prestaciontipo = $this->Prestaciontipos->newEntity();
         if ($this->request->is('post')) {
             $prestaciontipo = $this->Prestaciontipos->patchEntity($prestaciontipo, $this->request->data);
             if ($this->Prestaciontipos->save($prestaciontipo)) {
-                $this->Flash->success(__('The prestaciontipo has been saved.'));
+                $this->Flash->success(__('Ha creado correctamente un nuevo tipo de prestación.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The prestaciontipo could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible crear el nuevo tipo de prestación. Inténtalo de nuevo'));
             }
         }
-        $this->set(compact('prestaciontipo'));
+        $this->set(compact('prestaciontipo', 'tipos_de_prestacion'));
         $this->set('_serialize', ['prestaciontipo']);
     }
 
@@ -78,11 +79,11 @@ class PrestaciontiposController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $prestaciontipo = $this->Prestaciontipos->patchEntity($prestaciontipo, $this->request->data);
             if ($this->Prestaciontipos->save($prestaciontipo)) {
-                $this->Flash->success(__('The prestaciontipo has been saved.'));
+                $this->Flash->success(__('Se han guardado correctamente las modificaciones en el tipo de prestación "'.$prestaciontipo->tipo.'".'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The prestaciontipo could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible editar el tipo de prestación. Inténtalo de nuevo'));
             }
         }
         $this->set(compact('prestaciontipo'));
@@ -101,11 +102,11 @@ class PrestaciontiposController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $prestaciontipo = $this->Prestaciontipos->get($id);
         if ($this->Prestaciontipos->delete($prestaciontipo)) {
-            $this->Flash->success(__('The prestaciontipo has been deleted.'));
+            $this->Flash->success(__('Ha eliminado correctamente este tipo de prestación.'));
         } else {
-            $this->Flash->error(__('The prestaciontipo could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible eliminar el tipo de prestación. Inténtalo de nuevo.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

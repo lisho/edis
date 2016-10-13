@@ -542,11 +542,13 @@
                                         <?= $a['change']; ?> <!-- Fecha de Archivo en Subdirectorio -->
                                     </div>
                                     <div class="col-xs-2 text-right">
+                                        <?= $k = '';?>
                                         <?= $this->Html->link('', [ 'controller' => 'Expedientes', 
                                                                     'action' => 'delete_archivo', 
-                                                                    $expediente['numedis'], 
-                                                                    //$a['dirname'], 
-                                                                    $a['basename']
+                                                                    $a['basename'],
+                                                                    $expediente['numedis'],                                                                     
+                                                                    //$key, 
+                                                                    $expediente->id
                                                                     ], 
                                                                 ['class'=> 'fa fa-trash text-danger',
                                                                     'confirm' => __('¿Estás seguro de que quieres borrar este archivo?')
@@ -638,6 +640,7 @@
                                         <div class="col-xs-6">
                                             <li class="<?= $ext_ico; ?>"></li> 
                                             <?php $options=['target' => '_blank'];?>
+
                                            <?= $this->Html->link($a['basename'], '/webroot/docs/'.$expediente->numedis.'/'.$key.'/'.$a['basename'], $options); ?><!-- Archivo en Subdirectorio -->
                                         </div>
                                         <div class="col-xs-2">
@@ -650,8 +653,9 @@
                                         <div class="col-xs-2 text-right">
                                             <?= $this->Html->link('', [ 'controller' => 'Expedientes', 
                                                                     'action' => 'delete_archivo', 
-                                                                    $expediente['numedis'], 
                                                                     $a['basename'],
+                                                                    $expediente['numedis'],                                                                     
+                                                                    $expediente->id, 
                                                                     $key, 
                                                                     ], 
                                                                 ['class'=> 'fa fa-trash text-danger',
@@ -730,8 +734,56 @@
                 <!-- start cuarta pestaña -->
 
               <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
-                <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui
-                  photo booth letterpress, commodo enim craft beer mlkshk </p>
+                <?= $this->Html->link('', '#', [     
+                    'class'=> 'btn btn-xs modal-btn btn-info fa fa-plus',
+                    'id'=>'add_prestacion',
+                    'data-container'=>"body",
+                    'data-toggle'=>"popover",
+                    'data-placement'=>"right",
+                    'data-content'=>"Añade una nueva prestación para este expediente..."]) ?>
+
+                <table class="table">
+                        <thead>
+                            <tr>
+                                
+                                <th>Identificador</th>
+                                <th>Tipo</th>
+                                <th>F. Apertura</th>
+                                <th>F. Cierre</th>
+                                <th>Titular</th>
+                                <th>Observaciones</th>
+                                <th>Estado</th>
+                                
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                                        
+                    <?php foreach ($expediente->prestacions as $prestacion): ?> 
+                             <tr>
+                                <td>
+                                    <strong><?= $this->Html->link($prestacion->numprestacion, ['controller' =>'Prestacions','action' => 'edit', $prestacion->id]) ?> </strong>
+                                </td>
+                                <td><?= $prestacion->prestaciontipo->tipo; ?></td>
+                                <td>
+                                    <?= $this->Time->format($prestacion->apertura, "dd/MM/yyyy", null); ?>
+                                </td>
+                                <td>
+                                    <?= $this->Time->format($prestacion->cierre, "dd/MM/yyyy", null); ?>
+                                </td>     
+                                <td><?= $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?></td>   
+                                <td><?= $prestacion->observaciones; ?></td> 
+                                <td><?= $prestacion->prestacionestado->estado; ?></td>   
+                                
+                               
+                            </tr>
+
+                    <?php endforeach; ?>
+
+                        </tbody>
+                    </table>
+
+
               </div>
 
                 <!-- end cuarta pestaña -->
@@ -976,7 +1028,7 @@
      
                          <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Fecha</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php
 
                                     echo $this->Form->input('incidencias.fecha', [
@@ -994,7 +1046,7 @@
                         </div>                   
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo <span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php
                                     echo $this->Form->input('incidencias.incidenciatipo_id', [
                                             'type' => 'select',
@@ -1011,7 +1063,7 @@
 
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">Descripción <span class="required">*</span></label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-8 col-sm-8 col-xs-12">
                                 <?php
                                     echo $this->Form->input('incidencias.descripcion', [
                                         'class'=>'editor form-control col-md-7 col-xs-12',
@@ -1036,6 +1088,135 @@
                 <?= $this->Form->end() ?>
                 <!-- /END Formulario -->
             </div>
+        </div>
+    </div>
+</div>
+
+
+<!--Modal ADD PRESTACIÓN--> 
+
+<div id="modal_add_prestacion" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Añade una nueva Prestación a este expediente <strong><?= $expediente['numedis']?></strong></h4>
+            </div>
+            <div class="modal-body">
+                <?= $this->Form->create($nueva_prestacion,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+
+                <?php
+                    echo $this->Form->input('prestacions.expediente_id', [
+                            'type' => 'hidden',
+                            'value' => $expediente->id,
+                            'label' => ['text' => '']
+                        ]);
+                ?> 
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Número de Prestación <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                            echo $this->Form->input('prestacions.numprestacion', [
+                                    'class'=>'form-control col-md-7 col-xs-12',
+                                    'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tipo de Prestación <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                            echo $this->Form->input('prestacions.prestaciontipo_id', [
+                                                            'type' => 'select',
+                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                            'default' => '',
+                                                            'required' => 'required',
+                                                            'label' => ['text' => ''],
+                                                            //'options' => $listado_tipos_prestacion,
+                                                            'empty'   => 'Selecciona un tipo de prestación...'
+                                                        ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Estado de la Prestación <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                            echo $this->Form->input('prestacions.prestacionestado_id', [
+                                                            'type' => 'select',
+                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                            'default' => '',
+                                                            'required' => 'required',
+                                                            'label' => ['text' => ''],
+                                                            //'options' => $listado_estados_prestacion,
+                                                            'empty'   => 'Selecciona un estado de la prestación...'
+                                                        ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Fecha de Apertura de la Prestación <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                             echo $this->Form->input('prestacions.apertura', [
+                                    'type'=>'text',
+                                    //'dateFormat' => 'DMY',
+                                    'class'=>'datepicker form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => ''],
+                                    'default' => date("d/m/Y"),
+                                    'placeholder' => '_ _ / _ _ / _ _ _ _'
+                                    //'templates'=>['dateWidget' => '{{day}}{{month}}{{year}}']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group has-feedback">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Titular de la Prestación <span class="required">*</span></label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                            
+                            echo $this->Form->input('prestacions.participante_id', [
+                                                            'type' => 'select',
+                                                            'class'=>'form-control col-md-7 col-xs-12',
+                                                            'default' => '',
+                                                            'required' => 'required',
+                                                            'label' => ['text' => ''],
+                                                            'options' => $listado_posibles_titulares_prestacion,
+                                                            'empty'   => 'Selecciona un titular para esta prestación'
+                                                        ]);
+                        ?> 
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre esta Prestación </label>
+                    <div class="col-md-8 col-sm-8 col-xs-12">
+                        <?php
+                            echo $this->Form->input('prestacions.observaciones', [
+                                    'class'=>'editor form-control col-md-7 col-xs-12',
+                                    //'required' => 'required',
+                                    'label' => ['text' => '']
+                                ]);
+                        ?> 
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <?= $this->Form->button('Añadir el Nuevo Usuario ->', ['class' => 'btn btn-success']) ?>
+                <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+                
+            </div>
+               
+                <?= $this->Form->end() ?>
         </div>
     </div>
 </div>

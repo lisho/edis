@@ -57,15 +57,61 @@ class ComisionsController extends AppController
      */
     public function view($id = null)
     {
+        /*
+        ** Variables iniciales
+        */
+
         $listado_ceas = $this->listadoEquipo('CEAS');
         $secretario='';
         $posibles_secretarios=[];
+
+        /*
+        ** Variables para NUEVAS ENTIDADES
+        */
+
+        $this->loadModel('Prestacions');      
+        $nueva_prestacion = $this->Prestacions->newEntity(); // Crear nueva prestación
+
         $this->loadModel('Pasacomisions');      
-        $nuevo_pasacomision = $this->Pasacomisions->newEntity();
+        $nuevo_pasacomision = $this->Pasacomisions->newEntity(); // Crear nuevo paso por prestación
         
+        /*
+        ** Redirigimos las entradas POST de la CREACIÓN de elementos
+        */
+
+        if ($this->request->is('post')) {
+                    if (isset($this->request->data['prestacions'])) {
+                        $data = $this->request->data['prestacions'];
+                        ExpedientesController::addPrestacion($data,$data['expediente_id'],$nueva_prestacion);
+                    }
+                    elseif (isset($this->request->data['pasacomision'])) {
+                        $data = $this->request->data['pasacomision'];
+                        $this->addPasacomision($data, $id, $nuevo_pasacomision);
+                    } 
+                    
+                }
+
+        /*
+        ** Datos de la comisión
+        */
+
         $comision = $this->Comisions->get($id, [
-            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes']
+            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes', 'Pasacomisions.Expedientes.Prestacions', 'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 'Pasacomisions.Expedientes.Prestacions.Participantes']
         ]);
+
+        /*
+        ** Pasamos los posibles Estados de la comisión (hemos cargado el modelo al principio)
+        */
+
+        $estados_comision = $this->Prestacions->Prestacionestados->find('list', [   'keyField' => 'id',
+                                                                                    'valueField' => 'estado']
+                                                                                );
+        $estados_comision = $estados_comision->toArray();
+//debug($estados_comision->toArray());exit();
+
+        /*
+        ** Armamos los Arrais secretario y posibles_secretarios
+        */
 
         foreach ($comision->asistentecomisions as $asistente) {
             $asistentes[]=$asistente->tecnico_id; 
@@ -77,22 +123,26 @@ class ComisionsController extends AppController
                 }                           
         }
 
-        // Ordenamos los Pasos por comisión por CEAS
+        /*
+        ** Ordenamos los Pasos por comisión agrupados por CEAS
+        */
 
         foreach ($comision->pasacomisions as $exp) {
             $expedientes_ordenados[$exp->expediente->ceas][]=$exp;  
+            $listado_posibles_titulares_prestacion [$exp->expediente->id]= $this->listadoMiembrosParrilla($exp->expediente->id);
         }
+
+        /*
+        ** Armamos un array con los posibles asistentes a la comisión
+        */
 
         $this->loadModel('Tecnicos');
         $tecnicos = $this->Tecnicos->find('all', ['contain' => ['Asistentecomisions', 'Equipos'],
                                                     ]);
 
-        if ($this->request->is('post')) {
-                    $data = $this->request->data['pasacomision'];
-                    $this->addPasacomision($data, $id, $nuevo_pasacomision);
-                }
-
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'el_asistente'));
+        //$listado_posibles_titulares_prestacion = $this->listadoMiembrosParrilla($id);  
+              
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'el_asistente', 'nueva_prestacion', 'listado_posibles_titulares_prestacion', 'estados_comision'));
         $this->set('_serialize', ['comision']);
     }
 

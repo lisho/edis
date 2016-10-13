@@ -19,7 +19,7 @@ class PrestacionsController extends AppController
     public function index()
     {
         $this->paginate = [
-            'contain' => ['Tipoprestacions', 'Expedientes', 'Participantes', 'Estadoprestacions']
+            'contain' => ['Prestaciontipos', 'Expedientes', 'Participantes', 'Prestacionestados']
         ];
         $prestacions = $this->paginate($this->Prestacions);
 
@@ -37,7 +37,7 @@ class PrestacionsController extends AppController
     public function view($id = null)
     {
         $prestacion = $this->Prestacions->get($id, [
-            'contain' => ['Tipoprestacions', 'Expedientes', 'Participantes', 'Estadoprestacions']
+            'contain' => ['Prestaciontipos', 'Expedientes', 'Participantes', 'Prestacionestados']
         ]);
 
         $this->set('prestacion', $prestacion);
@@ -62,11 +62,11 @@ class PrestacionsController extends AppController
                 $this->Flash->error(__('The prestacion could not be saved. Please, try again.'));
             }
         }
-        $tipoprestacions = $this->Prestacions->Tipoprestacions->find('list', ['limit' => 200]);
+        $prestaciontipos = $this->Prestacions->Prestaciontipos->find('list', ['limit' => 200]);
         $expedientes = $this->Prestacions->Expedientes->find('list', ['limit' => 200]);
         $participantes = $this->Prestacions->Participantes->find('list', ['limit' => 200]);
-        $estadoprestacions = $this->Prestacions->Estadoprestacions->find('list', ['limit' => 200]);
-        $this->set(compact('prestacion', 'tipoprestacions', 'expedientes', 'participantes', 'estadoprestacions'));
+        $prestacionestados = $this->Prestacions->Prestacionestados->find('list', ['limit' => 200]);
+        $this->set(compact('prestacion', 'prestaciontipos', 'expedientes', 'participantes', 'prestacionestados'));
         $this->set('_serialize', ['prestacion']);
     }
 
@@ -79,24 +79,52 @@ class PrestacionsController extends AppController
      */
     public function edit($id = null)
     {
+
+        $prestaciontipos = $this->Prestacions->Prestaciontipos->find('list', [  'keyField' => 'id',
+                                                                                'valueField' => 'tipo'
+                                                                                ]);
+        $prestacionestados = $this->Prestacions->Prestacionestados->find('list', [  'keyField' => 'id',
+                                                                                'valueField' => 'estado'
+                                                                                ]);
+
         $prestacion = $this->Prestacions->get($id, [
-            'contain' => []
+            'contain' => ['Prestaciontipos', 'Expedientes', 'Participantes', 'Prestacionestados']
         ]);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $prestacion = $this->Prestacions->patchEntity($prestacion, $this->request->data);
+
+                $data = $this->request->data;
+
+                if ( $data['apertura']!='') {
+                    $cachos_fecha_apertura = preg_split("/[\/]+/", $data['apertura']);
+                     $data['apertura']=array(
+                                    'year'=>$cachos_fecha_apertura[2],
+                                    'month'=>$cachos_fecha_apertura[1],
+                                    'day' =>$cachos_fecha_apertura[0] 
+                            );
+                }
+                if ( $data['cierre']!='') {
+                    $cachos_fecha_cierre = preg_split("/[\/]+/", $data['cierre']);
+                     $data['cierre']=array(
+                                    'year'=>$cachos_fecha_cierre[2],
+                                    'month'=>$cachos_fecha_cierre[1],
+                                    'day' =>$cachos_fecha_cierre[0] 
+                            );
+                } else { $data['cierre']=null;}
+//debug($data);exit();
+            $prestacion = $this->Prestacions->patchEntity($prestacion, $data);
             if ($this->Prestacions->save($prestacion)) {
                 $this->Flash->success(__('The prestacion has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller'=>'Expedientes', 'action' => 'view', $data['expediente_id']]);
             } else {
                 $this->Flash->error(__('The prestacion could not be saved. Please, try again.'));
             }
         }
-        $tipoprestacions = $this->Prestacions->Tipoprestacions->find('list', ['limit' => 200]);
-        $expedientes = $this->Prestacions->Expedientes->find('list', ['limit' => 200]);
-        $participantes = $this->Prestacions->Participantes->find('list', ['limit' => 200]);
-        $estadoprestacions = $this->Prestacions->Estadoprestacions->find('list', ['limit' => 200]);
-        $this->set(compact('prestacion', 'tipoprestacions', 'expedientes', 'participantes', 'estadoprestacions'));
+        
+        $participantes = $this->listadoMiembrosParrilla($prestacion->expediente_id);
+        
+        $this->set(compact('prestacion', 'participantes', 'prestaciontipos', 'expedientes','prestacionestados'));
         $this->set('_serialize', ['prestacion']);
     }
 
@@ -118,5 +146,30 @@ class PrestacionsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function cerrarPrestacion($id=null, $mensaje=null)
+    {
+        $data = [];
+        $prestacion = $this->Prestacions->get($id);
+
+        $data['cierre'] = $this->ajustarFecha(date('d/m/Y'));
+        $data['prestacionestado_id'] = 6;
+        $data['observaciones'] = $mensaje;
+//debug($data);exit();
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            $prestacion = $this->Prestacions->patchEntity($prestacion, $data);
+            if ($this->Prestacions->save($prestacion)) {
+                $this->Flash->success(__('Has cerrado la prestación.'));
+
+            } else {
+                $this->Flash->error(__('No ha sido posible cerrar la prestación. Inténtalo de nuevo.'));
+            }
+        }
+
+        return $this->redirect($this->referer());
+        $this->autoRender = false;
+
     }
 }

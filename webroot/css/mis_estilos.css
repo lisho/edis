@@ -83,6 +83,16 @@ blockquote.small {
 	text-align: center;
 }
 
+.warning {
+	padding: 0;
+	margin: 0;
+	font-size: 1.3em;
+	color: #FFB700;
+	border-color: #FFB700;
+	background-color: rgba(255,180,0,.2);
+	text-align: center;
+}
+
 .radio {
 	margin-left: 2em;
 }
@@ -338,4 +348,23 @@ hr.reset {
 
 .row_archivo:hover {
 	background-color: rgba(0, 0, 0, 1.0)
+}
+
+.sombra {
+	-webkit-box-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+	-moz-box-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+	box-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
+}
+
+.blond {
+	font-weight: bold;
+}
+
+.centrar {
+	vertical-align: center;
+	text-align: center;
+}
+
+td .max-width-60{
+	width: 60%;
 }

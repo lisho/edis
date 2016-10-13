@@ -18,6 +18,12 @@
                       
                     </ul>
                   </li>
+                  <li><a><i class="fa fa-table"></i> Comisiones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link('Tengo que ir a una comisión ', ['controller'=> 'Comisions', 'action'=>'index']) ?></li>
+                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                    </ul>
+                  </li>
                   <li><a><i class="fa fa-warning"></i> Avisos/Noticias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Nuevo aviso o noticia', ['controller'=> 'Avisos', 'action'=>'add']) ?></li>
@@ -85,12 +91,16 @@
                             </li>
                           </ul>
                         </li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-table"></i> Comisiones <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link('Tengo que ir a una comisión ', ['controller'=> 'Comisions', 'action'=>'index']) ?></li>
-                      <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                        <li><a>Prestaciones<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li>
+                              <?= $this->Html->link('Gestión Estados de Prestación', ['controller'=> 'Prestacionestados', 'action'=>'add']) ?>
+                            </li>
+                            <li>
+                              <?= $this->Html->link('Gestión Tipos de Prestación', ['controller'=> 'Prestaciontipos', 'action'=>'add']) ?>
+                            </li>
+                          </ul>
+                        </li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>

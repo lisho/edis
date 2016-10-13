@@ -33,7 +33,7 @@ class PrestacionestadosTable extends Table
         parent::initialize($config);
 
         $this->table('prestacionestados');
-        $this->displayField('id');
+        $this->displayField('tipo');
         $this->primaryKey('id');
 
         $this->hasMany('Prestacions', [
@@ -58,8 +58,8 @@ class PrestacionestadosTable extends Table
             ->notEmpty('estado');
 
         $validator
-            ->requirePresence('observaciones', 'create')
-            ->notEmpty('observaciones');
+            ->requirePresence('descripcion', 'create')
+            ->notEmpty('descripcion');
 
         return $validator;
     }

@@ -48,18 +48,19 @@ class PrestacionestadosController extends AppController
      */
     public function add()
     {
+        $estados_de_prestacion = $this->paginate($this->Prestacionestados);
         $prestacionestado = $this->Prestacionestados->newEntity();
         if ($this->request->is('post')) {
             $prestacionestado = $this->Prestacionestados->patchEntity($prestacionestado, $this->request->data);
             if ($this->Prestacionestados->save($prestacionestado)) {
-                $this->Flash->success(__('The prestacionestado has been saved.'));
+                $this->Flash->success(__('Ha creado correctamente un nuevo estado de prestación.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The prestacionestado could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible crear el nuevo estado de prestación. Inténtalo de nuevo'));
             }
         }
-        $this->set(compact('prestacionestado'));
+        $this->set(compact('prestacionestado','estados_de_prestacion'));
         $this->set('_serialize', ['prestacionestado']);
     }
 
@@ -78,11 +79,11 @@ class PrestacionestadosController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $prestacionestado = $this->Prestacionestados->patchEntity($prestacionestado, $this->request->data);
             if ($this->Prestacionestados->save($prestacionestado)) {
-                $this->Flash->success(__('The prestacionestado has been saved.'));
+                $this->Flash->success(__('Se han guardado correctamente las modificaciones en el estado de prestación "'.$prestacionestado->estado.'".'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'add']);
             } else {
-                $this->Flash->error(__('The prestacionestado could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible editar el estado de prestación. Inténtalo de nuevo'));
             }
         }
         $this->set(compact('prestacionestado'));
@@ -101,11 +102,11 @@ class PrestacionestadosController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $prestacionestado = $this->Prestacionestados->get($id);
         if ($this->Prestacionestados->delete($prestacionestado)) {
-            $this->Flash->success(__('The prestacionestado has been deleted.'));
+            $this->Flash->success(__('Ha eliminado correctamente el estado de prestación.'));
         } else {
-            $this->Flash->error(__('The prestacionestado could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible eliminar el estado de prestación. Inténtalo de nuevo.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'add']);
     }
 }

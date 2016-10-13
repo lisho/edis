@@ -74,7 +74,8 @@ class PrestacionsTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->allowEmpty('numprestacion');
+            ->allowEmpty('numprestacion')
+            ->requirePresence('apertura', 'create');
 
         $validator
             ->date('apertura')
@@ -83,10 +84,12 @@ class PrestacionsTable extends Table
 
         $validator
             ->date('cierre')
-            ->allowEmpty('cierre');
+            ->allowEmpty('cierre')
+            ;
 
         $validator
-            ->allowEmpty('observaciones');
+            //->allowEmpty('observaciones')
+            ;
 
         return $validator;
     }
