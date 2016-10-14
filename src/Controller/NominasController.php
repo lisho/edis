@@ -48,9 +48,11 @@ class NominasController extends AppController
      */
     public function add()
     {
-        $lista_nominas= $this->listaNominas();
+        //$lista_nominas= $this->listaNominas();
+
         $nomina = $this->Nominas->newEntity();
         $cuenta_nominas=0;
+        $cuenta_fallos=0;
         $lineas  = [];
         $keys = ['CCLL','CEAS','HS','RGC','CLASIFICACION','MIEMBROS','dni','nombrecompleto','SEXO','EDAD','NACIONALIDAD','DOMICILIO','fechatramite','RESOLUCION','fechaefectos','relacion','fechanomina'];
         
@@ -59,9 +61,6 @@ class NominasController extends AppController
         if ($this->request->is('post') && $this->request->data['nomina']['tmp_name']!='') {
 
             $csv = $this->request->data['nomina'];
-
-                
-            //si es correcto, entonces damos permisos de lectura para subir
             $filename = $csv['tmp_name'];
             $lineas = file($filename);
             unset($lineas[0], $lineas[1], $lineas[2]);
@@ -70,32 +69,36 @@ class NominasController extends AppController
                 $data = [];
                 $datos = [];   
 
-                    //abrimos condición, solo entrará en la condición a partir de la segunda pasada del bucle.
-                    /* La funcion explode nos ayuda a delimitar los campos, por lo tanto irá 
-                    leyendo hasta que encuentre un ; */
-                    
-                    //$linea = str_replace('"',"",$linea);
-
                     $datos = explode(';',$linea);
                     $data = array_combine($keys,$datos);
 
                     foreach ($data as $k => $d) { $data[$k] = trim($d);}
                     $data['fechatramite'] = $this->ajustarFecha($data['fechatramite']);
-                    $data['fechaefectos'] = $this->ajustarFecha($data['fechaefectos']);                
-                    //debug($data);exit(); 
+                    $data['fechaefectos'] = $this->ajustarFecha($data['fechaefectos']);  
+                    $comprueba_nomina = $this->Nominas->find('all', ['conditions' => [
+                                'fechanomina' => $data['fechanomina'],
+                                'nombrecompleto' => $data['nombrecompleto'],
+                                'dni' => $data['dni']
+                            ]
+                        ]);
 
-                $n = $this->Nominas->newEntity();
-                $n = $this->Nominas->patchEntity($n, $data);
+                    if (empty($comprueba_nomina->toArray())) {
+                        $n = $this->Nominas->newEntity();
+                        $n = $this->Nominas->patchEntity($n, $data);
 
-                if ($this->Nominas->save($n)) {
-                    $cuenta_nominas++;
+                        if ($this->Nominas->save($n)) {
+                            $cuenta_nominas++;
 
-                } else {
-                    $this->Flash->error(__('The nomina could not be saved. Please, try again.'));
-                }
+                        } else {
+                            $this->Flash->error(__('The nomina could not be saved. Please, try again.'));
+                        }
+                    } else {
+                        $cuenta_fallos++;
+                    }  
             } 
                    
             $this->Flash->success(__('Se han cargado correctamente '.$cuenta_nominas.' nominas'));
+            $this->Flash->error(__('No ha sido posible cargar '.$cuenta_fallos.' nominas porque ya existen en el sistema'));
         }
         
         $this->set(compact('nomina', 'lista_nominas'));
@@ -166,6 +169,29 @@ class NominasController extends AppController
         //return $this->redirect($this->referer());
         $this->autoRender = false;
 
+    }
+
+    /**
+     * Desplegar la última nómina
+     *
+     * @param $mes_nomina 
+     * @return array
+     * 
+     */
+    public function ultima($id = null)
+    {
+        
+        $lista_fechanominas = $this->Nominas->find('list',
+                 ['keyField' => 'id', 'valueField'=>'fechanomina' ]);
+        $lista_fechanominas = array_unique ($lista_fechanominas->toArray());                                           
+        $lista_nominas = $this->ListaNominas();
+        //debug($lista_fechanominas);exit();   
+        
+        //return $this->redirect($this->referer());
+        $this->set(compact('lista_nominas', 'lista_fechanominas'));
+        $this->set('_serialize', ['lista_nominas']);
+        //$this->autoRender = false;
+        //return $lista_nominas;
     }
 
 }

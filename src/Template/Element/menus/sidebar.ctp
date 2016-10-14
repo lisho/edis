@@ -101,6 +101,16 @@
                             </li>
                           </ul>
                         </li>
+                        <li><a>Nóminas<span class="fa fa-chevron-down"></span></a>
+                          <ul class="nav child_menu">
+                            <li>
+                              <?= $this->Html->link('Añadir nueva Nómina', ['controller'=> 'Nominas', 'action'=>'add']) ?>
+                            </li>
+                            <li>
+                              <?= $this->Html->link('Última Nómina', ['controller'=> 'Nominas', 'action'=>'ultima']); ?>
+                            </li>
+                          </ul>
+                        </li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>

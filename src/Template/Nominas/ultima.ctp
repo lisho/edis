@@ -1,37 +1,3 @@
-<h1>Importando archivo CSV</h1>
-
-<fieldset>
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Carca un archivo de nómina en formato csv<span class="required">*</span></label>
-    
-    <div class="form-group">
-         <div class="col-md-6 col-sm-6 col-xs-12">
-            <?php echo $this->Form->create($nomina,['type'=>'file','class'=>'form-horizontal form-label-left data-parsley-validate=""']); ?>
-                    
-                    <?= $this->Form->file('nomina', [
-                                                        //'type'=>'file',
-                                                        //'label'=>'Selecciona un archivo para añadir la foto de perfil:'
-                                                        ]); ?>  
-        </div>
-    </div>
-</fieldset>             
-
-<div class="ln_solid"></div>
-<div class="form-group">
-    <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-        <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
-        <?= $this->Html->link(__('Cancel'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
-    </div>
-</div>
-
-<?php echo $this->Form->end(); ?>
-<!--
-<form action='<?php echo $_SERVER["PHP_SELF"];?>' method='post' enctype="multipart/form-data">
-Importar Archivo : <input type='file' name='sel_file' size='20'>
-<input type='submit' name='submit' value='submit'>
-</form>
-
-
-
 
 
 <div class="col-md-12 col-sm-12 col-xs-12"> 
@@ -78,6 +44,7 @@ Importar Archivo : <input type='file' name='sel_file' size='20'>
                             <th><?= 'NACIONALIDAD' ?></th> 
                             <th><?= 'DOMICILIO' ?></th> 
                             <th><?= 'relacion' ?></th> 
+                            <th><?= 'fechanomina' ?></th>
                             
                         </tr>                        
                     </thead>
@@ -95,6 +62,7 @@ Importar Archivo : <input type='file' name='sel_file' size='20'>
                             <td><?= h($nomina->NACIONALIDAD) ?></td> 
                             <td><?= h($nomina->DOMICILIO) ?></td> 
                             <td><?= h($nomina->relacion) ?></td> 
+                            <td><?= h($nomina->fechanomina) ?></td> 
                             
                         </tr> 
                     <?php endforeach; ?> 
@@ -105,5 +73,3 @@ Importar Archivo : <input type='file' name='sel_file' size='20'>
         </div> 
     </div>
 </div>
-
--->
