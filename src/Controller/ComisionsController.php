@@ -251,7 +251,7 @@ class ComisionsController extends AppController
         $nuevo_pasacomision = $this->Pasacomisions->newEntity();
         
         $comision = $this->Comisions->get($id, [
-            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes']
+            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes', 'Pasacomisions.Expedientes.Prestacions', 'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 'Pasacomisions.Expedientes.Prestacions.Participantes']
         ]);
 
         foreach ($comision->asistentecomisions as $asistente) {

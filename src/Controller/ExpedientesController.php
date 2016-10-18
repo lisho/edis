@@ -53,9 +53,8 @@ class ExpedientesController extends AppController
      */
     public function view($id = null)
     {
+
         $archivos_tree=[];
-        $this->loadModel('Participantes');
-        $participante = $this->Participantes->newEntity();
 
         $this->loadModel('Incidencias');
         $nueva_incidencia = $this->Incidencias->newEntity();
@@ -74,23 +73,43 @@ class ExpedientesController extends AppController
                                                                                 ]);
 
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos','Pasacomisions.Comisions', 'Prestacions', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes'],
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
+                'Pasacomisions.Comisions', 'Pasacomisions'=>[ 
+                                                'sort'=>[
+                                                    'Comisions.fecha'=> 'DESC']],
+                                            'Prestacions'=>[ 
+                                                'sort'=>[
+                                                    'apertura'=> 'DESC']],
+                                        ],
+                                    ]);
+        foreach ($expediente->participantes as $participante) {
+            $listado_participantes[] = $participante->dni;
+        }
 
-        ]);
+        //*****************************************************//
+        // Creamos un array con todos los datos de las nóminas //
+        // de este expediente                                  //
+        //*****************************************************//
+
+
+            $datos_nominas = $this->cruceNomina($expediente['numhs']);
+
+        //*****************************************************//
+        //                                                     //
+        //*****************************************************//
+
 
         //Añadimos la edad al array de datos del expediente
             foreach ($expediente->participantes as $p) {
                 $edad = $this->calcularEdad($p['nacimiento']);
                 $p['edad'] = $edad;
             }
-
+             
             //Si creamos un nuevo usuario en el expediente...
-            if ($this->request->is('post')) {
-         //debug($this->request->data);exit();
-                
+
                 if (isset($this->request->data['participantes'])) {
                     $data = $this->request->data['participantes'];
-                    $this->addParticipante($data,$expediente,$participante);
+                    $this->addParticipante($data,$expediente);
                 } elseif (isset($this->request->data['incidencias'])) {
                     $data = $this->request->data['incidencias'];
                     $this->addIncidencia($data,$expediente,$nueva_incidencia);
@@ -99,8 +118,7 @@ class ExpedientesController extends AppController
                     $this->addPrestacion($data,$expediente,$nueva_prestacion);
                 }
                     
-                
-            } // FIN creación de nuevo usuario/participante.
+            // FIN creación de nuevo usuario/participante.
 
         $listado_ceas = $this->listadoEquipo('ceas');        
         $listado_relaciones = $this->listadoRelaciones();
@@ -113,7 +131,7 @@ class ExpedientesController extends AppController
         //*************************************************//
         $archivos=$this->archivosTree($expediente->numedis, $expediente->id);
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados'));
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados','datos_nominas','listado_participantes'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -134,7 +152,7 @@ class ExpedientesController extends AppController
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['participantes'][0]['nacimiento']);
 
             $this->request->data['participantes'][0]['foto']='';
-            
+          
             if ( $this->request->data['participantes'][0]['nacimiento']) {
                  $this->request->data['participantes'][0]['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
@@ -322,8 +340,12 @@ class ExpedientesController extends AppController
      *  2. Array con el request->data del formulario.
      *   Redirecciona a la vista del expediente.
      */
-    public function addParticipante($data,$expediente,$participante)
+    public function addParticipante($data,$expediente)
     {
+        //debug($data);debug($expediente);debug($participante);exit();  
+
+        $this->loadModel('Participantes');
+        $participante = $this->Participantes->newEntity();  
         
         $cachos_fecha = preg_split("/[\/]+/", $data['nacimiento']);
         $data['id']='';
@@ -486,9 +508,9 @@ class ExpedientesController extends AppController
         $longitud_nombre_carpeta = strlen($root);
         $archivos_tree['/'] = [];
         $dir = new Folder($root);
-        //$archivos = $dir->findRecursive();
+        $archivos = $dir->tree($root);
 
-        $archivos = Folder::tree($root);
+        //$archivos = Folder::tree($root);
         
         foreach ($archivos[0] as $directorio) {
             $directorio = substr($directorio,$longitud_nombre_carpeta);

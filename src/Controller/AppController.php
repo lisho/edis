@@ -294,4 +294,119 @@ class AppController extends Controller
                 );
         return $fecha_ajustada;
     }
+
+    /**
+     * Contar las veces que se repiten los valores de un array
+     *
+     * @return array valor => veces que se repite
+     */
+    public function contarValoresArray($array=null)
+    {
+        
+        $contar=array();
+     
+        foreach($array as $value)
+        {
+            if(isset($contar[$value]))
+            {
+                // si ya existe, le añadimos uno
+                $contar[$value]+=1;
+            }else{
+                // si no existe lo añadimos al array
+                $contar[$value]=1;
+            }
+        }
+        return $contar;
+
+    }
+
+    /**
+     * Contar las veces que se repiten los valores de un array
+     *
+     * @return array valor => veces que se repite
+     */
+    public function eliminarValoresArray($array=null, $valor=[], $useOldKeys = FALSE)
+    {
+    
+    if (!is_array($valor)) {$valor[]=$valor; }
+            
+    foreach ($array as $key => $a) {
+        if (in_array($a, $valor)) {unset($array[$key]);}
+    }
+  
+    if(!$useOldKeys){
+        $array = array_values($array);
+    }
+
+    return $array;
+
+    }
+
+    /**
+     * Datos de las nóminas de un expediente
+     *
+     * @param $hs : Número de Historia Social.
+     * @return array asociativo con todos los datos de las nóminas re-ordenados.
+     * 
+     */
+
+    public function cruceNomina($hs=null)
+    {
+        $participantes_ultima_nomina = [];
+        $count_nominas = [];
+        $this->loadModel('Nominas');
+        $mis_nominas = $this->Nominas->find('all', ['conditions' => [
+                                'HS' => $hs,
+                            ]
+                        ]);
+
+        if ($mis_nominas!=[]) {
+
+            $mis_nominas_array = $mis_nominas->toArray();
+            $cuentas_nomina = count($mis_nominas_array);
+            $ultima_nomina = end($mis_nominas_array);
+
+            foreach ($mis_nominas as $nomina) {
+
+                //explotamos la fecha de nómina en un array
+                $n_descompuesto = explode(' ',$nomina->fechanomina);
+
+                //sacamos meses y años de cobro y los colocamos en un array asociativo
+                $n = $this->eliminarValoresArray($n_descompuesto, ['', 'de']);
+                $lista_n[$n[1]][] = $n[0];
+                
+                //contamos las personas que cobran cada mes de cada año
+                $count_nominas[$n[1]] = array_count_values($lista_n[$n[1]]);
+
+                // Si es la ultima nomina, sacamos los datos para el array
+                if ($nomina['fechanomina']===$ultima_nomina['fechanomina']) {
+                    $participantes_ultima_nomina[]=['dni'=>$nomina->dni,
+                                                    'nombrecompleto' => $nomina->nombrecompleto,
+                                                    'sexo' => $nomina->SEXO,
+                                                    'nacionalidad' => $nomina->NACIONALIDAD,
+                                                    'relacion_titular' => $nomina->relacion,
+                                                ];
+                } 
+            }
+
+
+            // Datos de uno de los usuarios de este expediente en la última nómina cargada.
+
+            $m_n['ultima_nomina'] = $ultima_nomina; 
+            $m_n['todas_mis_nominas'] = $mis_nominas_array;
+            $m_n['meses_nomina'] = $count_nominas;
+            $m_n['cuentas_nominas'] = $cuentas_nomina;
+            $m_n['participantes_ultima_nomina'] = $participantes_ultima_nomina;
+            $m_n['cuenta_paicipantes_ultima_nomina'] = count($m_n['participantes_ultima_nomina']);
+            
+        }
+            
+            return  $m_n;
+            //debug($count_nominas);
+            //debug($lista_n);
+
+            //debug($ultima_nomina);
+            //debug($mis_nominas->toArray());
+            //exit();
+    }
 }

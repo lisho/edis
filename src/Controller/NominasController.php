@@ -158,6 +158,7 @@ class NominasController extends AppController
      * @return array
      * 
      */
+
     public function listaNominas($id = null)
     {
         
@@ -178,6 +179,7 @@ class NominasController extends AppController
      * @return array
      * 
      */
+
     public function ultima($id = null)
     {
         

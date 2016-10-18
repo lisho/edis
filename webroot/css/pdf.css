@@ -152,3 +152,7 @@ td#td2 {
     margin: 0;
     padding: 0;
 }
+
+.mayusculas {
+    text-transform:uppercase;
+}

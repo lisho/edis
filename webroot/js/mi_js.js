@@ -21,6 +21,8 @@ jQuery(document).ready(function($) {
     			'print' ]
 	});
 
+	$(".datatable_nobtn").DataTable();
+
 	// --> EFECTOS BOOTSTRAP
 	
 	$('.datepicker').datepicker({

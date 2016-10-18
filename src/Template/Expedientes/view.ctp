@@ -154,6 +154,42 @@
         </div> 
     </div>
 
+    <div class="x_panel"> <!--/ Panel de NOMINAS-->
+        <div class="x_title"> 
+            <big><i class="icono-fa fa fa-refresh"></i><?= '    Cruce con la Última Nómina en SAUSS:' ?> </big>
+            <ul class="nav navbar-right panel_toolbox"> 
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
+              </li> 
+              <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
+                <ul class="dropdown-menu" role="menu"> 
+                  <li><a href="#">Settings 1</a> 
+                  </li> 
+                  <li><a href="#">Settings 2</a> 
+                  </li> 
+                </ul> 
+              </li> 
+              <li><a class="close-link"><i class="fa fa-close"></i></a> 
+              </li> 
+            </ul> 
+            <div class="clearfix"></div> 
+        </div> 
+ 
+        <div class="x_content">         
+
+            <div class="clearfix"></div> 
+            <div class="related"> 
+                
+                <h3>Datos de expediente</h3>
+
+                    <?= $this->element('nominas/comparar_ultima_nomina',[   'datos_nominas'=>$datos_nominas,
+                                                                            'expediente'=>$expediente
+                                                                        ]);
+                                                                    ?>             
+            </div> 
+
+        </div> 
+    </div><!--/ FIN Panel Nóminas-->
 
 
 </div><!--// FIN DIV col-md-4 col-sm-12 col-xs-12-->
@@ -161,6 +197,16 @@
 <!--Participantes: PARRILLA FAMILIAR-->
 
 <div class="col-md-8 col-sm-12 col-xs-12"> 
+                                             <!-- **************************************
+                                             ******  Indicadores de Nomina  - ALERTAS      ******
+                                             ****************************************-->       
+
+     <?= $this->element('expedientes/expediente_alertas',[      'datos_nominas'=>$datos_nominas,
+                                                                'expediente'=>$expediente
+                                                            ]); ?>                                        
+
+<!-- Cierre de expediente -->
+
     <div class="fijo">
         <?= $this->Html->link('',[],['class'=>'default fa fa-close fijo-boton', 'id'=>'cerrar_ventana', 'data-expediente'=>$expediente->numedis,'data-container'=>"body",
                 'data-toggle'=>"popover",
@@ -346,7 +392,7 @@
         <div class="x_panel">    
           <div class="" role="tabpanel" data-example-id="togglable-tabs">
             <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true" > <i class="fa fa-cubes">  Actuaciones</i></a>
+              <li role="presentation" class="active"><a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true" > <i class="fa fa-cubes">  Incidencias</i></a>
               </li>
               <li role="presentation" class=""><a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-folder-open user-profile-icon"></i> Documentos </a>
               </li>
@@ -742,7 +788,7 @@
                     'data-placement'=>"right",
                     'data-content'=>"Añade una nueva prestación para este expediente..."]) ?>
 
-                <table class="table">
+                <table class="datatable_nobtn table no-footer table-bordered " class="display" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 
@@ -760,7 +806,8 @@
                         <tbody>
                                         
                     <?php foreach ($expediente->prestacions as $prestacion): ?> 
-                             <tr>
+                        <?php $colorear = ($prestacion->prestacionestado->estado==='Abierta') ? 'tabla-seleccionada' : '' ;?>
+                             <tr class="<?= $colorear;?>">
                                 <td>
                                     <strong><?= $this->Html->link($prestacion->numprestacion, ['controller' =>'Prestacions','action' => 'edit', $prestacion->id]) ?> </strong>
                                 </td>
@@ -1080,8 +1127,8 @@
                     <div class="ln_solid"></div>
                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                    <?= $this->Form->button(__('Submit'), ['class' => 'btn btn-success']) ?>
-                    <?= $this->Html->link(__('Cancel'), ['action'=>'view',$expediente->id],['class' => 'btn btn-primary']) ?>
+                    <?= $this->Form->button(__('Guardar Actuación'), ['class' => 'btn btn-success']) ?>
+                    <?= $this->Html->link(__('Cancelar'), ['action'=>'view',$expediente->id],['class' => 'btn btn-primary']) ?>
                         </div>
                     </div>
                    

@@ -295,7 +295,7 @@
                                     <?php 
                                         $marcada = '';
                                         if ($p->id === $participante->id){
-                                            $marcada = 'warning';
+                                            $marcada = 'tabla-seleccionada';
                                         }
                                      ?>                                               
                                     

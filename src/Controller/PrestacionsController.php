@@ -53,6 +53,9 @@ class PrestacionsController extends AppController
     {
         $prestacion = $this->Prestacions->newEntity();
         if ($this->request->is('post')) {
+
+            $prestaciones_existentes = $this->Prestacions->findByExpediente_id($this->requiest->data->expediente_id);
+debug($prestaciones_existentes);exit();
             $prestacion = $this->Prestacions->patchEntity($prestacion, $this->request->data);
             if ($this->Prestacions->save($prestacion)) {
                 $this->Flash->success(__('The prestacion has been saved.'));
@@ -114,11 +117,11 @@ class PrestacionsController extends AppController
 //debug($data);exit();
             $prestacion = $this->Prestacions->patchEntity($prestacion, $data);
             if ($this->Prestacions->save($prestacion)) {
-                $this->Flash->success(__('The prestacion has been saved.'));
+                $this->Flash->success(__('Los cambios en la prestación se han guardado correctamente.'));
 
                 return $this->redirect(['controller'=>'Expedientes', 'action' => 'view', $data['expediente_id']]);
             } else {
-                $this->Flash->error(__('The prestacion could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible guardar los cambios. Por favor inténtalo de nuevo.'));
             }
         }
         

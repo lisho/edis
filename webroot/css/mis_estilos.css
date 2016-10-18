@@ -58,8 +58,11 @@ blockquote.small {
 .error-message{
 	color: #fff;
 	border-color: #FF0000;
-	
+}
 
+.error-text{
+	color: #FF0000;
+	border-color: #FF0000;
 }
 
 .error{
@@ -68,7 +71,7 @@ blockquote.small {
 	font-size: 1.3em;
 	color: #fff;
 	border-color: #FF0000;
-	background-color: rgba(255,0,0,.9);
+	background-color: rgba(255,0,0,.5);
 	text-align: center;
 	text-shadow: 0 3px 3px rgba(10, 10, 10, 0.5);
 }
@@ -187,6 +190,9 @@ ul.msg_list li a .time {
 	-webkit-box-shadow: 8px 8px 10px -3px rgba(64,64,64,.6);
 	-moz-box-shadow: 8px 8px 10px -3px rgba(64,64,64,.6);
 	box-shadow: 8px 8px 10px -3px rgba(64,64,64,.6);
+	z-index: 10000;
+	left: -50%;
+	/*width: 80%;*/
 }
 
 .ui-autocomplete li.ui-menu-item a {
@@ -356,6 +362,12 @@ hr.reset {
 	box-shadow: 1px 1px 1px rgba(10, 10, 10, 0.8);
 }
 
+.text-sombra-blanca {
+	-webkit-text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.9);
+	-moz-text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.9);
+	text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.9);
+}
+
 .blond {
 	font-weight: bold;
 }
@@ -367,4 +379,24 @@ hr.reset {
 
 td .max-width-60{
 	width: 60%;
+}
+
+.bg-yelow {
+    background: #f0ad4e !important;
+    border: 1px solid #f0ad4e !important;
+    color: #fff;
+}
+
+table>tbody>tr.tabla-seleccionada>td {
+	font-weight: bold;
+	background-color: rgba(17,136,102,.5);
+	color: #ffffff;
+}
+
+.fila_roja {
+		background-color: rgba(208,54,54,.1);
+}
+
+.fila_verde {
+		background-color: rgba(17,136,102,.1);
 }

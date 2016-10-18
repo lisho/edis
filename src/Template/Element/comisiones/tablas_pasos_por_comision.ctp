@@ -260,8 +260,16 @@
                                         'data-content'=>"Si este expediente está DERIVADO a EDIS deberíamos tener una prestación de Apoyo Técnico y Familiar para la Inclusión Social (ATFIS). Si n o es así deberíamos crearla."]); ?>  
                 
                 <?php elseif ($atfis === 'si'): ?>
-                        <button class="btn btn-xs btn-success" type="button">
-                          <span class="badge"><?= $atfis_num; ?></span>
+                        <button class="btn btn-xs btn-success modal-btn" type="button" id= '<?= $modificador; ?>crear_prestacion_atfis<?= $pasacomision->id; ?>',
+                                        data-container="body",
+                                        data-toggle="popover",
+                                        data-placement="top",
+                                        data-content="En este expediente hay <?= $atfis_num; ?> prestaciones ATFIS abiertas.">
+                          <span class="badge" >
+
+                                <?= $atfis_num; ?>
+                              
+                          </span>
                         </button>      
                 <?php endif; ?>
 
