@@ -31,13 +31,24 @@ class NominasController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
-        $nomina = $this->Nominas->get($id, [
-            'contain' => []
-        ]);
+        $nomina = [];
+        $posibles_nominas = $this->posiblesNominas();
+//debug($this->request);exit();
 
-        $this->set('nomina', $nomina);
+        if ($this->request->is('post')) {
+
+            $n = $this->request->data['n'];        
+            $mes = $posibles_nominas[$n][0];
+            $ano = $posibles_nominas[$n][1];
+
+            if ($mes!=null && $año=!null) {
+                $nomina = $this->generarNomina($mes, $ano);
+            }
+        }
+        //debug($nomina);exit();
+        $this->set(compact('posibles_nominas', 'nomina'));
         $this->set('_serialize', ['nomina']);
     }
 
@@ -48,8 +59,6 @@ class NominasController extends AppController
      */
     public function add()
     {
-        //$lista_nominas= $this->listaNominas();
-
         $nomina = $this->Nominas->newEntity();
         $cuenta_nominas=0;
         $cuenta_fallos=0;
@@ -78,7 +87,8 @@ class NominasController extends AppController
                     $comprueba_nomina = $this->Nominas->find('all', ['conditions' => [
                                 'fechanomina' => $data['fechanomina'],
                                 'nombrecompleto' => $data['nombrecompleto'],
-                                'dni' => $data['dni']
+                                'dni' => $data['dni'],
+                                //'relacion' => $data['relacion']
                             ]
                         ]);
 
@@ -94,6 +104,7 @@ class NominasController extends AppController
                         }
                     } else {
                         $cuenta_fallos++;
+                        $this->Flash->error('Error al cargar la nomina:'.$linea);
                     }  
             } 
                    
@@ -103,6 +114,7 @@ class NominasController extends AppController
         
         $this->set(compact('nomina', 'lista_nominas'));
         $this->set('_serialize', ['nomina']);
+
     }
 
     /**
@@ -152,27 +164,6 @@ class NominasController extends AppController
     }
 
     /**
-     * Buscar Nominas method
-     *
-     * @param $mes_nomina 
-     * @return array
-     * 
-     */
-
-    public function listaNominas($id = null)
-    {
-        
-        $lista_nominas = $this->Nominas->find('all', [ 'order'=>'HS DESC',
-                                                        //'limit'=> 1000
-            ]);
-//debug($lista_nominas->toArray());exit();                          
-        return $lista_nominas;
-        //return $this->redirect($this->referer());
-        $this->autoRender = false;
-
-    }
-
-    /**
      * Desplegar la última nómina
      *
      * @param $mes_nomina 
@@ -180,20 +171,65 @@ class NominasController extends AppController
      * 
      */
 
-    public function ultima($id = null)
+    public function ultima()
+    {
+        $c = 1; // Contador para restar meses buscando la ultima nómina.
+        $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
+        $fecha_actual = getdate();
+
+        while (empty($ultima_nomina)) {
+           $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']);
+            $c++;
+        }
+
+        $this->set(['lista_nominas'=>$ultima_nomina]);
+        
+        //debug($ultima_nomina);exit();
+    }
+
+    /**
+     * generarNomina method
+     *
+     * @param $mes $año
+     * @return array con la nómina de ese mes
+     * 
+     */
+
+    public function generarNomina($mes=null, $año=null)
     {
         
-        $lista_fechanominas = $this->Nominas->find('list',
-                 ['keyField' => 'id', 'valueField'=>'fechanomina' ]);
-        $lista_fechanominas = array_unique ($lista_fechanominas->toArray());                                           
-        $lista_nominas = $this->ListaNominas();
-        //debug($lista_fechanominas);exit();   
-        
-        //return $this->redirect($this->referer());
-        $this->set(compact('lista_nominas', 'lista_fechanominas'));
-        $this->set('_serialize', ['lista_nominas']);
-        //$this->autoRender = false;
-        //return $lista_nominas;
+        $fecha = getdate();
+        $lista_nominas = $this->Nominas->find()
+                    ->where(['fechanomina LIKE' => '%'.$mes.'%'])
+                    ->andWhere(['fechanomina LIKE' => '%'.$año.'%']);
+
+        $lista_nominas = $lista_nominas->toArray();
+
+        return $lista_nominas;
+    }
+
+     /**
+     * Posibles nóminas
+     *
+     * @return array las posibles nóminas que se han cargado
+     * 
+     */
+
+    public function posiblesNominas()
+    {
+        $lista_nominas = $this->Nominas->find()
+            -> select(['fechanomina']);
+        $lista_nominas = array_unique( $lista_nominas->toArray());
+
+        foreach ($lista_nominas  as $nomina) {
+            $n = explode(" ", $nomina['fechanomina']);
+            $n = $this->eliminarValoresArray($n,["",'de']);
+            $nominas['opciones'][] = $n[0].' de '.$n[1];
+            $nominas[] = $n;
+        }
+
+        return $nominas;
+       
     }
 
 }

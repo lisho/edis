@@ -88,7 +88,7 @@
                 <div class="input-group">
                     <input id="s" type="text" class="form-control" placeholder="Buscar a..." autocomplete="off">
                     <span class="input-group-btn">
-                      <button class="btn btn-default " type="button"><i class="fa fa-search"></i></button>
+                      <button class="btn btn-default " type="button"><i class="fa"></i></button>
                     </span>
                 </div>
             </li>

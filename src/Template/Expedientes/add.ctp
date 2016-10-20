@@ -71,7 +71,7 @@
                                 
                                 <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
                                 <span class="input-group-btn">
-                                  <button class="btn btn-default " type="button"><i class="fa fa-search"></i></button>
+                                  <button class="btn btn-default " type="button"><i class="fa"></i></button>
                                 </span>
                             </div>
 

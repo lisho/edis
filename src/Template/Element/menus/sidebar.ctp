@@ -107,6 +107,12 @@
                               <?= $this->Html->link('Añadir nueva Nómina', ['controller'=> 'Nominas', 'action'=>'add']) ?>
                             </li>
                             <li>
+                              <?= $this->Html->link('Añadir nuevo Listado de Suspensiones', ['controller'=> 'Suspensions', 'action'=>'add']) ?>
+                            </li>
+                            <li>
+                              <?= $this->Html->link('Ver Nóminas', ['controller'=> 'Nominas', 'action'=>'view']); ?>
+                            </li>
+                            <li>
                               <?= $this->Html->link('Última Nómina', ['controller'=> 'Nominas', 'action'=>'ultima']); ?>
                             </li>
                           </ul>

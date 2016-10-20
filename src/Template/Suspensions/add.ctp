@@ -1,13 +1,14 @@
-<h1>Importando archivo txt - Nóminas</h1>
+<h1>Importando archivo txt - Suspensiones</h1>
 <br><br>
 <fieldset>
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Carga un archivo de nómina en formato txt<span class="required">*</span></label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Carga un archivo de Suspensiones en formato txt<span class="required">*</span></label>
     
     <div class="form-group">
          <div class="col-md-6 col-sm-6 col-xs-12">
-            <?php echo $this->Form->create($nomina,['type'=>'file','class'=>'form-horizontal form-label-left data-parsley-validate=""']); ?>
+
+            <?php echo $this->Form->create($suspension,['type'=>'file','class'=>'form-horizontal form-label-left data-parsley-validate=""']); ?>
                     
-                    <?= $this->Form->file('nomina', [
+                    <?= $this->Form->file('suspension', [
                                                         //'type'=>'file',
                                                         //'label'=>'Selecciona un archivo para añadir la foto de perfil:'
                                                         ]); ?>  

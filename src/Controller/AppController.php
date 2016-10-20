@@ -287,7 +287,7 @@ class AppController extends Controller
     public function ajustarFecha($fecha=null)
     {
         $cachos_fecha_apertura = preg_split("/[\/]+/", $fecha);
-         $fecha_ajustada=array(
+            $fecha_ajustada=array(
                         'year'=>$cachos_fecha_apertura[2],
                         'month'=>$cachos_fecha_apertura[1],
                         'day' =>$cachos_fecha_apertura[0] 
@@ -321,9 +321,10 @@ class AppController extends Controller
     }
 
     /**
-     * Contar las veces que se repiten los valores de un array
-     *
-     * @return array valor => veces que se repite
+     * eliminar un valor de un array
+     * 
+     * @param $array, $valor y $useOldKeys (TRUE si queremos que mantenga las key)
+     * @return array sin los valores eliminados
      */
     public function eliminarValoresArray($array=null, $valor=[], $useOldKeys = FALSE)
     {

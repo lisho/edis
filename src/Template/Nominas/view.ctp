@@ -1,86 +1,89 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Nomina'), ['action' => 'edit', $nomina->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Nomina'), ['action' => 'delete', $nomina->id], ['confirm' => __('Are you sure you want to delete # {0}?', $nomina->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Nominas'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Nomina'), ['action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="nominas view large-9 medium-8 columns content">
-    <h3><?= h($nomina->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('CCLL') ?></th>
-            <td><?= h($nomina->CCLL) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('CEAS') ?></th>
-            <td><?= h($nomina->CEAS) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('HS') ?></th>
-            <td><?= h($nomina->HS) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('RGC') ?></th>
-            <td><?= h($nomina->RGC) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('CLASIFICACION') ?></th>
-            <td><?= h($nomina->CLASIFICACION) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('MIEMBROS') ?></th>
-            <td><?= h($nomina->MIEMBROS) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Dni') ?></th>
-            <td><?= h($nomina->dni) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Nombrecompleto') ?></th>
-            <td><?= h($nomina->nombrecompleto) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('SEXO') ?></th>
-            <td><?= h($nomina->SEXO) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('EDAD') ?></th>
-            <td><?= h($nomina->EDAD) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('NACIONALIDAD') ?></th>
-            <td><?= h($nomina->NACIONALIDAD) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('DOMICILIO') ?></th>
-            <td><?= h($nomina->DOMICILIO) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('RESOLUCION') ?></th>
-            <td><?= h($nomina->RESOLUCION) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Relacion') ?></th>
-            <td><?= h($nomina->relacion) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fechanomina') ?></th>
-            <td><?= h($nomina->fechanomina) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($nomina->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fechatramite') ?></th>
-            <td><?= h($nomina->fechatramite) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Fechaefectos') ?></th>
-            <td><?= h($nomina->fechaefectos) ?></td>
-        </tr>
-    </table>
+
+<h1><i class="fa fa-money"></i>  Visor de Nóminas </h1>
+<div class="col-md-12 col-sm-12 col-xs-12"> 
+    <div class="x_panel"> 
+        <div class="x_title"> 
+            
+            <?php if ($nomina): ?>
+              <h2><?= $nomina[0]->fechanomina; ?></h2>         
+            <?php endif; ?>
+            
+            <ul class="nav navbar-right panel_toolbox"> 
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
+              </li> 
+              <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
+                <ul class="dropdown-menu" role="menu"> 
+                  <li><a href="#">Settings 1</a> 
+                  </li> 
+                  <li><a href="#">Settings 2</a> 
+                  </li> 
+                </ul> 
+              </li> 
+              <li><a class="close-link"><i class="fa fa-close"></i></a> 
+              </li> 
+            </ul> 
+            <div class="clearfix"></div> 
+        </div> 
+ 
+        <div class="x_content"> 
+         
+            <div class="input-group">
+                <form action="view" class="form-horizontal form-label-left" method = 'post'>                                     
+                    <div class="input-group">
+                        <?php 
+                            echo $this->Form->select('n', $posibles_nominas['opciones'], [ 
+                                        'class'=>'form-control',
+                                        'autocomplete'=>"off",
+                                        'required' => 'required', 
+                                        'label' => ['text' => ''], 
+                                        'empty' => 'Selecciona una nómina...' 
+                                    ]); 
+                        ?>  
+
+                        <span class="input-group-btn">
+                          <button class="btn btn-default " type="submit"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+                      
+            <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
+                <thead>
+                    <tr> 
+                        <th><?= 'CEAS' ?></th> 
+                        <th><?= 'HS' ?></th> 
+                        <th><?= 'RGC' ?></th> 
+                        <th><?= 'CLASIFICACIÓN' ?></th> 
+                        <th><?= 'dni' ?></th> 
+                        <th><?= 'nombrecompleto' ?></th> 
+                        <th><?= 'SEXO' ?></th> 
+                        <th><?= 'EDAD' ?></th> 
+                        <th><?= 'NACIONALIDAD' ?></th> 
+                        <th><?= 'DOMICILIO' ?></th> 
+                        <th><?= 'relacion' ?></th> 
+                        <th><?= 'fechanomina' ?></th>                        
+                    </tr>                        
+                </thead>
+                <tbody>
+                <?php foreach ($nomina as $n): ?> 
+                    <tr> 
+                        <td><?= h($n->CEAS) ?></td> 
+                        <td><?= h($n->HS) ?></td> 
+                        <td><?= h($n->RGC) ?></td> 
+                        <td><?= h($n->CLASIFICACION) ?></td> 
+                        <td><?= h($n->dni) ?></td> 
+                        <td><?= h($n->nombrecompleto) ?></td> 
+                        <td><?= h($n->SEXO) ?></td> 
+                        <td><?= h($n->EDAD) ?></td> 
+                        <td><?= h($n->NACIONALIDAD) ?></td> 
+                        <td><?= h($n->DOMICILIO) ?></td> 
+                        <td><?= h($n->relacion) ?></td> 
+                        <td><?= h($n->fechanomina) ?></td>        
+                    </tr> 
+                <?php endforeach; ?> 
+                </tbody>
+            </table> 
+        </div> 
+    </div>
 </div>
