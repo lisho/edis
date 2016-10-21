@@ -14,7 +14,7 @@
 
 // Alerta de la parrilla
 
-	if (count($expediente->participantes) === $datos_nominas['ultima_nomina']['MIEMBROS']) { 
+	if (count($expediente->participantes) == $datos_nominas['ultima_nomina']['MIEMBROS']) { 
 		$coincide_participantes_alert = '<span class="badge bg-green">'.$datos_nominas['ultima_nomina']['MIEMBROS'].'</span>';
 		$mensaje_participantes='La parrilla de esta App tiene el mismo número de personas que la última nómina cargada.';
 	}

@@ -490,6 +490,58 @@ class ExpedientesController extends AppController
 
     }
 
+    /**
+     * AddCarpeta method
+     *
+     * Añade una nueva carpeta asociada a este expediente.
+     *
+     */
+    public function addCarpeta($expediente=null)
+    {
+        
+        
+        $nombre_carpeta = $this->request->data['nombre_carpeta'];
+        //$folder = new Folder(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta, true, 0755);
+        $folder = new Folder();
+        //debug($dir);exit();
+
+        if (!file_exists(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta)) {
+                $folder->create(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta);
+                $this->Flash->success(__('La carpeta '.$nombre_carpeta.' no existía en este expediente y se ha creado correctamente.'));
+        } else
+        {
+            $this->Flash->error(__('No es posible crerar la carpeta. Comprueba que no existe en este expediente o inténtalo con otro nombre.'));
+        }
+        return $this->redirect($this->referer());
+        $this->autoRender = false;
+
+    }
+
+    /**
+     * deleteCarpeta method
+     *
+     * Borra una carpeta asociada a este expediente.
+     *
+     */
+    public function deleteCarpeta($expediente=null, $nombre_carpeta=null)
+    {        
+        
+        //debug($expediente);exit();
+        $folder = new Folder(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta);
+            
+            if ($folder->delete()) {
+                $this->Flash->success(__('La carpeta '.$nombre_carpeta.' y todos los archivos que contenía se ha borrado correctamente.'));
+            }else
+            {
+                $this->Flash->error(__('No ha sido posible eliminar la carpeta. Por favor vuelve a intentarlo.'));
+            }
+        
+        return $this->redirect($this->referer());
+        $this->autoRender = false;
+
+    }
+
+
      /**
      * archivosTree method
      *

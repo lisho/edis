@@ -65,7 +65,7 @@ class NominasController extends AppController
         $lineas  = [];
         $keys = ['CCLL','CEAS','HS','RGC','CLASIFICACION','MIEMBROS','dni','nombrecompleto','SEXO','EDAD','NACIONALIDAD','DOMICILIO','fechatramite','RESOLUCION','fechaefectos','relacion','fechanomina'];
         
-        //verificamos que si se haya enviado un post.
+        //verificamos que se haya enviado un post.
 
         if ($this->request->is('post') && $this->request->data['nomina']['tmp_name']!='') {
 

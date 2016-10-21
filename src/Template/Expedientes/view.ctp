@@ -503,7 +503,15 @@
               <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
 
                 <!-- start segunda pestaña -->
-
+                    <div class='text-right'>
+                        <?= $this->Html->link(' crear', '#', [     
+                                    'class'=> 'btn btn-xs modal-btn fa fa-folder',
+                                    'id'=>'add_carpeta',
+                                    'data-container'=>"body",
+                                    'data-toggle'=>"popover",
+                                    'data-placement'=>"left",
+                                    'data-content'=>"Crea una nueva carpeta para este expediente..."]) ?>
+                    </div>
                     <?= $this->Html->link('', '#', [     
                                     'class'=> 'btn btn-xs modal-btn fa fa-plus',
                                     'id'=>'add_archivos',
@@ -512,7 +520,39 @@
                                     'data-placement'=>"right",
                                     'data-content'=>"Añade archivos a este expediente..."]) ?>
 
-                    <!-- Modal -->
+                    <!-- Modal ADD-CARPETA-->
+
+                        <div id="modal_add_carpeta" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel"><strong> Crea una nueva carpeta para este expediente</strong>.</h4>
+  
+                                    </div>
+                                    <div class="modal-body">
+                                        
+                                          <?= $this->Form->create('',[ 'class'=>'form-horizontal form-label-left', 'url' => ['controller' => 'Expedientes', 'action' => 'add_carpeta', $expediente->numedis]]) ?>
+
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                        <?= $this->Form->input('nombre_carpeta', ['id'=>'nueva_carpeta', 'label' => 'Introduce un nombre para la carpeta']);?>
+                                                    </div>
+                                                </div>  
+                                    </div>
+
+                                    <div class="modal-footer">
+                                                <?= $this->Form->button('Crear Carpeta ->', ['class' => 'btn btn-success']) ?>
+
+                                            <?= $this->Form->end() ?>
+                                    </div>   
+
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Modal ADD-ARCHIVOS -->
 
                         <div id="modal_add_archivos" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
@@ -551,6 +591,7 @@
                 <ul> 
                 
                  <?php foreach ($archivos as $key => $directorio): ?> 
+
 
                         <?php if ($key ==='/'): ?>
                             <?php foreach ($directorio as $a): ?> 
@@ -608,19 +649,28 @@
                         
                          <?php else: ?>
                                 <br>
-                                <?php if (!strpos($key, '/')): ?>
-                                        <?php $key_replace = $key; ?>  
-                                    <?php if (strpos($key, ' ')): ?>
-                                          <?php $key_replace = str_replace(' ', '_', $key); ?>     
-                                    <?php endif; ?>
+                                    <?php if (!strpos($key, '/')): ?>
+                                            <?php $key_replace = $key; ?>  
+                                        <?php if (strpos($key, ' ')): ?>
+                                              <?php $key_replace = str_replace(' ', '_', $key); ?>     
+                                        <?php endif; ?>
 
-                                    <?= $this->Html->link('', '#', [     
-                                            'class'=> 'btn btn-xs modal-btn fa fa-plus',
-                                            'id'=>'add_archivos_'.$key_replace,
-                                            'data-container'=>"body",
-                                            'data-toggle'=>"popover",
-                                            'data-placement'=>"right",
-                                            'data-content'=>"Añade archivos en esta carpeta..."]) ?>
+                                        <?= $this->Html->link('', '#', [     
+                                                'class'=> 'btn btn-xs modal-btn fa fa-plus',
+                                                'id'=>'add_archivos_'.$key_replace,
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"right",
+                                                'data-content'=>"Añade archivos en esta carpeta..."]) ?>
+                                             
+                                    <?= $this->Html->link('', [ 'controller' => 'Expedientes', 
+                                                                    'action' => 'delete-carpeta', 
+                                                                    $expediente['numedis'],                                 
+                                                                    $key_replace
+                                                                    ],
+                                                                    ['class'=> 'fa fa-trash text-danger',
+                                                                    'confirm' => __('¿Estás seguro de que quieres borrar esta carpeta?')
+                                                                    ]); ?>
 
                                 <!-- Modal -->
 
