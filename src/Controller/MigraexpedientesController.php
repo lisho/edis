@@ -66,11 +66,7 @@ class MigraexpedientesController extends AppController
             $filename = $csv['tmp_name'];
             $lineas = file($filename);
             unset($lineas[0] 
-                    //,$lineas[1], 
-                    //$lineas[2]
                     );
-
-
 
             foreach ($lineas as $linea_num => $linea){        
                 $data = [];
@@ -168,6 +164,8 @@ class MigraexpedientesController extends AppController
 
     public function errores()
     {
+        $tedis = [];
+
         $migraexpediente = $this->Migraexpedientes->find('all', [
             'contain' => []
         ]);
@@ -176,14 +174,21 @@ class MigraexpedientesController extends AppController
 
         foreach ($migraexpediente as $k => $expediente) {
             
-            if (preg_match('/^(\d{4})$/i',$expediente['numedis'])) {
-               $numedis_error[]= $expediente['numedis'].' - '.$expediente['tedis'];
+            if (!preg_match('/[0-9]{4}/',$expediente['numedis'])) {
+        
+               $numedis_error[] = $expediente;        
             }
+
+            if (!isset($tedis[$expediente['tedis']])) {
+                $tedis[$expediente['tedis']]['val']=0;
+            }
+            $tedis[$expediente['tedis']]['val']++;
         }
 
-debug($numedis_error);exit();
+    
+//debug($tedis);exit();
 
-        $this->set(compact('migraexpediente','numedis_error'));
+        $this->set(compact('numedis_error','tedis'));
         $this->set('_serialize', ['migraexpediente']);
     }
 }
