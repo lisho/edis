@@ -53,55 +53,85 @@ class MigrausuariosController extends AppController
         $cuenta_migrausuarios=0;
         $cuenta_fallos=0;
         $lineas  = [];
+        $datos_array_incorrectos = [];
         $keys = ['dni','sexo','nombre','apellidos','telefono','otrosdatos','numedis','observaciones','relacion','nacimiento','nacionalidad'];
         
 
         //verificamos que se haya enviado un post.
 
         if ($this->request->is('post') && $this->request->data['migrausuario']['tmp_name']!='') {
-
+//generamos un array con las filas del archivo, pero eliminando la primera linea
             $csv = $this->request->data['migrausuario'];
             $filename = $csv['tmp_name'];
             $lineas = file($filename);
             unset($lineas[0] 
                     );
-//colocamos los usuarios en un array
-
-             foreach ($lineas as $linea_num => $linea){        
-                $datos = []; 
-                $datos = explode('|',$linea);
-
-                //debug($linea);debug($datos);debug(count($datos));
-                //if(count($datos)!=11){exit();}
-                $datos_array[$linea_num] = $datos;
-                if (count($datos)!=11) { $datos_array_incorrectos[$linea_num] = $datos;}
-                //if (count($datos)==3) { $datos_array[$linea_num-1] = $datos;echo $linea_num;}
-
-             }
-        echo count($datos_array_incorrectos);
-        debug($datos_array_incorrectos);exit();
-
-
-
-
-
-
-
-
-exit();
-
-
+//colocamos los usuarios en un array y detectamos los errores de migracion
 
             foreach ($lineas as $linea_num => $linea){        
                 $data = [];
                 $datos = [];   
 
                     $datos = explode('|',$linea);
-//debug(count($datos));exit();
-                    if (count($datos)!=11) {debug($linea);debug($datos);}
+                    
+                    if (count($datos)!=11) { $datos_array_incorrectos[$linea_num] = $datos;}
+                    else {$datos_array[$linea_num] = $datos;} // Cargamos $datos_array con los correctos.
+            }
 
-        //debug($datos);exit();
-                    $data = array_combine($keys,$datos);
+/*****************************************************************************
+**                                                                          **
+** recorremos los errores detectados comenzamos a montar el array corregido **    
+**                                                                          **
+******************************************************************************/
+
+
+            foreach ($datos_array_incorrectos as $key => $dato_incorrecto) {                
+           
+                if ( !isset($datos_array_corregido[$key]) && !isset($datos_array_corregido[$key-1])) {
+                   $datos_array_corregido[$key]= $dato_incorrecto;
+              
+                   
+                    if (isset($datos_array_incorrectos[$key+1])) {
+                        $k = $key+1;
+
+                        foreach ($datos_array_incorrectos[$k] as $c => $d) {
+             
+                            if ($c ==0){
+                                $datos_array_corregido[$key][count($datos_array_corregido[$key])-1]=$datos_array_corregido[$key][count($datos_array_corregido[$key])-1].' '.$d;
+                            }else{
+                                $datos_array_corregido[$key][count($datos_array_corregido[$key])]=$d;
+                            }
+                            
+                            if (count($datos_array_corregido[$key])<10) {
+                                 $k = $k++;
+                            }                 
+                        }
+                       unset($datos_array_incorrectos[$key+1]);
+                    }
+                }           
+            }
+
+
+
+            foreach ($datos_array_corregido as $key => $datos) {
+                if (count($datos)==11) {
+                    $datos_array[$key] = $datos; // Completamos $datos_array con los correctos.
+                } else{
+                    $datos_a_mano[$key] = $datos; // cargamos en $datos_a_mano con los que siguen incorrectos.
+                }
+            }
+
+//******** FIN MOntaje de  $datos_array ***************//
+
+/*********************************************************************************
+**                                                                              **
+** $datos_array, añadimos las claves, comprobamos si existe y cargamos en la BD **    
+**                                                                              **
+**********************************************************************************/
+
+            foreach ($datos_array as $key => $dato_array) {
+
+                    $data = array_combine($keys,$dato_array);
 
                     foreach ($data as $k => $d) { $data[$k] = trim($d);}
                     if($data['nacimiento']){$data['nacimiento'] = $this->ajustarFecha($data['nacimiento']);}else{$data['nacimiento']=null;}
@@ -113,7 +143,7 @@ exit();
                                 'relacion' => $data['relacion']
                             ]
                         ]);
-//debug($linea_num);exit();
+
                     if (empty($comprueba_usuario->toArray())) {
                         $n = $this->Migrausuarios->newEntity();
                         $n = $this->Migrausuarios->patchEntity($n, $data);
@@ -133,43 +163,15 @@ exit();
                    
             $this->Flash->success(__('Se han cargado correctamente '.$cuenta_migrausuarios.' usuarios'));
             $this->Flash->error(__('No ha sido posible cargar '.$cuenta_fallos.' nominas porque ya existen en el sistema'));
+
         }
+
+        if (isset($datos_a_mano)) {$datos_array_incorrectos = $datos_a_mano;}
         
-        $this->set(compact('migrausuario'));
+        $this->set(compact('migrausuario', 'datos_array_incorrectos'));
         $this->set('_serialize', ['migrausuario']);
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-        $migrausuario = $this->Migrausuarios->newEntity();
-        if ($this->request->is('post')) {
-            $migrausuario = $this->Migrausuarios->patchEntity($migrausuario, $this->request->data);
-            if ($this->Migrausuarios->save($migrausuario)) {
-                $this->Flash->success(__('The migrausuario has been saved.'));
-
-                return $this->redirect(['action' => 'index']);
-            } else {
-                $this->Flash->error(__('The migrausuario could not be saved. Please, try again.'));
-            }
-        }
-        $this->set(compact('migrausuario'));
-        $this->set('_serialize', ['migrausuario']);
-*/
     }
+
 
     /**
      * Edit method
@@ -227,29 +229,148 @@ exit();
     {
         $tedis = [];
 
-        $migraexpediente = $this->Migraexpedientes->find('all', [
+        $migrausuario = $this->Migrausuarios->find('all', [
             'contain' => []
         ]);
 
-        //$m_e = $migraexpediente->toArray();
+        //$m_e = $migrausuario->toArray();
 
-        foreach ($migraexpediente as $k => $expediente) {
+        foreach ($migrausuario as $k => $usuario) {
             
-            if (!preg_match('/[0-9]{4}/',$expediente['numedis'])) {
+            if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni'])) {
         
-               $numedis_error[] = $expediente;        
+               
+                if ($usuario->numedis >4999 && $usuario->numedis<5999) {
+                    $posibles_arraigos[]=$usuario; 
+                }else {
+                    $dni_error[] = $usuario; 
+                }  
+
+        //Listado de errores una vez se corrijan los espacios en blanco
+
+            $usuario['dni']=$this-> limpiarEspacios($usuario['dni']);  
+
+            if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni']) && !($usuario->numedis >4999 && $usuario->numedis<5999)) {
+                    $dni_sinespacios[] = $usuario;
+                }        
             }
 
-            if (!isset($tedis[$expediente['tedis']])) {
-                $tedis[$expediente['tedis']]['val']=0;
-            }
-            $tedis[$expediente['tedis']]['val']++;
         }
 
-    
 //debug($tedis);exit();
 
-        $this->set(compact('numedis_error','tedis'));
-        $this->set('_serialize', ['migraexpediente']);
+        $this->set(compact('dni_error','posibles_arraigos','dni_sinespacios'));
+        $this->set('_serialize', ['dni_error','posibles_arraigos','dni_sinespacios']);
+    }
+
+
+    /**
+     * 
+     * asigna expediente_id a los usuarios
+     */
+
+    public function enlazaExpedientes()
+    {
+        set_time_limit(300);
+
+        $listado_no_encontrados = []; // usuarios cuyo numedis no esta en expedientes
+        $listado_emparejados = [];
+        $listado_errores_save = [];
+        $this->loadModel('Migraexpedientes');
+        $expedientes = $this->Migraexpedientes->find('list', [
+                'keyField' => 'numedis',
+                'valueField' => 'id'
+            ]);
+
+        $usuarios = $this->Migrausuarios->find('all');
+        $expedientes_array = $expedientes->toArray();
+
+//debug(count($expedientes_array));exit();
+//debug($expedientes->toArray());
+
+        foreach ($usuarios as $usuario) {
+            
+            if (array_key_exists($usuario['numedis'],$expedientes_array)) {
+
+
+                $usuario_con_numedis['migraexpedientes_id'] = $expedientes_array[$usuario->numedis];
+                $usuario = $this->Migrausuarios->patchEntity($usuario, $usuario_con_numedis);
+                //$listado_emparejados[$usuario['numedis']] = $usuario;
+              
+                if ($this->Migrausuarios->save($usuario)) {
+                    $listado_emparejados[$usuario['numedis']] = $usuario;
+                    //$contador_correctos++;
+                }else{
+                    $listado_errores_save[$usuario['numedis']] = $usuario;
+                }
+
+            }else{
+
+                $listado_no_encontrados[$usuario['numedis']] = $usuario;
+                //$contador_errores++;
+            }
+        }
+        //debug($listado_no_encontrados);debug(count($listado_no_encontrados));exit();
+        $this->set(compact('listado_errores_save','listado_no_encontrados'
+            ,'listado_emparejados'
+            ));
+        $this->set('_serialize', ['listado_emparejados']);        
+
+    }
+
+        /**
+     * 
+     * Detectar errores en los expedientes
+     */
+
+    public function enlazaExpedientesView()
+    {
+
+        //$listado_no_encontrados = []; // usuarios cuyo numedis no esta en expedientes
+        //$listado_emparejados = [];
+        //$listado_errores_save = [];
+
+
+        $this->loadModel('Migraexpedientes');
+        $expedientes = $this->Migraexpedientes->find('list', [
+                'keyField' => 'id',
+                'valueField' => 'numedis'
+            ]);
+        $expedientes_array = $expedientes->toArray();
+        $usuarios = $this->Migrausuarios->find('all');
+        
+
+//debug(count($expedientes_array));exit();
+//debug($expedientes->toArray());
+/*
+        foreach ($usuarios as $usuario) {
+            
+            if (in_array($usuario['numedis'],$expedientes_array)) {
+
+
+                $usuario_con_numedis['migraexpedientes_id'] = $expedientes_array[$usuario->numedis];
+                $usuario = $this->Migrausuarios->patchEntity($usuario, $usuario_con_numedis);
+                //$listado_emparejados[$usuario['numedis']] = $usuario;
+              
+                if ($this->Migrausuarios->save($usuario)) {
+                    $listado_emparejados[$usuario['numedis']] = $usuario;
+                    //$contador_correctos++;
+                }else{
+                    $listado_errores_save[$usuario['numedis']] = $usuario;
+                }
+
+            }else{
+
+                $listado_no_encontrados[$usuario['numedis']] = $usuario;
+                //$contador_errores++;
+            }
+        }
+*/
+        //debug($listado_no_encontrados);debug(count($listado_no_encontrados));exit();
+        $this->set(compact('expedientes_array','usuarios'
+            
+            ));
+        
+
     }
 }

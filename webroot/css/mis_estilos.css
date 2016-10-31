@@ -400,3 +400,7 @@ table>tbody>tr.tabla-seleccionada>td {
 .fila_verde {
 		background-color: rgba(17,136,102,.1);
 }
+
+.fila_amarilla{
+		background-color: rgba(255,228,80,.1);
+}

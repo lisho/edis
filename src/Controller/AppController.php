@@ -387,7 +387,9 @@ class AppController extends Controller
                                                     'nacionalidad' => $nomina->NACIONALIDAD,
                                                     'relacion_titular' => $nomina->relacion,
                                                 ];
+                    //$nombres_ultima_nomina[] = $nomina->nombrecompleto;
                 } 
+                
             }
 
 
@@ -399,15 +401,21 @@ class AppController extends Controller
             $m_n['cuentas_nominas'] = $cuentas_nomina;
             $m_n['participantes_ultima_nomina'] = $participantes_ultima_nomina;
             $m_n['cuenta_paicipantes_ultima_nomina'] = count($m_n['participantes_ultima_nomina']);
+            //$m_n['nombres_ultima_nomina'] = $nombres_ultima_nomina; 
             
         }
             
             return  $m_n;
-            //debug($count_nominas);
-            //debug($lista_n);
+    }
 
-            //debug($ultima_nomina);
-            //debug($mis_nominas->toArray());
-            //exit();
+     /**
+     * 
+     * Limpia espacios en blanco de la cadena que le pasemos.
+     */
+
+    public function limpiarEspacios($cadena=null)
+    {
+        $cadena = str_replace(' ', '', $cadena);
+        return $cadena;
     }
 }

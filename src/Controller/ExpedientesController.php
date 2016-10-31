@@ -55,7 +55,7 @@ class ExpedientesController extends AppController
     {
 
         $archivos_tree=[];
-
+         $prestaciones_abiertas_rgc = [];
         $this->loadModel('Incidencias');
         $nueva_incidencia = $this->Incidencias->newEntity();
 
@@ -84,6 +84,14 @@ class ExpedientesController extends AppController
                                     ]);
         foreach ($expediente->participantes as $participante) {
             $listado_participantes[] = $participante->dni;
+            $listado_nombres_parrilla[] = $participante->nombre.' '. $participante->apellidos;
+        }
+
+        //Pasamos los numeros de las prestaciones abiertas de rgc
+        foreach ($expediente->prestacions as $prestacion) {
+            if ($prestacion['prestaciontipo_id'] ==3 && $prestacion['prestacionestado_id'] ==5) {
+                $prestaciones_abiertas_rgc[] = $prestacion->numprestacion;
+            }
         }
 
         //*****************************************************//
@@ -131,7 +139,7 @@ class ExpedientesController extends AppController
         //*************************************************//
         $archivos=$this->archivosTree($expediente->numedis, $expediente->id);
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados','datos_nominas','listado_participantes'));
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados','datos_nominas','listado_participantes', 'listado_nombres_parrilla','prestaciones_abiertas_rgc'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -346,19 +354,19 @@ class ExpedientesController extends AppController
 
         $this->loadModel('Participantes');
         $participante = $this->Participantes->newEntity();  
-        
-        $cachos_fecha = preg_split("/[\/]+/", $data['nacimiento']);
+                
         $data['id']='';
         $data['foto']='';
         $data['expediente_id']=$expediente['id'];
-        //$data['nacimiento']=null;
-            if ( $data['nacimiento']!='') {
+        
+            if (isset($data['nacimiento']) && $data['nacimiento']!='') {
+                 $cachos_fecha = preg_split("/[\/]+/", $data['nacimiento']);
                  $data['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
                                 'day' =>$cachos_fecha[0] 
                         );
-            }
+            } else {$data['nacimiento']=null;}
        
         $participante = $this->Participantes->patchEntity($participante, $data);    
         //debug($data);exit();

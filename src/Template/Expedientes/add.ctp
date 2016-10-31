@@ -63,7 +63,7 @@
 
         <!-- PRIMER PASO-->                
                     <div id="step-1">
-                        <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro: </h2>
+                        <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro. Si accedes a este formulario desde una comisión, puedes saltarte esta primera fase porque YA HABRÁS COMPROBADO A TODOS LOS MAYORES DE 16 AÑOS, ¿¿NO??: </h2>
 
                         <fieldset class="bloque-formulario">
                             <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe, pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"sigiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>

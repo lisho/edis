@@ -179,11 +179,13 @@
 
             <div class="clearfix"></div> 
             <div class="related"> 
-                
-                <h3>Datos de expediente</h3>
 
                     <?= $this->element('nominas/comparar_ultima_nomina',[   'datos_nominas'=>$datos_nominas,
-                                                                            'expediente'=>$expediente
+                                                                            'expediente'=>$expediente,
+                                                                            'listado_participantes'=>$listado_participantes,
+                                                                            'listado_nombres_parrilla' => $listado_nombres_parrilla,
+                                                                            'participante' => $participante
+
                                                                         ]);
                                                                     ?>             
             </div> 

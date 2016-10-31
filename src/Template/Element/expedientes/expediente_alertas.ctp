@@ -12,10 +12,11 @@
 		$count_atfis = 0;
 		$rgc = FALSE;	
 
+
 // Alerta de la parrilla
 
 	if (count($expediente->participantes) == $datos_nominas['ultima_nomina']['MIEMBROS']) { 
-		$coincide_participantes_alert = '<span class="badge bg-green">'.$datos_nominas['ultima_nomina']['MIEMBROS'].'</span>';
+		$coincide_participantes_alert = '<span class="badge bg-green">'.count($expediente->participantes).'/'.$datos_nominas['ultima_nomina']['MIEMBROS'].'</span>';
 		$mensaje_participantes='La parrilla de esta App tiene el mismo número de personas que la última nómina cargada.';
 	}
 	else if ($datos_nominas['ultima_nomina']==FALSE){
@@ -23,11 +24,17 @@
 		$mensaje_participantes='No es posible comparar las parrillas porque este expediente no aparece en la última nómina cargada.' ;
 	}
 	else {
-		$coincide_participantes_alert = '<span class="badge bg-red">'.$datos_nominas['ultima_nomina']['MIEMBROS'].'</span>';
+		$coincide_participantes_alert = '<span class="badge bg-red">'.count($expediente->participantes).'/'.$datos_nominas['ultima_nomina']['MIEMBROS'].'</span>';
 		$mensaje_participantes='La parrilla de esta App tiene un número diferente de personas asociadas a este expediente que los que aparecen en la última nómina cargada. Por favor, REVISA LA PARRILLA.' ;
 	}
 
 // Alertas de las prestaciones		
+
+	if ($datos_nominas['ultima_nomina']==TRUE && empty($expediente->prestacions)){
+			$coincide_rgc_alert = '<span class="badge bg-red">RGC</span><i class="fa fa-euro"></i>'.$datos_nominas['ultima_nomina']['RGC'];
+			$rgc = TRUE;
+			$mensaje_rgc = 'Este expediente aparece en la última nómina de RGC cargada, pero NO está abierta la prestación en nuestra APP. Por favor, REVÍSALO.';
+		} 
 
 	foreach	($expediente->prestacions as $prestacion){
 
@@ -79,15 +86,37 @@
 
 	if ($rgc === TRUE && $count_atfis===0){
 		$coincide_atfis_alert = '<span class="badge bg-yelow">'.$count_atfis.'/'.count($listado_posibles_titulares_prestacion).'</span><i class="fa fa-angellist"></i>ATFIS';
-		$mensaje_atfis = 'Este expediente NO tiene abierta ninguna prestación de Apoyo Técnico y Familiar para la Inclusión Social pero SI aparece en la última nómina de RGC. POr favor sevisa si es correcto.';
+		$mensaje_atfis = 'Este expediente NO tiene abierta ninguna prestación de Apoyo Técnico y Familiar para la Inclusión Social pero SI aparece en la última nómina de RGC. Por favor revisa si es correcto.';
 	}
 	
+// Alerta de CEAS	
 	
-	
+	$relacion_ceas = [	'CEAS CENTRO'=> '8'
+						,'CEAS MARIANO ANDRÉS'=> '7'
+						,'CEAS SAN MAMÉS-LA PALOMERA'=> '10'
+						,'CEAS EL EJIDO - SANTA ANA'=> '9'
+						,'CEAS PUENTE CASTRO-SAN CLAUDIO'=> '5'
+						,'CEAS EL CRUCERO-LA VEGA'=> '2'
+						,'CEAS ARMUNIA-OTERUELO-TROBAJO DE CERECEDO'=> '6'
+						];
+
+
+	if (!isset($datos_nominas['ultima_nomina']['CEAS'])){
+		$coincide_ceas_alert = '<span class="badge bg-default">CEAS</span><i class="fa fa-building-o text-success text-sombra-blanca"></i>'.$listado_ceas[$expediente->ceas];
+		$mensaje_ceas = 'Este expediente no aparece en la últimna nómina, por lo que no se puede comparar el CEAS.';
+	}elseif ($relacion_ceas[$datos_nominas['ultima_nomina']['CEAS']] == $expediente->ceas){
+		$coincide_ceas_alert = '<span class="badge bg-green">CEAS</span><i class="fa fa-building-o text-success text-sombra-blanca"></i>'.$listado_ceas[$expediente->ceas];
+		$mensaje_ceas = 'El CEAS coincide con el que aparece en SAUSS.';
+	}else{ 
+		$coincide_ceas_alert = '<span class="badge bg-red">CEAS</span><i class="fa fa-building-o text-success text-sombra-blanca"></i>'.$listado_ceas[$expediente->ceas];
+		$mensaje_ceas = 'El CEAS NO coincide con el que aparece en SAUSS. Por favor, revísalo.';
+	}
+
+//debug ($relacion_ceas[$datos_nominas['ultima_nomina']['CEAS']]);
+//debug ($expediente->ceas);exit();
 
 
 ?>
-
 
 <div>
     <a class="btn btn-app" id = "alerta_participantes",
@@ -122,4 +151,17 @@
                 			data-content =	"<?= $mensaje_atfis; ?>">
       	<?= $coincide_atfis_alert; ?>      
     </a>
+
+    <a class="btn btn-app" id = "alerta_ceas",
+    						data-container = "body",
+                			data-toggle = "popover",
+                			data-placement = "bottom",
+                			data-content =	"<?= $mensaje_ceas; ?>">
+      	<?= $coincide_ceas_alert; ?>      
+    </a>
 </div>
+
+
+<?php 
+	
+?>

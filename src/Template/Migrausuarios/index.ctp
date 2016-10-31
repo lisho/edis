@@ -6,7 +6,7 @@
 </nav>
 <div class="migrausuarios index large-9 medium-8 columns content">
     <h3><?= __('Migrausuarios') ?></h3>
-    <table cellpadding="0" cellspacing="0">
+    <table class='table' cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
@@ -19,6 +19,7 @@
                 <th scope="col"><?= $this->Paginator->sort('relacion') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nacimineto') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nacionalidad') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('migraexpedientes_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,6 +36,7 @@
                 <td><?= h($migrausuario->relacion) ?></td>
                 <td><?= h($migrausuario->nacimineto) ?></td>
                 <td><?= h($migrausuario->nacionalidad) ?></td>
+                <td><?= h($migrausuario->migraexpedientes_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['action' => 'view', $migrausuario->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['action' => 'edit', $migrausuario->id]) ?>

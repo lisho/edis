@@ -1,13 +1,13 @@
-<h1>Importando archivo txt - Migrausuarios</h1>
+<h1>Importando archivo txt - Migraactuaciones</h1>
 <br><br>
 <fieldset>
-    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Carga un archivo para migrar los usuarios<span class="required">*</span></label>
+    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Carga un archivo para migrar las actuaciones<span class="required">*</span></label>
     
     <div class="form-group">
          <div class="col-md-6 col-sm-6 col-xs-12">
-            <?php echo $this->Form->create($migrausuario,['type'=>'file','class'=>'form-horizontal form-label-left data-parsley-validate=""']); ?>
+            <?php echo $this->Form->create($migraactuacion,['type'=>'file','class'=>'form-horizontal form-label-left data-parsley-validate=""']); ?>
                     
-                    <?= $this->Form->file('migrausuario', [
+                    <?= $this->Form->file('migraactuacion', [
                                                         //'type'=>'file',
                                                         //'label'=>'Selecciona un archivo:'
                                                         ]); ?>  

@@ -119,45 +119,37 @@
                         </li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="chartjs.html">Chart JS</a></li>
-                      <li><a href="chartjs2.html">Chart JS2</a></li>
-                      <li><a href="morisjs.html">Moris JS</a></li>
-                      <li><a href="echarts.html">ECharts</a></li>
-                      <li><a href="other_charts.html">Other Charts</a></li>
-                    </ul>
-                  </li>
-                  <li><a><i class="fa fa-clone"></i>Layouts <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="fixed_sidebar.html">Fixed Sidebar</a></li>
-                      <li><a href="fixed_footer.html">Fixed Footer</a></li>
-                    </ul>
-                  </li>
                 </ul>
               </div>
               <div class="menu_section">
-                <h3>Live On</h3>
+                <h3>MIGRACIONES</h3>
                 <ul class="nav side-menu">
-                  <li><a><i class="fa fa-bug"></i> Additional Pages <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-folder"></i> Migra-Expedientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="e_commerce.html">E-commerce</a></li>
-                      <li><a href="projects.html">Projects</a></li>
-                      <li><a href="project_detail.html">Project Detail</a></li>
-                      <li><a href="contacts.html">Contacts</a></li>
-                      <li><a href="profile.html">Profile</a></li>
+                      <li><?= $this->Html->link(' Cargar Expedientes', ['controller'=> 'Migraexpedientes', 'action'=>'add'], ['class' => "fa fa-upload"]); ?></li>
+                      <li><?= $this->Html->link('Errores', ['controller'=> 'Migraexpedientes', 'action'=>'errores']); ?></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-windows"></i> Extras <span class="fa fa-chevron-down"></span></a>
+                  <li><a><i class="fa fa-group"></i> Migra-Usuarios <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="page_403.html">403 Error</a></li>
-                      <li><a href="page_404.html">404 Error</a></li>
-                      <li><a href="page_500.html">500 Error</a></li>
-                      <li><a href="plain_page.html">Plain Page</a></li>
-                      <li><a href="login.html">Login Page</a></li>
-                      <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                    </ul>
+                    <li><?= $this->Html->link('Todos los Usuarios Migrados', ['controller'=> 'Migrausuarios', 'action'=>'index']); ?></li>
+                      <li><?= $this->Html->link(' Cargar Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'add'],['class' => "fa fa-upload"]); ?></li>
+                      <li><?= $this->Html->link('Errores', ['controller'=> 'Migrausuarios', 'action'=>'errores']); ?></li>
+                      <li><?= $this->Html->link('Enlazar Expedientes-Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'enlaza-expedientes']); ?></li>
+                      <li><?= $this->Html->link('Errores al Enlazar Expedientes-Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'enlaza-expedientes-view']); ?></li>
+                    </ul> 
                   </li>
+                  <li><a><i class="fa fa-group"></i> Migra-Actuaciones <span class="fa fa-chevron-down"></span></a>
+                    <ul class="nav child_menu">
+                      <li><?= $this->Html->link('Todas las Actuaciones Migradas', ['controller'=> 'Migraactuaciones', 'action'=>'index']); ?></li>
+                      <li><?= $this->Html->link(' Cargar Actuaciones', ['controller'=> 'Migraactuaciones', 'action'=>'add'],['class' => "fa fa-upload"]); ?></li>
+                      <!--<li><?= $this->Html->link('Errores', ['controller'=> 'Migrausuarios', 'action'=>'errores']); ?></li>
+                      <li><?= $this->Html->link('Enlazar Expedientes-Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'enlaza-expedientes']); ?></li>
+                      <li><?= $this->Html->link('Errores al Enlazar Expedientes-Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'enlaza-expedientes-view']); ?></li>-->
+                    </ul> 
+                  </li>
+
+                  <!--
                   <li><a><i class="fa fa-sitemap"></i> Multilevel Menu <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                         <li><a href="#level1_1">Level One</a>
@@ -174,7 +166,9 @@
                         <li><a href="#level1_2">Level One</a>
                         </li>
                     </ul>
-                  </li>                  
+                  </li> 
+                  -->
+
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
               </div>

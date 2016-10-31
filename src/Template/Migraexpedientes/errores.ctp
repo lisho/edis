@@ -24,7 +24,7 @@
      
             <div class="x_content"> 
              
-                <h4><?= 'Miembros de este Equipo:' ?></h4> 
+                <h4><?= 'Expedientes con algún error en el número de expediente:' ?></h4> 
                 
                 <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
                     <tr> 
