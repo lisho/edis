@@ -1,11 +1,14 @@
 
-<?php if ($datos_nominas['ultima_nomina'] === FALSE): ?>
+<?php if ($datos_nominas['ultima_nomina'] === FALSE ): ?>
 
-	<p class='error-text text-center'>Este expediente <b>no aparece</b> en la última nómina cargada</p>
+	<p class="error-text text-center">Este expediente <b>no aparece</b> en la última nómina cargada (<?= $datos_nominas['datos_ultima_nomina']['fechanomina']; ?>)</p>
 
 <?php else: ?>	
-
- <h3>Datos de expediente</h3>
+	<?php if ($datos_nominas['ultima_nomina']['fechanomina']!=$datos_nominas['datos_ultima_nomina']['fechanomina'] ): ?>
+		<p class="error-text text-center">Este expediente <b>no aparece</b> en la última nómina cargada (<?= $datos_nominas['datos_ultima_nomina']['fechanomina']; ?>)</p>
+	<?php else: ?>
+		<p class="success-text text-center">Este expediente <b>aparece</b> en la última nómina cargada (<?= $datos_nominas['datos_ultima_nomina']['fechanomina']; ?>)</p> 	 
+	<?php endif; ?>
 
 <?php 
 
@@ -31,13 +34,13 @@
 			($datos_nominas['ultima_nomina']['CEAS'] === 'CEAS MARIANO ANDRÉS' && $expediente['ceas'] === '22') 
 			) {$coincide_ceas = '<i class="fa fa-check-square success"></i>';} else {$coincide_ceas = '<i class="fa fa-times error"></i>';}
 
-		if (in_array($datos_nominas['ultima_nomina']['RGC'],$prestaciones_abiertas_rgc)) { $coincide_numrgc = "<i class='fa fa-check-square success'></i>"; } 
-		else {$coincide_numrgc = '<i class="fa fa-times error"></i>';}
+		if (in_array($datos_nominas['ultima_nomina']['RGC'],$prestaciones_abiertas_rgc)) { $coincide_numrgc = "<i class='fa fa-check-square success'></i>"; $texto_rgc='La prestación de SAUSS coincide con la que tenemos abierta en el sistema: ';} 
+		else {$coincide_numrgc = '<i class="fa fa-times error"></i>';$texto_rgc='La prestación de SAUSS <b>NO coincide</b> con la que tenemos abierta en el sistema. La correcta es :';}
 
 		if ( $datos_nominas['ultima_nomina']['DOMICILIO'] === $expediente['domicilio']) {$coincide_direccion = '<i class="fa fa-check-square success"></i>';} 
 		else {$coincide_direccion = '<i class="fa fa-times error"></i>';}
 
-		if (count($expediente->participantes) == $datos_nominas['ultima_nomina']['MIEMBROS']) { $coincide_participantes = "<td> <i class='success'>El número de usuarios adscritos a este expediente <b>coincide</b> con el expediente en SAUSS</i></td> <td class='text-right'><i class='fa fa-check-square success'></i></td>"; } 
+		if (count($expediente->participantes) == $datos_nominas['ultima_nomina']['MIEMBROS']) { $coincide_participantes = "<td> <i>El número de usuarios adscritos a este expediente <b>coincide</b> con el expediente en SAUSS</i></td> <td class='text-right'><i class='fa fa-check-square success'></i></td>"; } 
 		else {$coincide_participantes = "<td> <i class='alert'>El número de usuarios adscritos a este expediente <b>NO coincide</b> con el del expediente en SAUSS.</i></td> <td class='text-right'><i class='fa fa-times error'></i></td>";}		
 
 ?>
@@ -46,8 +49,12 @@
     <table class="vertical-table table"> 
 		
         <tr>
+        	<th>Última nómina en la que aparece este expediente:</th>
+        	<td><?= $datos_nominas['ultima_nomina']['fechanomina']; ?></td>
+        </tr>
+        <tr>
             <th>NÚMERO DE R.G.C.: </th>
-            <td><?= $datos_nominas['ultima_nomina']['RGC']; ?></td> <td class="text-right"><?= $coincide_numrgc;?></td>
+            <td><?= $texto_rgc.' <b>'.$datos_nominas['ultima_nomina']['RGC'].'</b>'; ?></td> <td class="text-right"><?= $coincide_numrgc;?></td>
         </tr>   
         <tr>
             <th>CEAS: </th>

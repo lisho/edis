@@ -365,8 +365,10 @@ class AppController extends Controller
 
             $mis_nominas_array = $mis_nominas->toArray();
             $cuentas_nomina = count($mis_nominas_array);
-            $ultima_nomina = end($mis_nominas_array);
-
+            $mi_ultima_nomina = end($mis_nominas_array);
+            $ultima_nomina = $this->ultima();
+            $ultima_nomina = $ultima_nomina[0];
+//debug($ultima_nomina);exit();
             foreach ($mis_nominas as $nomina) {
 
                 //explotamos la fecha de nómina en un array
@@ -380,7 +382,7 @@ class AppController extends Controller
                 $count_nominas[$n[1]] = array_count_values($lista_n[$n[1]]);
 
                 // Si es la ultima nomina, sacamos los datos para el array
-                if ($nomina['fechanomina']===$ultima_nomina['fechanomina']) {
+                if ($nomina['fechanomina']===$mi_ultima_nomina['fechanomina']) {
                     $participantes_ultima_nomina[]=['dni'=>$nomina->dni,
                                                     'nombrecompleto' => $nomina->nombrecompleto,
                                                     'sexo' => $nomina->SEXO,
@@ -394,8 +396,8 @@ class AppController extends Controller
 
 
             // Datos de uno de los usuarios de este expediente en la última nómina cargada.
-
-            $m_n['ultima_nomina'] = $ultima_nomina; 
+            $m_n['ultima_nomina'] = $mi_ultima_nomina;
+            $m_n['datos_ultima_nomina'] = $ultima_nomina; 
             $m_n['todas_mis_nominas'] = $mis_nominas_array;
             $m_n['meses_nomina'] = $count_nominas;
             $m_n['cuentas_nominas'] = $cuentas_nomina;
@@ -408,6 +410,53 @@ class AppController extends Controller
             return  $m_n;
     }
 
+
+    /**
+     * generarNomina method
+     *
+     * @param $mes $año
+     * @return array con la nómina de ese mes
+     * 
+     */
+
+    public function generarNomina($mes=null, $año=null)
+    {
+        $this->loadModel('Nominas');
+        $fecha = getdate();
+        $lista_nominas = $this->Nominas->find()
+                    ->where(['fechanomina LIKE' => '%'.$mes.'%'])
+                    ->andWhere(['fechanomina LIKE' => '%'.$año.'%']);
+
+        $lista_nominas = $lista_nominas->toArray();
+
+        return $lista_nominas;
+    }
+
+
+    /**
+     * Desplegar la última nómina
+     *
+     * @param $mes_nomina 
+     * @return array
+     * 
+     */
+
+    public function ultima()
+    {
+        $this->loadModel('Nominas');
+        $c = 1; // Contador para restar meses buscando la ultima nómina.
+        $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
+        $fecha_actual = getdate();
+
+        while (empty($ultima_nomina)) {
+           $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']);
+           $c++;
+        }
+        return $ultima_nomina;
+        $this->set(['lista_nominas'=>$ultima_nomina]);       
+
+    }
+
      /**
      * 
      * Limpia espacios en blanco de la cadena que le pasemos.
@@ -418,4 +467,5 @@ class AppController extends Controller
         $cadena = str_replace(' ', '', $cadena);
         return $cadena;
     }
+
 }

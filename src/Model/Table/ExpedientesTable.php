@@ -74,14 +74,23 @@ class ExpedientesTable extends Table
         $validator
             ->requirePresence('numedis', 'create')
             //->isUnique('numedis', 'Este Número de expediente ya está creado en la aplicación')
-            ->notEmpty('numedis','Debes añadir un número de Expediente de EDIS.');
-            //->add('numedis')
+            ->notEmpty('numedis','Debes añadir un número de Expediente de EDIS.')
+            ->add('numedis', 'validFormat',[
+                            'rule'=>array('custom','/^(\d{4})$/i'),
+                            //'rule'=>array('custom','/^(\d{4})-(\d{1})$/i'),
+                            'message' => 'La forma de introducir el número de expediente EDIS no es correcta (4 dígitos)'
+                            ]);
             
 
         $validator
             ->requirePresence('numhs', 'create')
             //->isUnique('numhs', 'Este Número de historia ya existe en la aplicación')
-            ->notEmpty('numhs','Debes introducir el número de Historia Social de SAUSS para crear correctamente el expediente.');
+            ->notEmpty('numhs','Debes introducir el número de Historia Social de SAUSS para crear correctamente el expediente.')
+            ->add('numhs', 'validFormat',[
+                            'rule'=>array('custom','/^(\d{7})$/i'),
+                            //'rule'=>array('custom','/^(\d{4})-(\d{1})$/i'),
+                            'message' => 'La forma de introducir el número de historia social no es correcta (7 dígitos)'
+                            ]);
 
         $validator
             ->requirePresence('domicilio', 'create')

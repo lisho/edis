@@ -115,6 +115,9 @@
                             <li>
                               <?= $this->Html->link('Última Nómina', ['controller'=> 'Nominas', 'action'=>'ultima']); ?>
                             </li>
+                            <li>
+                              <?= $this->Html->link('Análisis de Cambios en la Última Nómina', ['controller'=> 'Nominas', 'action'=>'compara_nominas']); ?>
+                            </li>
                           </ul>
                         </li>
                     </ul>
@@ -184,8 +187,8 @@
               <a data-toggle="tooltip" data-placement="top" title="FullScreen">
                 <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Lock">
-                <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
+              <a data-toggle="tooltip" data-placement="top" title="Inicio de Página"  href="#body">
+                <span class="fa fa-angle-double-up" aria-hidden="true"></span>
               </a>
               <a data-toggle="tooltip" data-placement="top" title="Logout" href="/edis/users/logout">
                 <span class="glyphicon glyphicon-off" aria-hidden="true"></span>

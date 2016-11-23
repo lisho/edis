@@ -163,50 +163,6 @@ class NominasController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    /**
-     * Desplegar la última nómina
-     *
-     * @param $mes_nomina 
-     * @return array
-     * 
-     */
-
-    public function ultima()
-    {
-        $c = 1; // Contador para restar meses buscando la ultima nómina.
-        $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
-        $fecha_actual = getdate();
-
-        while (empty($ultima_nomina)) {
-           $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']);
-            $c++;
-        }
-
-        $this->set(['lista_nominas'=>$ultima_nomina]);
-        
-        //debug($ultima_nomina);exit();
-    }
-
-    /**
-     * generarNomina method
-     *
-     * @param $mes $año
-     * @return array con la nómina de ese mes
-     * 
-     */
-
-    public function generarNomina($mes=null, $año=null)
-    {
-        
-        $fecha = getdate();
-        $lista_nominas = $this->Nominas->find()
-                    ->where(['fechanomina LIKE' => '%'.$mes.'%'])
-                    ->andWhere(['fechanomina LIKE' => '%'.$año.'%']);
-
-        $lista_nominas = $lista_nominas->toArray();
-
-        return $lista_nominas;
-    }
 
      /**
      * Posibles nóminas
@@ -230,6 +186,114 @@ class NominasController extends AppController
 
         return $nominas;
        
+    }
+
+    /**
+     * Compara la última nómina con la penúltima
+     *
+     * @param none
+     * @return array
+     * 
+     */
+
+    public function comparaNominas()
+    {
+        $c = 1; // Contador para restar meses buscando la ultima nómina.
+        $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
+        $fecha_actual = getdate();
+        $cambios=[];
+
+        $this->loadModel('Suspensions');
+        /* Generamos al última y la penúltima nómina*/
+
+        while (empty($ultima_nomina)) {
+            
+            $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']); 
+            $penultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-($c+1)], $fecha_actual['year']);          
+            $c++;
+        }    
+        
+        /* Ordenamos los datos para comparar las 2 nóminas */
+            $datos_penultima_nomina['nomina']= $penultima_nomina[0]['fechanomina'];
+            $datos_ultima_nomina['nomina']= $ultima_nomina[0]['fechanomina'];
+
+        
+        foreach ($penultima_nomina as $penultima) {
+        //debug($penultima);exit();
+           $datos_penultima_nomina['RGC'][] = $penultima['RGC'];
+           $datos_penultima_nomina['dni'][] = $penultima['dni'];
+           //$datos_penultima_nomina['HS'][$penultima['HS']][] = $penultima['nombrecompleto'];
+           $datos_penultima_nomina[$penultima['RGC']]['titular'] = $penultima['nombrecompleto'];
+           $datos_penultima_nomina[$penultima['RGC']]['HS'] = $penultima['HS'];
+           $datos_penultima_nomina[$penultima['RGC']]['domicilio'] = $penultima['DOMICILIO'];
+           $datos_penultima_nomina[$penultima['RGC']]['ceas'] = $penultima['CEAS'];
+       }
+
+        foreach ($ultima_nomina as $ultima) {
+           $datos_ultima_nomina['RGC'][] = $ultima['RGC'];
+           $datos_ultima_nomina['dni'][] = $ultima['dni'];
+           //$datos_ultima_nomina['HS'][$ultima['HS']][] = $ultima['nombrecompleto'];
+           $datos_ultima_nomina[$ultima['RGC']]['titular'] = $ultima['nombrecompleto'];
+           $datos_ultima_nomina[$ultima['RGC']]['HS'] = $ultima['HS'];
+           $datos_ultima_nomina[$ultima['RGC']]['domicilio'] = $ultima['DOMICILIO'];
+           $datos_ultima_nomina[$ultima['RGC']]['ceas'] = $ultima['CEAS'];
+       }
+
+       /*****************************
+        * ** Numeros de RGC que antes estaban y ahora no están (bajas en nómina).
+        * ** Números de RGC que antes no estaban y ahora sí (nuevos).
+        * ** DNIs Nuevos
+        * ** DNIs que ya no están.
+        *****************************
+        */
+
+
+       foreach ($ultima_nomina as $ultima) {
+
+           if (in_array($ultima['RGC'], $datos_penultima_nomina['RGC'])) {      
+                /* Comprobamos si hay cambios en el domicilio de cada número de RGC*/
+               if ($datos_penultima_nomina[$ultima->RGC]['domicilio'] != $ultima->DOMICILIO) {
+                        $anterior['domicilios'][$ultima['RGC']] = $datos_penultima_nomina[$ultima['RGC']]['domicilio'];
+                        $cambios['domicilios'][$ultima['RGC']] = $datos_ultima_nomina[$ultima['RGC']]['domicilio'];
+
+                    if ($datos_penultima_nomina[$ultima->RGC]['ceas'] != $ultima->CEAS) {
+                        $anterior['ceas'][$ultima['RGC']] = $datos_penultima_nomina[$ultima['RGC']]['ceas'];
+                        $cambios['ceas'][$ultima['RGC']] = $datos_ultima_nomina[$ultima['RGC']]['ceas'];
+                    }   
+                }
+
+           }else{
+                $cambios['nuevos_rgc'][] = $ultima['RGC'];
+           }
+           
+       }
+
+       foreach ($penultima_nomina as $penultima) {
+           if (!in_array($penultima['RGC'], $datos_ultima_nomina['RGC'])) {
+               $cambios['bajas_nomina'][] = $penultima['RGC'];
+           }
+       }
+
+        $bajas = array_unique($cambios['bajas_nomina']);
+        $nuevos = array_unique($cambios['nuevos_rgc']);
+    /*   
+        debug($anterior);
+        debug($cambios);
+        debug(count($bajas));
+        debug($bajas);
+        debug(count($nuevos));
+        debug($nuevos);
+        debug($datos_penultima_nomina);
+        
+        exit();
+    */
+
+        $this->set(['lista_nominas'=>$ultima_nomina, 
+                    'penultima_nomina'=>$datos_penultima_nomina,
+                    'ultima_nomina' =>$datos_ultima_nomina,
+                    'anterior' => $anterior, 'cambios'=>$cambios, 'bajas' => $bajas, 'nuevos' => $nuevos]);
+        
+        //debug($ultima_nomina);exit();
     }
 
 }

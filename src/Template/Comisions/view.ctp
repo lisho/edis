@@ -63,6 +63,7 @@
           </div>
 
           <div class="x_content">
+
             <?php foreach ($comision->asistentecomisions as $asistente): ?>
                 <div>
                     <?php if ($asistente->rol==='secretario'): ?>
@@ -160,7 +161,7 @@
 
     <div class="x_panel">
         <div class="x_title">
-            <big>Expedientes que han pasado por esta comisión </big>
+            <big>Expedientes que han pasado por esta comisión <b class="azul"><?= count($comision->pasacomisions);?></b></big>
             
             <?= $this->Element('menus/menu_panel');?>
            
@@ -174,41 +175,49 @@
               <div class="tab-content">
                 
                 <div class="tab-pane active" id="todos-r"> 
-                    <?php foreach ($expedientes_ordenados as $key => $ceas): ?>
+                    <?php if (isset($expedientes_ordenados)): ?>
 
-                        <h3><?= $listado_ceas[$key]; ?></h3>
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>Mot.</th>
-                                        <th>Clas.</th>
-                                        <th>Exp.</th>
-                                        <th>HS</th>
-                                        <th>Pres. RGC</th>
-                                        <th>Deriv</th>
-                                        <th>Titular Pres.</th>
-                                        <th>Observ.</th>
-                                        <th>Docum.</th>
-                                        <th></th>
-                                        <th></th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php foreach ($ceas as $pasacomision): ?>
+                        <?php foreach ($expedientes_ordenados as $key => $ceas): ?>
+
+                            <h3><?= $listado_ceas[$key]; ?></h3>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Mot.</th>
+                                            <th>Clas.</th>
+                                            <th>Exp.</th>
+                                            <th>HS</th>
+                                            <th>Pres. RGC</th>
+                                            <th>Deriv</th>
+                                            <th>Titular Pres.</th>
+                                            <th>Observ.</th>
+                                            <th>Docum.</th>
+                                            <th></th>
+                                            <th></th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($ceas as $pasacomision): ?>
 
 
-                                        <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
-                                                                                                        'pasacomision' => $pasacomision,
-                                                                                                        'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                                        'modificador' => 'todos_'
-                                                                                                    ])?>
+                                            <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
+                                                                                                            'pasacomision' => $pasacomision,
+                                                                                                            'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                                            'modificador' => 'todos_'
+                                                                                                        ])?>
 
-                                    <?php endforeach ?>
+                                        <?php endforeach ?>
 
-                                </tbody>
-                            </table>
-                    <?php endforeach ?>
+                                    </tbody>
+                                </table>
+
+                        <?php endforeach ?>
+                 
+                    <?php else: ?>
+                        <h3>Aún no has añadido ningún expediente a esta comisión...</h3>
+                    <?php endif; ?>    
+
                 </div>
 
                 <?php foreach ($listado_ceas as $key => $ceas): ?>
@@ -239,10 +248,10 @@
                                             <?php if ($pasacomision->expediente->ceas==$key): ?>
 
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
-                                                                                                                'pasacomision' => $pasacomision,
-                                                                                                                'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                                                'modificador' => 'ceas_'
-                                                                                                            ])?>
+                                                                                    'pasacomision' => $pasacomision,
+                                                                                    'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                    'modificador' => 'ceas_'
+                                                                                ])?>
 
                                             <?php endif ?>
                                         <?php endforeach ?>

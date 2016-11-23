@@ -7,7 +7,7 @@
 </head>
 <body class="nav-md">
 
-    <div class="container body">
+    <div class="container body" id="body">
       <div class="main_container">
         
     <!-- Inicio barra lateral -->  

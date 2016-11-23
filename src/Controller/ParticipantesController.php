@@ -142,12 +142,17 @@ class ParticipantesController extends AppController
                     $this->request->data['foto'] = $this->request->data['dni'].$ext;
                 }
 
-            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['nacimiento']);
-            $this->request->data['nacimiento']=array(
+            if (empty($this->request->data['nacimiento'])) {
+                $this->request->data['nacimiento']="";
+            } else {
+                $cachos_fecha = preg_split("/[\/]+/", $this->request->data['nacimiento']);
+                $this->request->data['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
                                 'day' =>$cachos_fecha[0] 
                         );
+            }
+            
 //debug($this->request->data);exit();
             $participante = $this->Participantes->patchEntity($participante, $this->request->data, [
                     'associated' => [

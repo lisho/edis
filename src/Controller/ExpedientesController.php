@@ -55,7 +55,12 @@ class ExpedientesController extends AppController
     {
 
         $archivos_tree=[];
-         $prestaciones_abiertas_rgc = [];
+        $listado_roles=[];
+        $prestaciones_abiertas_rgc = [];
+
+        $this->loadModel('Equipos');
+        $listado_equipos = $this->Equipos->find('all')->toArray();
+
         $this->loadModel('Incidencias');
         $nueva_incidencia = $this->Incidencias->newEntity();
 
@@ -73,7 +78,7 @@ class ExpedientesController extends AppController
                                                                                 ]);
 
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
+            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos','Roles.Tecnicos.Equipos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
                 'Pasacomisions.Comisions', 'Pasacomisions'=>[ 
                                                 'sort'=>[
                                                     'Comisions.fecha'=> 'DESC']],
@@ -82,6 +87,14 @@ class ExpedientesController extends AppController
                                                     'apertura'=> 'DESC']],
                                         ],
                                     ]);
+
+        //Exytaemos los datos de los equipos y concretamos el Área de Acción Social
+
+        $this->loadModel('Equipos');
+        //$listado_equipos = $this->Equipos->find('all')->toArray();
+        $datos_ceas = $this->Equipos->find('all')->Where(['id'=>$expediente->ceas])->toArray();
+        $aas = $datos_ceas[0]['aas'];
+
         foreach ($expediente->participantes as $participante) {
             $listado_participantes[] = $participante->dni;
             $listado_nombres_parrilla[] = $participante->nombre.' '. $participante->apellidos;
@@ -93,6 +106,26 @@ class ExpedientesController extends AppController
                 $prestaciones_abiertas_rgc[] = $prestacion->numprestacion;
             }
         }
+
+        //Pasamos los id de los tecnicos que deberían estar asignados al expediente.
+
+        foreach ($expediente->roles as $rol) {
+            if ($rol->rol ==='CC') {
+                $listado_tecnicos[$rol['tecnico']['id']] = $rol['tecnico']['nombre'].' '.$rol['tecnico']['apellidos'];
+                if ($rol['tecnico']['equipo_id'] ==$expediente['ceas']) {
+                    $listado_roles['CC']['correcto'][] = $rol['tecnico']['id'];
+                }else{$listado_roles['CC']['incorrecto'][] = $rol['tecnico']['id'];}
+                
+            } elseif ($rol->rol ==='tedis'){
+                $listado_tecnicos[$rol['tecnico']['id']] = $rol['tecnico']['nombre'].' '.$rol['tecnico']['apellidos'];
+                if ($rol['tecnico']['equipo']['aas'] == $aas ) {
+                   $listado_roles['tedis']['correcto'][] = $rol['tecnico']['id'];
+                }else{ $listado_roles['tedis']['incorrecto'][] = $rol['tecnico']['id'];}
+                
+            }
+        }
+
+//debug ($listado_tecnicos);exit();
 
         //*****************************************************//
         // Creamos un array con todos los datos de las nóminas //
@@ -139,7 +172,7 @@ class ExpedientesController extends AppController
         //*************************************************//
         $archivos=$this->archivosTree($expediente->numedis, $expediente->id);
 
-        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados','datos_nominas','listado_participantes', 'listado_nombres_parrilla','prestaciones_abiertas_rgc'));
+        $this->set(compact('expediente', 'participante', 'listado_ceas', 'listado_relaciones', 'nueva_incidencia','incidenciatipos', 'archivos', 'nueva_prestacion', 'prestaciontipos', 'listado_posibles_titulares_prestacion', 'prestacionestados','datos_nominas','listado_participantes', 'listado_nombres_parrilla','prestaciones_abiertas_rgc', 'aas', 'listado_tecnicos', 'listado_roles'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -594,6 +627,31 @@ class ExpedientesController extends AppController
 
         return $archivos_tree;
         $this->autoRender = false;
+    }
+
+    /**
+     * Ir a Un expediente pasando el numero de historia social
+     *
+     */
+
+    public function viewExpedientePorHs($hs=null)
+    {
+
+        $expediente = $this->Expedientes->find()
+                                -> where(['numhs' => $hs]);
+
+        //$expediente = $expediente -> toArray();
+        $expediente = $expediente -> first();
+        //debug($expediente['id']);exit();
+        if (!empty($expediente)) {
+            return $this->redirect(['action' => 'view',$expediente->id]);
+        }
+        else {
+            $this->Flash->error(__('No existe este expediente. Debes crearlo antes de acceder.'));
+            return $this->redirect($this->referer());
+
+        }
+       $this->autoRender = false;
     }
 
 }

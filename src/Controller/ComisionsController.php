@@ -292,7 +292,7 @@ class ComisionsController extends AppController
         $logo= IMAGES."logo_concejalia.png";
         //$acta_completa = $file = new File(APP_DIR.'/Template/Comisions/pdf/acta.ctp');
         //file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
-
+//debug($comision);exit();
         $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'logo', 'el_secretario'));
         $this->set('_serialize', ['comision']);
     }

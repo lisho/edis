@@ -38,7 +38,7 @@
                     <th><?= 'Domicilio' ?></th>
                     <td><?= h($expediente->domicilio) ?></td>
                 </tr>
-                
+<!--                
                 <tr>
                     <th><?= 'Fecha de creación del expediente:' ?></th>
                     <td><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null); ?></td>
@@ -47,12 +47,61 @@
                     <th><?= 'Última modificación en el expediente:' ?></th>
                     <td><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null); ?></td>
                 </tr>
-                
+-->                
             </table> 
                     <br>
                     <p><b><?= 'CEAS de Referencia:' ?></b></p>
-                    <p><?= $listado_ceas[$expediente->ceas]; ?></p>
+                    <p class="text-center"><big><?= $listado_ceas[$expediente->ceas]; ?></big></p>
                     
+                    <p><b><?= 'Técnicos Asociados al Expediente:' ?></b></p>
+                        <?php if (!empty($expediente->roles)): ?> 
+                            <table id="" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
+
+                                <tr> 
+                                    
+                                    <th><?= __('Tecnico Id') ?></th>
+                                    <th><?= __('Rol') ?></th>
+                                    <th><?= __('Observaciones') ?></th>
+                                    
+                                    <?php if ($auth['role'] === 'admin'): ?>
+                                        <th class="actions"><?= __('Actions') ?></th>
+                                    <?php endif; ?>
+                                </tr> 
+                                <?php foreach ($expediente->roles as $roles): ?> 
+                                <tr> 
+
+                                <?php 
+
+                                    switch ($roles['rol']) {
+                                        case 'CC':
+                                            $r = 'Coordinador de Caso';
+                                            break;
+                                        case 'tedis':
+                                            $r = 'Técnico de Inclusión';
+                                            break; 
+                                        default:
+                                            $r = 'Otro rol por definir';
+                                            break;                          
+                                    }
+                                ?>
+
+                                   
+                                    <td><?= $roles->tecnico->nombre.' '.$roles->tecnico->apellidos ?></td>
+                                    <td><?= h($r) ?></td>
+                                    <td><?= h($roles->observaciones) ?></td>
+                                    <?php if ($auth['role'] === 'admin'): ?>
+                                         <td class="actions">
+                                            <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'view', $roles->id], ['class'=> 'fa fa-eye text-primary icono-tabla-fa']) ?>
+                                            <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'edit', $roles->id], ['class'=> 'fa fa-edit text-info icono-tabla-fa']) ?>
+                                            <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                                        </td>      
+                                    <?php endif; ?>
+                                    
+                                </tr> 
+                                <?php endforeach; ?> 
+                            </table>     
+                        <?php endif; ?> 
+
                     <p><b><?= 'Observaciones sobre el expediente:' ?></b></p>
                     <?php if ($expediente->observaciones!=null): ?>
                          <?= $expediente->observaciones; ?>
@@ -74,87 +123,7 @@
         </div> <!--// Fin Panel de datos de expediente-->
     </div>
 
-    <div class="x_panel"> <!--/ Panel de Tecnicos-->
-        <div class="x_title"> 
-            <big><i class="icono-fa fa fa-list-ul"></i><?= '    Técnicos asociados a este expediente:' ?> </big>
-            <ul class="nav navbar-right panel_toolbox"> 
-              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
-              </li> 
-              <li class="dropdown"> 
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
-                <ul class="dropdown-menu" role="menu"> 
-                  <li><a href="#">Settings 1</a> 
-                  </li> 
-                  <li><a href="#">Settings 2</a> 
-                  </li> 
-                </ul> 
-              </li> 
-              <li><a class="close-link"><i class="fa fa-close"></i></a> 
-              </li> 
-            </ul> 
-            <div class="clearfix"></div> 
-        </div> 
- 
-        <div class="x_content">         
-
-            <div class="clearfix"></div> 
-            <div class="related"> 
-                
-                <?php if (!empty($expediente->roles)): ?> 
-                <table id="" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"> 
-
-                    <tr> 
-                        
-                        <th><?= __('Tecnico Id') ?></th>
-                        <th><?= __('Rol') ?></th>
-                        <th><?= __('Observaciones') ?></th>
-                        
-                        <?php if ($auth['role'] === 'admin'): ?>
-                            <th class="actions"><?= __('Actions') ?></th>
-                        <?php endif; ?>
-                    </tr> 
-                    <?php foreach ($expediente->roles as $roles): ?> 
-                    <tr> 
-
-                    <?php 
-
-                        switch ($roles['rol']) {
-                            case 'CC':
-                                $r = 'Coordinador de Caso';
-                                break;
-                            case 'tedis':
-                                $r = 'Técnico de Inclusión';
-                                break; 
-                            default:
-                                $r = 'Otro rol por definir';
-                                break;                          
-                        }
-                    ?>
-
-                       
-                        <td><?= $roles->tecnico->nombre.' '.$roles->tecnico->apellidos ?></td>
-                        <td><?= h($r) ?></td>
-                        <td><?= h($roles->observaciones) ?></td>
-                        <?php if ($auth['role'] === 'admin'): ?>
-                             <td class="actions">
-                                <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'view', $roles->id], ['class'=> 'fa fa-eye text-primary icono-tabla-fa']) ?>
-                                <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'edit', $roles->id], ['class'=> 'fa fa-edit text-info icono-tabla-fa']) ?>
-                                <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
-                            </td>      
-                        <?php endif; ?>
-                        
-                    </tr> 
-                    <?php endforeach; ?> 
-                </table> 
- 
-                <?php endif; ?> 
- 
-            </div> <!--/ FIN Roles-->
-
-        </div> 
-    </div>
-
-    <div class="x_panel"> <!--/ Panel de NOMINAS-->
+    <div class="x_panel" id="nomina"> <!--/ Panel de NOMINAS-->
         <div class="x_title"> 
             <big><i class="icono-fa fa fa-refresh"></i><?= '    Cruce con la Última Nómina en SAUSS:' ?> </big>
             <ul class="nav navbar-right panel_toolbox"> 
@@ -1310,7 +1279,7 @@
 
             </div>
             <div class="modal-footer">
-                <?= $this->Form->button('Añadir el Nuevo Usuario ->', ['class' => 'btn btn-success']) ?>
+                <?= $this->Form->button('Añadir Nuev Prestacion ->', ['class' => 'btn btn-success']) ?>
                 <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
                 
             </div>

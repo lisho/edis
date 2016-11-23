@@ -299,7 +299,7 @@
       </div>
       <div class="modal-body">
         
-        <?= $this->Form->create($expediente,['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+        <?= $this->Form->create('',['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
 
             <div class="form-group has-feedback">
             <label class="control-label col-md-3 col-sm-3 col-xs-12">Nuevo Técnico <span class="required">*</span></label>
@@ -309,7 +309,7 @@
                                                     'type' => 'select',
                                                     'class'=>'form-control col-md-7 col-xs-12',
                                                     'id' => 'tecnico_ceas',
-                                                    'default' => '',
+                                                    //'default' => '',
                                                     'required' => 'required',
                                                     'label' => ['text' => ''],
                                                     'options' => $listado_tecnicos,
@@ -328,7 +328,7 @@
                                                     'type' => 'select',
                                                     'class'=>'form-control col-md-7 col-xs-12',
                                                     'id' => 'tecnico_inclusion',
-                                                    'default' => '',
+                                                    //'default' => '',
                                                     'required' => 'required',
                                                     'options' => $opciones_rol,
                                                     'label' => ['text' => ''],

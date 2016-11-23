@@ -43,7 +43,8 @@
                     <th>Docum.</th>
                     <th>Motivo</th>
                     <th>Clasif.</th>
-                    <th>NumHS</th>
+                    <!-- <th>NumHS</th> -->
+                    <th>Exp. RGC</th>
                     <th>Titular</th>
                     <th>DNI/NIE</th>                   
                 </tr>
@@ -62,16 +63,19 @@
                         </td>  
                         <td><?= $pasacomision->motivo; ?></td>
                         <td><?= $pasacomision->clasificacion; ?></td> 
-                        <td><?= $pasacomision->expediente->numhs; ?></td>   
-                        <td class="mayusculas">
 
-                        	<?php foreach ($pasacomision->expediente->prestacions as $prestacion): ?>	
-                        		<?php if ($prestacion->prestaciontipo->tipo === 'RGC' && $prestacion->cierre === null): ?>
-                        			<?= $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?> <!-- Recogemos el nombre de la prestación de RGC -->
+                            <?php foreach ($pasacomision->expediente->prestacions as $prestacion): ?>   
+                                <?php if ($prestacion->prestaciontipo->tipo === 'RGC' && $prestacion->cierre === null): ?>
+
+                                <!-- <td><?= $pasacomision->expediente->numhs; ?></td>   -->
+                                <td><?= $prestacion->numprestacion; ?></td>
+                                <td class="mayusculas">
+                                	
+                                			<?= $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?> <!-- Recogemos el nombre de la prestación de RGC -->
+                                </td>   
                         		<?php endif; ?>
                     		<?php endforeach ?>
-
-                        </td>		  
+                        	  
                         <td>
                         	<?php foreach ($pasacomision->expediente->participantes as $participante): ?>
                                 <?php if($participante->relation_id=='1'){ echo $participante->dni; }?>
