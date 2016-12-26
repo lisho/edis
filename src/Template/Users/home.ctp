@@ -1,1 +1,36 @@
-<h1>Bienvenido a la app</h1>
+<h2>Bienvenido a la app</h2>
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+          <div class="x_title">
+            
+			<h1>MESA DE TRABAJO <small>DE <?= $auth['nombre'].' '.$auth['apellidos'];?></small></h1>
+
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="x_content ">
+  			<div class="col-md-12 col-sm-12 col-xs-12">
+          	<div class="row">
+	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
+	          		
+	          	<a href="/edis/comisions" title="">
+	          		<button type="button" class="btn btn button_home">
+          				<i class="fa fa-briefcase icono-titulo-fa"></i>
+	          			<h2>Gestión de Comisiones</h2>
+	          		</button>
+	          	</a>
+	          	</div>
+	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
+	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
+	          	</div>
+	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
+	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
+	          	</div>
+	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
+	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
+	          	</div>
+		    </div>	
+		    </div>
+        </div>
+    </div>
+</div>

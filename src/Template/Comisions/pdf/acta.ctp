@@ -92,6 +92,14 @@
         <br><br>
 <?php endforeach ?>
 
+<h2>Otros temas pasados por comisión:</h2>
+<?php if (!empty($comision->observaciones)): ?>
+    <?= $comision->observaciones;?> 
+<?php else: ?>
+    No se han tratado temas adicionales en esta comisión.       
+<?php endif; ?>
+<br><br>
+
 <div >
 		<div class="cuadro">
 			<p class="justificado"><strong>El Equipo de Inclusión Social ha informado verbalmente de las revisiones en las que no se adjunta informe de seguimiento</strong></p>

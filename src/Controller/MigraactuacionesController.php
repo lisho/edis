@@ -18,7 +18,7 @@ class MigraactuacionesController extends AppController
      */
     public function index()
     {
-        $migraactuaciones = $this->paginate($this->Migraactuaciones);
+        $migraactuaciones = $this->Migraactuaciones->find('all');
 
         $this->set(compact('migraactuaciones'));
         $this->set('_serialize', ['migraactuaciones']);
@@ -209,7 +209,7 @@ class MigraactuacionesController extends AppController
 
     public function enlazaExpedientes()
     {
-        set_time_limit(300);
+        set_time_limit(600);
 
         $listado_no_encontrados = []; // actuaciones cuyo numedis no esta en expedientes
         $listado_emparejados = [];
@@ -221,20 +221,23 @@ class MigraactuacionesController extends AppController
             ]);
 
         $actuaciones = $this->Migraactuaciones->find('all');
+        $actuaciones = $actuaciones->toArray();
         $expedientes_array = $expedientes->toArray();
 
-//debug(count($expedientes_array));exit();
+//debug($actuaciones);exit();
 //debug($expedientes->toArray());
 
         foreach ($actuaciones as $actuacion) {
-            
+
             if (array_key_exists($actuacion['numedis'],$expedientes_array)) {
 
 
                 $actuacion_con_numedis['migraexpedientes_id'] = $expedientes_array[$actuacion->numedis];
+                debug($actuacion_con_numedis);  
                 $actuacion = $this->Migraactuaciones->patchEntity($actuacion, $actuacion_con_numedis);
+                debug($actuacion);  
                 //$listado_emparejados[$actuacion['numedis']] = $actuacion;
-              
+             
                 if ($this->Migraactuaciones->save($actuacion)) {
                     $listado_emparejados[$actuacion['numedis']] = $actuacion;
                     //$contador_correctos++;
@@ -248,7 +251,7 @@ class MigraactuacionesController extends AppController
                 //$contador_errores++;
             }
         }
-        //debug($listado_no_encontrados);debug(count($listado_no_encontrados));exit();
+        debug($listado_no_encontrados);debug(count($listado_no_encontrados));exit();
         $this->set(compact('listado_errores_save','listado_no_encontrados'
             ,'listado_emparejados'
             ));

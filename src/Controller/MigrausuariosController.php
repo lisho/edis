@@ -233,17 +233,15 @@ class MigrausuariosController extends AppController
             'contain' => []
         ]);
 
-        //$m_e = $migrausuario->toArray();
-
         foreach ($migrausuario as $k => $usuario) {
             
             if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni'])) {
         
                
                 if ($usuario->numedis >4999 && $usuario->numedis<5999) {
-                    $posibles_arraigos[]=$usuario; 
+                    $posibles_arraigos[]=$usuario; //array con arraigos
                 }else {
-                    $dni_error[] = $usuario; 
+                    $dni_error[] = $usuario; //array con errores en el dni
                 }  
 
         //Listado de errores una vez se corrijan los espacios en blanco
@@ -251,7 +249,7 @@ class MigrausuariosController extends AppController
             $usuario['dni']=$this-> limpiarEspacios($usuario['dni']);  
 
             if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni']) && !($usuario->numedis >4999 && $usuario->numedis<5999)) {
-                    $dni_sinespacios[] = $usuario;
+                    $dni_sinespacios[] = $usuario; //array con errores en el dni despues de eliminar los errores por espacios en blanco y los arraigos.
                 }        
             }
 
@@ -295,8 +293,7 @@ class MigrausuariosController extends AppController
 
                 $usuario_con_numedis['migraexpedientes_id'] = $expedientes_array[$usuario->numedis];
                 $usuario = $this->Migrausuarios->patchEntity($usuario, $usuario_con_numedis);
-                //$listado_emparejados[$usuario['numedis']] = $usuario;
-              
+
                 if ($this->Migrausuarios->save($usuario)) {
                     $listado_emparejados[$usuario['numedis']] = $usuario;
                     //$contador_correctos++;
@@ -326,11 +323,6 @@ class MigrausuariosController extends AppController
     public function enlazaExpedientesView()
     {
 
-        //$listado_no_encontrados = []; // usuarios cuyo numedis no esta en expedientes
-        //$listado_emparejados = [];
-        //$listado_errores_save = [];
-
-
         $this->loadModel('Migraexpedientes');
         $expedientes = $this->Migraexpedientes->find('list', [
                 'keyField' => 'id',
@@ -339,38 +331,6 @@ class MigrausuariosController extends AppController
         $expedientes_array = $expedientes->toArray();
         $usuarios = $this->Migrausuarios->find('all');
         
-
-//debug(count($expedientes_array));exit();
-//debug($expedientes->toArray());
-/*
-        foreach ($usuarios as $usuario) {
-            
-            if (in_array($usuario['numedis'],$expedientes_array)) {
-
-
-                $usuario_con_numedis['migraexpedientes_id'] = $expedientes_array[$usuario->numedis];
-                $usuario = $this->Migrausuarios->patchEntity($usuario, $usuario_con_numedis);
-                //$listado_emparejados[$usuario['numedis']] = $usuario;
-              
-                if ($this->Migrausuarios->save($usuario)) {
-                    $listado_emparejados[$usuario['numedis']] = $usuario;
-                    //$contador_correctos++;
-                }else{
-                    $listado_errores_save[$usuario['numedis']] = $usuario;
-                }
-
-            }else{
-
-                $listado_no_encontrados[$usuario['numedis']] = $usuario;
-                //$contador_errores++;
-            }
-        }
-*/
-        //debug($listado_no_encontrados);debug(count($listado_no_encontrados));exit();
-        $this->set(compact('expedientes_array','usuarios'
-            
-            ));
-        
-
+        $this->set(compact('expedientes_array','usuarios'));
     }
 }

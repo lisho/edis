@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"html",
+				"html\thtml"
+			],
+			[
+				"font",
+				"font-size"
+			],
+			[
+				"s",
+				"style\t<style>"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
 				"mi",
 				"mi_ultima_nomina"
 			],
@@ -210,10 +226,6 @@
 			[
 				"tex",
 				"text-align"
-			],
-			[
-				"font",
-				"font-weight"
 			],
 			[
 				"dir",
@@ -502,73 +514,34 @@
 			[
 				"clasi",
 				"clasificado"
-			],
-			[
-				"hi",
-				"height"
-			],
-			[
-				"ke",
-				"key"
-			],
-			[
-				"pre",
-				"pre_dni"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/Controller/NominasController.php",
+			"file": "src/Controller/MigraactuacionesController.php",
 			"settings":
 			{
-				"buffer_size": 10852,
+				"buffer_size": 9827,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Controller/ExpedientesController.php",
+			"file": "src/Template/Migraactuaciones/enlaza_expedientes_view.ctp",
 			"settings":
 			{
-				"buffer_size": 25782,
+				"buffer_size": 3585,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "src/Controller/AppController.php",
+			"file": "src/Template/Migraactuaciones/index.ctp",
 			"settings":
 			{
-				"buffer_size": 14287,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Element/nominas/comparar_ultima_nomina.ctp",
-			"settings":
-			{
-				"buffer_size": 10172,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Expedientes/view.ctp",
-			"settings":
-			{
-				"buffer_size": 73378,
-				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Element/expedientes/expediente_alertas.ctp",
-			"settings":
-			{
-				"buffer_size": 13682,
+				"buffer_size": 5871,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -586,7 +559,7 @@
 			"file": "webroot/css/mis_estilos.css",
 			"settings":
 			{
-				"buffer_size": 6508,
+				"buffer_size": 7286,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -603,16 +576,8 @@
 			"file": "src/Template/Element/menus/sidebar.ctp",
 			"settings":
 			{
-				"buffer_size": 12512,
+				"buffer_size": 12842,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "src/Template/Layout/default.ctp",
-			"settings":
-			{
-				"buffer_size": 2421,
 				"line_ending": "Unix"
 			}
 		},
@@ -675,36 +640,39 @@
 	"expanded_folders":
 	[
 		"/opt/lampp/htdocs/edis",
+		"/opt/lampp/htdocs/edis/bin",
 		"/opt/lampp/htdocs/edis/src",
 		"/opt/lampp/htdocs/edis/src/Controller",
 		"/opt/lampp/htdocs/edis/src/Template",
-		"/opt/lampp/htdocs/edis/src/Template/Element",
-		"/opt/lampp/htdocs/edis/src/Template/Element/expedientes",
-		"/opt/lampp/htdocs/edis/src/Template/Element/nominas",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes",
-		"/opt/lampp/htdocs/edis/webroot",
-		"/opt/lampp/htdocs/edis/webroot/css"
+		"/opt/lampp/htdocs/edis/src/Template/Migraactuaciones"
 	],
 	"file_history":
 	[
-		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
+		"/tmp/sublime-sftp-browse-1482307235/lishowebproject/gonlo/index.html",
+		"/opt/lampp/htdocs/edis/src/Controller/MigrausuariosController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/NominasController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Element/expedientes/expediente_alertas.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Element/nominas/comparar_ultima_nomina.ctp",
+		"/tmp/sublime-sftp-browse-1481970101/lishowebproject/gonlo/index.html",
+		"/opt/lampp/htdocs/edis/src/Template/Users/home.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Comisions/pdf/acta.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Comisions/index.ctp",
+		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/compara_nominas.ctp",
 		"/opt/lampp/htdocs/edis/vendor/cakephp/cakephp/src/View/View.php",
 		"/opt/lampp/htdocs/edis/src/Controller/ComisionsController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Comisions/pdf/acta.ctp",
 		"/home/lisho/Documentos/GraficosRGC.html",
 		"/tmp/sublime-sftp-browse-1478984309/lishowebproject/edis_leon/graficos_rgc.html",
 		"/home/lisho/Documentos/GraficosRGC",
-		"/opt/lampp/htdocs/edis/src/Template/Element/expedientes/expediente_alertas.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Pasacomisions/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Comisions/view.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Element/nominas/comparar_ultima_nomina.ctp",
 		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/bower_components/bootstrap/dist/css/bootstrap.css",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
@@ -713,7 +681,6 @@
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Migraactuaciones/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/enlaza_expedientes_view.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/MigrausuariosController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/enlaza_expedientes.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/MigraactuacionesTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/index.ctp",
@@ -724,7 +691,6 @@
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/MigrausuariosTable.php",
 		"/opt/lampp/htdocs/edis/src/Controller/MigraexpedientesController.php",
-		"/opt/lampp/htdocs/edis/src/Controller/NominasController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Migraexpedientes/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/SuspensionsController.php",
@@ -762,7 +728,6 @@
 		"/opt/lampp/htdocs/edis/webroot/css/pdf.css",
 		"/opt/lampp/htdocs/edis/src/Template/Layout/pdf/default.ctp",
 		"/opt/lampp/htdocs/edis/config/bootstrap.php",
-		"/opt/lampp/htdocs/edis/src/Template/Comisions/index.ctp",
 		"/opt/lampp/htdocs/edis/config/app.php",
 		"/home/lisho/Imágenes/logo_concejalia.png",
 		"/opt/lampp/htdocs/edis/src/Template/Comisions/acta.ctp",
@@ -780,7 +745,6 @@
 		"/opt/lampp/htdocs/edis/src/Controller/AsistentecomisionsController.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/PasacomisionsTable.php",
 		"/opt/lampp/htdocs/edis/src/Controller/TecnicosController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/TecnicosTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/edit.ctp",
@@ -811,10 +775,7 @@
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/tables_dynamic.html",
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/vendors/datatables.net-buttons/js/buttons.print.min.js",
 		"/opt/lampp/htdocs/pact_project_development/bower_components/gentelella/production/form_wizards.html",
-		"/opt/lampp/htdocs/edis/webroot/img/parrilla/male-desconocido.svg",
-		"/opt/lampp/htdocs/edis/webroot/img/parrilla/female-desconocida.svg",
-		"/home/lisho/Imágenes/family-icons/svg/female-desconocida.svg",
-		"/opt/lampp/htdocs/edis/webroot/img/parrilla/female-desconocido.svg"
+		"/opt/lampp/htdocs/edis/webroot/img/parrilla/male-desconocido.svg"
 	],
 	"find":
 	{
@@ -832,6 +793,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"fa",
+			"btn-primary",
+			"button",
+			"btn btn-app",
+			"12 btn btn-app",
+			" btn btn-app",
+			"btn-app",
 			"success-text",
 			"Coordinador de Caso",
 			"cc",
@@ -952,14 +920,7 @@
 			"redi",
 			"this->request->data['participantes']",
 			"$this->request->data",
-			"participantes",
-			"participante",
-			"0",
-			"fill",
-			"fil",
-			"fill",
-			"pleas",
-			"please  "
+			"participantes"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -977,24 +938,24 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/Controller/NominasController.php",
+					"file": "src/Controller/MigraactuacionesController.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10852,
+						"buffer_size": 9827,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5675,
-								5675
+								8491,
+								8491
 							]
 						],
 						"settings":
@@ -1007,124 +968,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2400.0,
+						"translation.y": 3314.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/Controller/ExpedientesController.php",
+					"file": "src/Template/Migraactuaciones/enlaza_expedientes_view.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25782,
+						"buffer_size": 3585,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3523,
-								3523
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1813.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/Controller/AppController.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 14287,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								11490,
-								11490
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 5240.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/Template/Element/nominas/comparar_ultima_nomina.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 10172,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								53,
-								53
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 990.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "src/Template/Expedientes/view.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 73378,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								7995,
-								7995
+								3585,
+								3585
 							]
 						],
 						"settings":
@@ -1137,27 +1001,27 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2099.0,
+						"translation.y": 180.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "src/Template/Element/expedientes/expediente_alertas.ctp",
+					"buffer": 2,
+					"file": "src/Template/Migraactuaciones/index.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13682,
+						"buffer_size": 5871,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5797,
-								5797
+								2405,
+								2405
 							]
 						],
 						"settings":
@@ -1165,13 +1029,15 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage"
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 405.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1181,7 +1047,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 6,
+					"buffer": 3,
 					"file": "webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
@@ -1209,24 +1075,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
+					"buffer": 4,
 					"file": "webroot/css/mis_estilos.css",
-					"semi_transient": true,
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6508,
+						"buffer_size": 7286,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								870,
-								870
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1238,14 +1104,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 675.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 4,
 					"type": "text"
 				},
 				{
-					"buffer": 8,
+					"buffer": 5,
 					"file": "webroot/css/pdf.css",
 					"semi_transient": false,
 					"settings":
@@ -1274,24 +1140,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 10,
+					"stack_index": 6,
 					"type": "text"
 				},
 				{
-					"buffer": 9,
+					"buffer": 6,
 					"file": "src/Template/Element/menus/sidebar.ctp",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 12512,
+						"buffer_size": 12842,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7632,
-								7632
+								10038,
+								10038
 							]
 						],
 						"settings":
@@ -1304,47 +1170,14 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 48330.0,
+						"translation.y": 40560.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 10,
-					"file": "src/Template/Layout/default.ctp",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2421,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 9,
-					"type": "text"
-				},
-				{
-					"buffer": 11,
+					"buffer": 7,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1364,13 +1197,15 @@
 							"auto_name": "'dni','sexo','nombre','apellidos','telefono','otro",
 							"default_dir": "/opt/lampp/htdocs/edis",
 							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 11,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
@@ -1404,7 +1239,7 @@
 		"cols":
 		[
 			0.0,
-			0.860564497515,
+			0.80371283445,
 			1.0
 		],
 		"rows":
@@ -1464,7 +1299,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1472,7 +1307,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 295.0,
+	"side_bar_width": 275.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

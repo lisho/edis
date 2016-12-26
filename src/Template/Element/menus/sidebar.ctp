@@ -145,6 +145,8 @@
                   <li><a><i class="fa fa-group"></i> Migra-Actuaciones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Todas las Actuaciones Migradas', ['controller'=> 'Migraactuaciones', 'action'=>'index']); ?></li>
+                      <li><?= $this->Html->link('Errores en las Actuaciones Migradas', ['controller'=> 'Migraactuaciones', 'action'=>'enlaza_expedientes_view']); ?></li>
+                      <li><?= $this->Html->link('Enlaza Expedientes-actuaciones', ['controller'=> 'Migraactuaciones', 'action'=>'enlaza_expedientes']); ?></li>
                       <li><?= $this->Html->link(' Cargar Actuaciones', ['controller'=> 'Migraactuaciones', 'action'=>'add'],['class' => "fa fa-upload"]); ?></li>
                       <!--<li><?= $this->Html->link('Errores', ['controller'=> 'Migrausuarios', 'action'=>'errores']); ?></li>
                       <li><?= $this->Html->link('Enlazar Expedientes-Usuarios', ['controller'=> 'Migrausuarios', 'action'=>'enlaza-expedientes']); ?></li>

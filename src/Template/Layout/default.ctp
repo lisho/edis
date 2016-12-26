@@ -18,7 +18,7 @@
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
               
-              <a href="index.html" class="site_title"><?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo']) ?> <span>EdisLeon</span></a>
+              <a href="/edis/users/home" class="site_title"><?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo']) ?> <span>EdisLeon</span></a>
             </div>
 
             <div class="clearfix"></div>
