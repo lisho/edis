@@ -1,57 +1,94 @@
-<?php
-/**
- * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
- * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
- * @link          http://cakephp.org CakePHP(tm) Project
- * @since         0.10.0
- * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
-$cakeDescription = 'CakePHP: the rapid development php framework';
-?>
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-    <?= $this->Html->charset() ?>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <?= $cakeDescription ?>:
-        <?= $this->fetch('title') ?>
-    </title>
-    <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css('base.css') ?>
-    <?= $this->Html->css('cake.css') ?>
+    <?= $this->element('layout_elements/head'); ?>
 
-    <?= $this->fetch('meta') ?>
-    <?= $this->fetch('css') ?>
-    <?= $this->fetch('script') ?>
 </head>
-<body>
-    <nav class="top-bar expanded" data-topbar role="navigation">
-        <ul class="title-area large-3 medium-4 columns">
-            <li class="name">
-                <h1><a href=""><?= $this->fetch('title') ?></a></h1>
-            </li>
-        </ul>
-        <div class="top-bar-section">
-            <ul class="right">
-                <li><a target="_blank" href="http://book.cakephp.org/3.0/">Documentation</a></li>
-                <li><a target="_blank" href="http://api.cakephp.org/3.0/">API</a></li>
-            </ul>
+<body class="nav-md">
+
+    <div class="container body" id="body">
+      <div class="main_container">
+        
+    <!-- Inicio barra lateral -->  
+    
+    <?php if (!empty($auth)): ?>
+      
+        <div class="col-md-3 left_col">
+          <div class="left_col scroll-view">
+            <div class="navbar nav_title" style="border: 0;">
+              
+              <a href="/edis/users/home" class="site_title"><?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo']) ?> <span>EdisLeon</span></a>
+            </div>
+
+            <div class="clearfix"></div>
+
+            <!-- menu profile quick info -->
+            <div class="profile">
+              <div class="profile_pic">
+
+                <?= $this->Html->image('user_fotos/'.$auth['foto'], ['class'=> 'img-circle profile_img']) ?>
+                
+              </div>
+              <div class="profile_info">
+                <span>Bienvenido,</span>
+                <h2><?= $auth['nombre'].' '.$auth['apellidos']; ?></h2>
+              </div>
+            </div>
+            <!-- /menu profile quick info -->
+
+            <br />
+
+            <!-- sidebar menu -->
+             <?= $this->element('menus/sidebar'); ?>   
+            <!-- /sidebar menu -->
+
+           
+          </div>
         </div>
-    </nav>
-    <?= $this->Flash->render() ?>
-    <div class="container clearfix">
-        <?= $this->fetch('content') ?>
-    </div>
-    <footer>
-    </footer>
+
+    <!-- Final barra lateral -->  
+
+        <!-- top navigation -->
+            <?= $this->element('menus/menu_principal'); ?>
+        <!-- /top navigation -->
+
+        <!-- page content -->        
+    
+    <?php else : ?>
+
+        <div class="col-md-3 left_col">
+          <div class="text-center">           
+            <?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo-grande']) ?>
+          </div>
+
+        </div>
+          
+    <?php endif ?>
+
+            <div class="container clearfix">
+                <div class="right_col" role="main">
+
+                <?= $this->Flash->render() ?>
+               
+                <div class="row"><?= $this->fetch('content') ?></div>
+                
+
+                </div>
+            </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+
+            <?= $this->element('layout_elements/footer'); ?>
+          
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>  
+   
+    <?= $this->element('layout_elements/scripts'); ?>
+
 </body>
 </html>

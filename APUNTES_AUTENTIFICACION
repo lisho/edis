@@ -1,0 +1,86 @@
+ 
+app.php --> lin222 -> 'host' =>127.0.0.1
+ 
+Autentificación:
+****************
+ 
+ * bin/cake migrations create CreateUsersTable
+ 
+ *
+ *** bin/cake migrations create create_users dni:string nombre:string apellidos:string
+
+
+
+en el archivo de la migración:
+*******************************
+
+ public function change()
+    {
+        $table = $this->table('users');
+        $table  -> addColumn ('dni', 'string', ['limit'=>9])
+                -> addColumn ('nombre', 'string', ['limit'=>100]) 
+                -> addColumn ('apellidos', 'string', ['limit'=>200])
+                -> addColumn ('email', 'string', ['limit'=>100])
+                -> addColumn ('telefono', 'string', ['limit'=>100])
+                -> addColumn ('user', 'string', ['limit'=>100]) 
+                -> addColumn ('password', 'string')
+                -> addColumn ('role', 'enum', ['values'=>'admin, edis, ceas'])
+                -> addColumn ('created', 'datetime')
+                -> addColumn ('modified', 'datetime')
+                ->create();
+
+        $refTable = $this->table ('users');
+        $refTable   -> addColumn('equipo_id', 'integer', ['signed' => 'disable'])
+                    -> addForeignKey('equipo_id', 'equipos', 'id', ['delete' => 'CASCADE', 'update'=> 'NO_ACTION'])
+                    -> update();
+    }
+
+
+creado el archivo ejecutamos:
+*****************************
+
+* bin/cake migratios migrate (para aplicar)
+* bin/cake migrations rollback (para revertir)
+
+
+
+En AppController añadimos:
+**************************
+
+en public function initialize()
+----------------------------------
+
+
+$this->loadComponent('Auth', [
+    'authorize' => ['Controller'],
+    'authenticate' => [
+        'Form' => [
+            'fields' => [
+                'username' => 'user', // si no existe el campo username.
+                'password' => 'password'
+                ]
+            ]
+        ],
+        'loginAction' => [
+            'controller' => 'Users',
+            'action' => 'login'
+        ],
+        'autrhError' => 'Debe introducir datos correctos...',
+        'loginRedirect' => [
+            'controller' => 'Users',
+            'action' => 'home'
+        ],
+        'logoutRedirect' => [
+            'controller' => 'Users',
+            'action' => 'login'
+        ],
+]);
+
+y al final del archivo
+------------------------
+
+
+ public function isAuthorized($user)
+    {
+        return true;
+    }

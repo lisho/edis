@@ -96,7 +96,7 @@ if (!Configure::read('debug')) {
  * Set server timezone to UTC. You can change it to another timezone of your
  * choice but using UTC makes time calculations / conversions easier.
  */
-date_default_timezone_set('UTC');
+date_default_timezone_set('Europe/Madrid');
 
 /**
  * Configure the mbstring extension to use the correct encoding.
@@ -190,6 +190,21 @@ Request::addDetector('tablet', function ($request) {
  *
  */
 
+Plugin::load('CakePdf', ['bootstrap' => true]);
+Configure::write('CakePdf', array(
+    'engine' => 'CakePdf.DomPdf',
+    'pageSize' => 'A4',
+    'orientation' => 'portrait'
+));
+
+
+//DomPDF settings
+define('DOMPDF_ENABLE_AUTOLOAD', false);
+define('DOMPDF_ENABLE_HTML5PARSER', true);
+define('DOMPDF_ENABLE_REMOTE', true);
+
+//require ROOT . DS . 'vendor' . DS . 'dompdf' . DS . 'dompdf' . DS . 'dompdf_config.inc.php';
+
 Plugin::load('Migrations');
 
 // Only try to load DebugKit in development mode
@@ -219,3 +234,5 @@ Type::build('date')
     ->useImmutable();
 Type::build('datetime')
     ->useImmutable();
+
+Plugin::load('Cake/Localized');
