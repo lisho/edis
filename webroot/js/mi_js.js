@@ -1,4 +1,6 @@
 jQuery(document).ready(function($) {
+
+	var url_json = "/edis/"; //raiz de url
 	
 	$(".editor").jqte(); 
 	
@@ -73,7 +75,7 @@ $(function(){
 			if (elegido) {
 				$.ajax({
 					type: "POST",
-					url: "/edis/equipos/combots",
+					url: url_json+"equipos/combots",
 					data: "ceas="+elegido,
 					cache: false,
 					success: function(tecnico_ceas) {
@@ -91,7 +93,7 @@ $(function(){
 
 				$.ajax({
 					type: "POST",
-					url: "/edis/equipos/combotedis",
+					url: url_json+"equipos/combotedis",
 					
 					data: "ceas="+elegido,
 					cache: false,
@@ -138,7 +140,7 @@ $(function(){
 
 	        source:function(request, response){
 	            $.ajax({
-	                url:"/edis/participantes/searchjson",
+	                url:url_json+"participantes/searchjson",
 	                data:{
 	                    term:request.term
 	                },
@@ -165,7 +167,7 @@ $(function(){
 	        
 	        //.addClass('fa fa-arrow-circle-right')
 	        .data("item.autocomplete", item)
-	        .append("<i class='fa fa-arrow-circle-right'><a href='/edis/expedientes/view/"+item.exp_id+"'><b> Exp: "+" "+item.exp +" </b>-- "+ item.nombre +" "+ item.apellidos + " (" + item.dni + ")</a></i>")
+	        .append("<i class='fa fa-arrow-circle-right'><a href='"+url_json+"expedientes/view/"+item.exp_id+"'><b> Exp: "+" "+item.exp +" </b>-- "+ item.nombre +" "+ item.apellidos + " (" + item.dni + ")</a></i>")
 	        .appendTo(ul)
 	    }; // --> Fin Buscador
 	} // END if
@@ -194,7 +196,7 @@ $(function(){
 
 			source:function(request, response){
 				$.ajax({
-					url:"/edis/participantes/searchjson",
+					url:url_json+"participantes/searchjson",
 					data:{
 						term:request.term
 					},
@@ -247,7 +249,7 @@ $(function(){
 
 		source:function(request, response){
 			$.ajax({
-				url:"/edis/participantes/searchjson",
+				url:url_json+"participantes/searchjson",
 				data:{
 					term:request.term
 				},
@@ -270,7 +272,7 @@ $(function(){
 		return $("<li style='display:block'></li>")
 		.addClass('fa fa-arrow-circle-right')
 		.data("item.autocomplete", item)
-		.append("<a href='/edis/participantes/view/"+item.id+"'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
+		.append("<a href='"+url_json+"participantes/view/"+item.id+"'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
 		.appendTo(ul)
 	}; // --> Fin Buscador
 
@@ -518,7 +520,7 @@ $(function(){
 		if (tecnico_id) {
 				$.ajax({
 					type: "POST",
-					url: "/edis/asistentecomisions/add",
+					url: url_json+"asistentecomisions/add",
 					data: datos,
 					//dataType: "json",
 					cache: false,
@@ -546,7 +548,7 @@ $(function(){
 
 				$.ajax({
 					type: "POST",
-					url: "/edis/asistentecomisions/edit/"+antiguo_secretario,
+					url: url_json+"asistentecomisions/edit/"+antiguo_secretario,
 					data: datos_viejo_secretario,
 					cache: false,
 				});	
@@ -554,7 +556,7 @@ $(function(){
 
 				$.ajax({
 					type: "POST",
-					url: "/edis/asistentecomisions/edit/"+secretario,
+					url: url_json+"asistentecomisions/edit/"+secretario,
 					data: datos_nuevo_secretario,
 					cache: false,
 					success: function() {

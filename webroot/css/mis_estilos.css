@@ -188,7 +188,7 @@ ul.msg_list li a .time {
 	background-color: #2A3F54;
 	text-transform:uppercase;
 	width: 0;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	list-style:none;
 	padding-top: 1em;
 	padding-bottom: 1em;
@@ -211,8 +211,8 @@ ul.msg_list li a .time {
 
 .ui-autocomplete li.ui-menu-item a:hover {
 	color: #fff;
-	font-size: 1.1em;
-	
+	/*font-size: 1.1em;*/
+	background-color: #12131F;
 
 }
 
@@ -223,15 +223,15 @@ ul.msg_list li a .time {
 }
 
 .ui-autocomplete li.ui-menu-item:hover {
-	margin-top: 0.8em;
-	margin-bottom: 0.8em;
+	margin-top: 0.4em;
+	margin-bottom: 0.4em;
 	background-color: rgba(252,252,252,.3);
 	/*padding-left: 1em;*/
 	padding-right: 1em;
 	padding-top: 0.4em;
 	padding-bottom: 0.4em;
-	/*margin-left: 1em;*/
-	border-radius: 10px;
+	/*margin-left: 1em;
+	border-radius: 10px;*/
 	-webkit-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
 	-moz-box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
 	box-shadow: 8px 8px 10px -3px rgba(25,25,25,.6);
@@ -449,3 +449,4 @@ table>tbody>tr.tabla-seleccionada>td {
 		0px -1px 0px rgba(000,000,000,0.7),
 		0px 1px 0px rgba(255,255,255,0.3);
 }
+

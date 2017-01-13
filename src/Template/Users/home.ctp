@@ -12,13 +12,14 @@
   			<div class="col-md-12 col-sm-12 col-xs-12">
           	<div class="row">
 	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
-	          		
-	          	<a href="/edis/comisions" title="">
-	          		<button type="button" class="btn btn button_home">
-          				<i class="fa fa-briefcase icono-titulo-fa"></i>
-	          			<h2>Gestión de Comisiones</h2>
-	          		</button>
-	          	</a>
+	         
+	          	 <?= $this->Html->link('<button type="button" class="btn btn button_home">
+					          				<i class="fa fa-briefcase icono-titulo-fa"></i>
+						          			<h2>Gestión de Comisiones</h2>
+						          		</button>', 
+	          	 		['controller'=> 'Comisions', 'action'=>'index'],['escape' => false]); ?>
+
+
 	          	</div>
 	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
 	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>

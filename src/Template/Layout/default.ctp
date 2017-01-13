@@ -17,8 +17,9 @@
         <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
             <div class="navbar nav_title" style="border: 0;">
-              
-              <a href="/edis/users/home" class="site_title"><?= $this->Html->image('escudo.svg', ['class'=> 'sidebar-logo']) ?> <span>EdisLeon</span></a>
+
+              <?= $this->Html->link($this->Html->image('escudo.svg', ['class'=> 'sidebar-logo'])."<span>  EdisLeon</span>", ['controller'=> 'Users', 'action'=>'home'],['escape' => false, 'class'=>"site_title"]); ?>
+
             </div>
 
             <div class="clearfix"></div>
