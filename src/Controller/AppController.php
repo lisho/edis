@@ -356,19 +356,32 @@ class AppController extends Controller
         $participantes_ultima_nomina = [];
         $count_nominas = [];
         $this->loadModel('Nominas');
+       
+//listamos las nóminas de esta historia social
+
         $mis_nominas = $this->Nominas->find('all', ['conditions' => [
                                 'HS' => $hs,
                             ]
                         ]);
+
+/* En caso de que exista alguna nómina para esta HS:
+**  1. Convertimos el objeto en array
+**  2. contamos las nominas de esa hs, aunque no recuerdo para qué
+**  3. escogemos sólo mi_ultima _nomina.
+**  4. sacamos la última nómna de sauss cargada en el sistema
+**
+*/
+
 
         if ($mis_nominas!=[]) {
 
             $mis_nominas_array = $mis_nominas->toArray();
             $cuentas_nomina = count($mis_nominas_array);
             $mi_ultima_nomina = end($mis_nominas_array);
+
             $ultima_nomina = $this->ultima();
             $ultima_nomina = $ultima_nomina[0];
-//debug($ultima_nomina);exit();
+
             foreach ($mis_nominas as $nomina) {
 
                 //explotamos la fecha de nómina en un array
@@ -447,11 +460,23 @@ class AppController extends Controller
         $c = 1; // Contador para restar meses buscando la ultima nómina.
         $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
         $fecha_actual = getdate();
+        //debug($fecha_actual);exit();
+        $mes_revisar = $fecha_actual['mon']-$c;
+        $year_revisar = $fecha_actual['year'];
 
         while (empty($ultima_nomina)) {
-           $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']);
-           $c++;
+
+            if ($mes_revisar<1) { // corregimos los cambios de año
+                $c = 1;
+                $mes_revisar=12;
+                $year_revisar--;
+            }
+
+            $ultima_nomina = $this->generarNomina($mes[$mes_revisar-$c], $year_revisar);
+            $c++;
+
         }
+
         return $ultima_nomina;
         $this->set(['lista_nominas'=>$ultima_nomina]);       
 

@@ -192,8 +192,18 @@
               <a data-toggle="tooltip" data-placement="top" title="Inicio de Página"  href="#body">
                 <span class="fa fa-angle-double-up" aria-hidden="true"></span>
               </a>
-              <a data-toggle="tooltip" data-placement="top" title="Logout" href="/edis/users/logout">
-                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-              </a>
+
+              <?= $this->Html->link(
+                        $this->Html->tag('span','',[
+                                      "class"=>"glyphicon glyphicon-off",
+                                      "aria-hidden"=>"true"
+                                  ]), ['controller'=>'Users', 'action'=>'logout'],
+                                  [ "data-toggle"=>"tooltip",
+                                    "data-placement"=>"top",
+                                    "title"=>"Logout",
+                                    'escape' => false]); ?>
+
+
+             
             </div>
             <!-- /menu footer buttons -->
