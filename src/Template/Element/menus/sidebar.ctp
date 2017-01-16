@@ -3,6 +3,7 @@
               <div class="menu_section">
                 <h3><?= $auth['role']; ?></h3>
                 <ul class="nav side-menu">
+                  <!--
                   <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="index.html">Dashboard</a></li>
@@ -10,6 +11,7 @@
                       <li><a href="index3.html">Dashboard3</a></li>
                     </ul>
                   </li>
+                  -->
                   <li><a><i class="fa fa-folder-open"></i> Expedientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Crear Nuevo Expediente', ['controller'=> 'Expedientes', 'action'=>'add']) ?></li>
@@ -21,7 +23,9 @@
                   <li><a><i class="fa fa-table"></i> Comisiones <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Tengo que ir a una comisión ', ['controller'=> 'Comisions', 'action'=>'index']) ?></li>
+                      <!--
                       <li><a href="tables_dynamic.html">Table Dynamic</a></li>
+                      -->
                     </ul>
                   </li>
                   <li><a><i class="fa fa-warning"></i> Avisos/Noticias <span class="fa fa-chevron-down"></span></a>
@@ -29,23 +33,27 @@
                       <li><?= $this->Html->link('Nuevo aviso o noticia', ['controller'=> 'Avisos', 'action'=>'add']) ?></li>
                       <li><? // $this->Html->link('Mis avisos o noticias', ['controller'=> 'Avisos', 'action'=>'add']) ?></li></li>
                       <li><?= $this->Html->link('Gestión de avisos y noticias', ['controller'=> 'Avisos', 'action'=>'index']) ?></li></li>
-                      <li></li>
-                      <li></li>
-                      <li></li>
                     </ul>
                   </li>
-                  <li><a><i class="fa fa-fire"></i> Reflexiones <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><?= $this->Html->link('Crear Nueva Reflexión', ['controller'=> '', 'action'=>'add']) ?></li>
-                      <li><?= $this->Html->link('Panel de Reflexiones', ['controller'=> '', 'action'=>'index']) ?></li>
-                      <li><?= $this->Html->link('Mis Reflexiones', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
-                      <li><?= $this->Html->link('Nuevo tema de reflexión', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
-                      
-                    </ul>
-                  </li>
+                  
+                  <?php if ($auth['role']=='admin'): ?>
+                      <li><a><i class="fa fa-fire"></i> Reflexiones <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                          <li><?= $this->Html->link('Crear Nueva Reflexión', ['controller'=> '', 'action'=>'add']) ?></li>
+                          <li><?= $this->Html->link('Panel de Reflexiones', ['controller'=> '', 'action'=>'index']) ?></li>
+                          <li><?= $this->Html->link('Mis Reflexiones', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
+                          <li><?= $this->Html->link('Nuevo tema de reflexión', ['controller'=> '', 'action'=>'mis_reflexiones']) ?></li>
+                          
+                        </ul>
+                      </li>   
+                  <?php endif; ?>
+                  
 <!-- ADMINISTRACION -->                  
                   <li><a><i class="fa fa-desktop"></i> Administración <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
+                        
+                    <?php if ($auth['role']=='admin'): ?>
+
                         <li><a>Equipos<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
                             <li>
@@ -101,30 +109,46 @@
                             </li>
                           </ul>
                         </li>
+
+                   <?php endif; ?>
+                                          
                         <li><a>Nóminas<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
+
+                            <li>
+                              <?= $this->Html->link('Ver Nóminas', ['controller'=> 'Nominas', 'action'=>'view']); ?>
+                            </li>
+                            <!--
+                            <li>
+                              <?= $this->Html->link('Última Nómina', ['controller'=> 'Nominas', 'action'=>'ultima']); ?>
+                            </li>
+                            -->
+                            <li>
+                              <?= $this->Html->link('Análisis de Cambios en la Última Nómina', ['controller'=> 'Nominas', 'action'=>'compara_nominas']); ?>
+                            </li>
+
+                  <?php if ($auth['role']=='admin'): ?>   
+
                             <li>
                               <?= $this->Html->link('Añadir nueva Nómina', ['controller'=> 'Nominas', 'action'=>'add']) ?>
                             </li>
                             <li>
                               <?= $this->Html->link('Añadir nuevo Listado de Suspensiones', ['controller'=> 'Suspensions', 'action'=>'add']) ?>
                             </li>
-                            <li>
-                              <?= $this->Html->link('Ver Nóminas', ['controller'=> 'Nominas', 'action'=>'view']); ?>
-                            </li>
-                            <li>
-                              <?= $this->Html->link('Última Nómina', ['controller'=> 'Nominas', 'action'=>'ultima']); ?>
-                            </li>
-                            <li>
-                              <?= $this->Html->link('Análisis de Cambios en la Última Nómina', ['controller'=> 'Nominas', 'action'=>'compara_nominas']); ?>
-                            </li>
+
+                   <?php endif; ?>
+
                           </ul>
                         </li>
                     </ul>
                   </li>
                 </ul>
               </div>
-              <div class="menu_section">
+
+
+              <?php if ($auth['role']=='admin'): ?>   
+
+              <div class="menu_section admin_menu">
                 <h3>MIGRACIONES</h3>
                 <ul class="nav side-menu">
                   <li><a><i class="fa fa-folder"></i> Migra-Expedientes <span class="fa fa-chevron-down"></span></a>
@@ -176,19 +200,25 @@
 
                   <li><a href="javascript:void(0)"><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a></li>
                 </ul>
-              </div>
+              </div> <!-- end migraciones -->
+
+              <?php endif; ?>
+
 
             </div>
             <!-- /sidebar menu -->
 
              <!-- menu footer buttons -->
             <div class="sidebar-footer hidden-small">
+
               <a data-toggle="tooltip" data-placement="top" title="Settings">
                 <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
               </a>
+
               <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"  ></span>
               </a>
+
               <a data-toggle="tooltip" data-placement="top" title="Inicio de Página"  href="#body">
                 <span class="fa fa-angle-double-up" aria-hidden="true"></span>
               </a>

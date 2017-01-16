@@ -253,7 +253,8 @@
                                                 <div class="modal-footer">
                                                     <?= $this->Form->button('Guardar cambios en el rol ->', ['class' => 'btn btn-success']) ?>
                                                     <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
-                                                
+                                                    
+                            
                                                 </div>
                                             
                                         <?= $this->Form->end() ?>
@@ -275,6 +276,10 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <?= $this->Form->button('Guardar cambios en el expediente ->', ['class' => 'btn btn-success']) ?>
                 <?= $this->Html->link(__('Cancel'), ['action'=>'view',$expediente->id],['class' => 'btn btn-primary']) ?>
+                <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa pull-right', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis), 'id' => 'borra_expediente',
+                                                                    'data-toggle'=>"popover",
+                                                                    'data-placement'=>"top",
+                                                                    'data-content'=>"¡ATENCIÓN! Si eliminas este expediente eliminarás todos los datos y usuarios asociados a él  ¡PIÉNSALO DE NUEVO!."]) ?> 
                     </div>
                 </div>
                

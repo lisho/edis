@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"year",
+				"year_revisar"
+			],
+			[
+				"mes",
+				"mes_revisar"
+			],
+			[
 				"html",
 				"html\thtml"
 			],
@@ -506,19 +514,20 @@
 			[
 				"llamados",
 				"llamados_notas"
-			],
-			[
-				"titular",
-				"titulares"
-			],
-			[
-				"clasi",
-				"clasificado"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "src/Template/Element/menus/sidebar.ctp",
+			"settings":
+			{
+				"buffer_size": 13202,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
 		{
 			"file": "webroot/js/mi_js.js",
 			"settings":
@@ -604,7 +613,6 @@
 	"expanded_folders":
 	[
 		"/opt/lampp/htdocs/edis",
-		"/opt/lampp/htdocs/edis/config",
 		"/opt/lampp/htdocs/edis/src",
 		"/opt/lampp/htdocs/edis/src/Template",
 		"/opt/lampp/htdocs/edis/src/Template/Element",
@@ -615,6 +623,8 @@
 	],
 	"file_history":
 	[
+		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
+		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Element/menus/sidebar.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/home.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
@@ -629,8 +639,6 @@
 		"/tmp/sublime-sftp-browse-1482307235/lishowebproject/gonlo/index.html",
 		"/opt/lampp/htdocs/edis/src/Controller/MigrausuariosController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/NominasController.php",
-		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
-		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Element/expedientes/expediente_alertas.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/nominas/comparar_ultima_nomina.ctp",
@@ -760,6 +768,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"$fecha_actual['mon']",
+			"ultima",
 			"edis",
 			"combots",
 			"url_json",
@@ -885,9 +895,7 @@
 			"fieldset",
 			"      \n",
 			">\n",
-			";\n",
-			"icono-fa",
-			"redi"
+			";\n"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -905,8 +913,42 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/Template/Element/menus/sidebar.ctp",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 13202,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13202,
+								13202
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1933.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -914,7 +956,7 @@
 			"sheets":
 			[
 				{
-					"buffer": 0,
+					"buffer": 1,
 					"file": "webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
@@ -942,11 +984,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
+					"buffer": 2,
 					"file": "webroot/css/mis_estilos.css",
 					"semi_transient": false,
 					"settings":
@@ -974,11 +1016,11 @@
 						"translation.y": 2262.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
+					"buffer": 3,
 					"file": "webroot/css/pdf.css",
 					"semi_transient": false,
 					"settings":
@@ -1007,11 +1049,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1039,7 +1081,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1073,7 +1115,7 @@
 		"cols":
 		[
 			0.0,
-			0.441472177961,
+			0.89496761869,
 			1.0
 		],
 		"rows":

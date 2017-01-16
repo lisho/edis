@@ -1,5 +1,14 @@
 jQuery(document).ready(function($) {
 
+//-->PAGINA INICIAL .
+	$('.login_content').hide();
+	$('.login_inicial button').click(function() {
+		$('.login_inicial').hide('fast', function() {
+			$('.login_content').show('fast');
+		});		
+	});
+
+// -->FIN PAGINA INICIAL
 	var url_json = "/edis/"; //raiz de url
 	
 	$(".editor").jqte(); 
@@ -572,7 +581,23 @@ $(function(){
 		return confirm (texto);
 	}
 
+//--> Sustituir dirección de expediente por la de sauss.
+	$('#cambiar_direccion').click(function() {
+		var direccion_actual = $('#direccion_actual').text();
+		var no_coincide_direccion = $('#coincide_direccion i').hasClass('error');
+		var id = $('#expediente_id').text();
+		var datos_nueva_direccion = {"id":id, "domicilio":direccion_actual}
+		$.ajax({
+			type: "POST",
+			url: url_json+"expedientes/edit/"+id,
+			data: datos_nueva_direccion,
+			cache: false,
+			success: function() {
+				location.reload();
+			}
+		});	
+	});
+
+
 }); // --> Fin ReadyDocument
-
-
 

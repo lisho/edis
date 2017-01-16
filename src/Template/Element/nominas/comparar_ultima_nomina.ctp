@@ -38,7 +38,13 @@
 		else {$coincide_numrgc = '<i class="fa fa-times error"></i>';$texto_rgc='La prestación de SAUSS <b>NO coincide</b> con la que tenemos abierta en el sistema. La correcta es :';}
 
 		if ( $datos_nominas['ultima_nomina']['DOMICILIO'] === $expediente['domicilio']) {$coincide_direccion = '<i class="fa fa-check-square success"></i>';} 
-		else {$coincide_direccion = '<i class="fa fa-times error"></i>';}
+		else {$coincide_direccion = '<button class="fa fa-share-square-o error" 
+												id="cambiar_direccion"
+												data-container="body"
+								                data-toggle="popover"
+								                data-placement="left"
+								                data-content="Sustituye la dirección del expediente por la de Sauss."
+												></button>';}
 
 		if (count($expediente->participantes) == $datos_nominas['ultima_nomina']['MIEMBROS']) { $coincide_participantes = "<td> <i>El número de usuarios adscritos a este expediente <b>coincide</b> con el expediente en SAUSS</i></td> <td class='text-right'><i class='fa fa-check-square success'></i></td>"; } 
 		else {$coincide_participantes = "<td> <i class='alert'>El número de usuarios adscritos a este expediente <b>NO coincide</b> con el del expediente en SAUSS.</i></td> <td class='text-right'><i class='fa fa-times error'></i></td>";}		
@@ -62,7 +68,7 @@
         </tr>       	
         <tr>
         	<th>DIRECCIÓN: </th>
-            <td><?= $datos_nominas['ultima_nomina']['DOMICILIO']; ?></td> <td class="text-right"><?= $coincide_direccion;?></td>
+            <td id="direccion_actual"><?= $datos_nominas['ultima_nomina']['DOMICILIO']; ?></td> <td class="text-right" id="coincide_direccion"><?= $coincide_direccion;?></td>
         </tr>
                 <tr>
         	<th>PARTICIPANTES: </th>

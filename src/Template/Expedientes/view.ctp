@@ -26,8 +26,8 @@
             <table class="vertical-table"> 
                  
                <tr>
-                    <th><?= 'Número de Expediente EDIS' ?></th>
-                    <td><?= h($expediente->numedis) ?></td>
+                    <th><?= 'Número de Expediente EDIS' ?> </th>
+                    <td><?= h($expediente->numedis) ?><span class="hidden" id="expediente_id"><?= $expediente->id; ?></span></td>
 
                 </tr>
                 <tr>
@@ -114,11 +114,13 @@
                 <br> <hr>
                 <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa']) ?> 
                 <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa']) ?> 
-                <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis), 'id' => 'borra_expediente',
+                
+                <!--
+                <?php $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis), 'id' => 'borra_expediente',
                                         'data-toggle'=>"popover",
                                         'data-placement'=>"top",
                                         'data-content'=>"¡ATENCIÓN! Si eliminas este expediente eliminarás todos los datos y usuarios asociados a él  ¡PIÉNSALO DE NUEVO!."]) ?> 
-                
+                -->
 
         </div> <!--// Fin Panel de datos de expediente-->
     </div>

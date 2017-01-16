@@ -3,10 +3,17 @@
       <a class="hiddenanchor" id="signin"></a>
 
 <?= $this->Flash->render('auth'); ?>
+      
+      <div class="login_inicial text-center">
+          <p class="">r<b>edis</b>eñándonos</p>
+          <button type="button" class="btn btn-primary">Entrar</button>
+      </div>
 
       <div class="login_wrapper">
         <div class="animate form login_form">
+
           <section class="login_content">
+           <h2 class="titulo_inicial text-center">ediSemos</h2>
             <?= $this->Form->create(); ?>
 
               <h1><?= $this->Html->image('escudo_color.svg', ['class'=> 'logo-login']) ?></h1>

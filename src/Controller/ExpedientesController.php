@@ -304,7 +304,7 @@ class ExpedientesController extends AppController
 
 
             if ($this->Expedientes->save($expediente)) {
-                $this->Flash->success(__('The expediente has been saved.'));
+                $this->Flash->success(__('Los cambios en el expediente se han completado correctamente.'));
                 
                 return $this->redirect(['action' => 'view',$id]);
                 

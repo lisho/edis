@@ -205,7 +205,7 @@ class NominasController extends AppController
 
         $this->loadModel('Suspensions');
         /* Generamos al última y la penúltima nómina*/
-
+/*
         while (empty($ultima_nomina)) {
             
             $ultima_nomina = $this->generarNomina($mes[$fecha_actual['mon']-$c], $fecha_actual['year']); 
@@ -213,6 +213,25 @@ class NominasController extends AppController
             $c++;
         }    
         
+*/
+        $mes_revisar = $fecha_actual['mon']-$c;
+        $year_revisar = $fecha_actual['year'];
+
+        while (empty($ultima_nomina)) {
+
+            if ($mes_revisar<1) { // corregimos los cambios de año
+                $c = 1;
+                $mes_revisar=12;
+                $year_revisar--;
+            }
+
+            $ultima_nomina = $this->generarNomina($mes[$mes_revisar-$c], $year_revisar);
+            $penultima_nomina = $this->generarNomina($mes[$mes_revisar-($c+1)], $year_revisar); 
+            $c++;
+
+        }
+
+
         /* Ordenamos los datos para comparar las 2 nóminas */
             $datos_penultima_nomina['nomina']= $penultima_nomina[0]['fechanomina'];
             $datos_ultima_nomina['nomina']= $ultima_nomina[0]['fechanomina'];
@@ -296,4 +315,37 @@ class NominasController extends AppController
         //debug($ultima_nomina);exit();
     }
 
+
+    /**
+     * Desplegar la última nómina
+     *
+     * @param $mes_nomina 
+     * @return array
+     * 
+     */
+
+    public function ultimaNomina()
+    {
+        $c = 1; // Contador para restar meses buscando la ultima nómina.
+        $mes = array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre");
+        $fecha_actual = getdate();
+        //debug($fecha_actual);exit();
+        $mes_revisar = $fecha_actual['mon']-$c;
+        $year_revisar = $fecha_actual['year'];
+
+        while (empty($ultima_nomina)) {
+
+            if ($mes_revisar<1) { // corregimos los cambios de año
+                $c = 1;
+                $mes_revisar=12;
+                $year_revisar--;
+            }
+
+            $ultima_nomina = $this->generarNomina($mes[$mes_revisar-$c], $year_revisar);
+            $c++;
+
+        }
+
+        $this->set(['lista_nominas'=>$ultima_nomina]);       
+    }
 }
