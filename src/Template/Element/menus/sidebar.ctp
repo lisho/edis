@@ -31,7 +31,9 @@
                   <li><a><i class="fa fa-warning"></i> Avisos/Noticias <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><?= $this->Html->link('Nuevo aviso o noticia', ['controller'=> 'Avisos', 'action'=>'add']) ?></li>
-                      <li><? // $this->Html->link('Mis avisos o noticias', ['controller'=> 'Avisos', 'action'=>'add']) ?></li></li>
+                      <!--
+                      <li><?= $this->Html->link('Mis avisos o noticias', ['controller'=> 'Avisos', 'action'=>'add']) ?></li></li>
+                      -->
                       <li><?= $this->Html->link('Gestión de avisos y noticias', ['controller'=> 'Avisos', 'action'=>'index']) ?></li></li>
                     </ul>
                   </li>

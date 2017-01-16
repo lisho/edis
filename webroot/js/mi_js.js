@@ -1,7 +1,7 @@
 jQuery(document).ready(function($) {
 
 //-->PAGINA INICIAL .
-	$('.login_content').hide();
+	//$('.login_content').hide();
 	$('.login_inicial button').click(function() {
 		$('.login_inicial').hide('fast', function() {
 			$('.login_content').show('fast');
