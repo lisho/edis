@@ -93,7 +93,15 @@ class UsersController extends AppController
 
                 // ****  Añadimos el archivo a la carpeta *******//    
                     $filename=$this->request->data['photo'];
-                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
+
+                //****** Redismensionamos las fotos *********** 
+
+                    $this->redimensionarImagen($filename['tmp_name']);
+                        
+                //***********************************
+
+//debug($filename);exit();
+                   move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
                     
 /*
                     if (!empty($this->request->data['photo']['tmp_name'])
@@ -148,8 +156,7 @@ class UsersController extends AppController
                 default:
                     # code...
                     break;
-            }
-//debug( $old_foto);exit();                      
+            }                    
 
             if (!empty($this->request->data['photo']['tmp_name'])
                     && is_uploaded_file($this->request->data['photo']['tmp_name'])) 
@@ -161,6 +168,13 @@ class UsersController extends AppController
                     }
 
                     $filename=$this->request->data['photo'];
+
+            //****** Redismensionamos las fotos *********** 
+
+            $this->redimensionarImagen($filename['tmp_name']);
+                
+            //***********************************
+                   
                     move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
                     $this->request->data['foto'] = $this->request->data['user'].$ext;
                 }
@@ -232,6 +246,5 @@ class UsersController extends AppController
     {
         return $this->redirect($this->Auth->logout());
     }
-
 
 }

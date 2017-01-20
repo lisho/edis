@@ -19,14 +19,16 @@ class AvisosController extends AppController
 
     public function avisos_urgentes()
     {
+        $hoy = date('Y-m-d');
         $this->paginate = [
             'contain' => ['Users'],
             'order' => [
                 'Avisos.created' => 'desc'],
              'conditions' => [  'Avisos.importancia' => 'alta',
-                                'Avisos.tipo' => 'aviso']
+                                'Avisos.tipo' => 'aviso',
+                                'Avisos.caduca >=' => $hoy]
         ];
-
+//debug($hoy);exit();
         $avisos_urgentes = $this->paginate($this->Avisos);
 
         return $avisos_urgentes;
@@ -119,20 +121,24 @@ class AvisosController extends AppController
     }
 
     /**
-     * View method
+     * View method peticion por ajax
      *
      * @param string|null $id Aviso id.
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
+        
+        $id = $this->request->query['id'];
         $aviso = $this->Avisos->get($id, [
             'contain' => ['Users']
         ]);
+        echo json_encode($aviso);
+        $this->autoRender = false;
 
-        $this->set('aviso', $aviso);
-        $this->set('_serialize', ['aviso']);
+
+
     }
 
     /**

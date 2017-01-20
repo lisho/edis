@@ -570,6 +570,11 @@
                             <?php foreach ($directorio as $a): ?> 
 
                                 <?php 
+
+                                if(!isset($a['extension'])){
+                                    $ext_ico = 'fa fa-file-o';
+                                }else{
+
                                     switch ($a['extension']) {
                                         case 'pdf':
                                             $ext_ico = 'fa fa-file-pdf-o text-danger';
@@ -581,10 +586,14 @@
                                         case ('doc'):
                                             $ext_ico = 'fa fa-file-word-o text-primary';
                                             break;
+                                        case (''):
+                                            $ext_ico = 'fa fa-file-o';
+                                            break;
                                         default:
                                             $ext_ico = 'fa fa-file-o';
                                             break;
                                     }
+                                }
                                 ?>
 
                                 <div class="row row_archivo">

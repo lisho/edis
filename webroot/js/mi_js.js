@@ -598,6 +598,35 @@ $(function(){
 		});	
 	});
 
+//--> MODAL view aviso / noticia
+
+	$('.ver_aviso').click(function(e) {
+		var id = $(this).attr('id');
+
+		$.ajax({
+			url:url_json+"avisos/view",
+			data:{
+				id:id
+			},
+			dataType: "json",
+			success : function(json){
+				$('#modal_ver_incidencia').modal();
+				$('h4.modal-title').text(json.tipo);
+				$('#myModalLabel').html("<strong>"+json.titulo+"</strong>");
+				
+				var fecha_created = $.datepicker.formatDate('dd-mm-yy',new Date(json.created));
+				$('#fecha_created big').text(fecha_created);
+
+				var user_logueado = json.user.id;
+				$('#creado_por').text(json.user.nombre+" "+json.user.apellidos);
+				$('.modal-body').html("<blockquote>"+json.description+"</blockquote>");
+
+				var fecha_caducidad = $.datepicker.formatDate('dd-mm-yy',new Date(json.caduca));
+				$('.modal-footer').html("<p>Fecha de caducidad:  "+fecha_caducidad+"</p>")
+			}
+		});
+	});
+
 
 }); // --> Fin ReadyDocument
 

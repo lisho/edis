@@ -21,9 +21,9 @@
 
             <div class="row">
                 <?php foreach ($avisos_urgentes as $aviso): ?>
-                
-                <div class="col-md-4 col-xs-12 widget widget_tally_box">
-                    <div class="x_panel ui-ribbon-container fixed_height_390">
+
+                <div class="col-md-4 col-xs-12 widget widget_tally_box fixed_height">
+                    <div class="x_panel ui-ribbon-container ">
                         <div class="ui-ribbon-wrapper">
                             <div class="ui-ribbon importancia-<?= $aviso['importancia'];?>">
                               <?= strtoupper($aviso['tipo']);?>
@@ -35,7 +35,8 @@
                                     <?= $this->Html->image('user_fotos/'.$aviso['user']['foto'], ['class'=> 'img-circle profile_img']) ?>           
                                 </div>
                                 <div class="col-lg-8 botonera-avisos">
-                                    <?= $this->Html->link('', ['action' => 'view', $aviso->id], ['class'=> 'btn btn-xs btn-dark fa fa-eye']) ?>
+
+                                    <?= $this->Html->link('', '#', ['class'=> 'ver_aviso modal-btn btn btn-xs btn-dark fa fa-eye', 'id' => $aviso->id]) ?>
 
                                 <?php if ($aviso['user_id']=== $auth['id'] || $auth['role']==='admin'): ?>
                                                
@@ -54,11 +55,13 @@
                             <p><?= $this->Time->format($aviso->modified, "dd/MM/yyyy", null) ?></p>
                             <div class="divider"></div>
 
-                            <p><?= $aviso['description'];?></p>
+                            <!-- <p><?= $aviso['description'];?></p> -->
 
                         </div>
                     </div>
                 </div>
+
+
                 <?php endforeach; ?>
 
             </div>
@@ -153,7 +156,7 @@
                                 <td><?= $aviso->user->user ?></td>
                                 <td>  
                                            
-                                    <?= $this->Html->link('', ['action' => 'view', $aviso->id], ['class'=> 'btn btn-xs btn-dark fa fa-eye']) ?>
+                                    <?= $this->Html->link('', '#', ['class'=> 'ver_aviso modal-btn btn btn-xs btn-dark fa fa-eye', 'id' => $aviso->id]) ?>
 
                                     <?php if ($aviso['user_id']=== $auth['id'] || $auth['role']==='admin'): ?>                 
                                         <?= $this->Html->link('', ['action' => 'edit', $aviso->id], ['class'=> 'btn btn-xs btn-info fa fa-edit']) ?>
@@ -235,7 +238,7 @@
                                 
                                 <td>  
                                            
-                                    <?= $this->Html->link('', ['action' => 'view', $aviso->id], ['class'=> 'btn btn-xs btn-dark fa fa-eye']) ?>
+                                    <?= $this->Html->link('', '#', ['class'=> 'ver_aviso modal-btn btn btn-xs btn-dark fa fa-eye', 'id' => $aviso->id]) ?>
 
                                     <?php if ($aviso['user_id']=== $auth['id'] || $auth['role']==='admin'): ?>                 
                                         <?= $this->Html->link('', ['action' => 'edit', $aviso->id], ['class'=> 'btn btn-xs btn-info fa fa-edit']) ?>
@@ -318,7 +321,7 @@
                                 
                                 <td>  
                                            
-                                    <?= $this->Html->link('', ['action' => 'view', $aviso->id], ['class'=> 'btn btn-xs btn-dark fa fa-eye']) ?>
+                                    <?= $this->Html->link('', '#', ['class'=> 'ver_aviso modal-btn btn btn-xs btn-dark fa fa-eye', 'id' => $aviso->id]) ?>
 
                                     <?php if ($aviso['user_id']=== $auth['id'] || $auth['role']==='admin'): ?>                 
                                         <?= $this->Html->link('', ['action' => 'edit', $aviso->id], ['class'=> 'btn btn-xs btn-info fa fa-edit']) ?>
@@ -400,7 +403,7 @@
                                 
                                 <td>  
                                            
-                                    <?= $this->Html->link('', ['action' => 'view', $aviso->id], ['class'=> 'btn btn-xs btn-dark fa fa-eye']) ?>
+                                    <?= $this->Html->link('', '#', ['class'=> 'ver_aviso modal-btn btn btn-xs btn-dark fa fa-eye', 'id' => $aviso->id]) ?>
 
                                     <?php if ($aviso['user_id']=== $auth['id'] || $auth['role']==='admin'): ?>                 
                                         <?= $this->Html->link('', ['action' => 'edit', $aviso->id], ['class'=> 'btn btn-xs btn-info fa fa-edit']) ?>
@@ -427,3 +430,26 @@
 
 </div> <!--/ row-->
 
+
+
+<!--Modal VER AVISO/NOTICIA--> 
+
+<div id="modal_ver_incidencia" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel"></h4>
+                 
+                 <h4 class="modal-title label label-warning"><strong ></strong>.</h4>
+
+                <span class="label label-success pull-right" id="fecha_created"><big></big></span>
+                <p></p>
+                <p>Publicado por: <span id="creado_por"></span></p>               
+            </div>
+            <div class="modal-body"> </div>
+
+            <div class="modal-footer"> </div>   
+        </div>
+    </div>
+</div>
