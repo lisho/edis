@@ -22,8 +22,8 @@
                     <th>CEAS </th>
                     <th>Domicilio</th>
                     <th>Creado</th>
-                    <th>Última Modificación</th>
-                    <th class="actions"><?= __('Actions') ?></th>
+                    <th>Modificado</th>
+                    <th class="actions"></th>
                 </tr>
             </thead>
             <tbody>
@@ -45,11 +45,28 @@
                     <td><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null) ?></td>
                     
                     <td class="actions">
-                        <?= $this->Html->link('', ['action' => 'view', $expediente->id], ['class'=> 'btn btn-xs btn-success fa fa-folder-open']) ?>
-                        <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit btn btn-xs btn-info']) ?>
-                     <?php if ($auth['role'] === 'admin'): ?>    
-                        <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger fa fa-trash', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->nombre)]) ?>
-                    <?php endif; ?>
+
+                        <ul class="nav">    
+                            <li class="">
+                              <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
+
+                                <span class=" fa fa-angle-down btn btn-xs btn-primary"></span>
+
+                              </a>
+                              <ul class="dropdown-menu pull-right actions ">
+
+                                    <li><?= $this->Html->link('', ['action' => 'view', $expediente->id], ['class'=> 'btn btn-xs btn-success fa fa-folder-open']) ?></li>
+                                    <li><?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit btn btn-xs btn-info']) ?></li>
+                                    <li>
+                                        <?php if ($auth['role'] === 'admin'): ?>    
+                                            <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger fa fa-trash', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->nombre)]) ?>
+                                        <?php endif; ?>       
+                                    </li>
+
+                              </ul>
+                            </li>
+                        </ul>
+
                     </td>
                 </tr>
                 <?php endforeach; ?>

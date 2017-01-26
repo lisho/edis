@@ -91,5 +91,9 @@
    
     <?= $this->element('layout_elements/scripts'); ?>
 
+    <script>
+      var url_json = '<?php echo $this->Url->build("/"); ?>' ;
+    </script>
+
 </body>
 </html>

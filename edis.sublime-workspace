@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"modal",
+				"modal-footer"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"fecha",
+				"fecha_caducidad"
+			],
+			[
+				"fun",
+				"fun\tfunction …"
+			],
+			[
 				"max",
 				"max-height"
 			],
@@ -82,10 +98,6 @@
 			[
 				"W",
 				"Where"
-			],
-			[
-				"min",
-				"min-height"
 			],
 			[
 				"datos",
@@ -174,10 +186,6 @@
 			[
 				"f",
 				"for\tfor …"
-			],
-			[
-				"fecha",
-				"fecha_actual"
 			],
 			[
 				"prestaciones",
@@ -380,10 +388,6 @@
 				"vertical-align"
 			],
 			[
-				"fun",
-				"fun\tfunction …"
-			],
-			[
 				"icono",
 				"icono-titulo-fa"
 			],
@@ -510,20 +514,16 @@
 			[
 				"lo",
 				"localStorage"
-			],
-			[
-				"num",
-				"num_candidatos"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/Controller/UsersController.php",
+			"file": "src/Template/Expedientes/view.ctp",
 			"settings":
 			{
-				"buffer_size": 7227,
+				"buffer_size": 74965,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -532,7 +532,16 @@
 			"file": "webroot/js/mi_js.js",
 			"settings":
 			{
-				"buffer_size": 17386,
+				"buffer_size": 18866,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/tmp/sublime-sftp-browse-1485336247/lishowebproject/edis/webroot/js/mi_js.js",
+			"settings":
+			{
+				"buffer_size": 17381,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -541,7 +550,7 @@
 			"file": "webroot/css/mis_estilos.css",
 			"settings":
 			{
-				"buffer_size": 7805,
+				"buffer_size": 7961,
 				"encoding": "UTF-8",
 				"line_ending": "Unix"
 			}
@@ -615,27 +624,49 @@
 		"/opt/lampp/htdocs/edis",
 		"/opt/lampp/htdocs/edis/src",
 		"/opt/lampp/htdocs/edis/src/Controller",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes"
+		"/opt/lampp/htdocs/edis/src/Model",
+		"/opt/lampp/htdocs/edis/src/Model/Table",
+		"/opt/lampp/htdocs/edis/src/Template",
+		"/opt/lampp/htdocs/edis/src/Template/Element",
+		"/opt/lampp/htdocs/edis/src/Template/Element/menus",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes",
+		"/opt/lampp/htdocs/edis/src/Template/Prestacions"
 	],
 	"file_history":
 	[
-		"/opt/lampp/htdocs/edis/src/Controller/AvisosController.php",
+		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/bower_components/bootstrap/dist/css/bootstrap.css",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/index.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/TecnicosController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/view.ctp",
-		"/tmp/sublime-sftp-browse-1484834399/lishowebproject/edis/src/Template/Participantes/view.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/AvisosController.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/InformesTable.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/UsersTable.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
+		"/opt/lampp/htdocs/edis/src/Model/Table/IncidenciasTable.php",
+		"/opt/lampp/htdocs/edis/src/Controller/InformesController.php",
+		"/opt/lampp/htdocs/edis/src/Template/Element/menus/menu_principal.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Template/Prestacions/edit.ctp",
+		"/opt/lampp/htdocs/edis/src/Controller/PrestacionsController.php",
+		"/opt/lampp/htdocs/edis/vendor/cakephp/debug_kit/webroot/js/toolbar-app.js",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/index.ctp",
-		"/opt/lampp/htdocs/edis/vendor/cakephp/cakephp/src/View/Helper/FormHelper.php",
+		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
+		"/opt/lampp/htdocs/edis/vendor/cakephp/debug_kit/src/DebugPanel.php",
+		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
+		"/tmp/sublime-sftp-browse-1484945126/lishowebproject/php.ini",
+		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
+		"/home/lisho/Documentos/Migraciones base edis/redimensionar imagen\\ejecutar.php",
 		"/opt/lampp/htdocs/edis/src/Controller/ParticipantesController.php",
+		"/tmp/sublime-sftp-browse-1484834399/lishowebproject/edis/src/Template/Participantes/view.ctp",
+		"/opt/lampp/htdocs/edis/vendor/cakephp/cakephp/src/View/Helper/FormHelper.php",
 		"/opt/lampp/htdocs/edis/src/Template/Avisos/view.ctp",
 		"/home/lisho/Descargas/clariproject/webslides-master/demos/keynote.html",
 		"/home/lisho/Descargas/clariproject/webslides-master/static/js/svg-icons.js",
 		"/opt/lampp/htdocs/edis/src/Template/Element/menus/sidebar.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/nominas/comparar_ultima_nomina.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/ExpedientesController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Users/login.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/AppController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/NominasController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Element/menus/menu_principal.ctp",
 		"/opt/lampp/htdocs/edis/webroot/js/mi_js.js",
 		"/opt/lampp/htdocs/edis/src/Template/Users/home.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Layout/default.ctp",
@@ -653,7 +684,6 @@
 		"/tmp/sublime-sftp-browse-1481970101/lishowebproject/gonlo/index.html",
 		"/opt/lampp/htdocs/edis/src/Template/Comisions/pdf/acta.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Comisions/index.ctp",
-		"/opt/lampp/htdocs/edis/webroot/css/mis_estilos.css",
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/compara_nominas.ctp",
 		"/opt/lampp/htdocs/edis/vendor/cakephp/cakephp/src/View/View.php",
 		"/opt/lampp/htdocs/edis/src/Controller/ComisionsController.php",
@@ -661,10 +691,8 @@
 		"/tmp/sublime-sftp-browse-1478984309/lishowebproject/edis_leon/graficos_rgc.html",
 		"/home/lisho/Documentos/GraficosRGC",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ParticipantesTable.php",
-		"/opt/lampp/htdocs/edis/src/Model/Table/ExpedientesTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Pasacomisions/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Comisions/view.ctp",
-		"/opt/lampp/htdocs/edis/webroot/js/parsleyjs/bower_components/bootstrap/dist/css/bootstrap.css",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Expedientes/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Migraactuaciones/add.ctp",
@@ -674,7 +702,6 @@
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/index.ctp",
 		"/run/media/lisho/KINGSTON/Migraciones base edis/base vieja/usuarios/migrausuarios4.csv",
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/errores.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Expedientes/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Migraexpedientes/errores.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Migrausuarios/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/MigrausuariosTable.php",
@@ -687,13 +714,11 @@
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/ultima.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/comisiones/tablas_pasos_por_comision.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/PrestacionsController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Participantes/view.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/NominasTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Nominas/index.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Entity/Nomina.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/NominaTable.php",
-		"/opt/lampp/htdocs/edis/src/Template/Prestacions/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Model/Table/PrestacionsTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Prestacions/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Element/formularios/modal_crear_prestacion.ctp",
@@ -727,26 +752,16 @@
 		"/opt/lampp/htdocs/edis/src/Controller/PasacomisionsController.php",
 		"/opt/lampp/htdocs/edis/src/Controller/AsistentecomisionsController.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/PasacomisionsTable.php",
-		"/opt/lampp/htdocs/edis/src/Controller/TecnicosController.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/TecnicosTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/add.ctp",
 		"/opt/lampp/htdocs/edis/src/Template/Tecnicos/edit.ctp",
 		"/opt/lampp/htdocs/papis/papis/app/Controller/NotasController.php",
 		"/opt/lampp/htdocs/edis/src/Model/Table/ComisionsTable.php",
 		"/opt/lampp/htdocs/edis/src/Template/Users/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/UsersController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Incidencias/edit.ctp",
 		"/opt/lampp/htdocs/edis/src/Controller/IncidenciasController.php",
 		"/opt/lampp/htdocs/edis/src/Template/Incidencias/gestion.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Incidencias/add.ctp",
-		"/opt/lampp/htdocs/edis/src/Model/Table/IncidenciasTable.php",
-		"/opt/lampp/htdocs/edis/src/Model/Table/UsersTable.php",
-		"/opt/lampp/htdocs/edis/src/Model/Table/IncidenciatiposTable.php",
-		"/opt/lampp/htdocs/edis/src/Template/Incidenciatipos/edit.ctp",
-		"/opt/lampp/htdocs/edis/src/Controller/IncidenciatiposController.php",
-		"/opt/lampp/htdocs/edis/src/Template/Avisos/add.ctp",
-		"/opt/lampp/htdocs/edis/src/Template/Avisos/edit.ctp",
-		"/opt/lampp/htdocs/edis/webroot/js/bootstrap-datepicker.js"
+		"/opt/lampp/htdocs/edis/src/Template/Incidencias/add.ctp"
 	],
 	"find":
 	{
@@ -764,6 +779,19 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"url_json",
+			"fecha",
+			"li",
+			"aviso",
+			"ver_aviso",
+			"modal_ver",
+			"post",
+			"togg",
+			"delete",
+			"hiper",
+			"modal",
+			"max_upload",
+			"imagecopyresampled",
 			" '#'",
 			"['action' => '#']",
 			"'#'], ",
@@ -878,20 +906,7 @@
 			"img.img",
 			"font",
 			"error",
-			"months",
-			"mouth",
-			"date",
-			"datepike",
-			"nacimiento",
-			"dd",
-			"date",
-			"sorting_asc",
-			"var dni = $('#dni option:selected').text();\n\tvar id = 'dni';\n\tactualizar_datos(dni,id); ",
-			"sexo",
-			"Finish",
-			"title",
-			"print",
-			"numhs"
+			"months"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -914,19 +929,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/Controller/UsersController.php",
-					"semi_transient": true,
+					"file": "src/Template/Expedientes/view.ctp",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7227,
+						"buffer_size": 74965,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								7848,
+								7848
 							]
 						],
 						"settings":
@@ -934,21 +949,21 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"syntax": "Packages/CakePHP (tmbundle)/Syntaxes/(HTML) CakePHP.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1638.0,
+						"translation.y": 1950.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -957,15 +972,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 17386,
+						"buffer_size": 18866,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								16744,
-								16744
+								285,
+								285
 							]
 						],
 						"settings":
@@ -978,7 +993,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7444.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -986,23 +1001,58 @@
 				},
 				{
 					"buffer": 2,
-					"file": "webroot/css/mis_estilos.css",
+					"file": "/tmp/sublime-sftp-browse-1485336247/lishowebproject/edis/webroot/js/mi_js.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7805,
+						"buffer_size": 17381,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								7798,
-								7798
+								280,
+								280
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"is_remote": true,
+							"remote_loading": false,
+							"synced": true,
+							"syntax": "Packages/JavaScript/JavaScript.sublime-syntax",
+							"tmp_dir": "/tmp/sublime-sftp-browse-1485336247/lishowebproject/",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 78.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "webroot/css/mis_estilos.css",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7961,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7961,
+								7961
+							]
+						],
+						"settings":
+						{
+							"history_list_is_closing": true,
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
@@ -1010,14 +1060,14 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 5527.0,
+						"translation.y": 6222.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"file": "webroot/css/pdf.css",
 					"semi_transient": false,
 					"settings":
@@ -1046,11 +1096,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
+					"buffer": 5,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1078,7 +1128,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1112,7 +1162,7 @@
 		"cols":
 		[
 			0.0,
-			0.519343992812,
+			0.43058102762,
 			1.0
 		],
 		"rows":
@@ -1172,7 +1222,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1180,7 +1230,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 302.0,
+	"side_bar_width": 265.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

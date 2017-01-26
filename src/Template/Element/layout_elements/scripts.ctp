@@ -31,14 +31,21 @@
     <?= $this->Html->script('datatables.net-buttons-bs/js/buttons.bootstrap.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.flash.min.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.html5.min.js') ?>
+
+    <!--
     <?// $this->Html->script('parsleyjs/src/parsley.js') ?>
     <?// $this->Html->script('parsleyjs/dist/parsley.min.js') ?>
+    -->
+
     <?= $this->Html->script('jquery.smartWizard.js') ?>
     <?= $this->Html->script('datatables.net-buttons/js/buttons.print.min.js') ?>
     <?= $this->Html->script('bootstrap-datepicker.js') ?>
     <?= $this->Html->script('jq-te/jquery-te-1.4.0.min.js') ?>
-    <? // $this->Html->script('pdfmake/build/pdfmake.min.js') ?>
-    <? // $this->Html->script('pdfmake/build/vfs_fonts.js') ?>
+    
+    <!--
+    <?= $this->Html->script('pdfmake/build/pdfmake.min.js') ?>
+    <?= $this->Html->script('pdfmake/build/vfs_fonts.js') ?>
+    -->
     
     <?= $this->Html->script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js') ?>
     <?= $this->Html->script('//cdn.datatables.net/plug-ins/1.10.12/sorting/datetime-moment.js') ?>

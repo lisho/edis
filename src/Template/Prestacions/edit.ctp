@@ -163,10 +163,17 @@
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                         <?= $this->Form->button('Guardar cambios ->', ['class' => 'btn btn-success']) ?>
                         <?= $this->Html->link('Cerrar', ['controller'=>'Expedientes', 'action'=>'view', $prestacion->expediente->id],['class' => 'btn btn-primary']) ?>
+
+                        
                     </div>
                 </div>            
                
                 <?= $this->Form->end() ?>
+
+                <?= $this->Form->postLink('', ['controller'=>'Prestacions', 'action' => 'delete', $prestacion->id, $prestacion->expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa pull-right', 'confirm' => 'Realmente quieres borrar esta prestación # {0}?', 'id' => 'borra_prestacion',
+                                                                    'data-toggle'=>"popover",
+                                                                    'data-placement'=>"top",
+                                                                    'data-content'=>"Eliminar esta prestación para este expediente."]); ?> 
             </div>  
                 <!-- /Formulario --> 
         </div> 

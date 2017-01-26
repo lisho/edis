@@ -138,17 +138,20 @@ debug($prestaciones_existentes);exit();
      * @return \Cake\Network\Response|null Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id = null, $expediente_id = null)
     {
+          
         $this->request->allowMethod(['post', 'delete']);
         $prestacion = $this->Prestacions->get($id);
         if ($this->Prestacions->delete($prestacion)) {
-            $this->Flash->success(__('The prestacion has been deleted.'));
+            $this->Flash->success(__('La prestación ha sido eliminada.'));
         } else {
-            $this->Flash->error(__('The prestacion could not be deleted. Please, try again.'));
+            $this->Flash->error(__('La prestación ha no ha podido ser eliminada.Por favor inténtalo de nuevo.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        //return $this->redirect(['action' => 'index']);
+        //return $this->redirect($this->referer());
+        return $this->redirect(['controller'=>'Expedientes', 'action' => 'view', $expediente_id]);
     }
 
     public function cerrarPrestacion($id=null, $mensaje=null)

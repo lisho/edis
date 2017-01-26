@@ -89,13 +89,17 @@
                                     <td><?= $roles->tecnico->nombre.' '.$roles->tecnico->apellidos ?></td>
                                     <td><?= h($r) ?></td>
                                     <td><?= h($roles->observaciones) ?></td>
-                                    <?php if ($auth['role'] === 'admin'): ?>
+                                    
                                          <td class="actions">
-                                            <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'view', $roles->id], ['class'=> 'fa fa-eye text-primary icono-tabla-fa']) ?>
+                                            <?= $this->Html->link('', '#', ['class'=> 'fa fa-eye text-primary icono-tabla-fa ver_tecnico', 'id' => $roles->tecnico_id]) ?>
+                                            <!--
                                             <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'edit', $roles->id], ['class'=> 'fa fa-edit text-info icono-tabla-fa']) ?>
-                                            <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                                            -->
+                                            <?php if ($auth['role'] === 'admin'): ?>
+                                                <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                                            <?php endif; ?>
                                         </td>      
-                                    <?php endif; ?>
+                                
                                     
                                 </tr> 
                                 <?php endforeach; ?> 
@@ -124,6 +128,27 @@
 
         </div> <!--// Fin Panel de datos de expediente-->
     </div>
+
+            <!--// Inicio Modal_ver_tecnico-->
+
+                <div id="modal_ver_tecnico" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="myModalLabelTecnico"></h3>
+                            </div>
+                            <div class="modal-body modal-body-tecnico"></div>
+
+                            <div class="modal-footer modal-footer-tecnico"></div>   
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+<!--// Inicio Panel Nómina de expediente-->
 
     <div class="x_panel" id="nomina"> <!--/ Panel de NOMINAS-->
         <div class="x_title"> 
@@ -430,7 +455,7 @@
                           </div>
                         </li>
 
-                        <!-- Modal -->
+                        <!-- Modal Ver Incidencia-->
 
                         <div id="modal_ver_incidencia_<?= $incidencia->id;?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">

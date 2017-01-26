@@ -475,3 +475,19 @@ table>tbody>tr.tabla-seleccionada>td {
 .fixed_height {
 	height: 180px;
 }
+
+.nav>li>a.menu_tabla{
+	padding: 0px;
+	text-align: center;
+}
+
+ul.actions{
+	min-width: 0px;
+
+}
+
+.actions>li>a {
+	color: #fff;
+	padding: 5px;
+	margin: 2px;
+}

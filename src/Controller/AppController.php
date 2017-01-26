@@ -559,5 +559,4 @@ class AppController extends Controller
         imagejpeg($tmp,$rutaImagenOriginal,$calidad);
     }
 
-
 }

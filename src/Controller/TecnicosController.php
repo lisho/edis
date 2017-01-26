@@ -34,14 +34,17 @@ class TecnicosController extends AppController
      * @return \Cake\Network\Response|null
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view()
     {
+        $id = $this->request->query['id'];
         $tecnico = $this->Tecnicos->get($id, [
-            'contain' => ['Equipos', 'Roles']
+            'contain' => ['Equipos']
         ]);
 
-        $this->set('tecnico', $tecnico);
-        $this->set('_serialize', ['tecnico']);
+        //$this->set('tecnico', $tecnico);
+        //$this->set('_serialize', ['tecnico']);
+        echo json_encode($tecnico);
+        $this->autoRender = false;
     }
 
     /**

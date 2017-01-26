@@ -9,7 +9,10 @@ jQuery(document).ready(function($) {
 	});
 
 // -->FIN PAGINA INICIAL
-	var url_json = "/edis/"; //raiz de url
+
+	//var url_json = "/edis/"; //raiz de url
+	//pasamos la raiz de la URL desde default.ctp
+
 	
 	$(".editor").jqte(); 
 	
@@ -610,19 +613,75 @@ $(function(){
 			},
 			dataType: "json",
 			success : function(json){
+
+				var importancia = json.importancia;
+				var label;
+
+				switch (importancia){
+					case "alta":
+						label = "label-danger";
+						break;
+					case "media":
+						label = "label-warning";
+						break;
+					case "baja":
+						label = "label-success";
+						break;
+				}
+
 				$('#modal_ver_incidencia').modal();
-				$('h4.modal-title').text(json.tipo);
+				$('#etiqueta').attr('class', 'modal-title label '+label);
+				$('h4.modal-title').html('<big>'+json.tipo+'</big>');
+
 				$('#myModalLabel').html("<strong>"+json.titulo+"</strong>");
 				
-				var fecha_created = $.datepicker.formatDate('dd-mm-yy',new Date(json.created));
+				var fecha_created = $.datepicker.formatDate('dd/mm/yy',new Date(json.created));
 				$('#fecha_created big').text(fecha_created);
 
 				var user_logueado = json.user.id;
 				$('#creado_por').text(json.user.nombre+" "+json.user.apellidos);
 				$('.modal-body').html("<blockquote>"+json.description+"</blockquote>");
 
-				var fecha_caducidad = $.datepicker.formatDate('dd-mm-yy',new Date(json.caduca));
-				$('.modal-footer').html("<p>Fecha de caducidad:  "+fecha_caducidad+"</p>")
+				var fecha_caducidad = $.datepicker.formatDate('dd/mm/yy',new Date(json.caduca));
+				var fecha_actual = $.datepicker.formatDate('dd/mm/yy',new Date());
+
+				if (fecha_actual<fecha_caducidad) {
+					$('.modal-footer').html("<p>CADUCADO</p>");
+				}else{
+					$('.modal-footer').html("<p>Fecha de caducidad:  "+fecha_caducidad+"</p>");
+				}
+
+			}
+		});
+	});
+
+//--> MODAL view técnico
+
+	$('.ver_tecnico').click(function(e) {
+		var id = $(this).attr('id');
+
+		$.ajax({
+			url:url_json+"tecnicos/view",
+			data:{
+				id:id
+			},
+			dataType: "json",
+			success : function(json){
+
+				var tecnico = json.nombre+" "+json.apellidos;
+				var puesto = json.puesto;
+				var equipo = json.equipo.nombre;
+				var email = json.email;
+				var telefono = json.telefono;
+
+				$('#modal_ver_tecnico').modal();
+				$('#myModalLabelTecnico').html("<strong><i class='fa fa-user'></i>  "+tecnico+"</strong>");
+				$('.modal-body-tecnico').html(
+					"<h4>"+puesto+"</h4><hr>"
+					+"<h4>Contacto:</h4>"
+					+"<p><i class='fa fa-envelope-square'></i>  <strong><a href='mail:"+email+"'>"+email+"</a></strong></p>"
+					+"<p><i class='fa fa-phone-square'></i>  <strong>"+telefono+"</strong></p>");
+				$('.modal-footer-tecnico').html("<p>Equipo de referencia:  <big><strong>"+equipo+"</strong></big></p>");
 			}
 		});
 	});

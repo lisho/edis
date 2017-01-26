@@ -51,7 +51,8 @@
                 <?php foreach ($ultimos_avisos as $aviso): ?>
 
                   <li>
-                    <a href="/edis/avisos/view/<?= $aviso['id']; ?>">
+
+                    <a href="#">
 
                       <span class="image"><?= $this->Html->image('user_fotos/'.$aviso['user']['foto'], ['class'=> '']); ?></span>
                       <span class="importancia-<?= $aviso['importancia'];?>">
@@ -67,16 +68,15 @@
                       <?= $aviso['description'];?>
                     </span>
                     </a>
+
                   </li>
                   
                 <?php endforeach ?>
                 
                 <li>
                   <div class="text-center">
-                    <a href="/edis/avisos">
-                      <strong>Ver todos los avisos y noticias</strong>
-                      <i class="fa fa-angle-right"></i>
-                    </a>
+
+                  <?= $this->Html->link('<strong>Ver todos los avisos y noticias</strong><i class="fa fa-angle-right"></i>',['controller'=>'avisos'],['escape' => false]);?>
                   </div>
                 </li>
               </ul>

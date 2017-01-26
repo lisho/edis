@@ -441,7 +441,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel"></h4>
                  
-                 <h4 class="modal-title label label-warning"><strong ></strong>.</h4>
+                 <h4 id="etiqueta"><strong ></strong></h4>
 
                 <span class="label label-success pull-right" id="fecha_created"><big></big></span>
                 <p></p>
