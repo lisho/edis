@@ -142,8 +142,7 @@ class UsersController extends AppController
         ]);
 
         $old_foto=$user['foto'];
-        //debug($fotos);exit();
-
+        
         if ($this->request->is(['patch', 'post', 'put'])) {
 
             switch ($this->request->data['photo']['type']) {
@@ -157,7 +156,7 @@ class UsersController extends AppController
                     # code...
                     break;
             }                    
-
+//debug($this->request->data['photo']);exit(); 
             if (!empty($this->request->data['photo']['tmp_name'])
                     && is_uploaded_file($this->request->data['photo']['tmp_name'])) 
                 {
@@ -172,11 +171,12 @@ class UsersController extends AppController
             //****** Redismensionamos las fotos *********** 
 
             $this->redimensionarImagen($filename['tmp_name']);
-                
+              
             //***********************************
                    
-                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $user['user'].$ext);
-                    $this->request->data['foto'] = $this->request->data['user'].$ext;
+                    move_uploaded_file($filename['tmp_name'], IMAGES.'user_fotos/'. DS . $this->request->data['photo']['size'].$ext);
+                    $this->request->data['foto'] = $this->request->data['photo']['size'].$ext;
+                     
                 }
 
             

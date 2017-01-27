@@ -62,7 +62,7 @@ class ComisionsController extends AppController
         */
 
         $listado_ceas = $this->listadoEquipo('CEAS');
-        $secretario='';
+        $secretario=[];
         $posibles_secretarios=[];
 
         /*

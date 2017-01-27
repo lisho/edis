@@ -433,6 +433,7 @@ var comision_id = '<?php echo $comision['id']; ?>';
 <!-- Pasamos el valor de la variable antiguo_secretario para el ajax-->
 <?php if (!empty($secretario)): ?>
     <script>
+        var antiguo_secretario;
         var antiguo_secretario = '<?php echo key($secretario); ?>';
     </script>       
 <?php endif; ?>
