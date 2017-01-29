@@ -1,5 +1,6 @@
 jQuery(document).ready(function($) {
 
+
 //-->PAGINA INICIAL .
 	//$('.login_content').hide();
 	$('.login_inicial button').click(function() {
@@ -12,6 +13,13 @@ jQuery(document).ready(function($) {
 
 	//var url_json = "/edis/"; //raiz de url
 	//pasamos la raiz de la URL desde default.ctp
+
+// --> Comisiones de AUS
+
+	if (typeof tipo_comision!== 'undefined' && tipo_comision=="aus") {
+		$('#paso_motivo, #paso_clasificacion, #paso_documentacion').addClass('hidden');
+	}
+
 
 	
 	$(".editor").jqte(); 

@@ -18,6 +18,9 @@ class ComisionsController extends AppController
      */
     public function index()
     {
+        $this->paginate = [
+            'order'=>['fecha'=>'DESC']
+        ];
         $comisions = $this->paginate($this->Comisions);
         $ultimas_comisiones = $this->Comisions->find('all',['contain' => 'Pasacomisions', 'order'=>'fecha DESC' ,'limit'=>4]);
 

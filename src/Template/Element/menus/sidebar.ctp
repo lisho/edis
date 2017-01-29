@@ -14,10 +14,10 @@
                   -->
                   <li><a><i class="fa fa-folder-open"></i> Expedientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><?= $this->Html->link('Crear Nuevo Expediente', ['controller'=> 'Expedientes', 'action'=>'add']) ?></li>
+                      
                       <li><?= $this->Html->link('Listado de Expedientes', ['controller'=> 'Expedientes', 'action'=>'index']) ?></li>
                       <li><?= $this->Html->link('Mis Expedientes', ['controller'=> 'Roles', 'action'=>'mis_roles']) ?></li>
-                      
+                      <li><?= $this->Html->link('Crear Nuevo Expediente', ['controller'=> 'Expedientes', 'action'=>'add']) ?></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Comisiones <span class="fa fa-chevron-down"></span></a>

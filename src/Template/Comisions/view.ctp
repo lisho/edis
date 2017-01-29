@@ -155,9 +155,7 @@
 
 <!-- // PANEL DERECHO - Expedientes por CEAS --> 
 
-<div class="col-md-9 col-sm-8 col-xs-12">
-
-    
+<div class="col-md-9 col-sm-8 col-xs-12">   
 
     <div class="x_panel">
         <div class="x_title">
@@ -184,28 +182,47 @@
                                     <thead>
                                         <tr>
                                             <th>Mot.</th>
-                                            <th>Clas.</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Clas.</th>       
+                                            <?php endif; ?>
                                             <th>Exp.</th>
                                             <th>HS</th>
-                                            <th>Pres. RGC</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Pres. RGC</th>
+                                            <?php elseif ($comision->tipo=="AUS"): ?>                                                       
+                                                 <th>Pres. AUS</th>
+                                            <?php endif; ?>
                                             <th>Deriv</th>
                                             <th>Titular Pres.</th>
                                             <th>Observ.</th>
-                                            <th>Docum.</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Docum.</th>       
+                                            <?php endif; ?>
                                             <th></th>
-                                            <th></th>
+                                            
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($ceas as $pasacomision): ?>
 
+                                            <?php if ($comision['tipo'] == "RGC"): ?>
 
-                                            <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
-                                                                                                            'pasacomision' => $pasacomision,
-                                                                                                            'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                                            'modificador' => 'todos_'
-                                                                                                        ])?>
+                                                <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
+                                                                                    'pasacomision' => $pasacomision,
+                                                                                    'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                    'modificador' => 'ceas_'
+                                                                                ])?>
+
+                                            <?php elseif ($comision['tipo'] == "AUS"): ?>
+                                                 
+                                                <?= $this->element ('comisiones/tablas_pasos_por_comision_aus', [   
+                                                                                    'pasacomision' => $pasacomision,
+                                                                                    'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                    'modificador' => 'ceas_'
+                                                                                ])?>
+
+                                            <?php endif ?>
 
                                         <?php endforeach ?>
 
@@ -229,23 +246,33 @@
                                     <thead>
                                         <tr>
                                             <th>Mot.</th>
-                                            <th>Clas.</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Clas.</th>       
+                                            <?php endif; ?>
                                             <th>Exp.</th>
                                             <th>HS</th>
-                                            <th>Pres. RGC</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Pres. RGC</th>
+                                            <?php elseif ($comision->tipo=="AUS"): ?>                                                       
+                                                 <th>Pres. AUS</th>
+                                            <?php endif; ?>
+                                            
                                             <th>Deriv</th>
                                             <th>Titular Pres.</th>
                                             <th>Observ.</th>
-                                            <th>Docum.</th>
+                                            <?php if ($comision->tipo=="RGC"): ?>
+                                                <th>Docum.</th>       
+                                            <?php endif; ?>
+                                            
                                             <th></th>
-                                            <th></th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
                                         
                                         <?php foreach ($comision->pasacomisions as $pasacomision): ?>
 
-                                            <?php if ($pasacomision->expediente->ceas==$key): ?>
+                                            <?php if ($pasacomision->expediente->ceas==$key && $comision['tipo'] == "RGC"): ?>
 
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                     'pasacomision' => $pasacomision,
@@ -253,7 +280,16 @@
                                                                                     'modificador' => 'ceas_'
                                                                                 ])?>
 
+                                            <?php elseif ($pasacomision->expediente->ceas==$key && $comision['tipo'] == "AUS"): ?>
+                                                 
+                                                <?= $this->element ('comisiones/tablas_pasos_por_comision_aus', [   
+                                                                                    'pasacomision' => $pasacomision,
+                                                                                    'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
+                                                                                    'modificador' => 'ceas_'
+                                                                                ])?>
+
                                             <?php endif ?>
+
                                         <?php endforeach ?>
 
                                     </tbody>
@@ -306,11 +342,7 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="form-group has-feedback">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Motivo del paso por comisión: <span class="required">*</span></label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-
+              
                             <?= $this->Form->input('pasacomision.comision_id', [
                                                 'type'=>'hidden',
                                                 'value' => $comision->id
@@ -322,6 +354,24 @@
                                                 'id' => 'campo_expediente'
                                             ]);
                                     ?> 
+
+
+        <?php if ($comision->tipo=='AUS'): ?> <!-- Sólo en caso de ser una comision de AUS pasamos la variable para mi_js.js-->
+
+            <script>
+                var tipo_comision = "aus";
+            </script>
+
+        <?php elseif ($comision->tipo=='RGC'): ?>
+            <script>
+                var tipo_comision = "rgc";
+            </script>
+        <?php endif; ?>
+
+                <div class="row" id="paso_motivo">
+                    <div class="form-group has-feedback">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Motivo del paso por comisión: <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
 
                             <?= $this->Form->imput(
                                         'pasacomision.motivo',
@@ -344,12 +394,12 @@
 
                                     );
                                 ?> 
-
+                      
                         </div>
                     </div>
                 </div>
-
-                <div class="row">
+                                 
+                <div class="row" id="paso_clasificacion">
                     <div class="form-group">
 
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Clasificación: <span class="required">*</span></label>
@@ -378,7 +428,7 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" id="paso_documentacion">
                     <div class="form-group">
                     <label class="control-label col-md-3 col-sm-3 col-xs-12">Documentación que se adjunta: <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">

@@ -73,7 +73,7 @@
 		
 
 		if ($prestacion->prestaciontipo->tipo === 'AUS' && $prestacion->prestacionestado->estado === 'Abierta'){
-			$coincide_aus_alert = '<span class="badge bg-green">AUS</span><i class="fa fa-euro text-success text-sombra-blanca"></i>$prestacion->numprestacion';
+			$coincide_aus_alert = '<span class="badge bg-green">AUS</span><i class="fa fa-euro text-success text-sombra-blanca"></i>'.$prestacion->numprestacion;
 			$mensaje_aus = 'Este expediente tiene abierta una prestación de AUS.';
 		}
 		

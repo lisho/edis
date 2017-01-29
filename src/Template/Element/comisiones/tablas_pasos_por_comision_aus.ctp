@@ -1,12 +1,11 @@
 
     <tr>
-        <td><?= $pasacomision->motivo; ?></td>
-        <td><?= $pasacomision->clasificacion; ?></td>   
+        <td><?= "AUS"; ?></td>
         <td><strong><?= $this->Html->link($pasacomision->expediente->numedis, ['controller'=>'Expedientes', 'action'=>'view', $pasacomision->expediente->id], ['target' => '_blank']); ?></strong></td>
         <td><?= $pasacomision->expediente->numhs; ?></td>   
         <td>
             
-            <?php $p = 'no'; ?> <!-- Partimos de que no existe prestación abierta de RGC -->
+            <?php $p = 'no'; ?> <!-- Partimos de que no existe prestación abierta de AUS -->
             <?php $atfis = 'no'; ?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
             <?php $atfis_num = 0; ?>
             <?php $titular = ''; ?> 
@@ -19,15 +18,15 @@
 
                     <?php endif; ?>
 
-                    <?php if ($prestacion->prestaciontipo->tipo === 'RGC' && $prestacion->cierre === null): ?>
-                        <?php $p = 'si'; ?> <!-- Recogemos la existencia de una prestación abierta de RGC -->
+                    <?php if ($prestacion->prestaciontipo->tipo === 'AUS' && $prestacion->cierre === null): ?>
+                        <?php $p = 'si'; ?> <!-- Recogemos la existencia de una prestación abierta de AUS -->
 
                          <!-- No está en nomina - codigo de color ?? -->
                         <?php if ($prestacion->prestacionestado->estado === 'Pendiente de cobro'){ $btn = ' btn-warning ';} else if ($prestacion->prestacionestado->estado === 'Abierta') {$btn = ' btn-success ';} ?>
 
 
-                        <?php $titular = $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?> <!-- Recogemos el nombre de la prestación de RGC -->
-                        <!-- Existe Prestacion RGC sin cerrar ?? -->
+                        <?php $titular = $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?> <!-- Recogemos el nombre de la prestación de AUS -->
+                        <!-- Existe Prestacion AUS sin cerrar ?? -->
 
                             <p>
                                 <?= $this->Html->link(' '.$prestacion->numprestacion, '#', [     
@@ -116,7 +115,7 @@
                 
                 <?php if ($p==='no'): ?>
            
-                    <?= $this->Html->link('+ RGC', '#', [     
+                    <?= $this->Html->link('+ AUS', '#', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
                                         'id'=>$modificador.'crear_prestacion_rgc'.$pasacomision->id,
                                         //'data-expediente' => $pasacomision->expediente->id,
@@ -134,14 +133,13 @@
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                                    <h4 class="modal-title" id="myModalLabel">Añade una nueva Prestación de <strong>RGC</strong> a este expediente <strong><?= $pasacomision->expediente['numedis']?></strong></h4>
+                                    <h4 class="modal-title" id="myModalLabel">Añade una nueva Prestación de <strong>AUS</strong> a este expediente <strong><?= $pasacomision->expediente['numedis']?></strong></h4>
                                 </div>
                                 <div class="modal-body">
-                                    <p>Cada paso por comisión necesita una prestación de RGC de referencia. Si no existe en nuestro sistema debemos crearla...</p>
+                                    <p>Cada paso por comisión necesita una prestación de AUS de referencia. Si no existe en nuestro sistema debemos crearla...</p>
                                     <p>Por defecto, crearemos una nueva prestación asumiendo los siguientes datos (si alguno no es correcto deberás cambiarlo una vez creada la prestación):</p>
 
-                                    <?php if($pasacomision->motivo === 'INI'){$p_estado = 1; }
-                                            else {$p_estado = 5;} ?>
+                                    <?php $p_estado = 5; ?>  <!-- Adjudicamos por defecto a la prestación el estado de abierta -->
 
                                     <ul>
                                         <li><strong>Estado de la prestación: </strong><?= $estados_comision[$p_estado]; ?></li>
@@ -163,7 +161,7 @@
                                     <?php
                                         echo $this->Form->input('prestacions.prestaciontipo_id', [
                                                 'type' => 'hidden',
-                                                'value' => 3,
+                                                'value' => 2,
                                                 'label' => ['text' => '']
                                             ]);
                                     ?> 
@@ -277,6 +275,8 @@
         </td>
         <td class="text-uppercase"><?= $titular; ?></td>  
         <td><?= $pasacomision->observaciones; ?></td>   
+        
+<!--
         <td>
             <?php if ($pasacomision->informeedis==1){echo '<span class="label label-warning">IE</span>';}
                     else{echo '<span class="label label-default">IE</span>';} ?>
@@ -285,10 +285,13 @@
                     else{echo '<span class="label label-default">D</span>';} ?>
 
         </td>  
+-->        
+
         <td>
             <?= $this->Html->link('', ['controller' =>'Pasacomisions','action' => 'edit', $pasacomision->id], ['class'=> 'fa fa-edit']) ?> 
             <?= $this->Form->postLink('', ['controller' =>'Pasacomisions', 'action' => 'delete', $pasacomision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar este expediente de esta comisión?']); ?> 
 
         </td> 
-
+    
+ 
     </tr>      
