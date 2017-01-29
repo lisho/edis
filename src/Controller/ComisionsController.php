@@ -8,8 +8,7 @@ use App\Controller\AppController;
  *
  * @property \App\Model\Table\ComisionsTable $Comisions
  */
-class ComisionsController extends AppController
-{
+class ComisionsController extends AppController{
 
     /**
      * Index method
@@ -85,7 +84,7 @@ class ComisionsController extends AppController
         if ($this->request->is('post')) {
                     if (isset($this->request->data['prestacions'])) {
                         $data = $this->request->data['prestacions'];
-                        ExpedientesController::addPrestacion($data,$data['expediente_id'],$nueva_prestacion);
+                        $this->addPrestacion($data,$data['expediente_id'],$nueva_prestacion);
                     }
                     elseif (isset($this->request->data['pasacomision'])) {
                         $data = $this->request->data['pasacomision'];

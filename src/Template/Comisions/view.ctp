@@ -148,7 +148,11 @@
 
 
     </div>
-<?= $this->Html->link(__('  Crear el acta'), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'btn btn-default fa fa-file-pdf-o', 'target' => '_blank']); ?>
+
+<?php if ($comision->tipo == "RGC"): ?>
+      <?= $this->Html->link(__('  Crear el acta'), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'btn btn-default fa fa-file-pdf-o', 'target' => '_blank']); ?>     
+<?php endif; ?>
+
            
 
 </div>  <!-- // FIN columna izquierda -->   

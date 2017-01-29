@@ -451,48 +451,7 @@ class ExpedientesController extends AppController
 
     }
 
-    /**
-     * AddIncidencia method
-     *
-     * Crea una nueva incidencia asociada a este expediente.
-     *
-     * Necesitamos pasarle:
-     *  1. Array con los datos del expediente, al menos id y numedis
-     *  2. Array con el request->data del formulario.
-     *   Redirecciona a la vista del expediente.
-     */
-    public function addPrestacion($data,$expediente,$nueva_prestacion)
-    {
-        
-        $cachos_fecha = preg_split("/[\/]+/", $data['apertura']);
-        $data['id']='';
-        
-        if (!isset($data['expediente_id'])) {
-            $data['expediente_id']=$expediente->id;
-        } 
-        
-            if ( $data['apertura']!='') {
-                 $data['apertura']=array(
-                                'year'=>$cachos_fecha[2],
-                                'month'=>$cachos_fecha[1],
-                                'day' =>$cachos_fecha[0] 
-                        );
-            }
-       
-        $nueva_prestacion = $this->Prestacions->patchEntity($nueva_prestacion, $data);    
-        //debug($nueva_prestacion);exit();
 
-        if ($this->Prestacions->save($nueva_prestacion)) {
-            $this->Flash->success('Se ha añadido correctamente una nueva prestación a este expediente');
-            
-            //return $this->redirect(['action' => 'view',$expediente['id']]);
-            return $this->redirect($this->referer());
-            
-        } else {
-            $this->Flash->error(__('Lo siento. No ha sido posible crear una nueva prestación asociada a este expediente. Por favor revisa los datos.'));
-        }
-
-    }
 
     /**
      * AddArchivos method
