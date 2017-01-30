@@ -151,9 +151,8 @@
 
 <?php if ($comision->tipo == "RGC"): ?>
       <?= $this->Html->link(__('  Crear el acta'), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'btn btn-default fa fa-file-pdf-o', 'target' => '_blank']); ?>     
-<?php endif; ?>
-
-           
+      <?= $this->Html->link('  Validar el acta', ['action' => 'valida', $comision->id], ['class'=>'btn btn-default fa fa-file-pdf-o']); ?> 
+<?php endif; ?>           
 
 </div>  <!-- // FIN columna izquierda -->   
 

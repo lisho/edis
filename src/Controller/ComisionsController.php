@@ -243,7 +243,13 @@ class ComisionsController extends AppController{
                     
     }
 
-    public function acta($id=null)
+    /************************************************************
+    **
+    ** ACIONES CON ACTAS
+    **
+    *************************************************************/
+
+    public function acta($id=null, $validar=null)
     {
         
         $listado_ceas = $this->listadoEquipo('CEAS');
@@ -291,12 +297,42 @@ class ComisionsController extends AppController{
                     'filename' => 'acta_'.$id.'pdf'
                 ]
             ]);
+
+        //$this->file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
+
         $logo= IMAGES."logo_concejalia.png";
         //$acta_completa = $file = new File(APP_DIR.'/Template/Comisions/pdf/acta.ctp');
-        //file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
+        
 //debug($comision);exit();
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'logo', 'el_secretario'));
+        $datos_acta = $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'logo', 'el_secretario'));
+        if ($validar=="validar") {
+            return $datos_acta;
+        }
+
         $this->set('_serialize', ['comision']);
+    }
+
+
+
+    public function valida($id=null)
+    {
+
+            $CakePdf = new \CakePdf\Pdf\CakePdf();
+            $CakePdf->templatePath('Comisions/pdf');
+            $CakePdf->template('acta', 'default');
+            $CakePdf->viewVars($this->acta($id,"validar")->viewVars);
+            //debug($this->acta($id,"validar")->viewVars['comision']['fecha']->i18nFormat("dd-MM-yyyy"));exit();
+            // Get the PDF string returned
+            //$pdf = $CakePdf->output();
+            // Or write it to file directly
+            $fecha_acta = $this->acta($id,"validar")->viewVars['comision']['fecha']->i18nFormat("dd-MM-yyyy");
+            //ebug($fecha_acta);exit();
+
+            $nombre_archivo = $this->acta($id,"validar")->viewVars['comision']['tipo']."_".$fecha_acta;
+            $pdf = $CakePdf->write(DOCS.'actas' . DS . $nombre_archivo.'.pdf');
+            
+            return $this->redirect($this->referer());
+            $this->autoRender = false;
     }
 
 }

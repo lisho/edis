@@ -435,7 +435,7 @@
 
                             <div class="tags">
                               <a  class= "tag">
-                                <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yyyy", null); ?></strong></span>
+                                <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yy", null); ?></strong></span>
                               </a>
                               <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
                             </div>

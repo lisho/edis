@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <?= $this->Html->charset() ?>
+    <!-- <?= $this->Html->charset() ?> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>
-        <?// $this->fetch('title') ?>
+        <!-- <?= $this->fetch('title') ?> -->
     </title>
-    <!-- Bootstrap -->
+    <!-- <?= $this->Html->css('pdf.css', ['fullBase' => true]) ?> -->
     
-    <?= $this->Html->css('pdf.css', ['fullBase' => true]) ?>
-
+    <link rel="stylesheet" href="<?= CSS; ?>pdf.css" />
+    
 </head>
 <body>
     <div class="header">
         <table class="table">
             <tr>
-                <td id="td1"><img src="/opt/lampp/htdocs/edis/webroot/img/logo_concejalia.jpg" alt="" class="logo_pdf">
+                <td id="td1">
+
+                <img src="<?= IMAGES; ?>logo_concejalia.jpg" alt="" class="logo_pdf">
+
+                
                 <p>CONCEJALIA DE FAMILIA Y SERVICIOS SOCIALES</p>
                 </td>
 
-                <td id="td2"><img src="/opt/lampp/htdocs/edis/webroot/img/leon_cuna.jpg" alt="" class="logo_pdf">
+                <td id="td2"><img src="<?= IMAGES; ?>leon_cuna.jpg" alt="" class="logo_pdf">
                 </td>
 
             </tr>
