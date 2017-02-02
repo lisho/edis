@@ -1,3 +1,7 @@
+@font-face {
+    font-family: Adleit-Demo;
+    src: url('pdf-fonts/Adleit-Demo.ttf');    
+}
 
 html {
   margin: 0;
@@ -15,7 +19,7 @@ h1, h2, h3, h4 {
 h2 {
     background: #fff;
     color: #15848F;
-    font-family:'Gill Sans','lucida grande', helvetica, arial, sans-serif;
+    font-family: 'Gill Sans','lucida grande', helvetica, arial, sans-serif;
     font-size: 130%;
 
 }
@@ -96,6 +100,9 @@ td {
 .centrado {
     text-align : center; 
 }
+.alinear_derecha  {
+    text-align: right;
+}
 .none>tbody>tr>td, .none>tbody>tr>th, .none>tfoot>tr>td, .none>tfoot>tr>th, .none>thead>tr>td, .none>thead>tr>th {
     padding: 4px;
     border: none;
@@ -155,4 +162,48 @@ td#td2 {
 
 .mayusculas {
     text-transform:uppercase;
+}
+
+
+/* ESTILOS INFORMES*/
+
+.block{
+    display: block;
+}
+.cabecera_informe{
+    display: block;
+    margin-top: -40px;
+}
+
+.cabecera_informe div{
+    width: 50%;
+    float: left;
+}
+
+.titulo_informe{
+    font-size: 3.5em;
+    margin: 5px;
+}
+
+.titulo_informe h2{
+   
+}
+
+.subtitulo_informe{
+    margin-top: -10px;
+}
+
+#fecha_informe{
+    font-size: 1.5em;  
+    padding-top: 70px;
+    padding-right: 300px;
+}
+
+.strong{
+    font-weight: bold;
+    text-align: left;
+}
+
+div.sangrado p{
+    text-indent: 40px;
 }

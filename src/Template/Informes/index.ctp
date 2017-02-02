@@ -1,51 +1,113 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Informe'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['controller' => 'Users', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New User'), ['controller' => 'Users', 'action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Expedientes'), ['controller' => 'Expedientes', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Expediente'), ['controller' => 'Expedientes', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
-<div class="informes index large-9 medium-8 columns content">
-    <h3><?= __('Informes') ?></h3>
-    <table cellpadding="0" cellspacing="0">
-        <thead>
-            <tr>
-                <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('user_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('fecha') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('expediente_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($informes as $informe): ?>
-            <tr>
-                <td><?= $this->Number->format($informe->id) ?></td>
-                <td><?= $informe->has('user') ? $this->Html->link($informe->user->dni, ['controller' => 'Users', 'action' => 'view', $informe->user->id]) : '' ?></td>
-                <td><?= h($informe->fecha) ?></td>
-                <td><?= $informe->has('expediente') ? $this->Html->link($informe->expediente->id, ['controller' => 'Expedientes', 'action' => 'view', $informe->expediente->id]) : '' ?></td>
-                <td><?= h($informe->created) ?></td>
-                <td><?= h($informe->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $informe->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $informe->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $informe->id], ['confirm' => __('Are you sure you want to delete # {0}?', $informe->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-        </ul>
-        <p><?= $this->Paginator->counter() ?></p>
+<h1><i class="fa fa-files-o"></i>  Informes
+
+</h1>
+
+<div class="col-md-12 col-sm-12 col-xs-12"> 
+    <div class="x_panel"> 
+        <div class="x_title"> 
+            <h2><i class="icono-titulo-fa fa fa-folder-open"><?= '  '.h($expediente->numedis) ?></i> 
+
+                <?= $this->Html->link('', ['controller'=>'Informes', 
+                                            'action' => 'add',
+                                            $expediente->id], 
+                                            [
+                                                'class'=> 'fa fa-plus-square text-info icono-titulo-fa pull-right', 
+                                                'id'=>'informes',
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"top",
+                                                'data-content'=>"Genera un nuevo informe en formato 'borrador'."]) ?> 
+
+                <?= $this->Html->link('', ['controller'=>'Expedientes', 
+                                            'action' => 'view',
+                                            $expediente->id], 
+                                            [
+                                                'class'=> 'fa fa-backward text-info icono-titulo-fa pull-right', 
+                                                'id'=>'volver',
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"top",
+                                                'data-content'=>"Volver al expediente  ".$expediente->numedis]) ?> 
+            </h2> 
+            
+            <ul class="nav navbar-right panel_toolbox"> 
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
+              </li> 
+              <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
+                <ul class="dropdown-menu" role="menu"> 
+                  <li><a href="#">Settings 1</a> 
+                  </li> 
+                  <li><a href="#">Settings 2</a> 
+                  </li> 
+                </ul> 
+              </li> 
+              <li><a class="close-link"><i class="fa fa-close"></i></a> 
+              </li> 
+            </ul> 
+            <div class="clearfix"></div> 
+        </div> 
+ 
+        <div class="x_content"> 
+         
+            <div class="row"> 
+                   
+            </div>         
+
+            <div class="related"> 
+                <h4><?= 'Miembros de este Equipo:' ?></h4> 
+                <?php if (!empty($informes)): ?> 
+                <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
+                    <thead>
+                    <tr> 
+                        <th></th>
+                        <th><?= 'Tipo de informe'?></th>
+                        <th><?= __('Fecha de emisión') ?></th> 
+                        <th><?= __('Creado por') ?></th> 
+                        <th><?= __('Fecha de Creación') ?></th> 
+                        <th><?= __('Última modificación') ?></th> 
+                        
+                        <th class="actions"><?= __('Actions') ?></th> 
+                    </tr> 
+                    </thead>
+                    <body>
+                    <?php foreach ($informes as $informe): ?> 
+                    <tr> 
+                        <td class="text-center">
+                            <?php if ($informe->estado=='borrador'): ?>
+                                <i class="fa fa-pencil-square icono-fa warning" id= 'borrador<?= $informe->id?>',
+                                                data-container="body",
+                                                data-toggle="popover",
+                                                data-placement="right",
+                                                data-content="Este informe está en estado de 'borrador'."></i>
+                            <?php elseif ($informe->estado=='valido'): ?>
+                                 <i class="fa fa-check-square icono-fa success" id= 'valido<?= $informe->id?>',
+                                                data-container="body",
+                                                data-toggle="popover",
+                                                data-placement="right",
+                                                data-content="Este informe ya ha sido validado."></i>
+                            <?php endif; ?>
+
+                        </td> 
+                        <td class="text-center"><?= 'Informe de '.h($informe->tipo) ?></td> 
+                        <td class="text-center"><?= $this->Time->format($informe->fecha, "dd/MM/yyyy", null) ?> </td> 
+                        <td class="text-center"><?= h($informe->user->nombre.' '.$informe->user->apellidos) ?></td> 
+
+                        <td class="text-center"><?= $this->Time->format($informe->created, "dd/MM/yyyy 'a las' HH:mm", null) ?> </td> 
+                        <td class="text-center"><?= $this->Time->format($informe->modified, "dd/MM/yyyy 'a las' HH:mm", null) ?> </td> 
+
+                        <td class="actions"> 
+                            <?= $this->Html->link('', [ 'action' => 'edit', $informe->id], ['class'=> 'btn btn-xs btn-success fa fa-edit']) ?> 
+                            <?= $this->Form->postLink('', ['action' => 'delete', $informe->id], ['class'=> 'btn btn-xs btn-danger fa fa-trash', 'confirm' => __('¿Estás seguro/a de que quieres eliminar este informe?')]) ?> 
+                        </td> 
+                    </tr> 
+                    <?php endforeach; ?> 
+                    </body>
+                </table> 
+ 
+                <?php endif; ?> 
+ 
+            </div> 
+        </div> 
     </div>
 </div>

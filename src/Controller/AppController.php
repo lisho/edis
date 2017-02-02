@@ -466,7 +466,7 @@ class AppController extends Controller
 
         while (empty($ultima_nomina)) {
 
-            if ($mes_revisar<1) { // corregimos los cambios de año
+            if ($mes_revisar<=1) { // corregimos los cambios de año
                 $c = 1;
                 $mes_revisar=12;
                 $year_revisar--;

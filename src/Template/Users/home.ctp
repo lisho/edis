@@ -13,9 +13,9 @@
           	<div class="row">
 	          	<div class="col-md-3 col-sm-6 col-xs-12 text-center">
 	         
-	          	 <?= $this->Html->link('<button type="button" class="btn btn button_home">
-					          				<i class="fa fa-briefcase icono-titulo-fa"></i>
-						          			<h2>Gestión de Comisiones</h2>
+	          	 <?= $this->Html->link('<button type="button" class="btn btn button_home text-center">
+					          				<h1><i class="fa fa-briefcase"></i>
+						          			<p >Comisiones</p></h1>
 						          		</button>', 
 	          	 		['controller'=> 'Comisions', 'action'=>'index'],['escape' => false]); ?>
 

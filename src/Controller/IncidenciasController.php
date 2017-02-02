@@ -66,7 +66,7 @@ class IncidenciasController extends AppController
             $incidencia = $this->Incidencias->patchEntity($incidencia, $this->request->data);
             if ($this->Incidencias->save($incidencia)) {
                 $this->Flash->success(__('The incidencia has been saved.'));
-                return $this->redirect(['controller'=>'incidencias', 'action' => 'index']);
+                return $this->redirect($this->referer());
             } else {
                 $this->Flash->error(__('The incidencia could not be saved. Please, try again.'));
             }
@@ -145,7 +145,7 @@ class IncidenciasController extends AppController
         } else {
             $this->Flash->error(__('The incidencia could not be deleted. Please, try again.'));
         }
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect($this->referer());
     }
 
     /**

@@ -86,6 +86,18 @@ Router::scope('/comisions', function ($routes) {
     $routes->fallbacks('InflectedRoute');
 });
 
+Router::scope('/informes', function ($routes) {
+    $routes->extensions('pdf');
+    $routes->connect('/informe/*', ['controller' => 'Informes', 'action' => 'informe']);
+    $routes->connect('/index/*', ['controller' => 'Informes', 'action' => 'index']);
+    $routes->connect('/view/*', ['controller' => 'Informes', 'action' => 'view']);
+    $routes->connect('/add/*', ['controller' => 'Informes', 'action' => 'add']);
+    $routes->connect('/edit/*', ['controller' => 'Informes', 'action' => 'edit']);
+    $routes->connect('/delete/*', ['controller' => 'Informes', 'action' => 'delete']);
+    $routes->connect('/valida/*', ['controller' => 'Informes', 'action' => 'valida']);
+    $routes->fallbacks('InflectedRoute');
+});
+
 /**
  * Load all plugin routes.  See the Plugin documentation on
  * how to customize the loading of plugin routes.

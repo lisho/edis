@@ -116,9 +116,29 @@
 
                  
                 <br> <hr>
-                <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa']) ?> 
-                <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa']) ?> 
-                
+                <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa',
+                                                                    'id'=>'volver',
+                                                                    'data-container'=>"body",
+                                                                    'data-toggle'=>"popover",
+                                                                    'data-placement'=>"right",
+                                                                    'data-content'=>"Vuelve al listado de expedientes."]) ?> 
+
+                <?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa',
+                                                                                    'id'=>'editar',
+                                                                                    'data-container'=>"body",
+                                                                                    'data-toggle'=>"popover",
+                                                                                    'data-placement'=>"top",
+                                                                                    'data-content'=>"Editar este expediente."]) ?> 
+
+                <?= $this->Html->link('', ['controller'=>'Informes', 
+                                            'action' => 'index', $expediente->id], 
+                                            [
+                                                'class'=> 'fa fa-files-o text-info icono-titulo-fa', 
+                                                'id'=>'informes',
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"top",
+                                                'data-content'=>"Accede a los informes generados para este expediente."]) ?> 
                 <!--
                 <?php $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'fa fa-trash text-danger icono-titulo-fa', 'confirm' => __('Realmente quieres borrar el expediente: # {0}?', $expediente->numedis), 'id' => 'borra_expediente',
                                         'data-toggle'=>"popover",

@@ -79,13 +79,13 @@ class InformesTable extends Table
             ->allowEmpty('propuesta');
 
         $validator
-            ->dateTime('fecha')
+            ->date('fecha')
             ->requirePresence('fecha', 'create')
             ->notEmpty('fecha');
 
         $validator
-            ->requirePresence('estado', 'create')
-            ->notEmpty('estado');
+            ->requirePresence('estado', 'tipo', 'create')
+            ->notEmpty('estado', 'tipo');
 
         return $validator;
     }
