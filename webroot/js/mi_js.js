@@ -63,9 +63,17 @@ jQuery(document).ready(function($) {
  		$("#" +id).popover('toggle');
  	});
 
+
  	$('#cerrar_ventana').click(function() {
 		var expediente = $(this).data("expediente");
 		cerrar_ventana(expediente);
+	});
+
+	//--> mostrar input para cambio de numedis
+
+	$('#ver_nuevo_numedis').click(function() {
+		$('#nuevo_numedis').toggleClass('hidden');
+		$('#numedis_recomentdado').addClass('hidden');
 	});
 
 
@@ -397,13 +405,13 @@ $(function(){
 
 
 	// sexo
-	var sexo = $('#nuevo_expediente input:radio:checked').val();
+	var sexo = $('#nuevo_expediente label.sexo input:radio:checked').val();
 	var id = 'sexo';
 	if (sexo==='F') {var sexo='Mujer';}
 	else if (sexo==='M') {var sexo='Hombre';}
 	else {var sexo='';}
 	actualizar_datos(sexo,id); 
-	$( "#nuevo_expediente input:radio" ).click(function() {
+	$( "#nuevo_expediente label.sexo input:radio" ).click(function() {
 		var sexo = $(this).val(); 
 		if (sexo==='F') {var sexo='Mujer';}
 		else if (sexo==='M') {var sexo='Hombre';}
@@ -694,6 +702,7 @@ $(function(){
 		});
 	});
 
-
 }); // --> Fin ReadyDocument
+
+	
 

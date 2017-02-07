@@ -22,8 +22,8 @@ class ExpedientesController extends AppController
     {
         
         $expedientes = $this->Expedientes->find('all', [
-            'contain' => ['Participantes'=>[
-                                'conditions' => ['Participantes.relation_id'=>'1']
+            'contain' => ['Participantes.Relations'=>[
+                                //'conditions' => ['Participantes.relation_id'=>'1']
                 ]
             ],
         ]);
@@ -181,11 +181,24 @@ class ExpedientesController extends AppController
      *
      * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($desde=null)
     {
-        
+
         $listado_ceas = $this->listadoEquipo('ceas');
         $listado_edis = $this->listadoEquipo('edis');
+
+        if ($desde!=null) {
+            $this->loadModel('Comisions');
+            $comision = $this->Comisions->get($desde);
+        }
+        
+        $todos_expedientes = $this->Expedientes->find('all',[
+                                'order' => ['numedis' => 'ASC']
+                                ]);
+        $ultimo_numedis = $todos_expedientes->last();
+        $proximo_numedis = $ultimo_numedis->numedis + 1;
+
+//debug($proximo_numedis);exit();
 
         $expediente = $this->Expedientes->newEntity();
 
@@ -223,15 +236,18 @@ class ExpedientesController extends AppController
                                 'Roles',
                                 'Roles.Tecnicos',
                                 //'Roles.Tecnicos.Equipos',
-                                'Participantes'
+                                'Participantes',
+                                'Pasacomisions'
                         ]
                     ]);
+
 
 //debug($expediente);exit();
 
             if ($this->Expedientes->save($expediente)) {
 
                 // Carpetas del expediente ...
+
                 if (!file_exists(WWW_ROOT . 'docs/'.$expediente->numedis)) {
                     $dir = new Folder(WWW_ROOT . 'docs/'.$expediente->numedis, true, 0755);
                     $this->Flash->success(__('Se ha creado correctamente la carpeta de documentos de este expediente.'));
@@ -240,18 +256,26 @@ class ExpedientesController extends AppController
                 }     
                 
 
-//debug($dir);exit();
-
-
                 $this->Flash->success(__('El expediente '.$expediente['numedis'].' ha sido creado correctamente.'));
-                return $this->redirect(['action' => 'view',$expediente['id']]);
+
+                // Si el expediente lo creamos desde una comisión, AÑADIMOS EL PASO POR COMISION Y REDIRIGIMOS
+                
+                if ($desde!=null) { 
+                    // Si venimos de una comisión, volvemos a la comision.
+                    return $this->redirect(['controller'=>'Comisions', 'action' => 'view',$desde]);
+
+                }else{
+                    // Si no creamos desde una comisión, vamos al expediente que acabamos de crear.
+                    return $this->redirect(['action' => 'view',$expediente['id']]);
+                }
+
             } else {
                 $this->Flash->error(__('No se ha podiodo crear el expediente correctamente. Por favor revisa los datos.'));
             }
 
 
         }
-        $this->set(compact('expediente','listado_ceas','listado_edis'));
+        $this->set(compact('expediente','listado_ceas','listado_edis','comision','proximo_numedis'));
         $this->set('_serialize', ['expediente']);
     }
 
@@ -336,9 +360,9 @@ class ExpedientesController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $expediente = $this->Expedientes->get($id);
         if ($this->Expedientes->delete($expediente)) {
-            $this->Flash->success(__('The expediente has been deleted.'));
+            $this->Flash->success(__('El expediente ha sido completamente eliminado'));
         } else {
-            $this->Flash->error(__('The expediente could not be deleted. Please, try again.'));
+            $this->Flash->error(__('No ha sido posible eliminar el expediente. Por favor inténtalo de nuevo.'));
         }
         return $this->redirect(['action' => 'index']);
     }
@@ -612,5 +636,4 @@ class ExpedientesController extends AppController
         }
        $this->autoRender = false;
     }
-
 }

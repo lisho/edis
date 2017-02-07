@@ -63,19 +63,26 @@
 
         <!-- PRIMER PASO-->                
                     <div id="step-1">
-                        <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro. Si accedes a este formulario desde una comisión, puedes saltarte esta primera fase porque YA HABRÁS COMPROBADO A TODOS LOS MAYORES DE 16 AÑOS, ¿¿NO??: </h2>
 
-                        <fieldset class="bloque-formulario">
-                            <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe, pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"sigiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>
-                            <div class="form-group input-group form-group-buscador form-horizontal center-block">
-                                
-                                <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
-                                <span class="input-group-btn">
-                                  <button class="btn btn-default " type="button"><i class="fa"></i></button>
-                                </span>
-                            </div>
+                        <?php if (!isset($comision)): ?>
+                            <h2 class="StepTitle"><big><b>Primer Paso: </big></b>Antes de crear un expediente nuevo debemos comprobar que ninguna de las personas mayores de 16 años incluidas en el expediente están asociadas a otro. </h2>
 
-                        </fieldset>
+                            <fieldset class="bloque-formulario">
+                                <h4>Puedes comprobar la existencia de una persona en el sistema introduciendo su DNI/NIE, nombre o apellidos... Si existe, pica simplemente en él para ir al expediente. Si no aparece el resultado que buscas, pica en <b>"siguiente"</b> para continuar con el proceso de creación de un nuevo expediente.</h4>
+                                <div class="form-group input-group form-group-buscador form-horizontal center-block">
+                                    
+                                    <input id="busca" type="text" class="form-control col-md-8 col-sm-8 col-xs-12" placeholder="Buscar a...">
+                                    <span class="input-group-btn">
+                                      <button class="btn btn-default " type="button"><i class="fa"></i></button>
+                                    </span>
+                                </div>
+
+                            </fieldset> 
+                        <?php else: ?>
+                                         
+                            <h2>Accedes a este formulario desde una comisión, puedes saltarte esta primera fase porque YA HABRÁS COMPROBADO A TODOS LOS MAYORES DE 16 AÑOS, ¿¿NO??: </h2>
+                        <?php endif; ?>
+                        
 
                     </div>
 
@@ -93,7 +100,14 @@
                         <h2 class="StepTitle"><big><b>Segundo Paso: </b></big> Si ninguna de las personas mayores de 16 años del expediente están en el sistema podemos comenzar a <u>crear el nuevo expediente:</u></h2>
 
                         <div class="bloque-formulario">
-                            <div class="form-group">
+                            <div id="numedis_recomentdado" class="text-center">
+                                <h2>Número de Expediente EDIS asignado al nuevo expediente:
+                                    <div id="ver_nuevo_numedis" class="btn btn-lg btn-primary"><b><?= $proximo_numedis; ?></b></div>
+                                </h2>
+                            </div>
+                            
+                            <div id="nuevo_numedis" class="form-group hidden">
+                                <span id="label_propuesta_numedis" class="label label-info"><?= $proximo_numedis; ?></span>
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12">Número de Expediente EDIS <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?php
@@ -101,11 +115,12 @@
                                                 'class'=>'form-control col-md-7 col-xs-12',
                                                 'id' => 'numedis',
                                                 'required' =>'',
-                                                'label' => ['text' => '']
+                                                'label' => ['text' => ''],
+                                                'value' => $proximo_numedis
                                             ]);
                                     ?> 
                                 </div>
-                                <div id="resultados"></div>
+                               <!-- <div id="resultados"></div> -->
                             </div>
 
                             <div class="form-group has-feedback">
@@ -277,7 +292,7 @@
                                                         'templates' => [
                                                             'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
                                                         ], 
-                                                        'label' => ["class" => "radio"]
+                                                        'label' => ["class" => "radio sexo"]
 
                                                     ]
 
@@ -356,7 +371,140 @@
                             <h2 class="StepTitle"><big><b>Cuarto Paso: </b></big>Comprueba que los datos introducidos son correctos y completa la creación del expediente</h2>
                             <div class="form-group">
                                 <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+
+                                    <?php if (isset($comision)): ?>
+                                               
+                                        <div id='paso_comision'>
+
+                                            <?= $this->Form->input('pasacomisions.0.comision_id', [
+                                                                'type'=>'hidden',
+                                                                'value' => $comision->id
+                                                            ]);
+                                                    ?> 
+
+                                            <?= $this->Form->input('pasacomisions.0.expediente_id', [
+                                                                'type'=>'hidden',
+                                                                'id' => 'campo_expediente'
+
+                                                            ]);
+                                                    ?> 
+
+                                            <?php if ($comision->tipo=='AUS'): ?> <!-- Sólo en caso de ser una comision de AUS pasamos la variable para mi_js.js-->
+
+                                                <script>
+                                                    var tipo_comision = "aus";
+                                                </script>
+
+                                            <?php elseif ($comision->tipo=='RGC'): ?>
+                                                <script>
+                                                    var tipo_comision = "rgc";
+                                                </script>
+                                            <?php endif; ?>
+
+                                            <h2>Estás creando este expediente desde la comisión de <?= $comision->tipo;?> de fecha <?= $this->Time->format($comision->fecha, "dd/MM/yyyy", null);?>, por lo que <u>es necesario que completes los datos del paso por comisión</u> de este expediente para añadirlo directamente:</h2>
+                                            <br>
+                                            <div class="row" id="paso_motivo">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Motivo del paso por comisión: <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                                                        <?= $this->Form->imput(
+                                                                    'pasacomisions.0.motivo',
+                                                                    [
+                                                                        'type' => 'radio',
+                                                                        'options'=>[
+                                                                            ['value' => 'INI', 'text' => 'Inicial (INI)',
+                                                                            ],
+                                                                            ['value' => 'RIP', 'text' => 'Revisión a Instancia de Parte (RIP)', 
+                                                                            ],
+                                                                            ['value' => 'ROF', 'text' => 'Revisión de Oficio (ROF)',
+                                                                            ],     
+                                                                        ],
+                                                                        'templates' => [
+                                                                            'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
+                                                                        ], 
+                                                                        'label' => ["class" => "radio"],
+                                                                        'value' => 'INI'
+
+                                                                    ]
+
+                                                                );
+                                                            ?> 
+                                                  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                             
+                                            <div class="row" id="paso_clasificacion">
+                                                <div class="form-group">
+
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Clasificación: <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    
+                                                    <?= $this->Form->imput(
+                                                                    'pasacomisions.0.clasificacion',
+                                                                    [
+                                                                        'type' => 'radio',
+                                                                        'options'=>[
+                                                                            ['value' => 'E', 'text' => 'Estructural',
+                                                                            ],
+                                                                            ['value' => 'C', 'text' => 'Coyuntural', 
+                                                                            ],
+                                                                        ],
+                                                                        'templates' => [
+                                                                            'radioWrapper' => '<div class="radio-inline screen-center screen-radio">{{label}}</div>'
+                                                                        ], 
+                                                                        'label' => ["class" => "radio"],
+                                                                        'value' => 'E'
+
+                                                                    ]
+
+                                                                );
+                                                        ?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row" id="paso_documentacion">
+                                                <div class="form-group">
+                                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Documentación que se adjunta: <span class="required">*</span></label>
+                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                     <?= $this->Form->input('pasacomisions.0.diligencia', [
+                                                                        'type'=>'checkbox',
+                                                                    ]);
+                                                            ?> 
+
+                                                    <?= $this->Form->input('pasacomisions.0.informeedis', [
+                                                                        'type'=>'checkbox',
+                                                                        'class' => '',
+                                                                        'label' => 'Informe de Seguimiento de EDIS'
+                                                                    ]);
+                                                            ?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre el paso por comisión de este Expediente: </label>
+                                                    <div class="col-md-9 col-sm-9 col-xs-12">
+                                                        <?php
+                                                            echo $this->Form->input('pasacomisions.0.observaciones', [
+                                                                    'class'=>'editor form-control col-md-7 col-xs-12',
+                                                                    //'required' => 'required',
+                                                                    'label' => ['text' => '']
+                                                                ]);
+                                                        ?> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    <?php endif; ?>
+
                                     <div id="datos">
+                                        <br><br>
+                                        <h2 ><big>Revisa los datos y completa la creación del expediente:</big></h2>
                                         <div id="datos_expediente">
                                             <h2><u>Datos del Expediente:</u></h2>
                                         
@@ -381,7 +529,9 @@
                                         </div>                                       
                                     </div>
                                     <br><br>
+
                                     <?= $this->Form->button('CREA UN NUEVO EXPEDIENTE', ['class' => 'btn btn-success btn-lg', 'id'=>'crea_expediente' ]) ?>
+
                                     <? // $this->Html->link(__('Cancela'), ['action'=>'index'],['class' => 'btn btn-primary']) ?>
                                 </div>
                             </div>                

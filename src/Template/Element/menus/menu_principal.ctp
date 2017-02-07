@@ -23,6 +23,8 @@
 
                 <li>
                 <?= $this->Html->link('    Mi Perfil',['controller'=>'Users','action' => 'view', $auth['id']], ['class'=>'fa fa-user pull-right'])?>
+                
+                <!--
                 <a href="javascript:;"> Profile</a></li>
                 <li>
                   <a href="javascript:;">
@@ -31,7 +33,7 @@
                   </a>
                 </li>
                 <li><a href="javascript:;">Help</a></li>
-                
+                -->
                 <li><?= $this->Html->link('   Salir', ['controller'=> 'Users', 'action'=>'logout'], ['class'=>'fa fa-sign-out pull-right']) ?></li>
               </ul>
             </li>

@@ -18,7 +18,7 @@
       
         
                 <p><u>Si no existe ningún usario del expediente en la aplicación, debes <b>crear un nuevo expediente</b></u> para añadirlos antes de incluirlos en una comisión. Puedes hacerlo desde 
-                <?= $this->Html->link('', ['controller'=> 'Expedientes', 'action'=>'add'],
+                <?= $this->Html->link('', ['controller'=> 'Expedientes', 'action'=>'add', $comision->id],
                                             ['class'=>'btn btn-xs modal-btn btn-info fa fa-plus', 'target' => '_blank',
                                               'data-container'=>"body",
                                             'data-toggle'=>"popover",
@@ -87,13 +87,19 @@
 
 
             <p>Selecciona al Secretario de la comisión...</p>
-            <?php if($secretario===''){$secretario='Selecciona un TEDIS...';} ?>
+            <?php if(empty($secretario)){$secretario='Selecciona un TEDIS...';} ?>
+            
+            <?php
+
+            
+            ?>
+            
             <?= $this->Form->input('secretaria',[   'id'=>'secretaria', 
                                                     'class'=>'form-control col-md-7 col-xs-12',
                                                     'type'=>'select', 
                                                     'options' => $posibles_secretarios,
                                                     'empty' => $secretario,
-                                                    'label' => ''
+                                                    'label' => '',
                                                     ]); ?>
 
 
@@ -443,6 +449,7 @@
                         <?= $this->Form->input('pasacomision.informeedis', [
                                             'type'=>'checkbox',
                                             'class' => '',
+                                            'label' => 'Informe de Seguimiento de EDIS'
                                         ]);
                                 ?> 
                         </div>

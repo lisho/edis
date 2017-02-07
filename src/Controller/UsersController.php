@@ -183,10 +183,10 @@ class UsersController extends AppController
             $user = $this->Users->patchEntity($user, $this->request->data);
                 
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('Los cambios se han guardado correctamente.'));
                 return $this->redirect(['action'=>'view', $user->id]);
             } else {
-                $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                $this->Flash->error(__('No ha sido posible hacer los cambios. Por favor, inténtalo de nuevo.'));
             }
         }
         $equipos = $this->Users->Equipos->find('list', ['limit' => 200, 'order' => 'nombre DESC']);

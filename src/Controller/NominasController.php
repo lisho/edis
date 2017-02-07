@@ -88,6 +88,7 @@ class NominasController extends AppController
                                 'fechanomina' => $data['fechanomina'],
                                 'nombrecompleto' => $data['nombrecompleto'],
                                 'dni' => $data['dni'],
+                                'HS' => $data['HS']
                                 //'relacion' => $data['relacion']
                             ]
                         ]);
@@ -203,7 +204,7 @@ class NominasController extends AppController
         $fecha_actual = getdate();
         $cambios=[];
 
-        $this->loadModel('Suspensions');
+       // $this->loadModel('Suspensions');
         /* Generamos al última y la penúltima nómina*/
 /*
         while (empty($ultima_nomina)) {
@@ -219,7 +220,7 @@ class NominasController extends AppController
 
         while (empty($ultima_nomina)) {
 
-            if ($mes_revisar<1) { // corregimos los cambios de año
+            if ($mes_revisar<=1) { // corregimos los cambios de año
                 $c = 1;
                 $mes_revisar=12;
                 $year_revisar--;
@@ -249,13 +250,17 @@ class NominasController extends AppController
        }
 
         foreach ($ultima_nomina as $ultima) {
-           $datos_ultima_nomina['RGC'][] = $ultima['RGC'];
-           $datos_ultima_nomina['dni'][] = $ultima['dni'];
-           //$datos_ultima_nomina['HS'][$ultima['HS']][] = $ultima['nombrecompleto'];
-           $datos_ultima_nomina[$ultima['RGC']]['titular'] = $ultima['nombrecompleto'];
-           $datos_ultima_nomina[$ultima['RGC']]['HS'] = $ultima['HS'];
-           $datos_ultima_nomina[$ultima['RGC']]['domicilio'] = $ultima['DOMICILIO'];
-           $datos_ultima_nomina[$ultima['RGC']]['ceas'] = $ultima['CEAS'];
+
+            if ($ultima['relacion'] == 'TITULAR') {
+
+               $datos_ultima_nomina['RGC'][] = $ultima['RGC'];
+               $datos_ultima_nomina['dni'][] = $ultima['dni'];
+               //$datos_ultima_nomina['HS'][$ultima['HS']][] = $ultima['nombrecompleto'];
+               $datos_ultima_nomina[$ultima['RGC']]['titular'] = $ultima['nombrecompleto'];
+               $datos_ultima_nomina[$ultima['RGC']]['HS'] = $ultima['HS'];
+               $datos_ultima_nomina[$ultima['RGC']]['domicilio'] = $ultima['DOMICILIO'];
+               $datos_ultima_nomina[$ultima['RGC']]['ceas'] = $ultima['CEAS'];
+            }
        }
 
        /*****************************
@@ -265,10 +270,10 @@ class NominasController extends AppController
         * ** DNIs que ya no están.
         *****************************
         */
-
+//debug($ultima_nomina);exit();
 
        foreach ($ultima_nomina as $ultima) {
-
+                //Nos aseguramos de usar sólo los titulares.
            if (in_array($ultima['RGC'], $datos_penultima_nomina['RGC'])) {      
                 /* Comprobamos si hay cambios en el domicilio de cada número de RGC*/
                if ($datos_penultima_nomina[$ultima->RGC]['domicilio'] != $ultima->DOMICILIO) {

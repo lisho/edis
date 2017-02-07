@@ -104,10 +104,10 @@
                                                         <h4><small>Titular del Expediente: </small><span class="text-uppercase"><?= array_values($listado_posibles_titulares_prestacion[$pasacomision->expediente->id])[0]; ?></span></h4>
 
                                                 </div>
-                                        </div>
-                                    </div>   
-                            
-                            
+                                            </div>
+                                        </div>   
+                                    </div>
+                                
                                     
                     <?php endif; ?>
 

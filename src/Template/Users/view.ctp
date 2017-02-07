@@ -70,38 +70,50 @@
                         <th><?= __('User') ?></th>
                         <td><?= h($user->user) ?></td>
                     </tr>
+                    <!--
                     <tr>
                         <th><?= __('Password   ') ?></th>
                         <td><?= h($user->password) ?></td>
                     </tr>
+                    -->
                     <tr>
                         <th><?= __('Equipo') ?></th>
-                        <td><?= $user->has('equipo') ? $this->Html->link($user->equipo->id, ['controller' => 'Equipos', 'action' => 'view', $user->equipo->id]) : '' ?></td>
+                        <td><?= $user->has('equipo') ? $this->Html->link($user->equipo->nombre, ['controller' => 'Equipos', 'action' => 'view', $user->equipo->id]) : '' ?></td>
                     </tr>
+                    <!--
                     <tr>
                         <th><?= __('Id') ?></th>
                         <td><?= $this->Number->format($user->id) ?></td>
                     </tr>
+                    -->
                     <tr>
-                        <th><?= __('Created') ?></th>
+                        <th><?= __('Fecha de creación') ?></th>
                         <td><?= h($user->created) ?></td>
                     </tr>
                     <tr>
-                        <th><?= __('Modified') ?></th>
+                        <th><?= __('Última modificación') ?></th>
                         <td><?= h($user->modified) ?></td>
                     </tr>
                 </table>
             </div>
             <div class="row">
-                <h4><?= __('Role') ?></h4>
-                <?= $this->Text->autoParagraph(h($user->role)); ?>
+                <?php if ($auth['role']=="admin"): ?>
+                      <h4><?= "ROL: <big>".$this->Text->autoParagraph(h($user->role)); ?> </big></h4>
+                <?php endif; ?>     
             </div>
 
             <br>
+            <?php if ($auth['role']=="admin"): ?>
+                <?= $this->Html->link(__('Volver'), ['action' => 'index'], ['class'=> 'btn btn-xs btn-primary']) ?>
+            <?php else: ?>
+                <?= $this->Html->link(__('Volver'), ['action' => 'home'], ['class'=> 'btn btn-xs btn-primary']) ?>      
+            <?php endif; ?>
+
             
-            <?= $this->Html->link(__('Volver'), ['action' => 'index'], ['class'=> 'btn btn-xs btn-primary']) ?>
-            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class'=> 'btn btn-xs btn-info']) ?>
-            <?= $this->Form->postLink(__('delete'), ['action' => 'delete', $user->id], ['class'=> 'btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $user->nombre.' '.$user->apellidos)]) ?>
+
+
+            <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id], ['class'=> 'btn btn-xs btn-info']) ?>
+            <?= $this->Form->postLink(__('Borrar'), ['action' => 'delete', $user->id], ['class'=> 'btn btn-xs btn-danger', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $user->nombre.' '.$user->apellidos)]) ?>
         </div>
     </div>
 </div>

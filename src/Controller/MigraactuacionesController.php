@@ -233,13 +233,14 @@ class MigraactuacionesController extends AppController
 
 
                 $actuacion_con_numedis['migraexpedientes_id'] = $expedientes_array[$actuacion->numedis];
-                debug($actuacion_con_numedis);  
+                
                 $actuacion = $this->Migraactuaciones->patchEntity($actuacion, $actuacion_con_numedis);
-                debug($actuacion);  
+                //debug($actuacion);  
                 //$listado_emparejados[$actuacion['numedis']] = $actuacion;
              
                 if ($this->Migraactuaciones->save($actuacion)) {
                     $listado_emparejados[$actuacion['numedis']] = $actuacion;
+                    debug($actuacion['id'].'------>'.$actuacion['numedis'].'------>'.$actuacion['expediente_id']);  
                     //$contador_correctos++;
                 }else{
                     $listado_errores_save[$actuacion['numedis']] = $actuacion;

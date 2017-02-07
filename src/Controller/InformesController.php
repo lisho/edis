@@ -166,6 +166,8 @@ class InformesController extends AppController
         foreach ($prestaciones as $prestacion) {
             if ($prestacion->prestaciontipo_id==3 && $prestacion->prestacionestado_id == 5) {
                 $prestacion_rgc=$prestacion;
+            }elseif ($prestacion->prestaciontipo_id==3 && $prestacion->prestacionestado_id == 1) {
+                $prestacion_rgc=$prestacion;
             }
         }
 //debug($informe);exit();
@@ -180,7 +182,7 @@ class InformesController extends AppController
 //debug($tedis);exit();
         
 //debug($tedis);exit();
-//debug($informe);exit();
+//debug($prestacion_rgc);exit();
         /**
          * Creamos el PDF
          */

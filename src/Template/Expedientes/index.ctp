@@ -21,8 +21,9 @@
                     <th>Titular</th>
                     <th>CEAS </th>
                     <th>Domicilio</th>
-                    <th>Creado</th>
-                    <th>Modificado</th>
+                    <th><i class="fa fa-group"></i>Parrilla</th>
+                    <th class="visible-lg">Creado</th>
+                    <th class="visible-lg">Modificado</th>
                     <th class="actions"></th>
                 </tr>
             </thead>
@@ -33,16 +34,73 @@
                     <td class="text-center"><?= $this->Html->link('  '.$expediente->numedis, ['action' => 'view', $expediente->id], ['class' => 'btn btn-sm btn-success fa fa-folder-open', 'target' => '_blank']) ?></td>
 
                     <td><?= h($expediente->numhs) ?></td>
-                    <td><?= $this->Html->link($expediente['participantes'][0]['nombre'].' '.$expediente['participantes'][0]['apellidos'], [
-                                            'controller'=>'Participantes', 
-                                            'action' => 'view', 
-                                            $expediente['participantes'][0]['id']
-                                            ]) ?></td>
+                    <td class="mayusculas">
+                        
+                        <?php foreach($expediente->participantes as $key => $participante): ?>
+                            <?php if ($participante->relation_id == 1): ?>
+                               <?php $indice =  $key;  ?>     
+                            <?php endif; ?>
+                        <?php endforeach;?>
+
+                        <?= $this->Html->link($expediente['participantes'][$indice]['nombre'].' '.$expediente['participantes'][$indice]['apellidos'], [
+                                                'controller'=>'Participantes', 
+                                                'action' => 'view', 
+                                                $expediente['participantes'][$indice]['id']
+                                                ]) ?>                                             
+                    </td>
 
                     <td><?= h($listado_ceas[$expediente->ceas]) ?></td>
-                    <td><?= h($expediente->domicilio) ?></td>
-                    <td><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null) ?></td>
-                    <td><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null) ?></td>
+                    
+                    <td class="text-center">
+
+                        <ul class="nav">    
+                            <li class="">
+                              <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
+
+                                <span class=" fa fa-home btn btn-xs btn-info"></span>
+
+                              </a>
+                              <ul class="dropdown-menu pull-right domicilio ">
+
+                                    <li><h4><?= $expediente->domicilio; ?></h4> </li>
+
+                              </ul>
+                            </li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul class="nav">    
+                            <li class="">
+                              <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
+
+                                <span class=" fa fa-group btn btn-xs btn-info"></span>
+
+                              </a>
+                              <ul class="dropdown-menu pull-right parrilla ">
+                                  <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>DNI/NIE</th>
+                                            <th>Nombre y Apellidos</th>
+                                            <th>Relacion</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach($expediente->participantes as $participante): ?>
+                                             <tr>
+                                                <td><?= $participante->dni; ?></td>
+                                                <td class="mayusculas"><?= $participante->nombre." ".$participante->apellidos; ?></td>
+                                                <td><?= $participante->relation->nombre; ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>    
+                                    </tbody>
+                                  </table>
+                              </ul>
+                            </li>
+                        </ul>
+                    </td>
+                    <td class="visible-lg"><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null) ?></td>
+                    <td class="visible-lg"><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null) ?></td>
                     
                     <td class="actions">
 
