@@ -20,7 +20,6 @@ jQuery(document).ready(function($) {
 		$('#paso_motivo, #paso_clasificacion, #paso_documentacion').addClass('hidden');
 	}
 
-
 	
 	$(".editor").jqte(); 
 	
@@ -54,15 +53,7 @@ jQuery(document).ready(function($) {
 
 	// --> mensajes con popover pasando el id
 	
- 	$('[data-toggle="popover"]').hover(function () {
- 		id=$(this).attr("id");
-
- 		$("#" +id).hover('handlerIn', function (e) {
-		  	$("#" +id).popover('hide');
-		})
- 		$("#" +id).popover('toggle');
- 	});
-
+ 	lanza_popover();
 
  	$('#cerrar_ventana').click(function() {
 		var expediente = $(this).data("expediente");
@@ -76,6 +67,36 @@ jQuery(document).ready(function($) {
 		$('#numedis_recomentdado').addClass('hidden');
 	});
 
+	// --> Validamos la comision
+
+	valida_comision();
+
+
+
+/*
+	$('.valida_comision').click(function(event) {
+		var id = $(this).attr('id');
+		
+		if ($(this).hasClass('fa-pencil-square')) {
+			var validada = true;
+			$(this).removeClass('btn-warning fa-pencil-square').addClass('btn-success fa-check-square');			
+			$('#actions'+id).children('a').addClass('hidden');
+		}else if ($(this).hasClass('fa-check-square')){
+			var validada = false;
+			$(this).removeClass('btn-success fa-check-square ').addClass('btn-warning fa-pencil-square');
+			$('#actions'+id).children('a').removeClass('hidden');			
+		}
+
+		$.ajax({
+				type: "POST",
+				url: url_json+"comisions/cambiaValidacion",
+				data: {id:id,
+						validada:validada},
+				cache: false,
+			});	
+			return false;
+	});
+*/
 
 $(function(){
 
@@ -702,7 +723,75 @@ $(function(){
 		});
 	});
 
+//--> Mantener la escucha al navegar las tablas
+
+	$('li.paginate_button ').click(function() {
+		valida_comision();
+		lanza_popover();
+	});
+
+//--> Mantener la escucha al navegar por las comisiones
+
+	$("a[data-toggle='tab']").click(function() {
+		lanza_popover();
+	});
+
 }); // --> Fin ReadyDocument
 
+
+/*
+**
+** Funcion que gestionan los estados de validación de las comisiones
+**
+*/
+
+function valida_comision() {
 	
+	$('.valida_comision').click(function(event) {
+
+		var id = $(this).attr('id');		
+		if ($(this).hasClass('fa-pencil-square')) {
+			var validada = true;
+			$(this).removeClass('btn-warning fa-pencil-square')
+					.addClass('btn-success fa-check-square')
+					.attr('data-content', 'Esta comisión ha sido validada. Actívala de nuevo para reactivar las opciones de edición.');			
+			$('#actions'+id).children('a').addClass('hidden');
+			$('#badge'+id).parent('button').removeClass('btn-warning').addClass('btn-success');
+
+		}else if ($(this).hasClass('fa-check-square')){
+			var validada = false;
+			$(this).removeClass('btn-success fa-check-square ')
+					.addClass('btn-warning fa-pencil-square')
+					.attr('data-content', 'Valida la comisión para dar por finalizado el trabajo sobre ella.');
+			$('#actions'+id).children('a').removeClass('hidden');
+			$('#badge'+id).parent('button').removeClass('btn-success').addClass('btn-warning');	
+		}
+
+		$.ajax({
+				type: "POST",
+				url: url_json+"comisions/cambiaValidacion",
+				data: {id:id,
+						validada:validada},
+				cache: false,
+			});	
+			return false;
+	});
+}
+
+/*
+**
+** Funcion que lanza un mensaje popover basado en el id
+**
+*/
+
+function lanza_popover() {
+	 $('[data-toggle="popover"]').hover(function () {
+ 		id=$(this).attr("id");
+
+ 		$("#" +id).hover('handlerIn', function (e) {
+		  	$("#" +id).popover('hide');
+		})
+ 		$("#" +id).popover('toggle');
+ 	});
+}
 

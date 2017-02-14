@@ -49,8 +49,8 @@ class MigraexpedientesFixture extends TestFixture
             'tedis' => 'Lorem ipsum dolor sit amet',
             'cc' => 'Lorem ipsum dolor sit amet',
             'ceas' => 'Lorem ipsum dolor sit amet',
-            'alta' => '2016-10-21',
-            'baja' => '2016-10-21',
+            'alta' => '2017-02-09',
+            'baja' => '2017-02-09',
             'domicilio' => 'Lorem ipsum dolor sit amet'
         ],
     ];

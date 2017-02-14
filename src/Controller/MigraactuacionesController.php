@@ -274,7 +274,42 @@ class MigraactuacionesController extends AppController
         $this->set(compact('expedientes_array','actuaciones'
             
             ));
-        
+    }
 
+        /**********************************************************************************************/
+
+
+    public function cambiarTipoIncidencia()
+    {
+        //$this->loadModel('Incidencias');
+        $incidencia = $this->Migraactuaciones->find('all');
+
+        $tipos_incidencia =[];
+        $vacio=0;
+
+        foreach ($incidencia as $incid) {
+            if (!in_array($incid->actuacion, $tipos_incidencia)) {
+                $tipos_incidencia[] = $incid->actuacion;
+                //$tipos_incidencia[$incid->actuacion]['num']=1;
+            }
+            else {
+                //$tipos_incidencia[$incid->actuacion]['num']++;
+            }
+/*
+            if ($incid->actuacion=='') {
+
+                $incidencia = $this->Migraactuaciones->get($incid->id);
+                $incid['actuacion'] = 'Otras';
+                $incidencia = $this->Migraactuaciones->patchEntity($incidencia, $incid->toArray());
+    
+    //debug($incidencia); exit();
+                $this->Migraactuaciones->save($incidencia);
+                debug($incidencia); exit();
+                $vacio++;
+            }*/
+        }
+
+        //debug($vacio); 
+        debug($tipos_incidencia); exit();
     }
 }

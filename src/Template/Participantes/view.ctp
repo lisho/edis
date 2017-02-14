@@ -30,7 +30,7 @@
                 <!-- end of image cropping -->
                 <div id="crop-avatar">
                   <!-- Current avatar -->
-                  <?php if ($participante->foto === ''): ?>
+                  <?php if ($participante->foto === '' || $participante->foto === NULL): ?>
                          
                         <?= $this->Html->image('avatar/avatar-'.$participante->sexo.'.svg', [
                                                 'class' =>'img-responsive avatar-view avatar_profile', 

@@ -65,11 +65,11 @@
                                 <td><?= h($usuario->observaciones) ?></td> 
                                 <td><?= h($usuario->otrosdatos) ?></td> 
                                
-                                <td class="actions"> <!--
-                                    <?= $this->Html->link(__('View'), ['controller' => 'Migraexpedientes', 'action' => 'view', $error['id']]) ?> 
-                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Migraexpedientes', 'action' => 'edit', $error['id']]) ?> 
-                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Migraexpedientes', 'action' => 'delete', $error['id']], ['confirm' => __('Are you sure you want to delete # {0}?')]) ?> 
-                                --></td> 
+                                <td class="actions"> 
+                                    <?= $this->Html->link(__('View'), ['controller' => 'Migraexpedientes', 'action' => 'view', $usuario->id]) ?> 
+                                    <?= $this->Html->link(__('Edit'), ['controller' => 'Migrausuarios', 'action' => 'edit', $usuario->id]) ?> 
+                                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Migrausuarios', 'action' => 'delete', $usuario->id], ['confirm' => __('Are you sure you want to delete # {0}?')]) ?> 
+                                </td> 
                             </tr> 
                         <?php endif; ?>
                     <?php endforeach; ?> 

@@ -16,8 +16,9 @@ use Cake\ORM\Entity;
  * @property string $numedis
  * @property string $observaciones
  * @property string $relacion
- * @property \Cake\I18n\Time $nacimineto
+ * @property \Cake\I18n\Time $nacimiento
  * @property string $nacionalidad
+ * @property int $migraexpedientes_id
  */
 class Migrausuario extends Entity
 {

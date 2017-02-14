@@ -62,7 +62,7 @@
                                                                 <tr>
                                                                     <th class=" centrar">Exp. EDIS</th>
                                                                     <th class=" centrar">Num. HS</th>
-                                                                    <th class=" centrar">Num. RGC</th>
+                                                                    <th class=" centrar">Num. AUS</th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
@@ -287,7 +287,7 @@
         </td>  
 -->        
 
-        <td>
+        <td class="<?= $ocultar;?>">
             <?= $this->Html->link('', ['controller' =>'Pasacomisions','action' => 'edit', $pasacomision->id], ['class'=> 'fa fa-edit']) ?> 
             <?= $this->Form->postLink('', ['controller' =>'Pasacomisions', 'action' => 'delete', $pasacomision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar este expediente de esta comisión?']); ?> 
 

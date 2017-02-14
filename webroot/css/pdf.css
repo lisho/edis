@@ -207,3 +207,8 @@ td#td2 {
 div.sangrado p{
     text-indent: 40px;
 }
+
+.danger {
+    color: red;
+    border: solid 1px;
+}

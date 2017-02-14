@@ -182,10 +182,20 @@ class ComisionsController extends AppController{
             'contain' => []
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
+            
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['fecha']);
+            if ( $this->request->data['fecha']!='') {
+                 $this->request->data['fecha']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+            }
+
             $comision = $this->Comisions->patchEntity($comision, $this->request->data);
             if ($this->Comisions->save($comision)) {
                 $this->Flash->success(__('The comision has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $comision->id]);
             } else {
                 $this->Flash->error(__('The comision could not be saved. Please, try again.'));
             }
@@ -314,8 +324,25 @@ class ComisionsController extends AppController{
 
 
 
-    public function valida($id=null)
+    public function validaComision($id=null)
     {
+
+            $comision = $this->Comisions->get($id, [
+            'contain' => []
+            ]);
+
+            if ($this->request->is(['patch', 'post', 'put', 'get'])) {
+
+                
+                // Guardamos cambios en la BD
+                $comision = $this->Comisions->patchEntity($comision, $this->request->data);
+                $comision['validada']=true;
+                if ($this->Comisions->save($comision)) {
+        
+                } else {
+                    $this->Flash->error(__('The comision could not be saved. Please, try again.'));
+                }
+            }
 
             $CakePdf = new \CakePdf\Pdf\CakePdf();
             $CakePdf->templatePath('Comisions/pdf');
@@ -333,6 +360,32 @@ class ComisionsController extends AppController{
             
             return $this->redirect($this->referer());
             $this->autoRender = false;
+    }
+
+    public function cambiaValidacion()
+    {
+        
+        $id = $this->request->data['id'];
+        $validada = $this->request->data['validada'];
+       
+        $comision = $this->Comisions->get($id, [
+            'contain' => []
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+
+            
+            // Guardamos cambios en la BD
+            $comision = $this->Comisions->patchEntity($comision, $this->request->data);
+            if ($this->Comisions->save($comision)) {
+                //debug($comision->validada);exit();
+                if ($comision->validada) {
+                   $this->validaComision($id);
+                }
+            } else {
+                $this->Flash->error(__('The comision could not be saved. Please, try again.'));
+            }
+        }
+       $this->autoRender = false;
     }
 
 }

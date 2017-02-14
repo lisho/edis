@@ -92,7 +92,7 @@
         <br><br>
 <?php endforeach ?>
 
-<h2>Otros temas pasados por comisión:</h2>
+<h2>Otros temas tratados en esta comisión:</h2>
 <?php if (!empty($comision->observaciones)): ?>
     <?= $comision->observaciones;?> 
 <?php else: ?>
@@ -112,9 +112,13 @@
 	<p class="centrado">Secretaría de la Comisión Técnica para la Valoración y Seguimiento de la Renta Garantizada de Ciudadanía.</p>
 
 	<div class="firma">
-		<p><strong><?= $el_secretario->nombre.' '.$el_secretario->apellidos; ?></strong></p>
-		<P><?= $el_secretario->puesto.' - Equipos de inclusión Social ('.$el_secretario->equipo->nombre.')'; ?></P>
-		<p>Ayuntamiento de León</p>
+        <?php if (!isset($el_secretario)): ?>
+            <h2 class="danger">Debes elegir un sercretario para la comisión entre los TEDIS asistentes a la misma.</h2>
+        <?php else: ?>
+            <p><strong><?= $el_secretario->nombre.' '.$el_secretario->apellidos; ?></strong></p>
+            <P><?= $el_secretario->puesto.' - Equipos de inclusión Social ('.$el_secretario->equipo->nombre.')'; ?></P>
+            <p>Ayuntamiento de León</p>            
+        <?php endif; ?>
 	</div>
 	<br><br><br>
 	<p><strong>GERENCIA TERRITORIAL DE SERVICIOS SOCIALES DE LEÓN</strong></p>

@@ -351,18 +351,39 @@ class AppController extends Controller
      * 
      */
 
-    public function cruceNomina($hs=null)
+    public function cruceNomina($hs=null,$dni_expediente=null)
     {
+        
         $participantes_ultima_nomina = [];
         $count_nominas = [];
+        $m_n=null;
         $this->loadModel('Nominas');
-       
+        
+
+//Buscamos el numero de historia social asociado a los dni en la nomina.
+        foreach ($dni_expediente as $dni) {
+            
+            $datos_participante = $this->Nominas->find()->where(['dni' => $dni])->toArray();
+            if ($datos_participante) {
+                $hs = $datos_participante[0]['HS'];
+            }
+        }
+
+        //debug($hs);
+        //debug($datos_participante);
+        //debug($historia_social);exit();
+
 //listamos las nóminas de esta historia social
 
-        $mis_nominas = $this->Nominas->find('all', ['conditions' => [
+        if ($hs ==='') {
+            $mis_nominas=[];
+        } else {
+            $mis_nominas = $this->Nominas->find('all', ['conditions' => [
                                 'HS' => $hs,
                             ]
                         ]);
+        }
+        
 
 /* En caso de que exista alguna nómina para esta HS:
 **  1. Convertimos el objeto en array
@@ -419,8 +440,8 @@ class AppController extends Controller
             //$m_n['nombres_ultima_nomina'] = $nombres_ultima_nomina; 
             
         }
-            
             return  $m_n;
+
     }
 
 
@@ -466,7 +487,7 @@ class AppController extends Controller
 
         while (empty($ultima_nomina)) {
 
-            if ($mes_revisar<=1) { // corregimos los cambios de año
+            if ($mes_revisar<1) { // corregimos los cambios de año
                 $c = 1;
                 $mes_revisar=12;
                 $year_revisar--;

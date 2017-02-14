@@ -86,7 +86,6 @@ class ExpedientesTable extends Table
                             'message' => 'La forma de introducir el número de expediente EDIS no es correcta (4 dígitos)'
                             ]);
             
-
         $validator
             ->requirePresence('numhs', 'create')
             //->isUnique('numhs', 'Este Número de historia ya existe en la aplicación')

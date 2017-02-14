@@ -33,6 +33,12 @@ class MigraexpedientesTable extends Table
         $this->table('migraexpedientes');
         $this->displayField('id');
         $this->primaryKey('id');
+
+        $this->hasMany('Migrausuarios', [
+            'foreignKey' => 'migraexpediente_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
+        ]);
     }
 
     /**

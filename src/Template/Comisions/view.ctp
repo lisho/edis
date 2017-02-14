@@ -1,8 +1,59 @@
-<?php $modificador =''; ?>
-<h1><i class="fa fa-folder-open"></i>  Comisión <?= $comision->tipo; ?><small><?= ' '.$this->Time->format($comision->fecha, "dd/MM/yyyy", null); ?></small></h1>
+<?php 
+    $ocultar =''; 
+    $ancho_panel_derecho ='col-md-9 col-sm-8 col-xs-12';
+    $modificador ='';
+    $texto_validada = "";
+?>
+
+<?php if ($comision->validada): ?>
+     <?php  
+        $ocultar="hidden";
+        $ancho_panel_derecho ='col-md-12 col-sm-12 col-xs-12';
+        $texto_validada = '<big class="success-text icono-titulo-fa"><strong>--- Comisión Validada ---</strong></big>';
+     ?>      
+<?php endif; ?>
+<div class="row">
+   <div class="col-lg-6 col-md-6">
+        <h1><i class="fa fa-folder-open"></i>  Comisión <?= $comision->tipo; ?><small><?= ' '.$this->Time->format($comision->fecha, "dd/MM/yyyy", null); ?></small></h1>
+    </div>
+
+    <div class="col-lg-6 col-md-6 text-right">
+
+        <?= $texto_validada;?>
+        <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa',
+                                                                    'id'=>'volver',
+                                                                    'data-container'=>"body",
+                                                                    'data-toggle'=>"popover",
+                                                                    'data-placement'=>"bottom",
+                                                                    'data-content'=>"Vuelve al listado de comisiones."]) ?> 
+         <?= $this->Html->link('', ['action' => 'edit', $comision->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa '.$ocultar,
+                                                                                    'id'=>'editar',
+                                                                                    'data-container'=>"body",
+                                                                                    'data-toggle'=>"popover",
+                                                                                    'data-placement'=>"bottom",
+                                                                                    'data-content'=>"Editar los datos de configuración de esta comisión."]) ?> 
+        <?php if ($comision->tipo == "RGC"): ?>
+          <?= $this->Html->link(__(''), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'text-primary icono-titulo-fa   fa fa-file-pdf-o', 'target' => '_blank',
+                                                'id'=>'ver_pdf',
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"bottom",
+                                                'data-content'=>"Genera una vista previa del acta en PDF, descargable e imprimible."
+            ]); ?>     
+          <?= $this->Html->link('', ['action' => 'validaComision', $comision->id], ['class'=>'text-primary icono-titulo-fa fa fa-thumbs-o-up '.$ocultar,
+                                                                                'id'=>'valida',
+                                                                                'data-container'=>"body",
+                                                                                'data-toggle'=>"popover",
+                                                                                'data-placement'=>"bottom",
+                                                                                'data-content'=>"Valida el acta, dando por terminado el trabajo sobre ella."
+            ]); ?> 
+        <?php endif; ?>  
+    </div> 
+</div>
+
 
 <!-- Columna Izquierda -->   
-<div class="col-md-3 col-sm-4 col-xs-12">
+<div class="col-md-3 col-sm-4 col-xs-12 <?= $ocultar;?>">
 
     <div class="x_panel">
         <div class="x_title">
@@ -103,10 +154,6 @@
                                                     ]); ?>
 
 
-
-
-
-
 <!-- INICIO MODAL Añadir asistentes a la comision-->
                 <div id="modal_add_asistentes" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
@@ -154,17 +201,18 @@
 
 
     </div>
-
+<!--
 <?php if ($comision->tipo == "RGC"): ?>
       <?= $this->Html->link(__('  Crear el acta'), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'btn btn-default fa fa-file-pdf-o', 'target' => '_blank']); ?>     
       <?= $this->Html->link('  Validar el acta', ['action' => 'valida', $comision->id], ['class'=>'btn btn-default fa fa-file-pdf-o']); ?> 
-<?php endif; ?>           
+<?php endif; ?>   
+-->        
 
 </div>  <!-- // FIN columna izquierda -->   
 
 <!-- // PANEL DERECHO - Expedientes por CEAS --> 
 
-<div class="col-md-9 col-sm-8 col-xs-12">   
+<div class="<?= $ancho_panel_derecho;?>">   
 
     <div class="x_panel">
         <div class="x_title">
@@ -207,7 +255,7 @@
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Docum.</th>       
                                             <?php endif; ?>
-                                            <th></th>
+                                            <th class="<?= $ocultar;?>"></th>
                                             
                                             
                                         </tr>
@@ -220,7 +268,9 @@
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                    'modificador' => 'ceas_'
+                                                                                    'modificador' => 'ceas_',
+                                                                                    'ocultar' => $ocultar
+
                                                                                 ])?>
 
                                             <?php elseif ($comision['tipo'] == "AUS"): ?>
@@ -228,7 +278,8 @@
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision_aus', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                    'modificador' => 'ceas_'
+                                                                                    'modificador' => 'ceas_',
+                                                                                    'ocultar' => $ocultar
                                                                                 ])?>
 
                                             <?php endif ?>
@@ -286,7 +337,8 @@
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                    'modificador' => 'ceas_'
+                                                                                    'modificador' => 'ceas_',
+                                                                                    'ocultar' => $ocultar
                                                                                 ])?>
 
                                             <?php elseif ($pasacomision->expediente->ceas==$key && $comision['tipo'] == "AUS"): ?>
@@ -294,7 +346,8 @@
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision_aus', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
-                                                                                    'modificador' => 'ceas_'
+                                                                                    'modificador' => 'ceas_',
+                                                                                    'ocultar' => $ocultar
                                                                                 ])?>
 
                                             <?php endif ?>

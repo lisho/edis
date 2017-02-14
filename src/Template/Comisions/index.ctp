@@ -18,6 +18,13 @@
           <div class="x_content">
   
                     <?php foreach ($ultimas_comisiones as $comision): ?>
+
+                        <?php if ($comision->validada): ?>
+                             <?php $badge='success'?>  
+                        <?php else: ?>
+                             <?php $badge='warning'?>        
+                        <?php endif; ?>
+
                         <a href="comisions/view/<?= $comision->id; ?>">
                         <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
                             <div class="tile-stats">
@@ -28,8 +35,8 @@
                            
                             <div class="count"><?= $this->Time->format($comision->fecha, "dd/MM/yyyy", null) ?></div>
                                 <h3><?= h($comision->tipo) ?>
-                                <button class="btn btn-primary" type="button">
-                                  <span class="badge"> <?= count($comision->pasacomisions);?> </span>
+                                <button class="btn btn-<?= $badge;?>" type="button">
+                                  <span id="badge<?= $comision->id;?>" class="badge"> <?= count($comision->pasacomisions);?> </span>
                                 </button>
                                 </h3>
                             </div>
@@ -61,6 +68,7 @@
                     <th>Fecha</th>
                     <th>Comisión de...</th>
                     <th>Observaciones </th>
+                    <th>Estado</th>
                     <th></th>
                     
                 </tr>
@@ -69,7 +77,7 @@
                 <?php foreach ($comisions as $comision): ?>
                 <tr>
                     <td>
-                        <?= $this->Html->link('', ['action' => 'view', $comision->id], ['class'=> 'btn btn-xs btn-success fa fa-caret-square-o-right btn btn-xs']) ?>
+                        <?= $this->Html->link('', ['action' => 'view', $comision->id], ['class'=> 'btn btn-xs btn-primary fa fa-caret-square-o-right btn btn-xs']) ?>
                     </td>
                     <td>
                         <?= $this->Time->format($comision->fecha, "dd/MM/yyyy", null) ?>
@@ -77,8 +85,31 @@
                     <td><?= h($comision->tipo) ?></td>
                     <td><?= h($comision->observaciones) ?></td>
                     <td>
-                        <?= $this->Html->link('', ['action' => 'edit', $comision->id], ['class'=> 'fa fa-edit']); ?> 
-                        <?= $this->Form->postLink('', ['controller' => 'Comisions', 'action' => 'delete', $comision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar esta comisión?. Si lo haces eliminarás todos los datos asociados a la misma... ¡Para siempre!']); ?> 
+                        <?php if ($comision->validada == false): ?>
+                            <?php $ocultar=''; ?>
+                            <?= $this->Html->link('', '#', ['class'=> 'btn btn-xs btn-warning fa fa-pencil-square btn btn-xs valida_comision',
+                                                                'id'=>$comision->id,
+                                                                'data-container'=>"body",
+                                                                'data-toggle'=>"popover",
+                                                                'data-placement'=>"left",
+                                                                'data-content'=>"Pica aquí para validar la comisión para dar por finalizado el trabajo sobre ella."
+                            ]) ?>
+                        <?php else: ?> 
+                            <?php $ocultar='hidden'; ?>                                             
+                            <?= $this->Html->link('', '#', ['class'=> 'btn btn-xs btn-success fa fa-check-square btn btn-xs valida_comision',
+                                                                'id'=>$comision->id,
+                                                                'data-container'=>"body",
+                                                                'data-toggle'=>"popover",
+                                                                'data-placement'=>"left",
+                                                                'data-content'=>"Esta comisión ha sido validada. Pica aquí para pasarla de nuevo a borrador y reactivar las opciones de edición."
+                            ]) ?>
+                        <?php endif; ?>
+
+                    </td>
+                    <td id="actions<?= $comision->id;?>">
+                        <?= $this->Html->link('', ['action' => 'edit', $comision->id], ['class'=> 'fa fa-edit '.$ocultar]); ?> 
+
+                        <?= $this->Form->postLink('', ['controller' => 'Comisions', 'action' => 'delete', $comision->id], ['class'=> 'fa fa-trash '.$ocultar, 'confirm' => '¿Realmente quieres eliminar esta comisión?. Si lo haces eliminarás todos los datos asociados a la misma... ¡Para siempre!']); ?> 
                     </td>
                     
                 </tr>

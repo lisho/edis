@@ -22,10 +22,7 @@ class ExpedientesController extends AppController
     {
         
         $expedientes = $this->Expedientes->find('all', [
-            'contain' => ['Participantes.Relations'=>[
-                                //'conditions' => ['Participantes.relation_id'=>'1']
-                ]
-            ],
+            'contain' => ['Participantes.Relations'],
         ]);
 
 /*
@@ -78,7 +75,7 @@ class ExpedientesController extends AppController
                                                                                 ]);
 
         $expediente = $this->Expedientes->get($id, [
-            'contain' => ['Participantes', 'Roles', 'Roles.Tecnicos','Roles.Tecnicos.Equipos', 'Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
+            'contain' => ['Participantes', /*'Roles', 'Roles.Tecnicos',*/'Roles.Tecnicos.Equipos','Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
                 'Pasacomisions.Comisions', 'Pasacomisions'=>[ 
                                                 'sort'=>[
                                                     'Comisions.fecha'=> 'DESC']],
@@ -132,8 +129,19 @@ class ExpedientesController extends AppController
         // de este expediente                                  //
         //*****************************************************//
 
+            // Buscamos los dnis de los miembros de la unidad familiar para buscarlos en la nomina.
+            $dni_expediente =[];
+            if ($expediente['numhs']==null) {                
+                 
+                 foreach ($expediente->participantes as $participante) {
+                     $dni_expediente[] = $participante->dni;
+                 }
+            }
 
-            $datos_nominas = $this->cruceNomina($expediente['numhs']);
+
+            $datos_nominas = $this->cruceNomina($expediente['numhs'],$dni_expediente);
+
+            //debug($expediente);exit();
 
         //*****************************************************//
         //                                                     //

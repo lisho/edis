@@ -3,6 +3,9 @@
 
 	<p class="error-text text-center">Este expediente <b>no aparece</b> en la última nómina cargada (<?= $datos_nominas['datos_ultima_nomina']['fechanomina']; ?>)</p>
 
+<?php elseif ($datos_nominas===null): ?>
+	 <p class="error-text text-center">No ha sido posible encontrar este expediente en la última nómina. Si no conocemos el número de Historia Social hemos comprobado los DNI/NIE de los miembros de la parrilla.</p>
+
 <?php else: ?>	
 	<?php if ($datos_nominas['ultima_nomina']['fechanomina']!=$datos_nominas['datos_ultima_nomina']['fechanomina'] ): ?>
 		<p class="error-text text-center">Este expediente <b>no aparece</b> en la última nómina cargada (<?= $datos_nominas['datos_ultima_nomina']['fechanomina']; ?>)</p>
@@ -11,7 +14,7 @@
 	<?php endif; ?>
 
 <?php 
-
+	$coincide_numhs = '';
 	$coincide_numrgc = '';
 	$coincide_ceas = '';
 	$coincide_direccion = '';
@@ -57,6 +60,10 @@
         <tr>
         	<th>Última nómina en la que aparece este expediente:</th>
         	<td><?= $datos_nominas['ultima_nomina']['fechanomina']; ?></td>
+        </tr>
+        <tr>
+        	<th>Número de Historia Social</th>
+        	<td><?= $datos_nominas['ultima_nomina']['HS']; ?></td>
         </tr>
         <tr>
             <th>NÚMERO DE R.G.C.: </th>

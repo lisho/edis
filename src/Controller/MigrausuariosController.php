@@ -182,15 +182,19 @@ class MigrausuariosController extends AppController
      */
     public function edit($id = null)
     {
+
         $migrausuario = $this->Migrausuarios->get($id, [
             'contain' => []
         ]);
+
+        echo json_encode($migrausuario);
+
         if ($this->request->is(['patch', 'post', 'put'])) {
             $migrausuario = $this->Migrausuarios->patchEntity($migrausuario, $this->request->data);
             if ($this->Migrausuarios->save($migrausuario)) {
                 $this->Flash->success(__('The migrausuario has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'errores']);
             } else {
                 $this->Flash->error(__('The migrausuario could not be saved. Please, try again.'));
             }
@@ -229,11 +233,11 @@ class MigrausuariosController extends AppController
     {
         $tedis = [];
 
-        $migrausuario = $this->Migrausuarios->find('all', [
+        $migrausuarios = $this->Migrausuarios->find('all', [
             'contain' => []
         ]);
 
-        foreach ($migrausuario as $k => $usuario) {
+        foreach ($migrausuarios as $k => $usuario) {
             
             if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni'])) {
         
@@ -248,6 +252,8 @@ class MigrausuariosController extends AppController
 
             $usuario['dni']=$this-> limpiarEspacios($usuario['dni']);  
 
+            //$this->cambiarDni($usuario->id, $usuario->dni);
+
             if (!preg_match('/(([X-Z]{1})(\d{7})([A-Z]{1}))|((\d{8})([A-Z]{1}))|((\d{4})-(\d{1}))/',$usuario['dni']) && !($usuario->numedis >4999 && $usuario->numedis<5999)) {
                     $dni_sinespacios[] = $usuario; //array con errores en el dni despues de eliminar los errores por espacios en blanco y los arraigos.
                 }        
@@ -257,9 +263,41 @@ class MigrausuariosController extends AppController
 
 //debug($tedis);exit();
 
-        $this->set(compact('dni_error','posibles_arraigos','dni_sinespacios'));
+        $this->set(compact('dni_error','posibles_arraigos','dni_sinespacios','migrausuario'));
         $this->set('_serialize', ['dni_error','posibles_arraigos','dni_sinespacios']);
     }
+
+
+    /**
+    ***
+    ***
+    ***
+    **/
+
+        public function editaDni($id = null)
+        {
+            
+            //debug($this->request->data);exit();
+            $dni = $this->request->data['dni'];
+            
+            $migrausuario = $this->Migrausuarios->get($id, [
+                'contain' => []
+            ]);
+
+            if ($this->request->is(['patch', 'post', 'put'])) {
+                $migrausuario = $this->Migrausuarios->patchEntity($migrausuario, $this->request->data);
+                
+                if ($this->Migrausuarios->save($migrausuario)) {
+                    $this->Flash->success(__('Se ha guardado correctamente la edad de '.$migrausuario->nombre.' '.$migrausuario->apellidos));
+                    
+                    return $this->redirect($this->referer());
+                } else {
+                    $this->Flash->error(__('La edad del migrausuario no se ha guardado correctamente. Por favor, revisa el formato e inténtalo de nuevo.'));
+                    return $this->redirect($this->referer());
+                }
+            }
+            $this->autoRender = false;
+        }
 
 
     /**
@@ -315,7 +353,7 @@ class MigrausuariosController extends AppController
 
     }
 
-        /**
+    /**
      * 
      * Detectar errores en los expedientes
      */
@@ -329,8 +367,36 @@ class MigrausuariosController extends AppController
                 'valueField' => 'numedis'
             ]);
         $expedientes_array = $expedientes->toArray();
-        $usuarios = $this->Migrausuarios->find('all');
+        $usuarios = $this->Migrausuarios->find('all',[
+                'contain' => ['Migraexpedientes']
+            ]);
+
+        debug(count($usuarios->toArray()));debug($usuarios->toArray());exit();
         
         $this->set(compact('expedientes_array','usuarios'));
+    }
+
+    /**
+     * 
+     * Cambiar el DNI/NIE de un participante despes de un arreglo
+     */
+
+    public function cambiarDni($id=null, $dni=null)
+    {
+        $migrausuario = $this->Migrausuarios->get($id, [
+                'contain' => []
+            ]);
+        $this->request->data['dni'] = $dni;
+        $migrausuario = $this->Migrausuarios->patchEntity($migrausuario, $this->request->data);
+        if ($this->Migrausuarios->save($migrausuario)) {
+            $this->Flash->success(__('Cambiado el DNI/NIE del expediente: '.$id.' ('.$dni.')'));
+
+            return $this->redirect(['action' => 'index']);
+        } else {
+            $this->Flash->error(__('The migrausuario could not be saved. Please, try again.'));
+        }
+   
+        $this->set(compact('migrausuario'));
+        $this->set('_serialize', ['migrausuario']);
     }
 }

@@ -82,7 +82,8 @@ Router::scope('/comisions', function ($routes) {
     $routes->connect('/add/*', ['controller' => 'Comisions', 'action' => 'add']);
     $routes->connect('/edit/*', ['controller' => 'Comisions', 'action' => 'edit']);
     $routes->connect('/delete/*', ['controller' => 'Comisions', 'action' => 'delete']);
-    $routes->connect('/valida/*', ['controller' => 'Comisions', 'action' => 'valida']);
+    $routes->connect('/validaComision/*', ['controller' => 'Comisions', 'action' => 'validaComision']);
+    $routes->connect('/cambiaValidacion/*', ['controller' => 'Comisions', 'action' => 'cambiaValidacion']);
     $routes->fallbacks('InflectedRoute');
 });
 

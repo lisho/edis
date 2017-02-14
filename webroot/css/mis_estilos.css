@@ -416,7 +416,11 @@ table>tbody>tr.tabla-seleccionada>td {
 }
 
 .panel-body-cambios{
-	height: 250px;
+	height: 280px;
+}
+
+.panel-footer-cambios{
+	height: 3em;
 }
 
 .button_home {
