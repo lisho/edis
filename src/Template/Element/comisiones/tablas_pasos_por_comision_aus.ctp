@@ -12,13 +12,13 @@
             
             <?php foreach ($pasacomision->expediente->prestacions as $prestacion): ?>
 
-                    <?php if ($prestacion->prestaciontipo->tipo === 'ATFIS' && $prestacion->cierre === null): ?>
+                    <?php if ($prestacion->prestaciontipo->tipo === 'ATFIS' && $prestacion->estado ==6): ?>
 
                         <?php $atfis = 'si'; $atfis_num++?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
 
                     <?php endif; ?>
 
-                    <?php if ($prestacion->prestaciontipo->tipo === 'AUS' && $prestacion->cierre === null): ?>
+                    <?php if ($prestacion->prestaciontipo->tipo === 'AUS' && $prestacion->estado ==6): ?>
                         <?php $p = 'si'; ?> <!-- Recogemos la existencia de una prestación abierta de AUS -->
 
                          <!-- No está en nomina - codigo de color ?? -->

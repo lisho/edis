@@ -20,10 +20,15 @@ class ExpedientesController extends AppController
      */
     public function index()
     {
-        
+
+        $expedientes = $this->Expedientes->find()
+                                        ->contain('Participantes.Relations')
+                                        ->all() ;
+/*        
         $expedientes = $this->Expedientes->find('all', [
             'contain' => ['Participantes.Relations'],
         ]);
+*/
 
 /*
         $this->paginate = [

@@ -89,14 +89,13 @@ class AppController extends Controller
         $this->Auth->allow(['index', 'view', 'display']);
          
         $this->set('auth', $this->Auth->user()); //Con esta linea pasamos $auth a las vistas.
-        $this->set('ultimos_avisos', $this->ultimosAvisos(5)); //Con esta linea pasamos $auth a las vistas.
+        $this->set('ultimos_avisos', $this->ultimosAvisos(5)); //Con esta linea pasamos los avisos a las vistas.
 
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
         }
- 
     }
 
     public function isAuthorized($user)

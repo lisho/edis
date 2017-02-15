@@ -13,17 +13,17 @@
             
             <?php foreach ($pasacomision->expediente->prestacions as $prestacion): ?>
 
-                    <?php if ($prestacion->prestaciontipo->tipo === 'ATFIS' && $prestacion->cierre === null): ?>
+                    <?php if ($prestacion->prestaciontipo->tipo === 'ATFIS' && $prestacion->estado ==6): ?>
 
                         <?php $atfis = 'si'; $atfis_num++?> <!-- Recogemos la existencia de una prestación abierta de ATFIS -->
 
                     <?php endif; ?>
 
-                    <?php if ($prestacion->prestaciontipo->tipo === 'RGC' && $prestacion->cierre === null): ?>
+                    <?php if ($prestacion->prestaciontipo->tipo === 'RGC' && $prestacion->estado ==6): ?>
                         <?php $p = 'si'; ?> <!-- Recogemos la existencia de una prestación abierta de RGC -->
 
                          <!-- No está en nomina - codigo de color ?? -->
-                        <?php if ($prestacion->prestacionestado->estado === 'Pendiente de cobro'){ $btn = ' btn-warning ';} else if ($prestacion->prestacionestado->estado === 'Abierta') {$btn = ' btn-success ';} ?>
+                        <?php if ($prestacion->prestacionestado->estado === 'Pendiente de cobro'){ $btn = ' btn-warning '; break;} else if ($prestacion->prestacionestado->estado === 'Abierta') {$btn = ' btn-success '; break;} else{}?>
 
 
                         <?php $titular = $prestacion->participante->nombre.' '.$prestacion->participante->apellidos; ?> <!-- Recogemos el nombre de la prestación de RGC -->
