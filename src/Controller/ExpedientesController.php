@@ -21,19 +21,20 @@ class ExpedientesController extends AppController
     public function index()
     {
 
+
         $expedientes = $this->Expedientes->find()
                                         ->contain('Participantes.Relations')
                                         ->all() ;
-/*        
+/*       
         $expedientes = $this->Expedientes->find('all', [
             'contain' => ['Participantes.Relations'],
         ]);
-*/
 
-/*
+
+
         $this->paginate = [
-            'contain' => ['Participantes'=>[
-                                'conditions' => ['Participantes.relation_id'=>'1']
+            'contain' => ['Participantes.Relations'=>[
+                                //'conditions' => ['Participantes.relation_id'=>'1']
                 ]
             ],
         ];
@@ -343,10 +344,10 @@ class ExpedientesController extends AppController
             if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('Los cambios en el expediente se han completado correctamente.'));
                 
-                return $this->redirect(['action' => 'view',$id]);
+                //return $this->redirect(['action' => 'view',$id]);
                 
-                if (isset($this->request->data['roles']) || isset($this->request->data['volver'])) {
-                    /*return $this->redirect($this->referer());*/
+                if (isset($this->request->data['desde']) == 'comision') {
+                    return $this->redirect($this->referer());
                     
                 } else {
                     return $this->redirect(['action' => 'view',$id]);

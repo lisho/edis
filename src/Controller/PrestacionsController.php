@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\I18n\Time;
 
 /**
  * Prestacions Controller
@@ -52,10 +53,53 @@ class PrestacionsController extends AppController
     public function add()
     {
         $prestacion = $this->Prestacions->newEntity();
-        if ($this->request->is('post')) {
+
+        //-> Si la petición llega por ajax
+
+        if ($this->request->is('ajax')) {
+            
+            //-> Si la llamada AJAX viene desde una comisión
+
+            if ($this->request->data['desde']=='comision') {
+                
+                $this->loadModel('Participantes');
+
+                $participante = $this->Participantes-> find()
+                                                -> contain(['Expedientes'])
+                                                -> where([  
+                                                            'relation_id' => 1,
+                                                            'expediente_id' => $this->request->data['expediente_id']])
+                                                -> first();
+/*
+                $expediente = $this->Expedientes->find('all',[
+                                                        'contain'=>['Participantes'],
+                                                        'conditions' => ['Participantes.relation_id' => 1,
+                                                                            'id' => $this->request->data['expediente_id']]
+                                                        ]);
+*/
+                $this->request->data['prestaciontipo_id'] = 4;
+                $this->request->data['numprestacion'] = 'ATFIS'.$participante['expediente']['numedis'];
+                $this->request->data['apertura'] = date('Y-m-d');
+                $this->request->data['participante_id'] = $participante['id'];
+                $this->request->data['expediente_id'] = $participante['expediente_id'];
+                $this->request->data['prestacionestado_id'] = 5;
+                $this->request->data['observaciones'] = "Prestación abierta automátivamente por el sistema por derivación desde comisión";
+
+                //debug($participante); 
+                //debug($this->request->data); 
+                //exit();
+
+                $prestacion = $this->Prestacions->patchEntity($prestacion, $this->request->data);
+                $this->Prestacions->save($prestacion);
+            }//-> END IF desde == comision
+
+        } //-> END IF IS AJAX
+
+            //-> Si la petición llega por post pero NO POR AJAX
+        elseif ($this->request->is('post')) {
 
             $prestaciones_existentes = $this->Prestacions->findByExpediente_id($this->requiest->data->expediente_id);
-debug($prestaciones_existentes);exit();
+
             $prestacion = $this->Prestacions->patchEntity($prestacion, $this->request->data);
             if ($this->Prestacions->save($prestacion)) {
                 $this->Flash->success(__('The prestacion has been saved.'));

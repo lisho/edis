@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Filesystem\Folder;
+use Cake\Filesystem\File;
 
 /**
  * Comisions Controller
@@ -100,6 +102,18 @@ class ComisionsController extends AppController{
         $comision = $this->Comisions->get($id, [
             'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes', 'Pasacomisions.Expedientes.Prestacions', 'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 'Pasacomisions.Expedientes.Prestacions.Participantes']
         ]);
+
+        /*
+        **
+        ** Cargamos el listado de archivos de cada paso por comision.
+        **/
+
+/*
+        foreach ($comision->pasacomisions as $paso) {
+            $archivos=$this->archivosTree($paso->expediente->numedis.'/'.$comision->tipo.$comision->fecha->i18nFormat('dd-mm-yyyy'), $paso->expediente->id);
+            $comision[$paso]['archivos'] = $archivos;
+        }
+*/        
 
         /*
         ** Pasamos los posibles Estados de la comisión (hemos cargado el modelo al principio)

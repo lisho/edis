@@ -67,10 +67,13 @@ jQuery(document).ready(function($) {
 		$('#numedis_recomentdado').addClass('hidden');
 	});
 
-	// --> Validamos la comision
+	// --> Activamos el boton de validar la comision
 
 	valida_comision();
 
+	// --> Activamos el boton de crear prestacion ATFIS desde comisión
+
+	crea_atfis();
 
 
 /*
@@ -100,7 +103,7 @@ jQuery(document).ready(function($) {
 
 $(function(){
 
-	
+
 
 // --> Inicio Combo CEAS
 	
@@ -736,8 +739,13 @@ $(function(){
 		lanza_popover();
 	});
 
+
+
+
+
 }); // --> Fin ReadyDocument
 
+//************************************************************Fin ReadyDocument***************************************************************************//
 
 /*
 **
@@ -777,6 +785,36 @@ function valida_comision() {
 			return false;
 	});
 }
+
+/*
+**
+** Funcion que gestionan la creación de prestaciones atfis
+**
+*/
+
+function crea_atfis() {
+	
+	$('.sin_atfis').click(function(event) {
+
+		var expediente_id = $(this).attr('id');		
+		
+		$(this)
+				.addClass('hidden')
+				.next('button').removeClass('hidden');			
+
+		$.ajax({
+				type: "POST",
+				url: url_json+"prestacions/add",
+				data: {
+						expediente_id :expediente_id,
+						desde:'comision'
+					},
+				cache: false,
+			});	
+			return false;
+	});
+}
+
 
 /*
 **
