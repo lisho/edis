@@ -78,6 +78,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 Router::scope('/comisions', function ($routes) {
     $routes->extensions('pdf');
     $routes->connect('/acta/*', ['controller' => 'Comisions', 'action' => 'acta']);
+    $routes->connect('/plantilla/*', ['controller' => 'Comisions', 'action' => 'plantilla']);
     $routes->connect('/view/*', ['controller' => 'Comisions', 'action' => 'view']);
     $routes->connect('/add/*', ['controller' => 'Comisions', 'action' => 'add']);
     $routes->connect('/edit/*', ['controller' => 'Comisions', 'action' => 'edit']);

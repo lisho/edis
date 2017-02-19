@@ -1,5 +1,9 @@
 
 <h1><i class="fa fa-money"></i>  Visor de Nóminas </h1>
+
+<!-- Barra de Progreso -->  
+<?= $this->element ('herramientas/barra_progreso'); ?>
+
 <div class="col-md-12 col-sm-12 col-xs-12"> 
     <div class="x_panel"> 
         <div class="x_title"> 

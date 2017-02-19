@@ -1,15 +1,29 @@
+ <!-- 
+ *************************************************************************************************************************************************
+ ******
+ ****** FILA 1
+ *******************************************************************************************************************************************************
+ ******-->
 
-    <tr>
+    <tr class="fila1">
+
+        <!--MOTIVO-->
         <td><?= $pasacomision->motivo; ?></td>
+
+        <!--CLASIFICACIÓN : Solo RGC-->
         <td><?= $pasacomision->clasificacion; ?></td>   
+
+        <!-- EXPEDIENTE EDIS -->
         <td><strong><?= $this->Html->link($pasacomision->expediente->numedis, ['controller'=>'Expedientes', 'action'=>'view', $pasacomision->expediente->id], ['target' => '_blank']); ?></strong></td>
+
+        <!-- HISTORIA SOCIAL -->
         <td>
             <?php if ($pasacomision->expediente->numhs !=''): ?>
                     <?= $pasacomision->expediente->numhs; ?>
             <?php else: ?>
                     <?= $this->Html->link('+HS', '#', [     
                             'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
-                            'id'=>$modificador.'crear_hs'.$pasacomision->id,
+                            'id'=>$modificador.'crear_hs'.$pasacomision->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
                             'data-container'=>"body",
                             'data-toggle'=>"popover",
@@ -17,7 +31,7 @@
                             'data-content'=>"No tenemos la Historia Social de este expediente. Por favor, añádela."]); ?>  
             
             <!-- MODAL Añadir Historia Social -->
-                <div id="modal_<?= $modificador; ?>crear_hs<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div id="modal_<?= $modificador; ?>crear_hs<?= $pasacomision->id.$mod; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
 
                             <div class="modal-content">
@@ -67,7 +81,7 @@
                 
         </td>   
 
-
+        <!-- Numero de PRESTACIÓN -->
         <td>
             
             <?php $p = 'no'; ?> <!-- Partimos de que no existe prestación abierta de RGC -->
@@ -96,7 +110,7 @@
                             <p>
                                 <?= $this->Html->link(' '.$prestacion->numprestacion, '#', [     
                                         'class'=> 'btn btn-xs modal-btn'.$btn.'fa blond sombra',
-                                        'id'=>$modificador.'ver_info_prestacion'. $pasacomision->id,
+                                        'id'=>$modificador.'ver_info_prestacion'. $pasacomision->id.$mod,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
                                         'data-placement'=>"top",
@@ -105,7 +119,7 @@
 
    <!-- MODAL Datos de la Prestación  -->  
 
-                                    <div id="modal_<?= $modificador; ?>ver_info_prestacion<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                    <div id="modal_<?= $modificador; ?>ver_info_prestacion<?= $pasacomision->id.$mod; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                                         <div class="modal-dialog" role="document">
 
                                                 <div class="modal-content">
@@ -182,7 +196,7 @@
            
                     <?= $this->Html->link('+ RGC', '#', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
-                                        'id'=>$modificador.'crear_prestacion_rgc'.$pasacomision->id,
+                                        'id'=>$modificador.'crear_prestacion_rgc'.$pasacomision->id.$mod,
                                         //'data-expediente' => $pasacomision->expediente->id,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
@@ -191,7 +205,7 @@
                 
 
     <!-- MODAL Crear prestación -->
-                <div id="modal_<?= $modificador; ?>crear_prestacion_rgc<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div id="modal_<?= $modificador; ?>crear_prestacion_rgc<?= $pasacomision->id.$mod; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                     <div class="modal-dialog" role="document">
 
                             <div class="modal-content">
@@ -310,14 +324,19 @@
 
             <?php endif; ?>
         </td> 
+
+        <!-- TITULAR Prestacion -->
+        <td class="text-uppercase"><?= $titular; ?></td>  
+
+         <!-- DERIVADO -->
         <td>
    
                 <?php if ($atfis === 'no'): ?>
 
                      <?= $this->Html->link('ND', '#', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_atfis',
-                                        'id'=>$pasacomision->expediente->id,
-                                        //'data-expediente' => $pasacomision->expediente->id,
+                                        'id'=>$pasacomision->expediente->id.$mod,
+                                        'data-expediente' => $pasacomision->expediente->id,
                                         'data-container'=>"body",
                                         'data-toggle'=>"popover",
                                         'data-placement'=>"top",
@@ -341,8 +360,8 @@
 
 
         </td>
-        <td class="text-uppercase"><?= $titular; ?></td>  
-        <td><?= $pasacomision->observaciones; ?></td>   
+        
+        <!-- DOCUMENTACION : Solo RGC -->
         <td>
             <?php if ($pasacomision->informeedis==1){echo '<span class="label label-warning">IE</span>';}
                     else{echo '<span class="label label-default">IE</span>';} ?>
@@ -351,54 +370,206 @@
                     else{echo '<span class="label label-default">D</span>';} ?>
 
         </td>  
+
+        <!-- AJUSTE -->
         <td class="<?= $ocultar;?>">
             <?= $this->Html->link('', ['controller' =>'Pasacomisions','action' => 'edit', $pasacomision->id], ['class'=> 'fa fa-edit']) ?> 
             <?= $this->Form->postLink('', ['controller' =>'Pasacomisions', 'action' => 'delete', $pasacomision->id], ['class'=> 'fa fa-trash', 'confirm' => '¿Realmente quieres eliminar este expediente de esta comisión?']); ?> 
+        </td>
 
-            <?= $this->Html->link('+ ', '#', [     
-                            'class'=> 'btn btn-xs modal-btn btn-primary fa fa-files-o sin_prestacion',
-                            'id'=>$modificador.'subir-archivos'.$pasacomision->id,
+    </tr>   
+
+<!-- 
+ ********************************************************************************************************************************************
+ ******
+ ****** FILA 2
+ ******
+ ********************************************************************************************************************************-->
+
+    <tr class="fila2">
+
+        <!-- OBSERVACIONES -->
+        <td colspan="2"><strong>Observaciones:</strong>
+            <?= $this->Html->link(' ', '#', [     
+                            'class'=> 'btn btn-xs btn-primary modal-btn fa fa-edit',
+                            'id'=>'observaciones'.$pasacomision->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
                             'data-container'=>"body",
                             'data-toggle'=>"popover",
                             'data-placement'=>"top",
-                            'data-content'=>"Adjunta el Informe y el PII adjuntos a esta comisión."]); ?>  
+                            'data-content'=> 'Edita las observaciones sobre el paso por comisión de este expediente']); ?>
+        </td>   
+        <td colspan="4" id='cuadro_observaciones_<?= $pasacomision->id;?>'><?= $pasacomision->observaciones; ?></td>
+
+        <!-- ASIGNADO A ... ROL TEDIS -->
+        <td>
+            <?php $roles = $pasacomision->expediente->roles; ?>
+            <?= $this->element ('comisiones/tecnico_en_tabla', ['roles' => $roles, 'mod' => $mod])?>
+        </td>
+
+        <!-- SUBIR ARCHIVOS -->
+        <td class="<?= $ocultar;?>">
+
+                        <!--Cambiamos el color del botón si ya se han subido archivos-->
+            <?php if (empty($arbol[$pasacomision['id']]['/'])): ?>
+                <?php $boton_color = 'btn-danger'; 
+                        $mensaje = "Adjunta el Informe y el PII adjuntos a esta comisión.";
+                ?>
+            <?php else: ?>
+                <?php $boton_color = 'btn-success'; 
+                        $mensaje = "Ya has subido archivos de este expediente, pero puedes añadir más.";
+                ?>
+            <?php endif; ?>
+
+            <?= $this->Html->link('+ ', '#', [     
+                            'class'=> 'btn btn-xs modal-btn '.$boton_color.' fa fa-files-o sin_prestacion',
+                            'id'=>$modificador.'subir-archivos'.$pasacomision->id.$mod,
+                            //'data-expediente' => $pasacomision->expediente->id,
+                            'data-container'=>"body",
+                            'data-toggle'=>"popover",
+                            'data-placement'=>"top",
+                            'data-content'=> $mensaje]); ?>
 
             
         </td> 
 
-    </tr>      
+        <!-- COMPLETAR PASO -->
+        <td class="<?= $ocultar;?>" id="div_completar">
+
+            <?php if ($pasacomision->completado === true){$clase=' descompletar_paso text-success fa fa-check-square-o';} 
+                    else if($pasacomision->completado === false){$clase=' completar_paso text-danger fa fa-square-o';}
+
+            ?>
+
+            <?= $this->Html->link('', '#', [     
+                                'class'=> 'btn btn-xs modal-btn check_grande '.$clase,
+                                'id'=>'completar'.$pasacomision->id.$mod,
+                                'data_id'=>$pasacomision->id,
+                                //'data-expediente' => $pasacomision->expediente->id,
+                                'data-container'=>"body",
+                                'data-toggle'=>"popover",
+                                'data-placement'=>"top",
+                                'data-content'=>"Marca si has completado paso para este expediente en SAUSS para facilitar el seguimiento de los que te quedan."]); ?>  
+
+        </td>
+
+    </tr> 
+
+    
+
+
+
+    <!-- ----------------------------------------------------------------------------------------------------------------------------------------
+
+                                                        MODALES
+
+    ---------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+
+
+
+
+
+
+
+
 
 
     <!-- MODAL Añadir Informe y proyecto -->
-        <div id="modal_<?= $modificador; ?>subir-archivos<?= $pasacomision->id; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
 
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <div id="modal_<?= $modificador; ?>subir-archivos<?= $pasacomision->id.$mod; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
 
-                            <h4 class="modal-title" id="myModalLabel">Selecciona y envía los archivos adjuntos a este paso por comisión del expediente <strong><big><?= $pasacomision->expediente->numedis; ?></big></strong></h4>
-                        </div>
-                        <div class="modal-body">
-                           
-                                       <!-- Adjuntar documentos a la comisión -->
-                             <?= $this->Form->create('',['type' => 'file', 'class'=>'form-horizontal form-label-left', 'url' => ['controller' => 'Expedientes', 'action' => 'add_archivos', $pasacomision->expediente->numedis, $comision->tipo.$comision->fecha->i18nFormat('dd-mm-yyyy')]]) ?>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 
-                                <div class="form-group has-feedback">
-                                    <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span></label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <?= $this->Form->input('add_files[]', ['id'=>'add_files', 'type' => 'file', 'multiple' => 'true', 'label' => 'Adjunta el Informe y el PII asociados a esta comisión:']);?>
-                                    </div>
-                                </div>  
-                                <div class="text-center">
-                                    <?= $this->Form->button('Enviar archivos ->', ['class' => 'btn btn-success  botonera-avisos']) ?>
-                                </div>>
-                            <?= $this->Form->end() ?>
-                            <!-- END Adjuntar documentos a la comisión -->
-                        </div>
+                        <h4 class="modal-title" id="myModalLabel">Selecciona y envía los archivos adjuntos a este paso por comisión del expediente <strong><big><?= $pasacomision->expediente->numedis; ?></big></strong></h4>
+                    </div>
+                    <div class="modal-body">
+                       
+                                   <!-- Adjuntar documentos a la comisión -->
+                         <?= $this->Form->create('',['type' => 'file', 'class'=>'form-horizontal form-label-left', 'url' => ['controller' => 'Expedientes', 'action' => 'add_archivos', $pasacomision->expediente->numedis, $comision->tipo.$comision->fecha->i18nFormat('dd-MM-yyyy')]]) ?>
+
+                            <div class="form-group has-feedback">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name"><span class="required">*</span></label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <?= $this->Form->input('add_files[]', ['id'=>'add_files', 'type' => 'file', 'multiple' => 'true', 'label' => 'Adjunta el Informe y el PII asociados a esta comisión:']);?>
+                                </div>
+                            </div>  
+                            <div class="text-center">
+                                <?= $this->Form->button('Enviar archivos ->', ['class' => 'btn btn-success  botonera-avisos']) ?>
+                            </div>
+                        
+                        <?= $this->Form->end() ?>
+                        <!-- END Adjuntar documentos a la comisión -->
+                        <hr>
+                            <h4>Archivos incluidos en la carpeta </h4>
+                            <h2><i class="fa fa-folder"></i><strong>  RGC<?= $comision->fecha->i18nFormat('dd-MM-yyyy'); ?></strong></h2>
                             
+                            <?php if (empty($arbol[$pasacomision['id']]['/'])): ?>
+                                 <p>No se ha añadido ningún archivo asociado a esta comisión.</p>      
+                            <?php endif; ?>
+
+                            <?php foreach ($arbol[$pasacomision['id']]['/'] as $key => $a): ?> 
+
+                                <div class="row row_archivo lista_archivos">
+                                    <div class="col-xs-10">
+                                        <big><li class="fa fa-file"></li> <?= $a['basename'];?></big>
+                                    </div>
+                                    
+                                    <div class="col-xs-2 text-right">
+                                        
+                                    </div>
+                                </div>
+
+                            <?php endforeach; ?>
                     </div>
 
+                </div>
+
+        </div>
+    </div>   
+
+        <!-- MODAL Editar observaciones del paso por comision -->
+
+    <div id="modal_observaciones<?= $pasacomision->id.$mod; ?>" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title" id="myModalLabel">Añade o edita las observaciones sobre el paso por comisión del expediente <strong><big><?= $pasacomision->expediente->numedis; ?></big></strong></h4>
+                </div>
+                <div class="modal-body">
+                    <?= $this->Form->create($pasacomision, ['class'=>'form-horizontal form-label-left data-parsley-validate=""']) ?>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Observaciones sobre este paso por comision </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <?php
+                                echo $this->Form->input('observaciones', [
+                                        'class'=>'editor form-control col-md-7 col-xs-12',
+                                        'id' => 'input'.$pasacomision->id.$mod,
+                                        'data_id' => $pasacomision->id,
+                                        'data_observaciones' => 'pasacomisions',
+                                        //'required' => 'required',
+                                        'label' => ['text' => '']
+                                    ]);
+                            ?> 
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+
+                        <?= $this->Html->link('Guardar cambios', ['action'=>'index'],['class' => 'btn btn-success guardar_observaciones', 'data_id'=>$pasacomision->id, 'data_mod'=>$mod,'data-dismiss'=>"modal"]); ?>
+
+                        <?= $this->Html->link('Cerrar', ['action'=>'index'],['class' => 'btn btn-primary','data-dismiss'=>"modal"]) ?>
+                    </div>
+                    <?= $this->Form->end() ?>
+
+                </div>
             </div>
-        </div>   
+        </div>
+    </div>   

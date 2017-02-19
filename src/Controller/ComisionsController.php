@@ -100,7 +100,15 @@ class ComisionsController extends AppController{
         */
 
         $comision = $this->Comisions->get($id, [
-            'contain' => ['Asistentecomisions', 'Pasacomisions', 'Asistentecomisions.Tecnicos.Equipos', 'Pasacomisions.Expedientes','Pasacomisions.Expedientes.Participantes', 'Pasacomisions.Expedientes.Prestacions', 'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 'Pasacomisions.Expedientes.Prestacions.Participantes']
+            'contain' => ['Asistentecomisions', 
+                            //'Pasacomisions', 
+                            'Asistentecomisions.Tecnicos.Equipos', 
+                            'Pasacomisions.Expedientes.Roles.Tecnicos',
+                            'Pasacomisions.Expedientes.Participantes', 
+                            //'Pasacomisions.Expedientes.Prestacions', 
+                            'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 
+                            'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 
+                            'Pasacomisions.Expedientes.Prestacions.Participantes']
         ]);
 
         /*
@@ -108,12 +116,20 @@ class ComisionsController extends AppController{
         ** Cargamos el listado de archivos de cada paso por comision.
         **/
 
-/*
+
         foreach ($comision->pasacomisions as $paso) {
-            $archivos=$this->archivosTree($paso->expediente->numedis.'/'.$comision->tipo.$comision->fecha->i18nFormat('dd-mm-yyyy'), $paso->expediente->id);
-            $comision[$paso]['archivos'] = $archivos;
+                    //debug($comision);
+                    //debug($paso->expediente->numedis);
+                    //debug($comision->tipo.$comision->fecha->i18nFormat('dd-MM-yyyy'));
+                    //exit();
+            $archivos=$this->archivosTreeComision($paso->expediente->numedis.'/'.$comision->tipo.$comision->fecha->i18nFormat('dd-MM-yyyy'), $paso->expediente->id);
+
+            $arbol[$paso->id] =  $archivos;
+
+            //debug($arbol);exit();
         }
-*/        
+       
+        
 
         /*
         ** Pasamos los posibles Estados de la comisión (hemos cargado el modelo al principio)
@@ -158,7 +174,7 @@ class ComisionsController extends AppController{
 
         //$listado_posibles_titulares_prestacion = $this->listadoMiembrosParrilla($id);  
               
-        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'el_asistente', 'nueva_prestacion', 'listado_posibles_titulares_prestacion', 'estados_comision'));
+        $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'el_asistente', 'nueva_prestacion', 'listado_posibles_titulares_prestacion', 'estados_comision', 'arbol'));
         $this->set('_serialize', ['comision']);
     }
 
@@ -266,6 +282,87 @@ class ComisionsController extends AppController{
         }
                     
     }
+
+
+   /************************************************************
+    **
+    ** ACIONES CON PLANTILLA AUS
+    **
+    *************************************************************/
+
+    public function plantilla($id=null, $validar=null)
+    {
+        
+        $listado_ceas = $this->listadoEquipo('CEAS');
+        //$secretario='';
+        //$posibles_secretarios=[];
+        $this->loadModel('Pasacomisions');      
+        $nuevo_pasacomision = $this->Pasacomisions->newEntity();
+        
+        $comision = $this->Comisions->get($id, [
+            'contain' => ['Asistentecomisions', 
+                            'Pasacomisions', 
+                            'Asistentecomisions.Tecnicos.Equipos', 
+                            'Pasacomisions.Expedientes',
+                            'Pasacomisions.Expedientes.Participantes', 
+                            'Pasacomisions.Expedientes.Roles.Tecnicos', 
+                            'Pasacomisions.Expedientes.Prestacions.Prestaciontipos', 
+                            'Pasacomisions.Expedientes.Prestacions.Prestacionestados', 
+                            'Pasacomisions.Expedientes.Prestacions.Participantes'],
+
+        ]);
+/*
+        foreach ($comision->asistentecomisions as $asistente) {
+            $asistentes[]=$asistente->tecnico_id; 
+            if ($asistente->tecnico->equipo->tipo === "EDIS" && $asistente->rol ==="asistente") {
+                $posibles_secretarios[$asistente->id]=$asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos;
+            }
+            if ($asistente->rol ==="secretario") {
+                    $secretario[$asistente->id]=$asistente->tecnico->nombre.' '.$asistente->tecnico->apellidos;
+                    $el_secretario= $asistente->tecnico;
+                }                           
+        }
+*/
+
+        // Ordenamos los Pasos por comisión por CEAS
+
+        foreach ($comision->pasacomisions as $exp) {
+            $expedientes_ordenados[$exp->expediente->ceas][]=$exp;  
+        }
+
+        $this->loadModel('Tecnicos');
+        $tecnicos = $this->Tecnicos->find('all', ['contain' => ['Asistentecomisions', 'Equipos'],
+                                                    ]);
+
+        if ($this->request->is('post')) {
+                    $data = $this->request->data['pasacomision'];
+                    $this->addPasacomision($data, $id, $nuevo_pasacomision);
+                }
+        /**
+         * Creamos el PDF
+         */
+
+        $this->viewBuilder()->options([
+                'pdfConfig' => [
+                    'orientation' => 'portrait',
+                    'filename' => 'plantilla_'.$id.'pdf'
+                ]
+            ]);
+
+        //$this->file_put_contents(WWW_ROOT . "docs/archivo.pdf", $acta_completa);
+
+        $logo= IMAGES."logo_concejalia.png";
+        //$acta_completa = $file = new File(APP_DIR.'/Template/Comisions/pdf/acta.ctp');
+        
+//debug($comision);exit();
+        $datos_acta = $this->set(compact('comision', 'tecnicos', 'asistentes', 'listado_ceas', 'nuevo_pasacomision', 'posibles_secretarios','secretario', 'expedientes_ordenados', 'logo', 'el_secretario'));
+        if ($validar=="validar") {
+            return $datos_plantilla;
+        }
+
+        $this->set('_serialize', ['comision']);
+    }
+
 
     /************************************************************
     **
@@ -400,6 +497,52 @@ class ComisionsController extends AppController{
             }
         }
        $this->autoRender = false;
+    }
+
+    /**
+     * archivosTree method
+     *
+     * Crea un array con los directorios y archivos que contiene la carpetacon el
+     * número de expediente edis.
+     *
+     * Necesitamos pasarle:
+     *      - Número de expediente edis.
+     *   Redirecciona a la vista del expediente.
+     */
+
+    public function archivosTreeComision($expediente=null,$expediente_id=null)
+    {
+
+        $root = WWW_ROOT . 'docs/'.$expediente.'/';
+        $longitud_nombre_carpeta = strlen($root);
+        $archivos_tree['/'] = [];
+        $dir = new Folder($root);
+        $archivos = $dir->tree($root);
+
+        //$archivos = Folder::tree($root);
+        
+        foreach ($archivos[0] as $directorio) {
+            $directorio = substr($directorio,$longitud_nombre_carpeta);
+            if($directorio===false){$directorio='/';};
+            $archivos_tree[$directorio] = [];
+        }
+
+        foreach ($archivos[1] as $archivo) {
+            $file = new File($archivo);
+            $file_info = $file->info();
+            $change = $file->lastChange();
+            $change = date('d/m/Y H:m', $change);
+            $file_info['change'] = $change;
+            
+            $folder = substr($file_info['dirname'],$longitud_nombre_carpeta);
+            if ($folder === false) {$folder = '/';}
+            
+            $archivos_tree[$folder][] = $file_info;
+
+        }
+
+        return $archivos_tree;
+        $this->autoRender = false;
     }
 
 }

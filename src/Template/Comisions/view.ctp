@@ -3,6 +3,8 @@
     $ancho_panel_derecho ='col-md-9 col-sm-8 col-xs-12';
     $modificador ='';
     $texto_validada = "";
+    $secretario = "";
+    $mod = 0;
 ?>
 
 <?php if ($comision->validada): ?>
@@ -20,40 +22,67 @@
     <div class="col-lg-6 col-md-6 text-right">
 
         <?= $texto_validada;?>
+
         <?= $this->Html->link('', ['action' => 'index'], ['class'=> 'fa fa-backward text-primary icono-titulo-fa',
                                                                     'id'=>'volver',
                                                                     'data-container'=>"body",
                                                                     'data-toggle'=>"popover",
                                                                     'data-placement'=>"bottom",
                                                                     'data-content'=>"Vuelve al listado de comisiones."]) ?> 
+
          <?= $this->Html->link('', ['action' => 'edit', $comision->id], ['class'=> 'fa fa-edit text-info icono-titulo-fa '.$ocultar,
                                                                                     'id'=>'editar',
                                                                                     'data-container'=>"body",
                                                                                     'data-toggle'=>"popover",
                                                                                     'data-placement'=>"bottom",
                                                                                     'data-content'=>"Editar los datos de configuración de esta comisión."]) ?> 
-        <?php if ($comision->tipo == "RGC"): ?>
-          <?= $this->Html->link(__(''), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'text-primary icono-titulo-fa   fa fa-file-pdf-o', 'target' => '_blank',
+        
+        <?php if ($comision->tipo == "AUS"): ?>
+
+          <?= $this->Html->link(__(''), ['action' => 'plantilla', $comision->id, '_ext' => 'pdf'], ['class'=>'text-primary icono-titulo-fa   fa fa-file-pdf-o', 'target' => '_blank',
+                                                'id'=>'ver_pdf',
+                                                'data-container'=>"body",
+                                                'data-toggle'=>"popover",
+                                                'data-placement'=>"bottom",
+                                                'data-content'=>"Genera una vista previa de la plantilla total en PDF, descargable e imprimible."
+            ]); ?>     
+
+        <?php elseif ($comision->tipo == "RGC"): ?>
+
+            <?= $this->Html->link(__(''), ['action' => 'acta', $comision->id, '_ext' => 'pdf'], ['class'=>'text-primary icono-titulo-fa   fa fa-file-pdf-o', 'target' => '_blank',
                                                 'id'=>'ver_pdf',
                                                 'data-container'=>"body",
                                                 'data-toggle'=>"popover",
                                                 'data-placement'=>"bottom",
                                                 'data-content'=>"Genera una vista previa del acta en PDF, descargable e imprimible."
-            ]); ?>     
-          <?= $this->Html->link('', ['action' => 'validaComision', $comision->id], ['class'=>'text-primary icono-titulo-fa fa fa-thumbs-o-up '.$ocultar,
+            ]); ?>  
+
+        <?php endif; ?>  
+
+
+        <?= $this->Html->link('', ['action' => 'validaComision', $comision->id], ['class'=>'text-primary icono-titulo-fa fa fa-thumbs-o-up '.$ocultar,
                                                                                 'id'=>'valida',
                                                                                 'data-container'=>"body",
                                                                                 'data-toggle'=>"popover",
                                                                                 'data-placement'=>"bottom",
                                                                                 'data-content'=>"Valida el acta, dando por terminado el trabajo sobre ella."
             ]); ?> 
-        <?php endif; ?>  
+
+        <?= $this->Html->link('','#' , ['class'=> 'fa fa-arrows-alt text-primary icono-titulo-fa',
+                                                                    'id'=>'agrandar',
+                                                                    'data-container'=>"body",
+                                                                    'data-toggle'=>"popover",
+                                                                    'data-placement'=>"bottom",
+                                                                    'data-content'=>"Maximiza el listado de los expedientes que pasan por esta comisión."]) ?> 
+                                                                    
     </div> 
 </div>
 
+<!-- Barra de Progreso -->  
+<?= $this->element ('herramientas/barra_progreso'); ?>
 
 <!-- Columna Izquierda -->   
-<div class="col-md-3 col-sm-4 col-xs-12 <?= $ocultar;?>">
+<div class="col-md-3 col-sm-4 col-xs-12 <?= $ocultar;?>" id="panel_izquierdo">
 
     <div class="x_panel">
         <div class="x_title">
@@ -212,7 +241,7 @@
 
 <!-- // PANEL DERECHO - Expedientes por CEAS --> 
 
-<div class="<?= $ancho_panel_derecho;?>">   
+<div class="<?= $ancho_panel_derecho;?>" id="panel_derecho">   
 
     <div class="x_panel">
         <div class="x_title">
@@ -225,7 +254,7 @@
 
         <div class="x_content">      
 
-            <div class="col-xs-9">
+            <div class="col-xs-10">
               <!-- Tab panes -->
               <div class="tab-content">
                 
@@ -234,43 +263,56 @@
 
                         <?php foreach ($expedientes_ordenados as $key => $ceas): ?>
 
+                <!-- TABLA COMPLETA-->
                             <h3><?= $listado_ceas[$key]; ?></h3>
                                 <table class="table">
                                     <thead>
                                         <tr>
+
+                                            <!-- MOTIVO -->
                                             <th>Mot.</th>
+                                            <!-- CLASIFICACION : Solo RGC -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Clas.</th>       
                                             <?php endif; ?>
+                                            <!-- EXPEDIENTE EDIS -->
                                             <th>Exp.</th>
+                                            <!-- HISTORIA SOCIAL -->
                                             <th>HS</th>
+
+                                            <!-- Numero de PRESTACIÓN -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Pres. RGC</th>
                                             <?php elseif ($comision->tipo=="AUS"): ?>                                                       
                                                  <th>Pres. AUS</th>
                                             <?php endif; ?>
-                                            <th>Deriv</th>
+
+                                            <!-- TITULAR Prestacion -->
                                             <th>Titular Pres.</th>
-                                            <th>Observ.</th>
+                                             <!-- DERIVADO -->
+                                            <th>Deriv</th>
+                                            <!-- DOCUMENTACION : Solo RGC -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Docum.</th>       
                                             <?php endif; ?>
+                                            <!-- AJUSTE -->
                                             <th class="<?= $ocultar;?>"></th>
-                                            
-                                            
+                                                                                    
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php foreach ($ceas as $pasacomision): ?>
 
+                                            <?php $mod++; ?>
                                             <?php if ($comision['tipo'] == "RGC"): ?>
 
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
                                                                                     'modificador' => 'ceas_',
-                                                                                    'ocultar' => $ocultar
-
+                                                                                    'ocultar' => $ocultar,
+                                                                                    'arbol' => $arbol,
+                                                                                    'mod' => $mod
                                                                                 ])?>
 
                                             <?php elseif ($comision['tipo'] == "AUS"): ?>
@@ -279,7 +321,9 @@
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
                                                                                     'modificador' => 'ceas_',
-                                                                                    'ocultar' => $ocultar
+                                                                                    'ocultar' => $ocultar,
+                                                                                    'arbol' => $arbol,
+                                                                                    'mod' => $mod
                                                                                 ])?>
 
                                             <?php endif ?>
@@ -300,31 +344,40 @@
                 <?php foreach ($listado_ceas as $key => $ceas): ?>
                     <div class="tab-pane" id="<?= $key; ?>-r">
                      
-                        
+                 <!-- TABLA POR CEAS-->                       
                             <h3><?= $ceas; ?></h3>
                              <table class="table">
                                     <thead>
                                         <tr>
+                                           
+                                            <!-- MOTIVO -->
                                             <th>Mot.</th>
+                                            <!-- CLASIFICACION : Solo RGC -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Clas.</th>       
                                             <?php endif; ?>
+                                            <!-- EXPEDIENTE EDIS -->
                                             <th>Exp.</th>
+                                            <!-- HISTORIA SOCIAL -->
                                             <th>HS</th>
+
+                                            <!-- Numero de PRESTACIÓN -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Pres. RGC</th>
                                             <?php elseif ($comision->tipo=="AUS"): ?>                                                       
                                                  <th>Pres. AUS</th>
                                             <?php endif; ?>
-                                            
-                                            <th>Deriv</th>
+
+                                            <!-- TITULAR Prestacion -->
                                             <th>Titular Pres.</th>
-                                            <th>Observ.</th>
+                                             <!-- DERIVADO -->
+                                            <th>Deriv</th>
+                                            <!-- DOCUMENTACION : Solo RGC -->
                                             <?php if ($comision->tipo=="RGC"): ?>
                                                 <th>Docum.</th>       
                                             <?php endif; ?>
-                                            
-                                            <th></th>
+                                            <!-- AJUSTE -->
+                                            <th class="<?= $ocultar;?>"></th>
                                             
                                         </tr>
                                     </thead>
@@ -332,13 +385,17 @@
                                         
                                         <?php foreach ($comision->pasacomisions as $pasacomision): ?>
 
+                                            <?php $mod++; ?>
                                             <?php if ($pasacomision->expediente->ceas==$key && $comision['tipo'] == "RGC"): ?>
 
                                                 <?= $this->element ('comisiones/tablas_pasos_por_comision', [   
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
                                                                                     'modificador' => 'ceas_',
-                                                                                    'ocultar' => $ocultar
+                                                                                    'ocultar' => $ocultar,
+                                                                                    'arbol' => $arbol,
+                                                                                    'mod' => $mod
+
                                                                                 ])?>
 
                                             <?php elseif ($pasacomision->expediente->ceas==$key && $comision['tipo'] == "AUS"): ?>
@@ -347,7 +404,10 @@
                                                                                     'pasacomision' => $pasacomision,
                                                                                     'listado_posibles_titulares_prestacion' => $listado_posibles_titulares_prestacion,
                                                                                     'modificador' => 'ceas_',
-                                                                                    'ocultar' => $ocultar
+                                                                                    'ocultar' => $ocultar,
+                                                                                    'arbol' => $arbol,
+                                                                                    'mod' => $mod
+
                                                                                 ])?>
 
                                             <?php endif ?>
@@ -363,15 +423,17 @@
             
             </div>
 
-            <div class="col-xs-3">
+            <div class="col-xs-2">
               <!-- required for floating -->
               <!-- Nav tabs -->
+
               <ul class="nav nav-tabs tabs-right">
                     <li><a href="#todos-r" data-toggle="tab" aria-expanded="true">Visión Global</a>
                 <?php foreach ($listado_ceas as $key => $ceas): ?>
-                    <li><a href="#<?= $key; ?>-r" data-toggle="tab"><?= $ceas; ?></a>
+                    <li class="lista_ceas_comision"><a href="#<?= $key; ?>-r" data-toggle="tab" ><?= $ceas; ?></a>
                 <?php endforeach ?>    
               </ul>
+
             </div>
 
         </div>
@@ -546,7 +608,7 @@ var comision_id = '<?php echo $comision['id']; ?>';
 <!-- Pasamos el valor de la variable antiguo_secretario para el ajax-->
 <?php if (!empty($secretario)): ?>
     <script>
-        var antiguo_secretario;
+        var antiguo_secretario = "";
         var antiguo_secretario = '<?php echo key($secretario); ?>';
     </script>       
 <?php endif; ?>

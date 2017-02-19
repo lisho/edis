@@ -403,6 +403,16 @@ table>tbody>tr.tabla-seleccionada>td {
 	color: #ffffff;
 }
 
+table>tbody>tr.fila1>td{
+	border-top: 2px solid #64819E; 
+	background-color: rgba(180, 210, 240, 0.1)
+}
+
+table>tbody>tr.fila2>td{
+	border-bottom: 2px solid #2A3F54; 
+
+}
+
 .fila_roja {
 		background-color: rgba(208,54,54,.1);
 }
@@ -560,4 +570,19 @@ ul .parrilla {
 
 .mayusculas {
     text-transform:uppercase;
+}
+
+.lista_archivos {
+	border-left: 5px #FF9F00 solid;
+	margin-left: 15px;
+}
+
+.circulo {
+	border: 2px solid;
+	border-radius: 100px;
+	font-size: 1em;
+}
+
+.check_grande {
+	font-size: 1.5em;
 }

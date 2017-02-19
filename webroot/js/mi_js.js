@@ -75,6 +75,22 @@ jQuery(document).ready(function($) {
 
 	crea_atfis();
 
+	// -> boton que maximiza los listados de las comisiones.
+
+	agrandar();
+
+	// --> Boton que registra si se completa paso.
+
+	completa_paso();
+
+	//--> Escuchar boton que edita observaciones
+
+	edita_observaciones();
+
+
+
+});
+
 
 /*
 	$('.valida_comision').click(function(event) {
@@ -100,6 +116,7 @@ jQuery(document).ready(function($) {
 			return false;
 	});
 */
+
 
 $(function(){
 
@@ -166,6 +183,9 @@ $(function(){
  	
 }); // --> Fin Función Anónima.
 	
+
+$(function() {
+
  	// ******************************************** 
  	// --> Despliegue de modales		
  	// *** necesaria clase en el botón: .modal-btn
@@ -554,7 +574,6 @@ $(function(){
 		
 	}) /* FIN función anónima.*/
 
-
 	function cerrar_ventana(expediente){
 		
 		if(confirm('¿Seguro que deseas cerrar el expediente '+expediente+'?')){
@@ -733,14 +752,13 @@ $(function(){
 		lanza_popover();
 	});
 
-//--> Mantener la escucha al navegar por las comisiones
+	//--> Mantener la escucha al navegar por las comisiones
 
 	$("a[data-toggle='tab']").click(function() {
-		lanza_popover();
-	});
-
-
-
+			lanza_popover();
+			lanza_modal();
+			edita_observaciones();
+	});	
 
 
 }); // --> Fin ReadyDocument
@@ -796,7 +814,7 @@ function crea_atfis() {
 	
 	$('.sin_atfis').click(function(event) {
 
-		var expediente_id = $(this).attr('id');		
+		var expediente_id = $(this).attr('data-expediente');		
 		
 		$(this)
 				.addClass('hidden')
@@ -815,6 +833,82 @@ function crea_atfis() {
 	});
 }
 
+/*
+**
+** Funciones que marcan si se ha completado paso en comision
+**
+*/
+
+function completa_paso() {
+	
+	$('#div_completar a.check_grande').click(function(event) {
+
+		var id = $(this).attr('data_id');		
+
+		if ($(this).hasClass('completar_paso')) {
+			$(this)
+				.removeClass('completar_paso text-danger fa fa-square-o')
+				.addClass('descompletar_paso descompletar_paso text-success fa fa-check-square-o');	
+				var completado = true;
+
+		} else if ($(this).hasClass('descompletar_paso')){
+			$(this)
+				.removeClass('descompletar_paso descompletar_paso text-success fa fa-check-square-o')
+				.addClass('completar_paso text-danger fa fa-square-o');	
+				var completado = false;
+		}
+
+		$.ajax({
+				type: "POST",
+				url: url_json+"pasacomisions/edit",
+				data: {
+						id : id,
+						//desde:'comision'
+						completado : completado
+					},
+				cache: false,
+			});	
+			return false;
+	});
+}
+
+/*
+**
+** Funcion que actualiza las observaciones de un modal
+** si el único campo es el de observaciones.
+** en data_id el id de la tabla
+** en data_observaciones el modelo
+** 
+**
+*/
+
+function edita_observaciones() {
+	
+	$('a.btn.btn-success.guardar_observaciones').click(function(event) {
+
+		var id = $(this).attr('data_id');
+		var mod = $(this).attr('data_mod');
+		var modelo = $('#input'+id+mod).attr('data_observaciones');
+
+		var observaciones = $('#input'+id+mod).val(); 	
+			
+
+		$.ajax({
+				type: "POST",
+				url: url_json+modelo+"/edit",
+				data: {
+						id : id,
+						//desde:'comision'
+						observaciones : observaciones,
+					},
+				cache: false,
+				success: function() {
+					location.reload();
+				}
+
+			})
+	});
+}
 
 /*
 **
@@ -833,3 +927,32 @@ function lanza_popover() {
  	});
 }
 
+/*
+**
+** Funcion que Maximiza el listado de los expedientes que pasan por esta comisión
+**
+*/
+
+function agrandar() {
+	 $('#agrandar').click(function() {
+	 	if ($('div#panel_izquierdo').hasClass('hidden')) {
+		 	$('div#panel_izquierdo').removeClass('hidden');
+		 	$('div#panel_derecho').addClass('col-md-9 col-sm-8 col-xs-12');
+		 	$('body').removeClass('nav-sm').addClass('nav-md')
+		 } else {
+		 	$('div#panel_izquierdo').addClass('hidden');
+		 	$('div#panel_derecho').removeClass('col-md-9 col-sm-8 col-xs-12').addClass('col-md-12 col-sm-12 col-xs-12');
+		 	$('body').removeClass('nav-md').addClass('nav-sm')
+		 }
+	});
+}
+
+function lanza_modal() {
+	
+	$('.modal-btn').click(function () {
+
+		id=$(this).attr("id");
+	 	$('#modal_'+id).modal();
+
+	 });
+}

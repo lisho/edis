@@ -76,13 +76,21 @@ class PasacomisionsController extends AppController
      */
     public function edit($id = null)
     {
+
+        if ($this->request->is('ajax')) {
+            $id = $this->request->data['id'];
+        }
+
         $pasacomision = $this->Pasacomisions->get($id, [
             'contain' => ['Expedientes', 'Comisions']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $pasacomision = $this->Pasacomisions->patchEntity($pasacomision, $this->request->data);
             if ($this->Pasacomisions->save($pasacomision)) {
-                $this->Flash->success(__('The pasacomision has been saved.'));
+                if (!$this->request->is('ajax')) {
+                    $this->Flash->success(__('The pasacomision has been saved.'));
+                } 
+                
                 return $this->redirect(['controller'=>'comisions', 'action' => 'view', $pasacomision->comision->id]);
             } else {
                 $this->Flash->error(__('The pasacomision could not be saved. Please, try again.'));
@@ -90,6 +98,7 @@ class PasacomisionsController extends AppController
         }
         //$expedientes = $this->Pasacomisions->Expedientes->find('list', ['limit' => 200]);
         //$comisions = $this->Pasacomisions->Comisions->find('list', ['limit' => 200]);
+        echo json_encode($pasacomision);
         $this->set(compact('pasacomision'
                             //, 'expedientes', 
                             //'comisions'
