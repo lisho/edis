@@ -40,7 +40,17 @@
 
 	          	</div>
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
-	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
+	          		<?= $this->Html->link('<button type="button" class="btn btn button_home text-center"
+	          	 													id="ir_mis_expedientes",
+                                                                    data-container="body",
+                                                                    data-toggle="popover",
+                                                                    data-placement="bottom",
+                                                                    data-content="Accede al modulo de administracion">
+					          				<h1><i class="fa fa-search"></i>
+						          			<p ></p></h1>
+						          		</button>', 
+	          	 		['controller'=> 'Expedientes', 'action'=>'administracion'],['escape' => false]); ?>
+
 	          	</div>
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
 	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>

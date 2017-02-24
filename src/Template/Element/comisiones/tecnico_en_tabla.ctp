@@ -22,11 +22,11 @@
 					$tecnico = 'RO';
 					break;
 
-				CASE 'Nieves Álvarez Castañeda':
+				CASE 'Maria Nieves Álvarez Castañeda':
 					$tecnico = 'NI';
 					break;
 
-				CASE 'Mercedes Marne Nicolás':
+				CASE 'Maria Mercedes Marne Nicolás':
 					$tecnico = 'ME';
 					break;
 

@@ -41,9 +41,9 @@ class ExpedientesController extends AppController
         $expedientes = $this->paginate($this->Expedientes);
 */
         $listado_ceas = $this->listadoEquipo('ceas');
-
-        $this->set(compact('expedientes', 'listado_ceas'));
-        $this->set('_serialize', ['expedientes']);
+        
+            $this->set(compact('expedientes', 'listado_ceas'));
+            //$this->set('_serialize', ['expedientes']);        
     }
 
     
@@ -212,7 +212,7 @@ class ExpedientesController extends AppController
         $ultimo_numedis = $todos_expedientes->last();
         $proximo_numedis = $ultimo_numedis->numedis + 1;
 
-//debug($proximo_numedis);exit();
+//debug($this->request->data);exit();
 
         $expediente = $this->Expedientes->newEntity();
 
@@ -236,13 +236,16 @@ class ExpedientesController extends AppController
                                 'rol'=> 'CC',
                                 'observaciones'=> '',
                         );
-            $this->request->data['roles'][1]= array(
+            if ($this->request->data['tecnico_inclusion'] != 'Selecciona un Técnico de Inclusión') {
+               
+                $this->request->data['roles'][1]= array(
                                 //'expediente_id'=> $this->request->data['tecnico_ceas'],
                                 'id'=>'',
                                 'tecnico_id'=> $this->request->data['tecnico_inclusion'],
                                 'rol'=> 'tedis',
                                 'observaciones'=> '',
                         );
+            }
 
 
             $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
@@ -349,7 +352,13 @@ class ExpedientesController extends AppController
                 if (isset($this->request->data['desde']) == 'comision') {
                     return $this->redirect($this->referer());
                     
-                } else {
+                } elseif (isset($this->request->data['roles'][0]['rol'])) {
+                    return $this->redirect($this->referer());
+                    
+                } elseif (isset($this->request->data['ceas'])) {
+                    return $this->redirect($this->referer());
+                    
+                }else {
                     return $this->redirect(['action' => 'view',$id]);
                 }
                 
@@ -650,4 +659,41 @@ class ExpedientesController extends AppController
         }
        $this->autoRender = false;
     }
+
+    /**
+    **
+    ** Administracion AUXILIAR
+    **
+    **/
+
+    public function administracion()
+    {
+ 
+        if (!empty($this->request->query['term'])) {
+            $term=$this->request->query['term'];
+            $terms=explode(' ', trim($term));
+            $terms=array_diff($terms, array(''));
+
+            $this->loadModel('Participantes');
+            $participante = $this->Participantes->find('all')
+                                            -> contain(['Expedientes.Roles.Tecnicos',
+                                                        'Expedientes.Participantes.Relations',
+                                                        'Expedientes.Incidencias'=>[ 
+                                                                            'sort'=>[
+                                                                                'fecha'=> 'DESC']],
+                                                        'Expedientes.Incidencias.Incidenciatipos',
+                                                        'Expedientes.Incidencias.Users'])
+                                            -> order(['Participantes.relation_id'=> 'ASC'])
+                                            -> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
+                                            -> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
+                                            -> toArray()
+                                            ;
+                                 
+            echo json_encode($participante);
+            $this->autoRender = false;
+        }
+        //debug($participantes);exit();
+
+    }
+
 }

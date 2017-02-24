@@ -106,4 +106,22 @@ class IncidenciatiposController extends AppController
         }
         return $this->redirect(['action' => 'index']);
     }
+
+        /**
+    **
+    ** Lista de TIPOS DE INCIEDENCIA
+    **
+    **/
+
+    public function listaTipos()
+    {
+        $lista = $this->Incidenciatipos->find('list')
+                                        -> select('tipo')
+                                        -> toArray()
+                                        ;
+
+        echo json_encode($lista);
+        $this->autoRender = false;
+
+    }
 }

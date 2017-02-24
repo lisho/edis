@@ -196,7 +196,7 @@
                                                                         'class'=>'form-control col-md-7 col-xs-12',
                                                                         'id' => 'tecnico_inclusion',
                                                                         'default' => '',
-                                                                        'required' => 'required',
+                                                                        //'required' => 'required',
                                                                         'label' => ['text' => ''],
                                                                         'empty'   => '-----'
                                                                     ]);

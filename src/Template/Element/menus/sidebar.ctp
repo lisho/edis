@@ -53,7 +53,9 @@
 <!-- ADMINISTRACION -->                  
                   <li><a><i class="fa fa-desktop"></i> Administración <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                        
+
+                    <li><?= $this->Html->link('Acceso Auxiliar', ['controller'=> 'Expedientes', 'action'=>'administracion']) ?></li>  
+
                     <?php if ($auth['role']=='admin'): ?>
 
                         <li><a>Equipos<span class="fa fa-chevron-down"></span></a>

@@ -52,7 +52,8 @@ class IncidenciasController extends AppController
     public function add()
     {
         $incidencia = $this->Incidencias->newEntity();
-        
+//debug($this->request);exit();
+      
         if ($this->request->is('post')) {
         
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['fecha']);
@@ -174,6 +175,43 @@ class IncidenciasController extends AppController
         $expedientes = $this->Incidencias->Expedientes->find('list', ['limit' => 200]);
         $this->set(compact('incidencia', 'incidenciatipos', 'users', 'expedientes'));
         $this->set('_serialize', ['incidencia']);
+    }
+
+        /**
+     * Add method DESDE AJAX
+     *
+     * @return \Cake\Network\Response|void Redirects on successful add, renders view otherwise.
+     */
+    public function addJson()
+    {
+        $incidencia = $this->Incidencias->newEntity();
+        $expediente_id = $this->request->data['expediente_id'];
+//debug($this->request);exit();     
+        if ($this->request->is('ajax')) {
+        
+            $cachos_fecha = preg_split("/[\/]+/", $this->request->data['fecha']);
+            
+            $this->request->data['fecha']=array(
+                                'year'=>$cachos_fecha[2],
+                                'month'=>$cachos_fecha[1],
+                                'day' =>$cachos_fecha[0] 
+                        );
+//debug($this->request->data);exit();   
+            $incidencia = $this->Incidencias->patchEntity($incidencia, $this->request->data);
+
+            if ($this->Incidencias->save($incidencia)) {
+
+                $incidencias = $this->Incidencias->find('all')
+                                                    -> where (['expediente_id' => $expediente_id])
+                                                    -> contain (['Incidenciatipos'])
+                                                    -> order(['fecha'=> 'DESC'])
+                                                    -> toArray()
+                                                    ;
+                //debug($incidencias);exit();
+                echo json_encode($incidencias);   
+            } 
+        }
+        $this->autoRender = false;
     }
 
 }

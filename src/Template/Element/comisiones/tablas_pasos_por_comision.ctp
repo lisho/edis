@@ -453,6 +453,10 @@
 
         </td>
 
+        <?php if ($ocultar=='hidden'): ?>
+             <td></td>      
+        <?php endif; ?>
+
     </tr> 
 
     

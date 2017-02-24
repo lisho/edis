@@ -207,7 +207,7 @@ class ParticipantesController extends AppController
 
 
     /*
-    * BUSCADOR DE ALUMNOS;
+    * BUSCADOR DE PARTICIPANTES;
     *
     * 
     */  
@@ -265,6 +265,42 @@ class ParticipantesController extends AppController
             
             if ($this->Participantes->save($participante)) {
                 $this->Flash->success(__('Se ha guardado correctamente la edad de '.$participante->nombre.' '.$participante->apellidos));
+                
+                return $this->redirect($this->referer());
+            } else {
+                $this->Flash->error(__('La edad del participante no se ha guardado correctamente. Por favor, revisa el formato e inténtalo de nuevo.'));
+                return $this->redirect($this->referer());
+            }
+        }
+        $this->autoRender = false;
+    }
+
+
+        /**
+     * Edit method
+     *
+     * @param string|null $id Participante id.
+     * @return \Cake\Network\Response|void Redirects on successful edit, renders view otherwise.
+     * @throws \Cake\Network\Exception\NotFoundException When record not found.
+     */
+    public function editTelefono($id = null)
+    {
+        
+        $id = $this->request->data['id'];
+        $telefono = $this->request->data['telefono'];
+//debug($telefono);exit();
+        $participante = $this->Participantes->get($id, [
+            'contain' => []
+        ]);
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $participante = $this->Participantes->patchEntity($participante, $this->request->data);
+        
+            if ($this->Participantes->save($participante)) {
+               
+               if (!$this->request->is('ajax')) {
+                    $this->Flash->success(__('Se ha guardado correctamente la edad de '.$participante->nombre.' '.$participante->apellidos));
+                } else {echo json_encode($telefono);}
                 
                 return $this->redirect($this->referer());
             } else {

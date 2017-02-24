@@ -37,6 +37,7 @@ class EquiposController extends AppController
             'contain' => ['Users']
         ]);
 
+
         $this->set('equipo', $equipo);
         $this->set('_serialize', ['equipo']);
     }
@@ -174,6 +175,29 @@ class EquiposController extends AppController
           $this->RequestHandler->respondAs('json');
           $this->autoRender = false;      
           echo json_encode ($tecnico_edis);
+        
+         }
+
+    }
+
+    /**
+     * Método para obtener los datos de un CEAS
+     *
+     * @param ceas_id por AJAX
+     * @return array de los datos del CEAS por JSON
+     */
+    public function datosceas()
+    {
+        
+        if ($this->request->is('ajax')) { 
+          $idCeas = $this->request->data['ceas'];
+          //  debug($idCeas);exit();
+
+          $ceas = $this->Equipos->get($idCeas)->toArray(); 
+//debug($ceas);
+          $this->RequestHandler->respondAs('json');
+          $this->autoRender = false;      
+          echo json_encode ($ceas);
         
          }
 
