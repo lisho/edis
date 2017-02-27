@@ -11,8 +11,10 @@
           <div class="x_content ">
   			<div class="col-md-12 col-sm-12 col-xs-12">
           	<div class="row">
+	          	
+	        <?php if ($auth['role']!='auxiliar'): ?> 
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
-	         
+
 	          	 <?= $this->Html->link('<button type="button" class="btn btn button_home text-center"
 	          	 													id="ir_comisiones",
                                                                     data-container="body",
@@ -38,7 +40,8 @@
 						          		</button>', 
 	          	 		['controller'=> 'Roles', 'action'=>'mis_roles'],['escape' => false]); ?>
 
-	          	</div>
+	          	</div>   	
+	        <?php endif; ?>
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
 	          		<?= $this->Html->link('<button type="button" class="btn btn button_home text-center"
 	          	 													id="ir_mis_expedientes",
@@ -52,6 +55,9 @@
 	          	 		['controller'=> 'Expedientes', 'action'=>'administracion'],['escape' => false]); ?>
 
 	          	</div>
+
+
+	        <?php if ($auth['role']!='auxiliar'): ?> 	          	
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
 	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
 	          	</div>
@@ -61,6 +67,8 @@
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
 	          		<button type="button" class="btn button_home"><h2>prueba</h2></button>
 	          	</div>
+	        <?php endif; ?> 
+
 		    </div>	
 		    </div>
         </div>

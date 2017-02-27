@@ -12,6 +12,9 @@
                     </ul>
                   </li>
                   -->
+
+                  <?php if ($auth['role']!='auxiliar'): ?>
+
                   <li><a><i class="fa fa-folder-open"></i> Expedientes <span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       
@@ -37,7 +40,8 @@
                       <li><?= $this->Html->link('Gestión de avisos y noticias', ['controller'=> 'Avisos', 'action'=>'index']) ?></li></li>
                     </ul>
                   </li>
-                  
+                  <?php endif; ?>
+
                   <?php if ($auth['role']=='admin'): ?>
                       <li><a><i class="fa fa-fire"></i> Reflexiones <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
@@ -115,7 +119,8 @@
                         </li>
 
                    <?php endif; ?>
-                                          
+
+                   <?php if ($auth['role']!='auxiliar'): ?>                       
                         <li><a>Nóminas<span class="fa fa-chevron-down"></span></a>
                           <ul class="nav child_menu">
 
@@ -130,7 +135,8 @@
                             <li>
                               <?= $this->Html->link('Análisis de Cambios en la Última Nómina', ['controller'=> 'Nominas', 'action'=>'compara_nominas']); ?>
                             </li>
-
+                  <?php endif; ?>
+                  
                   <?php if ($auth['role']=='admin'): ?>   
 
                             <li>

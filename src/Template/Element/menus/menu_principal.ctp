@@ -1,3 +1,7 @@
+  <?php $esconder = ''; ?>
+  <?php if ($auth['role'] == 'auxiliar'): ?>
+     <?php $esconder = 'hidden'; ?>
+  <?php endif; ?>  
 
 <!-- top navigation -->
     <div class="top_nav">
@@ -39,7 +43,7 @@
             </li>
 
             <li role="presentation" class="dropdown">
-              <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+              <a href="javascript:;" class="dropdown-toggle info-number <?= $esconder; ?>" data-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-warning"></i>
                 <span class="badge bg-green">5</span>
               </a>
@@ -78,15 +82,15 @@
                 <li>
                   <div class="text-center">
 
-                  <?= $this->Html->link('<strong>Ver todos los avisos y noticias</strong><i class="fa fa-angle-right"></i>',['controller'=>'avisos'],['escape' => false]);?>
+                  <?= $this->Html->link('<strong>Ver todos los avisos y noticias</strong><i class="fa fa-angle-right "></i>',['controller'=>'avisos'],['escape' => false]);?>
                   </div>
                 </li>
               </ul>
             </li>
 
             <!-- buscador -->
-            <?php if ($auth['role'] != 'auxiliar'): ?>
-              <li class="col-md-5 col-sm-5 col-xs-12 form-group-buscador pull-right top_search"> 
+              
+              <li class="col-md-5 col-sm-5 col-xs-12 form-group-buscador pull-right top_search <?= $esconder; ?>"> 
                   <div class="input-group">
                       <input id="s" type="text" class="form-control" placeholder="Buscar a..." autocomplete="off">
                       <span class="input-group-btn">
@@ -94,7 +98,7 @@
                       </span>
                   </div>
               </li>   
-            <?php endif; ?>
+            
             
 
             <!-- /buscador -->

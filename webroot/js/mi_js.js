@@ -349,8 +349,6 @@ $(function() {
 	}; // --> Fin Buscador
 
 
-
-
 // --> *********** VALIDACIONES PARA NUEVO EXPEDIENTE ***************//
 
 	// numedis
