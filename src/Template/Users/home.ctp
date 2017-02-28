@@ -44,7 +44,7 @@
 	        <?php endif; ?>
 	          	<div class="col-md-2 col-sm-6 col-xs-12 text-center">
 	          		<?= $this->Html->link('<button type="button" class="btn btn button_home text-center"
-	          	 													id="ir_mis_expedientes",
+	          	 													id="buscar_administracion",
                                                                     data-container="body",
                                                                     data-toggle="popover",
                                                                     data-placement="bottom",
