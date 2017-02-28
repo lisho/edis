@@ -447,6 +447,7 @@
                         $i=0; //inicio de contador de incidencias de este espediente.
 
                     ?>
+                    
                     <?php foreach ($incidencias as $incidencia): ?>
 
                         <li>
@@ -454,11 +455,15 @@
                           <div class="block">
 
                             <div class="tags">
-                              <a  class= "tag">
+                              <a  class= "tag tag-incidencia tag-color<?= $incidencia->incidenciatipo_id; ?>">
                                 <span><strong><?= $this->Time->format($incidencia->fecha, "dd/MM/yy", null); ?></strong></span>
                               </a>
-                              <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?>
+                              <?= $this->Html->image('user_fotos/'.$incidencia->user->foto, ['class'=> 'avatar']); ?> 
+
+                              <?= $this->element('leyendas/incidencias_iconos', ['tipo' => $incidencia->incidenciatipo_id, 'incidencia_id' => $incidencia->id]); ?>
+
                             </div>
+
                             <div class="block_content">
                                 
                               <h2 class="title">
@@ -469,7 +474,7 @@
                               </div>
                               <p class="excerpt">
                                     <?= substr($incidencia->descripcion,0,200);?>
-                              <a href="#" id = "ver_incidencia_<?=$incidencia->id; ?>" class= "modal-btn"><strong>... Leer&nbsp;más</strong></a>
+                              <a href="javascript:" id = "ver_incidencia_<?=$incidencia->id; ?>" class= "modal-btn"><strong>... Leer&nbsp;más</strong></a>
                               </p>
                             </div>
                           </div>

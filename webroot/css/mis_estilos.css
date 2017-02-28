@@ -586,3 +586,100 @@ ul .parrilla {
 .check_grande {
 	font-size: 1.5em;
 }
+
+/**** PINTAR ETIQUETAS SEGUN TIPO DE INCIDENCIA ***/
+
+
+.tag-color6{
+	background-color: #3E6389;
+}
+
+.tag-color6:after{
+	border-left: 11px solid #3E6389;
+}
+
+.tag-color1{
+	background-color: #255A4F;
+}
+
+.tag-color1:after{
+	border-left: 11px solid #255A4F;
+}
+
+.tag-color2 {
+	background-color: #1abb9c;
+}
+
+.tag-color2:after {
+	border-left: 11px solid #1abb9c;
+}
+
+.tag-color4{
+	background-color: #CD6403;
+}
+
+.tag-color4:after {
+	border-left: 11px solid #CD6403;
+}
+
+.tag-color5{
+	background-color: #CD6403;
+}
+
+.tag-color5:after{
+	border-left: 11px solid #CD6403;
+}
+
+.tag-color8 {
+	background-color: #8C0D24;
+}
+ 
+.tag-color8:after {
+	border-left: 11px solid #8C0D24;
+}
+ 
+.tag-color10 {
+	background-color: #126717;
+}
+
+.tag-color10:after {
+	border-left: 11px solid #126717;
+}
+
+.tag-color12 {
+	background-color: #67A800;
+}
+
+.tag-color12:after {
+	border-left: 11px solid #67A800;
+}
+  
+.tag-color9 {
+	background-color: #276D15;
+}
+
+.tag-color9:after {
+	border-left: 11px solid #276D15;
+}
+
+.tag-color7{
+	background-color: #4F0F81;
+}
+
+.tag-color7:after{
+	border-left: 11px solid #4F0F81;
+}
+
+.tag-color11{
+	background-color: #A71A1C;
+}
+
+.tag-color11:after{
+	border-left: 11px solid #A71A1C;
+}
+
+.ico_incidencia {
+	margin-left: 5px;
+	margin-top: 5px;
+}
+

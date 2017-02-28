@@ -757,7 +757,7 @@ $(function() {
 			lanza_modal();
 			edita_observaciones();
 	});	
-
+    
 
 }); // --> Fin ReadyDocument
 
