@@ -105,7 +105,26 @@
 	</div>
 
 	<div>
-		<?= $informe->propuesta; ?>
+
+	<?php
+		$msj = '';
+
+		switch($informe->propuesta){
+
+			case "continuar":
+			$msj = '    * Continuar el desarrollo del Proyecto Individualizado de Inserción con el Apoyo Técnico de EDIS.';
+			break;
+
+			case "cerrar":
+			$msj = "Finalizar las actuaciones de apoyo social y familiar desde el Equipo de Inclusión Social para el desarrollo del Proyecto Individualizado de Inserción.";
+			break;
+		}
+	 ?>
+
+
+		<h3><big><u>Propuesta de intervención:</u></big></h3>
+		<?= $msj; ?>
+
 	</div>
 
 	<br>	
