@@ -135,6 +135,16 @@
                         'data-toggle'=>"popover",
                         'data-placement'=>"top",
                         'data-content'=>"¡ATENCIÓN! Si eliminas este usuario eliminarás todos los datos y plantillas asociadas a él (currículum, valoraciones, caracterizaciones...)."]) ?>
+            <?= $this->Html->link(' Cambiar de expediente', ['action' => 'trasladarExpediente', $participante->id], [
+                                                                  'class'=> 'pull-right btn btn-danger fa fa-external-link m-right-xs',
+                                                                  'id' => 'traslada_participante',
+                                                                  'data-toggle'=>"popover",
+                                                                  'data-placement'=>"top",
+                                                                  'data-content'=>"Desde aquí puedes trasladar a un usuario a otro expediente, arrastrando todos los datos asociados a él.",
+                                                                  'confirm' => __('¿Estás seguro de que quieres trasladar a # {0}', $participante->nombre.' '.$participante->apellidos.' a otro expediente?')
+                                                                  ]) ?>
+
+            
           <br />
 
         </div>

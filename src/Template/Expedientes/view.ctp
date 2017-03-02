@@ -96,7 +96,7 @@
                                             <?= $this->Html->link('', ['controller' => 'Roles', 'action' => 'edit', $roles->id], ['class'=> 'fa fa-edit text-info icono-tabla-fa']) ?>
                                             -->
                                             <?php if ($auth['role'] === 'admin'): ?>
-                                                <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('Are you sure you want to delete # {0}?', $roles->id)]) ?>
+                                                <?= $this->Form->postLink('', ['controller' => 'Roles', 'action' => 'delete', $roles->id], ['class'=> 'fa fa-trash text-danger icono-tabla-fa','confirm' => __('¿Estás seguro de que quieres borrar este rol # {0}?', $roles->id)]) ?>
                                             <?php endif; ?>
                                         </td>      
                                 

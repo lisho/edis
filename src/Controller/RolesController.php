@@ -103,7 +103,9 @@ class RolesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
+        
+//debug($this->request);exit();
+       // $this->request->allowMethod(['post','put', 'delete']);
         $role = $this->Roles->get($id);
         if ($this->Roles->delete($role)) {
             $this->Flash->success(__('The role has been deleted.'));

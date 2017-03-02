@@ -151,14 +151,7 @@
                             <td><?= $rol->observaciones ?></td>
                             <td>  
                                        
-                                <?= $this->Html->link('', ['controller'=>'tecnicos', 'action' => 'view', $rol->tecnico->id], [     
-                                                    'class'=> 'btn btn-xs btn-dark fa fa-user',
-                                                    'id'=>'ver'.$rol->tecnico->id,
-                                                    'data-container'=>"body",
-                                                    'data-toggle'=>"popover",
-                                                    'data-placement'=>"left",
-                                                    'data-content'=>"Ver la ficha de este técnico."]) ?>
-                     
+                                
                                 <?= $this->Html->link('', '#', [
                                                     'class'=> 'btn btn-xs btn-info modal-btn fa fa-edit',
                                                     'id'=>'editar'.$rol->id,
@@ -167,16 +160,16 @@
                                                     'data-placement'=>"top",
                                                     'data-content'=>"Editar este rol para este expediente."
                                                     ]) ?>
-                                
+                        
                                 <?= $this->Form->postLink('', ['controller'=>'roles', 'action' => 'delete', $rol->id], [
                                             'class'=> 'btn btn-xs btn-danger fa fa-trash', 
-                                            'id'=>'borrar'.$rol->tecnico->id,
+                                            'id'=>'borrar'.$rol->id,
                                             'data-container'=>"body",
                                             'data-toggle'=>"popover",
                                             'data-placement'=>"top",
                                             'data-content'=>"Eliminar rol para este expediente.",
                                             'confirm' => __('¿Realmente quieres borrar de este expediente a {0}?', $rol->tecnico->nombre.' '.$rol->tecnico->apellidos.' como '. $r )]) ?>
-                                
+                 
                             </td>
 
                         </tr>

@@ -37,7 +37,7 @@
 					$tecnico = 'PEND';
 					break;
 			}
-		}
+
 		
 		$mensaje = 'Expediente asignado a '.$tecnico_completo;
 		echo $this->Html->link($tecnico, '#', [     
@@ -48,6 +48,7 @@
                             'data-toggle'=>"popover",
                             'data-placement'=>"top",
                             'data-content'=> $mensaje]);
+        }                    
 	} //--> END Foreach
 
 	if($tecnico_completo == 'Pendiente'){
