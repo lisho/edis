@@ -74,3 +74,76 @@
         </div>
     </div>
 </div>
+
+<div class="col-md-6 col-sm-12 col-xs-12">
+
+    <div class="x_panel" id="nomina"> <!--/ Panel de NOMINAS-->
+        <div class="x_title"> 
+            <big><i class="icono-fa fa fa-briefcase"></i> Mis expedientes en las últimas comisiones (en construcción...)</big>
+            <ul class="nav navbar-right panel_toolbox"> 
+              <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a> 
+              </li> 
+              <li class="dropdown"> 
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a> 
+                <ul class="dropdown-menu" role="menu"> 
+                  <li><a href="#">Settings 1</a> 
+                  </li> 
+                  <li><a href="#">Settings 2</a> 
+                  </li> 
+                </ul> 
+              </li> 
+              <li><a class="close-link"><i class="fa fa-close"></i></a> 
+              </li> 
+            </ul> 
+            <div class="clearfix"></div> 
+        </div> 
+ 
+        <div class="x_content">         
+
+            <div class="clearfix"></div> 
+            <div class="related"> 
+
+            	<!-- Iteramos cada comisión -->
+               	<?php foreach ($mis_ultimas_comisiones as $comision): ?>
+
+               		<h2><?= $this->Html->link('Comisión de '. $comision->tipo . ' ('. $comision->fecha .').',['controller' => 'Comisions', 'action'=>'view', $comision->id]);?></h2>
+               			<!-- Iteramos cada PASO por comisión -->
+               			<?php foreach ($comision->pasacomisions as $paso): ?>
+               				<!-- en cada iteración miramos si existe nuestro rol asociado a ese expediente -->
+               				<?php if (!empty($paso->expediente->roles)): ?>
+               					
+           						<li>
+           							<big>
+           								<?= $this->Html->link($paso->expediente->numedis,['controller' => 'Expedientes', 'action'=>'view', $paso->expediente->id]);?>
+           							</big>
+           						</li>
+           							<ul>
+           								<!-- Si existe el rol iteramos las prestaciones abiertas y las pintamos -->
+           								<?php foreach ($paso->expediente->prestacions as $prestacion): ?>	
+           									<li><?= $prestacion->numprestacion; ?> -> <?= $prestacion->participante->nombre.' '.$prestacion->participante->apellidos ; ?></li>
+           								<?php endforeach; ?>
+           							</ul>
+               					 
+               				<?php endif; ?>
+               	
+               			<?php endforeach; ?>
+
+               	<?php endforeach; ?>  <!-- END FOREACH Comisiones--> 
+               	<div class="clearfix"></div>   
+            </div> 
+
+        </div> 
+    </div><!--/ FIN Panel Nóminas-->
+	
+</div>
+
+<!--
+                    <?= $this->element('nominas/comparar_ultima_nomina',[   'datos_nominas'=>$datos_nominas,
+                                                                            'expediente'=>$expediente,
+                                                                            'listado_participantes'=>$listado_participantes,
+                                                                            'listado_nombres_parrilla' => $listado_nombres_parrilla,
+                                                                            'participante' => $participante
+
+                                                                        ]);
+                                                                    ?> 
+                                                                    --> 

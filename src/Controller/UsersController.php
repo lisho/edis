@@ -240,7 +240,40 @@ class UsersController extends AppController
 
     public function home()
     {
-        $this->render();
+        $lista_tedis = [
+                36 => 2,
+                53 => 5,
+                54 => 6,
+                55 => 3,
+                56 => 8,
+                57 => 7
+        ];
+
+        //debug( );exit();
+        $this->loadModel('Comisions');
+
+        // Datos de mis expedientes en las 4 últimas comisiones
+       
+        $user = $lista_tedis[$this->Auth->user()['id']];
+
+        $mis_ultimas_comisiones = $this->Comisions -> find()
+                                                        //->contain ('Pasacomisions.Expedientes.Roles')
+                                                        -> order(['fecha' => 'DESC'])
+                                                        -> limit(4)
+                                                        //-> where(['Pasacomisions.Expedientes.Roles.tecnico_id' => $user])
+                                                        -> contain([
+                                                                'Pasacomisions.Expedientes.Roles'=> function ($q) use ($user){
+                                                                    return $q -> where(['tecnico_id' => $user]);
+                                                                },
+                                                                'Pasacomisions.Expedientes.Prestacions.Participantes'=> function ($q) {
+                                                                    return $q -> where(['Prestacions.prestacionestado_id' => 5]);
+                                                                }
+                                                            ]);
+                                                        
+        //debug($mis_ultimas_comisiones->toArray());exit();
+        $this->set(compact('mis_ultimas_comisiones'));
+        //$this->set('_serialize', ['mis_ultimas_comisiones']);                                                       
+        //$this->render();
     }
 
     public function logout()
