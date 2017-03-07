@@ -161,7 +161,7 @@
                                                     'data-content'=>"Editar este rol para este expediente."
                                                     ]) ?>
                         
-                                <?= $this->Form->postLink('', ['controller'=>'roles', 'action' => 'delete', $rol->id], [
+                                <?= $this->Html->Link('', ['controller'=>'Roles', 'action' => 'delete', $rol->id], [
                                             'class'=> 'btn btn-xs btn-danger fa fa-trash', 
                                             'id'=>'borrar'.$rol->id,
                                             'data-container'=>"body",

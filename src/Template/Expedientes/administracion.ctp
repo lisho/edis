@@ -197,9 +197,9 @@
     		var rol = '<?= $auth["role"]; ?>';
 
 			$('#s-admin').autocomplete ({
-				minLength: 2,
+				minLength: 3,
 				select:function(event, ui){
-					$('#s').val(ui.item.label);
+					$('#s-admin').val(ui.item.label);
 				},
 
 				source:function(request, response){
@@ -212,7 +212,7 @@
 						success: function(data){
 							response($.map(data,function(el,index){
 								return{
-									value:el.nombre,
+									value:el.nombre+' '+el.apellidos,
 									nombre:el.nombre,
 									apellidos:el.apellidos,
 									dni: el.dni,
@@ -230,135 +230,152 @@
 				.data("item.autocomplete", item)
 				.append("<a id = "+item.dni+" href='#'>"+" "+item.dni +" - "+ item.nombre +" "+ item.apellidos + "</a>")
 				.click(function() {
-								
+					var id = item.id;
 					var cabecera_parrilla = '<table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0"><thead><tr><th>DNI/NIE</th><th>Nombre</th><th>Relacion</th><th>Teléfono</th><th></th></tr></thead><tbody></tbody></table>';
 					$('#datos_invisible').hide('drop').fadeIn('slow').removeClass('hidden');
-					
-					if (rol != 'auxiliar') {
-						$('#numedis').html('').append('Expediente: <a href="view/'+item.expediente.id+'" title="" target="_blank">'+item.expediente.numedis+'</a>');
-					} else {
-						$('#numedis').html('').append('Expediente: '+item.expediente.numedis+'</a>');
-					}
 
-										
-					$('#domicilio span').html('').append(item.expediente.domicilio);
-
-					// Ajax para obteber el CEAS y la ZAS.
+					// Cargamos el resto de los datos después de hacer click en el nombre
 
 					$.ajax({
-						type: "POST",
-							url: url_json+"equipos/datosceas",
-							data: "ceas="+item.expediente.ceas,
-							cache: false,
-							success: function(ceas) {
-								$('#ceas span').html('').append(ceas.nombre);
-								//console.log(ceas);
+						
+						url:url_json+"expedientes/datosAdministracion",
+						data: {id:id},
+						dataType: "json",
+						success : function(json){
+
+							var numedis = json.expediente.numedis;
+							if (rol != 'auxiliar') {
+								$('#numedis').html('').append('Expediente: <a href="view/'+json.expediente.id+'" title="" target="_blank">'+numedis+'</a>');
+							} else {
+								$('#numedis').html('').append('Expediente: '+numedis);
 							}
-					});
 
-					// Mostrar la Parrilla
+							$('#domicilio span').html('').append(json.expediente.domicilio);
 
-					$('#datos_parrilla').html('').append(cabecera_parrilla);
-
-					$.each(item.expediente.participantes, function(i, val) {
-						 $('<tr><td>'+item.expediente.participantes[i].dni
-						 			+'</td><td><strong><big>'
-						 			+item.expediente.participantes[i].nombre+' '
-						 			+item.expediente.participantes[i].apellidos
-						 			+'</big><strong></td><td>'+item.expediente.participantes[i].relation.nombre
-						 			+'</td><td id="casilla_telefono'+i+'" class="warning"><strong><big>'+item.expediente.participantes[i].telefono
-						 			+'</big><strong></td><td class="text-center"><a href="#" id = "'+item.expediente.participantes[i].dni+'" class="btn btn-xs btn-info btn-modal btn_modal_telefono" data-i="'+i+'""><i class="glyphicon glyphicon-phone-alt"></i></a></td></tr>').appendTo('#datos_parrilla table tbody');
-
-					});
-
-					// Mostrar las Incidencias
-								
-					mostrar_incidencias(item.expediente.incidencias, rol);
-
-					// MOstrar Tedis
-
-					$('#tedis ul').html('');
-					$.each(item.expediente.roles, function(i, val) {
-
-						if (item.expediente.roles[i].rol == "tedis") {
-							$('<p class="success">'+item.expediente.roles[i].tecnico.nombre+' '+item.expediente.roles[i].tecnico.apellidos+'</p>').appendTo('#tedis ul')
-						}
-					});
-					
-					// Boton MODAL CAMBIAR TELEFONO
-
-					$('.btn_modal_telefono').click(function() {
-
-						 	// Editar el telefono
-						 	z = $(this).attr("data-i");
-						 	$('#modal_editar_telefono').modal();
-						 	$('#editar_telefono').html(""). append('<strong>'
-						 			+item.expediente.participantes[z].nombre+' '
-						 			+item.expediente.participantes[z].apellidos+'</strong>');
-						 	var telefono = $('#casilla_telefono'+z).text();
-						 	$('#numero_telefono').val(telefono);
-						 	
-						 	$('#boton_cambiar_telefono').click(function() {
-
-						 		var nuevo_telefono = $('#numero_telefono').val();
-						 		//var telefono = $('#numero_telefono').val();
-						 		//console.log(telefono);
-								$.ajax({
-									type: "POST",
-										url: url_json+"participantes/editTelefono",
-										data: {id:item.expediente.participantes[z].id,
-												telefono:nuevo_telefono},
-										cache: false,
-										success: function() {
-											//console.log(data);
-											//item.expediente.participantes[i].telefono = telefono;
-											$('#casilla_telefono'+z).html('<strong><big>'+nuevo_telefono+'</strong></big>');
-										}
-								});
-						 	});
-						 });
-
-					// Boton MODAL CAMBIAR Incidencia
-					$('#btn_modal_incidencia').click(function() {
-
-						$('#modal_add_incidencia').modal();
-
-						$('#tipos_incidencia').val('');
-						//$('#descripcion').attr('value','');
-						$('.jqte_editor').text("");
-
-						$('#boton_add_incidencia').click(function(e) {
-							e.preventDefault();
-							//e.stopPropagation();
-							e.stopImmediatePropagation();
-							var fecha = $('#fecha').val();
-							var tipo = $('#tipos_incidencia').val();
-							var descripcion = $('#descripcion').val();
-							var user = '<?php echo $auth["id"]; ?>';
+							// Ajax para obteber el CEAS y la ZAS.
 
 							$.ajax({
 								type: "POST",
-									url: url_json+"incidencias/add_json",
-									data: {	fecha:fecha,
-											incidenciatipo_id:tipo,
-											descripcion:descripcion,
-											user_id:'<?php echo $auth["id"]; ?>',
-											expediente_id:item.expediente.id
-										},
-									dataType: "json",
+									url: url_json+"equipos/datosceas",
+									data: "ceas="+json.expediente.ceas,
 									cache: false,
-									success: function(incidencias) {
-
-										mostrar_incidencias(incidencias, rol);
-										$('.modal').modal('hide');
-										
+									success: function(ceas) {
+										$('#ceas span').html('').append(ceas.nombre);
+										//console.log(ceas);
 									}
 							});
 
-						});
+							// Mostrar la Parrilla
 
-						//console.log(telefono);
-					});
+							$('#datos_parrilla').html('').append(cabecera_parrilla);
+
+							$.each(json.expediente.participantes, function(i, val) {
+								 $('<tr><td>'+json.expediente.participantes[i].dni
+								 			+'</td><td><strong><big>'
+								 			+json.expediente.participantes[i].nombre+' '
+								 			+json.expediente.participantes[i].apellidos
+								 			+'</big><strong></td><td>'+json.expediente.participantes[i].relation.nombre
+								 			+'</td><td id="casilla_telefono'+i+'" class="warning"><strong><big>'+json.expediente.participantes[i].telefono
+								 			+'</big><strong></td><td class="text-center"><a href="#" id = "'+json.expediente.participantes[i].dni+'" class="btn btn-xs btn-info btn-modal btn_modal_telefono" data-i="'+i+'""><i class="glyphicon glyphicon-phone-alt"></i></a></td></tr>').appendTo('#datos_parrilla table tbody');
+
+							});
+
+							// Mostrar Tedis
+
+							$('#tedis ul').html('');
+							$.each(json.expediente.roles, function(i, val) {
+
+								if (json.expediente.roles[i].rol == "tedis") {
+									$('<p class="success">'+json.expediente.roles[i].tecnico.nombre+' '+json.expediente.roles[i].tecnico.apellidos+'</p>').appendTo('#tedis ul')
+								}
+							});
+
+							// Mostrar las Incidencias
+								
+							mostrar_incidencias(json.expediente.incidencias, rol);
+
+							// Boton MODAL CAMBIAR TELEFONO
+
+							$('.btn_modal_telefono').click(function() {
+
+							 	// Editar el telefono
+							 	z = $(this).attr("data-i");
+							 	$('#modal_editar_telefono').modal();
+							 	$('#editar_telefono').html(""). append('<strong>'
+							 			+json.expediente.participantes[z].nombre+' '
+							 			+json.expediente.participantes[z].apellidos+'</strong>');
+							 	var telefono = $('#casilla_telefono'+z).text();
+							 	$('#numero_telefono').val(telefono);
+							 	
+							 	$('#boton_cambiar_telefono').click(function() {
+
+							 		var nuevo_telefono = $('#numero_telefono').val();
+							 		//var telefono = $('#numero_telefono').val();
+							 		//console.log(telefono);
+									$.ajax({
+										type: "POST",
+											url: url_json+"participantes/editTelefono",
+											data: {id:json.expediente.participantes[z].id,
+													telefono:nuevo_telefono},
+											cache: false,
+											success: function() {
+												//console.log(data);
+												//json.expediente.participantes[i].telefono = telefono;
+												$('#casilla_telefono'+z).html('<strong><big>'+nuevo_telefono+'</strong></big>');
+											}
+									});
+							 	});
+							});
+
+							// Boton MODAL CAMBIAR Incidencia
+
+							$('#btn_modal_incidencia').click(function() {
+
+								$('#modal_add_incidencia').modal();
+
+								$('#tipos_incidencia').val('');
+								//$('#descripcion').attr('value','');
+								$('.jqte_editor').text("");
+
+								$('#boton_add_incidencia').click(function(e) {
+									e.preventDefault();
+									//e.stopPropagation();
+									e.stopImmediatePropagation();
+									var fecha = $('#fecha').val();
+									var tipo = $('#tipos_incidencia').val();
+									var descripcion = $('#descripcion').val();
+									var user = '<?php echo $auth["id"]; ?>';
+
+									$.ajax({
+										type: "POST",
+											url: url_json+"incidencias/add_json",
+											data: {	fecha:fecha,
+													incidenciatipo_id:tipo,
+													descripcion:descripcion,
+													user_id:'<?php echo $auth["id"]; ?>',
+													expediente_id:json.expediente.id
+												},
+											dataType: "json",
+											cache: false,
+											success: function(incidencias) {
+
+												mostrar_incidencias(incidencias, rol);
+												$('.modal').modal('hide');
+												
+											}
+									});
+
+								});
+
+								//console.log(telefono);
+							});
+
+
+
+						} //-->END SUCCESS
+						
+					}); //-->END AJAX
+
 				})
 				.appendTo(ul);	
 			}; // --> Fin Buscador	

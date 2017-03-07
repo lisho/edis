@@ -669,30 +669,71 @@ class ExpedientesController extends AppController
     public function administracion()
     {
  
+// debug($this->request->query);exit();
+ 
         if (!empty($this->request->query['term'])) {
+
             $term=$this->request->query['term'];
             $terms=explode(' ', trim($term));
             $terms=array_diff($terms, array(''));
 
             $this->loadModel('Participantes');
             $participante = $this->Participantes->find('all')
-                                            -> contain(['Expedientes.Roles.Tecnicos',
-                                                        'Expedientes.Participantes.Relations',
-                                                        'Expedientes.Incidencias'=>[ 
-                                                                            'sort'=>[
-                                                                                'fecha'=> 'DESC']],
-                                                        'Expedientes.Incidencias.Incidenciatipos',
-                                                        'Expedientes.Incidencias.Users'])
                                             -> order(['Participantes.relation_id'=> 'ASC'])
                                             -> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
                                             -> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
-                                            -> toArray()
+                                            //-> toArray()
                                             ;
                                  
             echo json_encode($participante);
             $this->autoRender = false;
         }
         //debug($participantes);exit();
+
+    }
+
+    /**
+    **
+    ** Completar Datos AUXILIAR
+    **
+    **/
+
+    public function datosAdministracion()
+    {
+ 
+//debug($this->request->query['id']);exit();
+ 
+        if (!empty($this->request->query['id'])) {
+           
+            $id=$this->request->query['id'];
+             
+            //$id=explode(' ', trim($term));
+            //$id=array_diff($id, array(''));
+
+            $this->loadModel('Participantes');
+            $participante = $this->Participantes->get($id, [ 
+                                            'contain' => ['Expedientes.Roles.Tecnicos',
+                                                        'Expedientes.Participantes.Relations',
+                                                        'Expedientes.Incidencias'=>[ 
+                                                                            'sort'=>[
+                                                                                'fecha'=> 'DESC']],
+                                                        'Expedientes.Incidencias.Incidenciatipos',
+                                                        'Expedientes.Incidencias.Users'
+                                                        ],
+                                            'order' => ['Participantes.relation_id'=> 'ASC']
+                                            ])
+                                            //-> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
+                                            //-> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
+                                            //-> toArray()
+                                            ;
+
+           
+            //debug(json_encode($participante));exit();                                
+            //$this->RequestHandler->respondAs('json');                    
+            echo json_encode($participante);
+            $this->autoRender = false;
+        }
+        
 
     }
 
