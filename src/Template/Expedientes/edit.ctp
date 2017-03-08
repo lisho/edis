@@ -240,7 +240,7 @@
                                                     </div>
                                                 </div>
 
-                                                <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+                                               <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?>   <!--Avisamos al controlador de que hemos pasado un nuevo rol  -->
 
 
                                                 <div class="modal-footer">
@@ -349,7 +349,7 @@
             </div>
         </div>
 
-            <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?> <!-- Avisamos al controlador de que hemos pasado un nuevo rol  -->
+            <!-- <?= $this->Form->input('aviso', ['value'=>'nuevo_rol', 'type'=>'hidden']);?>  Avisamos al controlador de que hemos pasado un nuevo rol  -->
 
       </div>
       <div class="modal-footer">

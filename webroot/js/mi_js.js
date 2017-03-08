@@ -55,11 +55,6 @@ jQuery(document).ready(function($) {
 	
  	lanza_popover();
 
- 	$('#cerrar_ventana').click(function() {
-		var expediente = $(this).data("expediente");
-		cerrar_ventana(expediente);
-	});
-
 	//--> mostrar input para cambio de numedis
 
 	$('#ver_nuevo_numedis').click(function() {
@@ -572,12 +567,7 @@ $(function() {
 		
 	}) /* FIN función anónima.*/
 
-	function cerrar_ventana(expediente){
-		
-		if(confirm('¿Seguro que deseas cerrar el expediente '+expediente+'?')){
-		close();
-		}
-	}
+
 			
 
 // --> *********** CHECKBOX ASISTENTES A COMISION ***************//
@@ -954,3 +944,5 @@ function lanza_modal() {
 
 	 });
 }
+
+

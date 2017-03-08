@@ -18,7 +18,7 @@
             <?php if ($pasacomision->expediente->numhs !=''): ?>
                     <?= $pasacomision->expediente->numhs; ?>
             <?php else: ?>
-                    <?= $this->Html->link('+HS', '#', [     
+                    <?= $this->Html->link('+HS', 'javascript:;', [     
                             'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
                             'id'=>$modificador.'crear_hs'.$pasacomision->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
@@ -105,7 +105,7 @@
                         <!-- Existe Prestacion AUS sin cerrar ?? -->
 
                             <p>
-                                <?= $this->Html->link(' '.$prestacion->numprestacion, '#', [     
+                                <?= $this->Html->link(' '.$prestacion->numprestacion, 'javascript:;', [     
                                         'class'=> 'btn btn-xs modal-btn'.$btn.'fa blond sombra',
                                         'id'=>$modificador.'ver_info_prestacion'. $pasacomision->id.$mod,
                                         'data-container'=>"body",
@@ -191,7 +191,7 @@
                 
                 <?php if ($p==='no'): ?>
            
-                    <?= $this->Html->link('+ AUS', '#', [     
+                    <?= $this->Html->link('+ AUS', 'javascript:;', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_prestacion',
                                         'id'=>$modificador.'crear_prestacion_rgc'.$pasacomision->id.$mod,
                                         //'data-expediente' => $pasacomision->expediente->id,
@@ -332,7 +332,7 @@
    
                 <?php if ($atfis === 'no'): ?>
 
-                     <?= $this->Html->link('ND', '#', [     
+                     <?= $this->Html->link('ND', 'javascript:;', [     
                                         'class'=> 'btn btn-xs modal-btn btn-danger fa sin_atfis',
                                         'id'=>$pasacomision->expediente->id.$mod,
                                         'data-expediente' => $pasacomision->expediente->id,
@@ -390,7 +390,7 @@
 
         <!-- OBSERVACIONES -->
         <td colspan="1"><strong>Observaciones:</strong>
-            <?= $this->Html->link(' ', '#', [     
+            <?= $this->Html->link(' ', 'javascript:;', [     
                             'class'=> 'btn btn-xs btn-primary modal-btn fa fa-edit',
                             'id'=>'observaciones'.$pasacomision->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
@@ -421,7 +421,7 @@
                 ?>
             <?php endif; ?>
 
-            <?= $this->Html->link('+ ', '#', [     
+            <?= $this->Html->link('+ ', 'javascript:;', [     
                             'class'=> 'btn btn-xs modal-btn '.$boton_color.' fa fa-files-o sin_prestacion',
                             'id'=>$modificador.'subir-archivos'.$pasacomision->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
@@ -443,7 +443,7 @@
 
             ?>
 
-            <?= $this->Html->link('', '#', [     
+            <?= $this->Html->link('', 'javascript:;', [     
                                 'class'=> 'btn btn-xs modal-btn check_grande '.$clase,
                                 'id'=>'completar'.$pasacomision->id.$mod,
                                 'data_id'=>$pasacomision->id,

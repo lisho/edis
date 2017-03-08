@@ -351,15 +351,18 @@ class ExpedientesController extends AppController
                 
                 if (isset($this->request->data['desde']) == 'comision') {
                     return $this->redirect($this->referer());
-                    
+
+                } elseif (isset($this->request->data['aviso'])) {
+                    //return $this->redirect($this->referer());
+                    return $this->redirect(['action' => 'view',$id]);    
+
                 } elseif (isset($this->request->data['roles'][0]['rol'])) {
                     return $this->redirect($this->referer());
                     
-                } elseif (isset($this->request->data['ceas'])) {
+                }elseif (isset($this->request->data['ceas'])) {
                     return $this->redirect($this->referer());
                     
-                }else {
-                    return $this->redirect(['action' => 'view',$id]);
+                
                 }
                 
                 
@@ -688,8 +691,6 @@ class ExpedientesController extends AppController
             echo json_encode($participante);
             $this->autoRender = false;
         }
-        //debug($participantes);exit();
-
     }
 
     /**
@@ -701,14 +702,9 @@ class ExpedientesController extends AppController
     public function datosAdministracion()
     {
  
-//debug($this->request->query['id']);exit();
- 
         if (!empty($this->request->query['id'])) {
            
             $id=$this->request->query['id'];
-             
-            //$id=explode(' ', trim($term));
-            //$id=array_diff($id, array(''));
 
             $this->loadModel('Participantes');
             $participante = $this->Participantes->get($id, [ 
@@ -721,15 +717,8 @@ class ExpedientesController extends AppController
                                                         'Expedientes.Incidencias.Users'
                                                         ],
                                             'order' => ['Participantes.relation_id'=> 'ASC']
-                                            ])
-                                            //-> where(['CONCAT(dni," ", nombre," ", apellidos) LIKE' => '%' . implode(" ", $terms) . '%'])
-                                            //-> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
-                                            //-> toArray()
-                                            ;
-
-           
-            //debug(json_encode($participante));exit();                                
-            //$this->RequestHandler->respondAs('json');                    
+                                            ]);
+                 
             echo json_encode($participante);
             $this->autoRender = false;
         }

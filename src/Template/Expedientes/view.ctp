@@ -226,7 +226,7 @@
 <!-- Cierre de expediente -->
 
     <div class="fijo">
-        <?= $this->Html->link('',[],['class'=>'default fa fa-close fijo-boton', 'id'=>'cerrar_ventana', 'data-expediente'=>$expediente->numedis,'data-container'=>"body",
+        <?= $this->Html->link('','javascript:cerrar_ventana();',['class'=>'default fa fa-close fijo-boton', 'id'=>'cerrar_ventana', 'data-expediente'=>$expediente->numedis,'data-container'=>"body",
                 'data-toggle'=>"popover",
                 'data-placement'=>"left",
                 'data-content'=>"Cerrar este expediente"
@@ -1349,3 +1349,14 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+    function cerrar_ventana(expediente){
+        
+        if(confirm('¿Seguro que deseas cerrar el expediente '+expediente+'?')){
+        close();
+        return false;
+        }
+    }
+</script>

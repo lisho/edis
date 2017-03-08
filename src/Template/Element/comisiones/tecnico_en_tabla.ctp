@@ -40,7 +40,7 @@
 
 		
 		$mensaje = 'Expediente asignado a '.$tecnico_completo;
-		echo $this->Html->link($tecnico, '#', [     
+		echo $this->Html->link($tecnico, 'javascript:;', [     
                             'class'=> 'label label-primary circulo',
                             'id'=>$rol->id.$mod,
                             //'data-expediente' => $pasacomision->expediente->id,
@@ -55,7 +55,7 @@
 
 		$tecnico = 'PEND.';
 		$mensaje = 'Expediente Pendiente de Asignar';
-		echo $this->Html->link($tecnico, '#', [     
+		echo $this->Html->link($tecnico, 'javascript:;', [     
                             'class'=> 'label label-danger circulo',
                             'id'=>$i++,
                             //'data-expediente' => $pasacomision->expediente->id,
