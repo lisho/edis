@@ -36,7 +36,7 @@
                                                 'class' =>'img-responsive avatar-view avatar_profile', 
                                                 'id'=>$participante['id'],
                                                 ]);  ?> 
-                  <? else: ?>
+                  <?php else: ?>
                         
                         <?= $this->Html->image('participantes_fotos/'.$participante->foto, ['class'=>'img-responsive avatar-view avatar_profile'])?>
 

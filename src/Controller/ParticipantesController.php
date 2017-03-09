@@ -102,7 +102,7 @@ class ParticipantesController extends AppController
     public function edit($id = null)
     {
         
-        if ($this->request->data['expediente_numedis']) {
+        if (isset($this->request->data['expediente_numedis'])) {
             $this->loadModel ('Expedientes');
             $expediente_id = $this->Expedientes->find()
                                                 -> where(['numedis' => $this->request->data['expediente_numedis']])
