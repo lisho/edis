@@ -1349,27 +1349,3 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-/*
-    $(function() {
-        
-        $('#cerrar_ventana').click(function() {
-            
-            cerrar_ventana(expediente);
-        });
-
-    });
-
-    var expediente = $(this).data("expediente");
-
-    function cerrar_ventana(expediente){
-        
-        if(confirm('¿Seguro que deseas cerrar el expediente '+expediente+'?')){
-        close();
-        return false;
-        }
-    }
-*/
-
-</script>

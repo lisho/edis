@@ -186,7 +186,7 @@ class IncidenciasController extends AppController
     {
         $incidencia = $this->Incidencias->newEntity();
         $expediente_id = $this->request->data['expediente_id'];
-//debug($this->request);exit();     
+//debug($this->request->data);exit();     
         if ($this->request->is('ajax')) {
         
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['fecha']);

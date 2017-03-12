@@ -117,7 +117,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 id="" class="modal-title" id="myModalLabel">Modifica el telefono para: </h4>
+                    <h4 id="" class="modal-title" id="myModalLabel">Añadir una incidencia para el expediente:<big><span id="num_expediente_edis"></span></big> </h4>
+                    <span id="num_expediente_id" class="hidden"></span>
                     <h4 id="editar_telefono" class="modal-title" id=""></h4>
                 </div>
                 <div class="modal-body">
@@ -189,7 +190,7 @@
 
 
 
-    <script>
+    <script type="text/javascript" charset="utf-8" async defer>
     	
     	$(function() {
     			// --> ************** BUSCADOR DE ADMINISTRACION *************************************************************************
@@ -244,6 +245,7 @@
 						success : function(json){
 
 							var numedis = json.expediente.numedis;
+							//var expediente = json.expediente.id;
 							if (rol != 'auxiliar') {
 								$('#numedis').html('').append('Expediente: <a href="view/'+json.expediente.id+'" title="" target="_blank">'+numedis+'</a>');
 							} else {
@@ -332,8 +334,10 @@
 							$('#btn_modal_incidencia').click(function() {
 
 								$('#modal_add_incidencia').modal();
-
+								$('#num_expediente_edis').html(json.expediente.numedis);
+								$('#num_expediente_id').html(json.expediente.id);
 								$('#tipos_incidencia').val('');
+								//var expediente_id = json.expediente.id;
 								//$('#descripcion').attr('value','');
 								$('.jqte_editor').text("");
 
@@ -345,6 +349,7 @@
 									var tipo = $('#tipos_incidencia').val();
 									var descripcion = $('#descripcion').val();
 									var user = '<?php echo $auth["id"]; ?>';
+									var expediente_id = $('#num_expediente_id').html();
 
 									$.ajax({
 										type: "POST",
@@ -353,15 +358,14 @@
 													incidenciatipo_id:tipo,
 													descripcion:descripcion,
 													user_id:'<?php echo $auth["id"]; ?>',
-													expediente_id:json.expediente.id
+													expediente_id:expediente_id
 												},
 											dataType: "json",
 											cache: false,
 											success: function(incidencias) {
-
+												
 												mostrar_incidencias(incidencias, rol);
 												$('.modal').modal('hide');
-												
 											}
 									});
 

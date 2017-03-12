@@ -168,28 +168,28 @@
                 <br>
               <ul class="list-unstyled user_data">
                 <li>
-                  <?= $this->Html->link('', ['action' => '#'], ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
+                  <?= $this->Html->link('', '', ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
                   <p>Motivación para el empleo</p>
                   <div class="progress progress_sm">
                         <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
                   </div>
                 </li>
                 <li>
-                    <?= $this->Html->link('', ['action' => '#'], ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
+                    <?= $this->Html->link('', '', ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
                   <p>Motivación para la formación</p>
                   <div class="progress progress_sm">
                     <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="70"></div>
                   </div>
                 </li>
                 <li>
-                    <?= $this->Html->link('', ['action' => '#'], ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
+                    <?= $this->Html->link('', '', ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
                   <p>Nivel de Competencias Generales</p>
                   <div class="progress progress_sm">
                     <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="30"></div>
                   </div>
                 </li>
                 <li>
-                    <?= $this->Html->link('', ['action' => '#'], ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
+                    <?= $this->Html->link('', '', ['class'=> 'btn btn-primary fa fa-edit m-right-xs pull-right']) ?>
                   <p>Nivel de Disponibilidad</p>
                   <div class="progress progress_sm">
                     <div class="progress-bar bg-green" role="progressbar" data-transitiongoal="50"></div>
