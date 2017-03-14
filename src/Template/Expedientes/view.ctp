@@ -282,7 +282,12 @@
 
                     <?php $p=0; ?>  
                     <?php foreach ($expediente->participantes as $participantes): ?> 
-                        
+
+                        <?php $clase_desactivado=''; ?>
+                        <?php if ($participantes->desactivado == true): ?>
+                              <?php $clase_desactivado = 'disabled'; ?>     
+                        <?php endif; ?>
+
                         <!-- Iconos de la Parrilla segun edad y sexo -->
                         <?php 
                         
@@ -364,13 +369,17 @@
                             }
                          ?>
 
-                    <tr> 
-                        <td><?= $sexo;?></td>
+                    <tr class= '<?=$clase_desactivado;?>'> 
+                        <td>
+                            <?php if ($participantes->desactivado == true): ?>
+                                <big><i class="fa fa-eye-slash"></i></big>  
+                            <?php else: ?> 
+                                <?= $sexo;?>  
+                            <?php endif; ?>
+                        </td>
                         <td><?= h($participantes->dni) ?></td>
                         <td>
-                            <strong><?= $this->Html->link($participantes->nombre.' '.$participantes->apellidos,['controller'=>'Participantes','action'=>'view',$participantes->id]); ?></strong>
-                            
-
+                            <strong><?= $this->Html->link($participantes->nombre.' '.$participantes->apellidos,['controller'=>'Participantes','action'=>'view',$participantes->id]); ?>   </strong>
                         </td>
                         <td><?= h($participantes->relation->nombre) ?></td>
                         <td>

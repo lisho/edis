@@ -115,7 +115,13 @@
                                     </thead>
                                     <tbody>
                                         <?php foreach($expediente->participantes as $participante): ?>
-                                             <tr>
+
+                                            <?php $clase_desactivado=''; ?>
+                                            <?php if ($participante->desactivado == true): ?>
+                                                  <?php $clase_desactivado = 'disabled'; ?>     
+                                            <?php endif; ?>
+
+                                             <tr class="<?=$clase_desactivado;?>">
                                                 <td><?= $participante->dni; ?></td>
                                                 <td class="mayusculas"><?= $participante->nombre." ".$participante->apellidos; ?></td>
                                                 <td><?= $participante->relation->nombre; ?></td>

@@ -70,7 +70,7 @@
 			</thead>
 			<tbody>
 				<?php foreach($informe->expediente->participantes as $participante): ?>
-					<?php if ($participante->dni != $prestacion_rgc->participante->dni): ?>
+					<?php if ($participante->dni != $prestacion_rgc->participante->dni && $participante->desactivado != true): ?>
 						<tr>
 							<td><?= $participante-> relation ->nombre; ?></td>
 							<td><?= $participante-> dni; ?></td>

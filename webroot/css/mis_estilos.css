@@ -274,6 +274,14 @@ table.vertical-table>tbody>tr>th {
 	color: #FF0000;
 }
 
+.verde{
+	color: #3BA38D;
+}
+
+.amarillo{
+	color: #E7DE10;
+}
+
 .icono-parrilla-adulto{
 	vertical-align: center;
 	max-height: 2em;
@@ -378,6 +386,12 @@ hr.reset {
 	text-shadow: 2px 2px 1px rgba(255, 255, 255, 0.9);
 }
 
+.text-sombra {
+	-webkit-text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.7);
+	-moz-text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.7);
+	text-shadow: 1px 1px 1px rgba(10, 10, 10, 0.7);
+}
+
 .blond {
 	font-weight: bold;
 }
@@ -411,6 +425,11 @@ table>tbody>tr.fila1>td{
 table>tbody>tr.fila2>td{
 	border-bottom: 2px solid #2A3F54; 
 
+}
+
+table>tbody>tr.disabled>td{
+	color: #B2B1C0;
+	text-decoration: line-through;
 }
 
 .fila_roja {
@@ -568,6 +587,21 @@ ul .parrilla {
 
 }
 
+ul .roles {
+	width: 500px;
+	padding: 10px;
+	-moz-box-shadow:
+		0px 2px 3px rgba(000,000,000,0.9),
+		inset 0px 0px 2px rgba(42,63,84,.9);
+	-webkit-box-shadow:
+		0px 2px 3px rgba(000,000,000,0.9),
+		inset 0px 0px 2px rgba(42,63,84,.9);
+	box-shadow:
+		0px 2px 3px rgba(000,000,000,0.9),
+		inset 0px 0px 2px rgba(255,255,255,0.9);	
+
+}
+
 .mayusculas {
     text-transform:uppercase;
 }
@@ -683,3 +717,14 @@ ul .parrilla {
 	margin-top: 5px;
 }
 
+.cobrando {
+	color: #26B99A;
+}
+
+.negrita {
+	font-weight: bold;
+}
+
+ul.sin_decorar {
+	list-style-type: none;
+}

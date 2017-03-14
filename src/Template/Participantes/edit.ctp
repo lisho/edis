@@ -136,7 +136,7 @@
                                 </div>
                             </div>
 
-                             <div class="form-group has-feedback">
+                            <div class="form-group has-feedback">
                                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="relacion">Relación con el titular <span class="required">*</span></label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
                                     <?php
@@ -195,6 +195,18 @@
                 </fieldset>             
 
                 <div class="ln_solid"></div>
+
+                <!-- Desactivar participante -->
+                <fieldset>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Desactivar usuario (No lo tenemos en cuenta en las parrillas pero no perdemos la información) <span class="required">*</span></label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <?php
+                                echo $this->Form->checkbox('desactivado');
+                            ?> 
+                        </div>
+                    </div>
+                </fieldset>
                 <div class="form-group">
                     <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                 <?= $this->Form->button(__('Guardar'), ['class' => 'btn btn-success']) ?>

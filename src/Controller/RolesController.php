@@ -126,21 +126,53 @@ class RolesController extends AppController
         $auth=$this->Auth->user(); // lo pasamos a minúsculas
         $nombre_user = strtolower($auth['nombre']);
         $apellidos_user = strtolower($auth['apellidos']);
+        $mis_pestaciones = [];
         
         $expedientes = $this->Roles->find('all')
             -> where(['Tecnicos.nombre'=>ucwords($nombre_user),'Tecnicos.apellidos'=>ucwords($apellidos_user)])
             -> contain ([
                                             'Expedientes',
-                                            'Tecnicos',
+                                            //'Tecnicos',
                                             'Tecnicos.Equipos',
-                                            'Expedientes.Participantes',
+                                            'Expedientes.Participantes.Relations',
+                                            'Expedientes.Prestacions'
                                             //'Participantes.Relations'
                                     ])
             ;
+        $nomina = $this->ultima(); 
 
+        foreach ($nomina as $n) {
+             $dni_en_nomina[]= $n->dni;
+             //$rgc_en_nomina[]= $n->RGC;
+             $hs_en_nomina[]= $n->HS;
+         } 
+//debug($expedientes->toArray());exit();
+         foreach ($expedientes as $exp) {
+            foreach ($exp->expediente->prestacions as $pres) {
+
+                if ($pres->prestacionestado_id != 6) {
+                    
+                    switch ($pres->prestaciontipo_id){
+                        case 3:
+                            $mis_pestaciones[$exp->expediente->id]['RGC'][]= $pres;
+                            break;
+                        case 2:
+                            $mis_pestaciones[$exp->expediente->id]['AUS'][]= $pres;
+                            break;
+                        case 4:
+                            $mis_pestaciones[$exp->expediente->id]['ATFIS'][]= $pres;
+                            break;
+                        default:
+                            
+                            break;
+                    } 
+                }          
+            }            
+         }
+//debug($mis_pestaciones);exit();         
         $listado_ceas = $this->listadoEquipo('ceas');
 
-        $this->set(compact('expedientes','listado_ceas'));
-        $this->set('_serialize', ['expedientes']);
+        $this->set(compact('expedientes','listado_ceas','dni_en_nomina', 'hs_en_nomina','mis_pestaciones'));
+        //$this->set('_serialize', ['expedientes']);
     }
 }
