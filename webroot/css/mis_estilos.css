@@ -728,3 +728,40 @@ ul .roles {
 ul.sin_decorar {
 	list-style-type: none;
 }
+
+.sin_top {
+	margin-top : 50px;
+}
+
+.tarjeta {
+	border: solid 1px;
+	margin-bottom: 5px;
+	padding: 10px;
+	margin: 5px;
+	margin-top: 10px;
+}
+
+.tarjeta h2 {
+	background-color: #97ACC1;
+	padding: 10px;
+}
+
+.texto_blanco{
+	color: #ffffff;	
+}
+
+.media .date-grande{
+	width: auto;
+}
+
+.badge-grande {
+	font-size: 1em;
+}
+
+.validada {
+	background-color: #3C763D !important;
+}
+
+.no-validada {
+	background-color: #DDBA05 !important;
+}

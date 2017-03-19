@@ -6,7 +6,7 @@
       
       <div class="login_inicial text-center">
           <p class="">r<b>edis</b>eñándonos</p>
-          <button type="button" class="btn btn-primary">Entrar</button>
+          <button type="button" class="btn btn-primary" >Entrar</button>
       </div>
 
       <div class="login_wrapper">
@@ -43,7 +43,7 @@
                 <?= $this->Form->button('Entrar', [
                                             
                                             'class'=>"btn btn-default submit",
-                                            
+                                            'id'=>"entrar"
                                           ]); ?>
 
                 <!-- <a class="btn btn-default submit" href="index.html">Log in</a>
@@ -68,4 +68,5 @@
 
       </div>
     </div>
+
 

@@ -144,7 +144,10 @@
                                             break;
                                         case 'aviso':
                                             $fa = 'fa fa-warning';
-                                            break;                           
+                                            break;  
+                                        case 'novedades':
+                                            $fa = 'fa fa-bell';
+                                            break;                                
                                     }
 
                                 ?>

@@ -1,9 +1,15 @@
 
-
+<?php
+    $c = 0;
+    $atfis_c = 0;
+    $aus_c = 0;
+    $rgc_c = 0;
+    $rgc_pend_c = 0;
+?> <!-- Contador de mis Nóminas-->
 
     <ul class="nav ">    
         <li class="">
-        <h1><i class="fa fa-folder-open"></i>  Mis Expedientes <small><small>
+        <h1 class="sin_top"><i class="fa fa-folder-open"></i>  Mis Expedientes <small><span id="cuenta_nominas"></span><small>
           <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
 
             <i class="fa fa-question-circle icono-titulo-fa pull-right"></i>
@@ -76,7 +82,7 @@
                         
                         foreach ($clases_por_prestaciones as $clase) {$c_p = $c_p.' '.$clase; }
 */
-                        if ($cobrando == 'success'){ $c_p = 'cobrando negrita text-sombra'; }
+                        if ($cobrando == 'success'){ $c_p = 'cobrando negrita'; $c++; }
                         //debug($c_p);exit();
                     ?>
 
@@ -95,6 +101,8 @@
                                 foreach ($mis_pestaciones[$expediente['expediente_id']]['ATFIS'] as $atfis) {
                                     echo '<big><i class="fa fa-check-circle-o verde"></i></big><span class="hidden">atfis</span>'; 
                                 }  
+
+                                $atfis_c++;
                             }
                         ?>
                     </td>
@@ -105,9 +113,10 @@
                                 
                                 foreach ($mis_pestaciones[$expediente['expediente_id']]['RGC'] as $atfis) {
 
-                                    if ($atfis->prestacionestado_id == 1){echo '<big><i class="fa fa-check-circle-o amarillo"></i></big><span class="hidden">rgc</span>'; }
-                                    else if ($atfis->prestacionestado_id == 5){echo '<big><i class="fa fa-check-circle-o verde"></i></big><span class="hidden">rgc</span>'; }
-                                    
+                                    if ($atfis->prestacionestado_id == 1){echo '<big><i class="fa fa-check-circle-o amarillo"></i></big><span class="hidden">rgc pendiente</span>'; 
+                                    $rgc_c++; }
+                                    else if ($atfis->prestacionestado_id == 5){echo '<big><i class="fa fa-check-circle-o verde"></i></big><span class="hidden">rgc</span>'; 
+                                    $rgc_pend_c++; }
                                 }  
                             }
                         ?>
@@ -120,7 +129,8 @@
                                 
                                 foreach ($mis_pestaciones[$expediente['expediente_id']]['AUS'] as $atfis) {
                                     echo '<big><i class="fa fa-check-circle-o verde"></i></big><span class="hidden">aus</span>'; 
-                                }  
+                                }
+                                $aus_c++;  
                             }
                         ?>
                         
@@ -211,4 +221,27 @@
  
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var contador = '<?= $c; ?>';
+        var rgc ='<?= $rgc_c; ?>';
+        var rgc_pendiente ='<?= $rgc_pend_c; ?>';
+        var aus ='<?= $aus_c; ?>';
+        var atfis = '<?= $atfis_c; ?>';
+
+        $('#cuenta_nominas').html('<button class="btn btn-success btn_badge" type="button" data_filtro="cobrando">Expedientes en la última nómina <span class="badge">'+contador+'</span></button>'
+            +'<button class="btn btn-success btn_badge" type="button" data_filtro="atfis">ATFIS <span class="badge">'+atfis+'</span></button>'
+            +'<button class="btn btn-success btn_badge" type="button" data_filtro="rgc">RGC <span class="badge">'+rgc+'</span></button>'
+            +'<button class="btn btn-warning btn_badge" type="button" data_filtro="rgc pendiente">RGC <span class="badge">'+rgc_pendiente+'</span></button>'
+            +'<button class="btn btn-success btn_badge" type="button" data_filtro="aus">AUS <span class="badge">'+aus+'</span></button>'
+            );
+
+        $('.btn_badge').click(function(event) {
+            var filtro = $(this).attr('data_filtro');
+            console.log(filtro);
+            $('#datatable_filter > label > input').focus().val(filtro).keyup().val('');
+        });
+    });
+</script>
 

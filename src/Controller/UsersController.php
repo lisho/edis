@@ -240,6 +240,7 @@ class UsersController extends AppController
 
     public function home()
     {
+        $mis_cambios = [];
         $lista_tedis = [
                 36 => 2,
                 53 => 5,
@@ -270,8 +271,64 @@ class UsersController extends AppController
                                                                 }
                                                             ]);
                                                         
-        //debug($mis_ultimas_comisiones->toArray());exit();
-        $this->set(compact('mis_ultimas_comisiones'));
+        
+
+        $compara_nominas = $this->llamaComparaNominas();
+
+        // Iteramos los ****** CAMBIOS DE DOMICILIO ******
+        foreach ($compara_nominas['cambios']['domicilio'] as $rgc => $cambio) {
+            
+            // Revisamos si existen roles asignados es este expediente
+            if (isset($cambio['datos_bd']['rol'])) {
+                // Iteramos los roles buscando aquellos en los que coincida con el logueado.
+                foreach ($cambio['datos_bd']['rol'] as $rol) {
+                    
+                    // Si aparece el rol del usuario logueado
+                    if ($rol['tecnico']['id'] == $user) {
+                        $mis_cambios['domicilio'][$rgc] = $cambio;
+                    }
+                }
+            }
+        }
+
+        // Iteramos los ****** NUEVOS EXPEDIENTES ******
+        foreach ($compara_nominas['cambios']['nuevo_expediente'] as $rgc => $cambio) {
+            
+            // Revisamos si existen roles asignados es este expediente
+            if (isset($cambio['datos_bd']['rol'])) {
+                // Iteramos los roles buscando aquellos en los que coincida con el logueado.
+                foreach ($cambio['datos_bd']['rol'] as $rol) {
+                    
+                    // Si aparece el rol del usuario logueado
+                    if ($rol['tecnico']['id'] == $user) {
+                        $mis_cambios['nuevo_expediente'][$rgc] = $cambio;
+                    }
+                }
+            }
+        }
+
+        // Iteramos los ****** MIS BAJAS EN NOMINA ******
+        foreach ($compara_nominas['cambios']['bajas_nomina'] as $rgc => $cambio) {
+            
+            // Revisamos si existen roles asignados es este expediente
+            if (isset($cambio['datos_bd']['rol'])) {
+                // Iteramos los roles buscando aquellos en los que coincida con el logueado.
+                foreach ($cambio['datos_bd']['rol'] as $rol) {
+                    
+                    // Si aparece el rol del usuario logueado
+                    if ($rol['tecnico']['id'] == $user) {
+                        $mis_cambios['bajas_nomina'][$rgc] = $cambio;
+                    }
+                }
+            }
+        }
+
+        //debug($compara_nominas);exit();
+        //debug($mis_cambios);exit();
+        $ultima_nomina = $compara_nominas['ultima_nomina'];
+        $penultima_nomina = $compara_nominas['penultima_nomina'];
+
+        $this->set(compact('mis_ultimas_comisiones', 'mis_cambios','ultima_nomina', 'penultima_nomina'));
         //$this->set('_serialize', ['mis_ultimas_comisiones']);                                                       
         //$this->render();
     }

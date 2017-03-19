@@ -147,7 +147,7 @@ class RolesController extends AppController
              $hs_en_nomina[]= $n->HS;
          } 
 //debug($expedientes->toArray());exit();
-         foreach ($expedientes as $exp) {
+        foreach ($expedientes as $exp) {
             foreach ($exp->expediente->prestacions as $pres) {
 
                 if ($pres->prestacionestado_id != 6) {
@@ -168,10 +168,12 @@ class RolesController extends AppController
                     } 
                 }          
             }            
-         }
+        }
 //debug($mis_pestaciones);exit();         
         $listado_ceas = $this->listadoEquipo('ceas');
-
+        $dni_en_nomina = array_filter($dni_en_nomina);
+        $hs_en_nomina = array_filter($hs_en_nomina);
+        
         $this->set(compact('expedientes','listado_ceas','dni_en_nomina', 'hs_en_nomina','mis_pestaciones'));
         //$this->set('_serialize', ['expedientes']);
     }

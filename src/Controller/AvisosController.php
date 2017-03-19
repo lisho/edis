@@ -98,6 +98,40 @@ class AvisosController extends AppController
     }
 
     /**
+     * Novedades method
+     *
+     * @return \Cake\Network\Response|null
+     */
+    public function novedades()
+    {
+        //Si queremos solo la última por ajax pasamos el param='ultima' en el data del json
+        if (isset($this->request->query['param']) && $this->request->query['param'] == 'ultima') {
+
+            $novedades = $this->Avisos->find('all', [
+                    'order' => [
+                        'Avisos.created' => 'desc'],
+                    'conditions' => ['Avisos.tipo' => 'novedades']
+                ]);
+
+            $ultima_novedad = $novedades->first();
+//debug($ultima_novedad);exit();
+            echo json_encode($ultima_novedad);
+            $this->autoRender = false;
+        }
+
+        else {
+
+            $this->paginate = [
+                'order' => [
+                    'Avisos.created' => 'desc'],
+                 'conditions' => ['Avisos.tipo' => 'novedades']
+            ];
+            $novedades = $this->paginate($this->Avisos);
+            $this->set(compact('novedades'));
+        }
+    }
+
+    /**
      * Index method
      *
      * @return \Cake\Network\Response|null
@@ -136,8 +170,6 @@ class AvisosController extends AppController
         ]);
         echo json_encode($aviso);
         $this->autoRender = false;
-
-
 
     }
 

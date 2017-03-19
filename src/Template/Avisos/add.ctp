@@ -47,7 +47,13 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Tipo <span class="required">*</span></label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             <?php
-                                $tipos = ['noticia'=>'Noticia', 'aviso'=>'Aviso'];
+
+                                if ($auth['role']==='admin'){
+                                    $tipos = ['noticia'=>'Noticia', 'aviso'=>'Aviso', 'novedades'=>'Novedades'];
+                                } else {
+                                    $tipos = ['noticia'=>'Noticia', 'aviso'=>'Aviso'];
+                                }
+                        
                                 echo $this->Form->select('tipo', $tipos, [
                                         'class'=>'form-control col-md-7 col-xs-12',
                                         'default' => 'noticia',
