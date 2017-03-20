@@ -739,9 +739,18 @@ ul.sin_decorar {
 	padding: 10px;
 	margin: 5px;
 	margin-top: 10px;
+	min-height: 400px;
 }
 
-.tarjeta h2 {
+.tarjeta-ancha {
+	border: solid 1px;
+	margin-bottom: 5px;
+	padding: 10px;
+	margin: 5px;
+	margin-top: 10px;
+}
+
+.tarjeta h2, .tarjeta-ancha h2 {
 	background-color: #97ACC1;
 	padding: 10px;
 }

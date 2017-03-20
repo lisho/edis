@@ -225,8 +225,8 @@
 <script>
     $(document).ready(function() {
         var contador = '<?= $c; ?>';
-        var rgc ='<?= $rgc_c; ?>';
-        var rgc_pendiente ='<?= $rgc_pend_c; ?>';
+        var rgc ='<?= $rgc_pend_c; ?>';
+        var rgc_pendiente ='<?= $rgc_c; ?>';
         var aus ='<?= $aus_c; ?>';
         var atfis = '<?= $atfis_c; ?>';
 

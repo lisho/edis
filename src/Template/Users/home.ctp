@@ -1,3 +1,4 @@
+<?= $this->assign('title', 'Mi Mesa de Trabajo');?>
 <script>
   
     function mis_pasos(pasos, comision) {
@@ -167,7 +168,7 @@
                      				<?php if (!empty($paso->expediente->roles)): ?>
 
                                  <!-- Si aparece nuestro rol imprimimos la tarjeta -->
-                                <div class="tarjeta sombra">	
+                                <div class="tarjeta-ancha sombra">	
                                   
                                   <?php $pasos++; ?>
                      							<h2>
@@ -189,6 +190,23 @@
                      								<?php endforeach; ?>
 
                      							</ul>
+
+                                  <div class="text-center indicadores"><!-- INDICADORES del PASO por comisión -->
+
+                                    <?php if ($comision->tipo == 'RGC'): ?>
+                                        <span>Motivo: <span class="label label-info"><?= $paso->motivo; ?></span> </span>
+                                        <span>  Casifiación: <span class="label label-info"><?= $paso->clasificacion; ?></span> </span>
+                                        <span>  Documentación:</span>
+                                        <?php if ($paso->informeedis==1){echo '<span class="label label-warning">IE</span>';}
+                                                else{echo '<span class="label label-default">IE</span>';} ?>
+                                                   
+                                        <?php if ($paso->diligencia==1){echo '<span class="label label-warning">D</span>';}
+                                                else{echo '<span class="label label-default">D</span>';} ?>
+   
+                                    <?php endif; ?>
+
+                                    
+                                  </div>
                          				</div> <!--// FIN Tarjeta -->
                               
                        			<?php endif; ?> <!--// FIN IF de busqueda de rol para imprimir tarjeta -->
