@@ -11,7 +11,7 @@
             <a id="menu_toggle"><i class="fa fa-bars"></i></a>
           </div>       
 
-          <ul class="nav navbar-nav navbar-right">
+          <ul class="nav navbar-nav navbar-right" style="width: 90%;">
 
             <li class="">
               <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
@@ -88,18 +88,28 @@
               </ul>
             </li>
 
-            <!-- buscador -->
+              <!-- buscador -->
               
-              <li class="col-md-5 col-sm-5 col-xs-12 form-group-buscador pull-right top_search <?= $esconder; ?>"> 
-                  <div class="input-group">
+              <li class="col-md-12 col-sm-12 col-xs-12 form-group-buscador pull-right top_search <?= $esconder; ?> form-inline" style = "width: 70%;"> 
+                  <div class="input-group" style="width: 70%">
                       <input id="s" type="text" class="form-control" placeholder="Buscar a..." autocomplete="off">
                       <span class="input-group-btn">
                         <button class="btn btn-default " type="button"><i class="fa"></i></button>
                       </span>
                   </div>
+
+                  <div class="input-group" style="width: 25%">
+                      <input id="busca_expediente" type="text" class="form-control" placeholder="Expediente..." autocomplete="off">
+                      <span class="input-group-btn">
+                        <button id="btn_busca_exp" class="btn btn-default " type="button"><i class="fa fa-search"></i></button>
+                      </span>
+                  </div>
               </li>   
             
-            
+            <!-- /buscador -->
+
+            <!-- buscador por número de expediente-->
+              
 
             <!-- /buscador -->
 

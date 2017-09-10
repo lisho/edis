@@ -82,6 +82,10 @@ jQuery(document).ready(function($) {
 
 	edita_observaciones();
 
+	//--> Escuchar boton que busca por nombre de expediente
+
+	buscaPorNumedis();
+
 
 
 });
@@ -945,4 +949,26 @@ function lanza_modal() {
 	 });
 }
 
+function buscaPorNumedis() {
+	$('#btn_busca_exp').click(function() {
+		var expediente = $('#busca_expediente').val();
+		$.ajax({
+			url:url_json+"expedientes/viewExpedientePorNumedis",
+			data:{
+				expediente:expediente
+			},
+			dataType: "json",
+			success : function(json){
 
+				if (json.id != undefined) {
+					var expediente_id = json.id;
+					$(location).attr('href',url_json+"expedientes/view/"+expediente_id);
+				} else {
+					location.reload();
+				}
+				
+			}
+		});
+		console.log(expediente);
+	});
+}

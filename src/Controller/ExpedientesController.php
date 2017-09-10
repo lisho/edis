@@ -25,7 +25,7 @@ class ExpedientesController extends AppController
         $expedientes = $this->Expedientes->find()
                                         ->contain('Participantes.Relations')
                                         ->all() ;
-/*       
+/*
         $expedientes = $this->Expedientes->find('all', [
             'contain' => ['Participantes.Relations'],
         ]);
@@ -41,12 +41,12 @@ class ExpedientesController extends AppController
         $expedientes = $this->paginate($this->Expedientes);
 */
         $listado_ceas = $this->listadoEquipo('ceas');
-        
+
             $this->set(compact('expedientes', 'listado_ceas'));
-            //$this->set('_serialize', ['expedientes']);        
+            //$this->set('_serialize', ['expedientes']);
     }
 
-    
+
     /**
      * View method
      *
@@ -82,10 +82,10 @@ class ExpedientesController extends AppController
 
         $expediente = $this->Expedientes->get($id, [
             'contain' => ['Participantes', /*'Roles', 'Roles.Tecnicos',*/'Roles.Tecnicos.Equipos','Participantes.Relations', 'Incidencias', 'Incidencias.Users', 'Incidencias.Incidenciatipos', 'Prestacions.Prestaciontipos', 'Prestacions.Prestacionestados','Prestacions.Participantes',
-                'Pasacomisions.Comisions', 'Pasacomisions'=>[ 
+                'Pasacomisions.Comisions', 'Pasacomisions'=>[
                                                 'sort'=>[
                                                     'Comisions.fecha'=> 'DESC']],
-                                            'Prestacions'=>[ 
+                                            'Prestacions'=>[
                                                 'sort'=>[
                                                     'apertura'=> 'DESC']],
                                         ],
@@ -118,13 +118,13 @@ class ExpedientesController extends AppController
                 if ($rol['tecnico']['equipo_id'] ==$expediente['ceas']) {
                     $listado_roles['CC']['correcto'][] = $rol['tecnico']['id'];
                 }else{$listado_roles['CC']['incorrecto'][] = $rol['tecnico']['id'];}
-                
+
             } elseif ($rol->rol ==='tedis'){
                 $listado_tecnicos[$rol['tecnico']['id']] = $rol['tecnico']['nombre'].' '.$rol['tecnico']['apellidos'];
                 if ($rol['tecnico']['equipo']['aas'] == $aas ) {
                    $listado_roles['tedis']['correcto'][] = $rol['tecnico']['id'];
                 }else{ $listado_roles['tedis']['incorrecto'][] = $rol['tecnico']['id'];}
-                
+
             }
         }
 
@@ -137,8 +137,8 @@ class ExpedientesController extends AppController
 
             // Buscamos los dnis de los miembros de la unidad familiar para buscarlos en la nomina.
             $dni_expediente =[];
-            if ($expediente['numhs']==null) {                
-                 
+            if ($expediente['numhs']==null) {
+
                  foreach ($expediente->participantes as $participante) {
                      $dni_expediente[] = $participante->dni;
                  }
@@ -159,7 +159,7 @@ class ExpedientesController extends AppController
                 $edad = $this->calcularEdad($p['nacimiento']);
                 $p['edad'] = $edad;
             }
-             
+
             //Si creamos un nuevo usuario en el expediente...
 
                 if (isset($this->request->data['participantes'])) {
@@ -172,14 +172,14 @@ class ExpedientesController extends AppController
                     $data = $this->request->data['prestacions'];
                     $this->addPrestacion($data,$expediente,$nueva_prestacion);
                 }
-                    
+
             // FIN creación de nuevo usuario/participante.
 
-        $listado_ceas = $this->listadoEquipo('ceas');        
+        $listado_ceas = $this->listadoEquipo('ceas');
         $listado_relaciones = $this->listadoRelaciones();
         unset($listado_relaciones['1']); // Quitamos la opcion Titular del desplegable.
         $listado_posibles_titulares_prestacion = $this->listadoMiembrosParrilla($id);
-        //$listado_prestaciones = $this->listadoTiposPrestacion();       
+        //$listado_prestaciones = $this->listadoTiposPrestacion();
 
         //*************************************************//
         // Ceeamos el arbol de Archivos de este expediente //
@@ -205,7 +205,7 @@ class ExpedientesController extends AppController
             $this->loadModel('Comisions');
             $comision = $this->Comisions->get($desde);
         }
-        
+
         $todos_expedientes = $this->Expedientes->find('all',[
                                 'order' => ['numedis' => 'ASC']
                                 ]);
@@ -220,15 +220,15 @@ class ExpedientesController extends AppController
             $cachos_fecha = preg_split("/[\/]+/", $this->request->data['participantes'][0]['nacimiento']);
 
             $this->request->data['participantes'][0]['foto']='';
-          
+
             if ( $this->request->data['participantes'][0]['nacimiento']) {
                  $this->request->data['participantes'][0]['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
-                                'day' =>$cachos_fecha[0] 
+                                'day' =>$cachos_fecha[0]
                         );
             }
-           
+
             $this->request->data['roles'][0]= array(
                                 //'expediente_id'=> $this->request->data['tecnico_ceas'],
                                 'id'=>'',
@@ -237,7 +237,7 @@ class ExpedientesController extends AppController
                                 'observaciones'=> '',
                         );
             if ($this->request->data['tecnico_inclusion'] != 'Selecciona un Técnico de Inclusión') {
-               
+
                 $this->request->data['roles'][1]= array(
                                 //'expediente_id'=> $this->request->data['tecnico_ceas'],
                                 'id'=>'',
@@ -270,14 +270,14 @@ class ExpedientesController extends AppController
                     $this->Flash->success(__('Se ha creado correctamente la carpeta de documentos de este expediente.'));
                 } else {
                     $this->Flash->error(__('La carpeta del expediente no se ha creado porque ya exite. Comprueba que es la correcta.'));
-                }     
-                
+                }
+
 
                 $this->Flash->success(__('El expediente '.$expediente['numedis'].' ha sido creado correctamente.'));
 
                 // Si el expediente lo creamos desde una comisión, AÑADIMOS EL PASO POR COMISION Y REDIRIGIMOS
-                
-                if ($desde!=null) { 
+
+                if ($desde!=null) {
                     // Si venimos de una comisión, volvemos a la comision.
                     return $this->redirect(['controller'=>'Comisions', 'action' => 'view',$desde]);
 
@@ -317,7 +317,7 @@ class ExpedientesController extends AppController
                                 'Participantes',
                                 'Participantes.Relations'
                         ]
-            
+
         ]);
 //debug($this->request->data);exit();
 
@@ -330,10 +330,10 @@ class ExpedientesController extends AppController
 
             $this->request->data['roles'][0]['expediente_id']=$id;
         }
-        
-                            
+
+
         if ($this->request->is(['patch', 'post', 'put'])) {
-            
+
             $expediente = $this->Expedientes->patchEntity($expediente, $this->request->data, [
                         'associated' => [
                                 'Roles',
@@ -346,26 +346,26 @@ class ExpedientesController extends AppController
 
             if ($this->Expedientes->save($expediente)) {
                 $this->Flash->success(__('Los cambios en el expediente se han completado correctamente.'));
-                
+
                 //return $this->redirect(['action' => 'view',$id]);
-                
+
                 if (isset($this->request->data['desde']) == 'comision') {
                     return $this->redirect($this->referer());
 
                 } elseif (isset($this->request->data['aviso'])) {
                     //return $this->redirect($this->referer());
-                    return $this->redirect(['action' => 'view',$id]);    
+                    return $this->redirect(['action' => 'view',$id]);
 
                 } elseif (isset($this->request->data['roles'][0]['rol'])) {
                     return $this->redirect($this->referer());
-                    
+
                 }elseif (isset($this->request->data['ceas'])) {
                     return $this->redirect($this->referer());
-                    
-                
+
+
                 }
-                
-                
+
+
             } else {
                 $this->Flash->error(__('The expediente could not be saved. Please, try again.'));
             }
@@ -410,7 +410,7 @@ class ExpedientesController extends AppController
         }
 
         $archivo = new File($file);
-       
+
         if ($archivo->delete()) {
             $this->Flash->success(__('El archivo se ha borrado correctamente.'));
         } else {
@@ -433,37 +433,37 @@ class ExpedientesController extends AppController
      */
     public function addParticipante($data,$expediente)
     {
-        //debug($data);debug($expediente);debug($participante);exit();  
+        //debug($data);debug($expediente);debug($participante);exit();
 
         $this->loadModel('Participantes');
-        $participante = $this->Participantes->newEntity();  
-                
+        $participante = $this->Participantes->newEntity();
+
         $data['id']='';
         $data['foto']='';
         $data['expediente_id']=$expediente['id'];
-        
+
             if (isset($data['nacimiento']) && $data['nacimiento']!='') {
                  $cachos_fecha = preg_split("/[\/]+/", $data['nacimiento']);
                  $data['nacimiento']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
-                                'day' =>$cachos_fecha[0] 
+                                'day' =>$cachos_fecha[0]
                         );
             } else {$data['nacimiento']=null;}
-       
-        $participante = $this->Participantes->patchEntity($participante, $data);    
+
+        $participante = $this->Participantes->patchEntity($participante, $data);
         //debug($data);exit();
         if ($this->Participantes->save($participante)) {
             $this->Flash->success('Se ha añadido correctamente un nuevo miembro a la parrilla familiar del expediente'.$expediente['numedis']);
-            
+
             return $this->redirect(['action' => 'view',$expediente['id']]);
-            
+
         } else {
             $this->Flash->error(__('Lo siento. No ha sido posible incluir a esa persona en el sistema. Por favor revisa los datos.'));
         }
 
     }
-    
+
     /**
      * AddIncidencia method
      *
@@ -476,7 +476,7 @@ class ExpedientesController extends AppController
      */
     public function addIncidencia($data,$expediente,$nueva_incidencia)
     {
-        
+
         $cachos_fecha = preg_split("/[\/]+/", $data['fecha']);
         $data['id']='';
 
@@ -484,17 +484,17 @@ class ExpedientesController extends AppController
                  $data['fecha']=array(
                                 'year'=>$cachos_fecha[2],
                                 'month'=>$cachos_fecha[1],
-                                'day' =>$cachos_fecha[0] 
+                                'day' =>$cachos_fecha[0]
                         );
             }
-       
-        $nueva_incidencia = $this->Incidencias->patchEntity($nueva_incidencia, $data);    
+
+        $nueva_incidencia = $this->Incidencias->patchEntity($nueva_incidencia, $data);
         //debug($nueva_incidencia);exit();
         if ($this->Incidencias->save($nueva_incidencia)) {
             $this->Flash->success('Se ha añadido correctamente una actuación a este expediente');
-            
+
             return $this->redirect(['action' => 'view',$expediente['id']]);
-            
+
         } else {
             $this->Flash->error(__('Lo siento. No ha sido posible registrar la actuación en el sistema. Por favor revisa los datos.'));
         }
@@ -512,7 +512,7 @@ class ExpedientesController extends AppController
     public function addArchivos($expediente=null, $directorio='')
     {
         if ($directorio!='') {$directorio='/'.$directorio;}
-        
+
         $archivos=$this->request->data;
 
         if (!file_exists(WWW_ROOT . 'docs/'.$expediente.$directorio)) {
@@ -521,19 +521,19 @@ class ExpedientesController extends AppController
                 }
 
         foreach ($archivos['add_files'] as $file) {
-                    
+
                 if (file_exists(WWW_ROOT . 'docs/'.$expediente.$directorio.'/'.$file['name'])) {
-                   
+
                     $this->Flash->error(__('No es posible guardar el archivo'.$file['name'].' porque ya existe en este expediente. Cambia el nombre o borra el archivo existente antes de subir el nuevo.'));
-                   
+
 
                 } else {
-                    
+
                     move_uploaded_file($file['tmp_name'], WWW_ROOT . 'docs/'.$expediente.$directorio. DS . $file['name']);
                     $this->Flash->success(__('Se ha guardado correctamente el archivo '.$file['name']));
-                   
-                    //debug($file).exit();   
-                }           
+
+                    //debug($file).exit();
+                }
         }
         return $this->redirect($this->referer());
         $this->autoRender = false;
@@ -548,8 +548,8 @@ class ExpedientesController extends AppController
      */
     public function addCarpeta($expediente=null)
     {
-        
-        
+
+
         $nombre_carpeta = $this->request->data['nombre_carpeta'];
         //$folder = new Folder(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta, true, 0755);
         $folder = new Folder();
@@ -574,18 +574,18 @@ class ExpedientesController extends AppController
      *
      */
     public function deleteCarpeta($expediente=null, $nombre_carpeta=null)
-    {        
-        
+    {
+
         //debug($expediente);exit();
         $folder = new Folder(WWW_ROOT . 'docs/'.$expediente.DS.$nombre_carpeta);
-            
+
             if ($folder->delete()) {
                 $this->Flash->success(__('La carpeta '.$nombre_carpeta.' y todos los archivos que contenía se ha borrado correctamente.'));
             }else
             {
                 $this->Flash->error(__('No ha sido posible eliminar la carpeta. Por favor vuelve a intentarlo.'));
             }
-        
+
         return $this->redirect($this->referer());
         $this->autoRender = false;
 
@@ -613,7 +613,7 @@ class ExpedientesController extends AppController
         $archivos = $dir->tree($root);
 
         //$archivos = Folder::tree($root);
-        
+
         foreach ($archivos[0] as $directorio) {
             $directorio = substr($directorio,$longitud_nombre_carpeta);
             if($directorio===false){$directorio='/';};
@@ -626,10 +626,10 @@ class ExpedientesController extends AppController
             $change = $file->lastChange();
             $change = date('d/m/Y H:m', $change);
             $file_info['change'] = $change;
-            
+
             $folder = substr($file_info['dirname'],$longitud_nombre_carpeta);
             if ($folder === false) {$folder = '/';}
-            
+
             $archivos_tree[$folder][] = $file_info;
 
         }
@@ -664,6 +664,33 @@ class ExpedientesController extends AppController
     }
 
     /**
+     * Ir a Un expediente pasando el numero de Expediente EDIS
+     *
+     */
+
+    public function viewExpedientePorNumedis()
+    {
+        $numedis = $this->request->query['expediente'];
+        $expediente = $this->Expedientes->find()
+                                -> where(['numedis' => $numedis])
+                                -> first();
+
+        //$expediente = $expediente -> toArray();
+      
+        //debug($expediente);exit();
+        if ($expediente!=null) {
+            //return $this->redirect(['action' => 'view',$expediente->id]);
+            echo json_encode($expediente);
+        }
+        else {
+            $this->Flash->error(__('No existe este expediente. Debes crearlo antes de acceder.'));
+            return $this->redirect($this->referer());
+
+        }
+       $this->autoRender = false;
+    }
+
+    /**
     **
     ** Administracion AUXILIAR
     **
@@ -671,9 +698,9 @@ class ExpedientesController extends AppController
 
     public function administracion()
     {
- 
+
 // debug($this->request->query);exit();
- 
+
         if (!empty($this->request->query['term'])) {
 
             $term=$this->request->query['term'];
@@ -687,7 +714,7 @@ class ExpedientesController extends AppController
                                             -> orWhere(['CONCAT(dni," ", apellidos," ", nombre) LIKE' => '%' . implode(" ", $terms) . '%'])
                                             //-> toArray()
                                             ;
-                                 
+
             echo json_encode($participante);
             $this->autoRender = false;
         }
@@ -701,16 +728,16 @@ class ExpedientesController extends AppController
 
     public function datosAdministracion()
     {
- 
+
         if (!empty($this->request->query['id'])) {
-           
+
             $id=$this->request->query['id'];
 
             $this->loadModel('Participantes');
-            $participante = $this->Participantes->get($id, [ 
+            $participante = $this->Participantes->get($id, [
                                             'contain' => ['Expedientes.Roles.Tecnicos',
                                                         'Expedientes.Participantes.Relations',
-                                                        'Expedientes.Incidencias'=>[ 
+                                                        'Expedientes.Incidencias'=>[
                                                                             'sort'=>[
                                                                                 'fecha'=> 'DESC']],
                                                         'Expedientes.Incidencias.Incidenciatipos',
@@ -718,11 +745,11 @@ class ExpedientesController extends AppController
                                                         ],
                                             'order' => ['Participantes.relation_id'=> 'ASC']
                                             ]);
-                 
+
             echo json_encode($participante);
             $this->autoRender = false;
         }
-        
+
 
     }
 
