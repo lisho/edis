@@ -98,6 +98,7 @@
                       </span>
                   </div>
 
+                    <!-- buscador por número de expediente-->
                   <div class="input-group" style="width: 25%">
                       <input id="busca_expediente" type="text" class="form-control" placeholder="Expediente..." autocomplete="off">
                       <span class="input-group-btn">
@@ -106,11 +107,6 @@
                   </div>
               </li>   
             
-            <!-- /buscador -->
-
-            <!-- buscador por número de expediente-->
-              
-
             <!-- /buscador -->
 
           </ul>

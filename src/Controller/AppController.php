@@ -643,25 +643,28 @@ class AppController extends Controller
         $mes_revisar = $fecha_actual['mon'];
         $year_revisar = $fecha_actual['year'];
 
+//debug($mes_revisar);debug($mes);exit();
 
     /******************** Generamos al última y la penúltima nómina *******************/
 
         while (empty($ultima_nomina)) {
 
             if ($mes_revisar==2) { // corregimos los cambios de año si estamos en febrero
-                
-                $ultima_nomina = $this->generarNomina($mes[0], $year_revisar);                      
+                $ultima_nomina = $this->generarNomina($mes[1], $year_revisar);                      
                 $mes_revisar=12;
                 $year_revisar--;
             }
             elseif ($mes_revisar==1) {  // corregimos los cambios de año si estamos en enero
-                
                 $ultima_nomina = $this->generarNomina($mes[11], $year_revisar);
                 $mes_revisar=11;
                 
             }
-            else {
+            elseif ($mes_revisar==12) {  // corregimos los cambios de año si estamos en enero
+                $ultima_nomina = $this->generarNomina($mes[10], $year_revisar);
+                $mes_revisar=10;
                 
+            }
+            else {
                 $ultima_nomina = $this->generarNomina($mes[$mes_revisar--], $year_revisar);                
                 //$mes_revisar--;
             }

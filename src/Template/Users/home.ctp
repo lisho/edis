@@ -402,18 +402,26 @@
     <div id="modal_entrar" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h1>Últimas novedades</h1>
-                    <h2 id="fecha_novedades" class="pull-right"></h2>
-                </div>
-                <div class="modal-body modal-body-tecnico">
-                  <h2 id="titulo"></h2>
-                  <div id="novedades"></div>
-                    
+                    <!--<h2 id="fecha_novedades" class="pull-right"></h2>-->
                 </div>
 
+                <div class="modal-body modal-body-tecnico text-center">
+                  <!--
+                  <h2 id="titulo"></h2>
+                  <div id="novedades"></div>
+                  -->
+                    <h2>Recordad...</h2>
+                    <img src="https://pa1.narvii.com/6535/9f4b46944089fe45bbb6de4e7bb6295eb372936b_hq.gif" alt="">
+                    <h1>¡YO TENGO EL PODER!</h1>
+                </div>
+              
                 <!-- <div class="modal-footer modal-footer-tecnico"></div> -->  
+
+                
 
             </div>
         </div>

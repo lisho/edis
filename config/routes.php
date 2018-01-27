@@ -54,7 +54,7 @@ Router::scope('/', function (RouteBuilder $routes) {
      * ...and connect the rest of 'Pages' controller's URLs.
      */
     $routes->connect('/pages/*', ['controller' => 'Pages', 'action' => 'display']);
-
+    $routes->connect('/pages/biblioteca/*', ['controller' => 'Pages', 'action' => 'display', 'biblioteca/']);
     /**
      * Connect catchall routes for all controllers.
      *
@@ -73,7 +73,9 @@ Router::scope('/', function (RouteBuilder $routes) {
      */
     $routes->fallbacks('DashedRoute');
     $routes->addExtensions(['pdf']);
+   
 });
+
 
 Router::scope('/comisions', function ($routes) {
     $routes->extensions('pdf');

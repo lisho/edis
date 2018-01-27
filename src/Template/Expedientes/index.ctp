@@ -17,14 +17,14 @@
               // Aumento en 10 el progeso
               progreso +=10;
               $('#bar').css('width', progreso + '%');
-                 
+
               //Si llegó a 100 elimino el interval
               if(progreso == 100){
                 clearInterval(idIterval);
                 jQuery(document).ready(function($) {
                      $('.progress').addClass('hidden');
                 });
-               
+
               }
             },1000);
         </script>
@@ -34,7 +34,7 @@
         <h2>Lista completa de los Expedientes registrados en el sistema </h2>
 
         <?= $this->Element('menus/menu_panel');?>
-        
+
         <div class="clearfix"></div>
       </div>
 
@@ -43,7 +43,7 @@
         <table id="datatable" class="table table-striped table-bordered" cellpadding="0" cellspacing="0">
             <thead>
                 <tr>
-                    
+
                     <th>Exp. EDIS</th>
                     <th>Historia Social </th>
                     <th>Titular</th>
@@ -63,25 +63,25 @@
 
                     <td><?= h($expediente->numhs) ?></td>
                     <td class="mayusculas">
-                        
+
                         <?php foreach($expediente->participantes as $key => $participante): ?>
                             <?php if ($participante->relation_id == 1): ?>
-                               <?php $indice =  $key;  ?>     
+                               <?php $indice =  $key;  ?>
                             <?php endif; ?>
                         <?php endforeach;?>
 
                         <?= $this->Html->link($expediente['participantes'][$indice]['nombre'].' '.$expediente['participantes'][$indice]['apellidos'], [
-                                                'controller'=>'Participantes', 
-                                                'action' => 'view', 
+                                                'controller'=>'Participantes',
+                                                'action' => 'view',
                                                 $expediente['participantes'][$indice]['id']
-                                                ]) ?>                                             
+                                                ]) ?>
                     </td>
 
                     <td><?= h($listado_ceas[$expediente->ceas]) ?></td>
-                    
+
                     <td class="text-center">
 
-                        <ul class="nav">    
+                        <ul class="nav">
                             <li class="">
                               <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
 
@@ -97,7 +97,7 @@
                         </ul>
                     </td>
                     <td>
-                        <ul class="nav">    
+                        <ul class="nav">
                             <li class="">
                               <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
 
@@ -118,7 +118,7 @@
 
                                             <?php $clase_desactivado=''; ?>
                                             <?php if ($participante->desactivado == true): ?>
-                                                  <?php $clase_desactivado = 'disabled'; ?>     
+                                                  <?php $clase_desactivado = 'disabled'; ?>
                                             <?php endif; ?>
 
                                              <tr class="<?=$clase_desactivado;?>">
@@ -126,7 +126,7 @@
                                                 <td class="mayusculas"><?= $participante->nombre." ".$participante->apellidos; ?></td>
                                                 <td><?= $participante->relation->nombre; ?></td>
                                             </tr>
-                                        <?php endforeach; ?>    
+                                        <?php endforeach; ?>
                                     </tbody>
                                   </table>
                               </ul>
@@ -135,10 +135,10 @@
                     </td>
                     <td class="visible-lg"><?= $this->Time->format($expediente->created, "dd/MM/yyyy", null) ?></td>
                     <td class="visible-lg"><?= $this->Time->format($expediente->modified, "dd/MM/yyyy", null) ?></td>
-                    
+
                     <td class="actions">
 
-                        <ul class="nav">    
+                        <ul class="nav">
                             <li class="">
                               <a href="javascript:;" class="dropdown-toggle menu_tabla" data-toggle="dropdown" aria-expanded="false">
 
@@ -150,9 +150,9 @@
                                     <li><?= $this->Html->link('', ['action' => 'view', $expediente->id], ['class'=> 'btn btn-xs btn-success fa fa-folder-open']) ?></li>
                                     <li><?= $this->Html->link('', ['action' => 'edit', $expediente->id], ['class'=> 'fa fa-edit btn btn-xs btn-info']) ?></li>
                                     <li>
-                                        <?php if ($auth['role'] === 'admin'): ?>    
+                                        <?php if ($auth['role'] === 'admin'): ?>
                                             <?= $this->Form->postLink('', ['action' => 'delete', $expediente->id], ['class'=> 'btn btn-xs btn-danger fa fa-trash', 'confirm' => __('Realmente quieres borrar el registro: # {0}?', $expediente->nombre)]) ?>
-                                        <?php endif; ?>       
+                                        <?php endif; ?>
                                     </li>
 
                               </ul>
